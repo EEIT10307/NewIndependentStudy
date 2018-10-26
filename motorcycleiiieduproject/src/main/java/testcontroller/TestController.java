@@ -48,7 +48,7 @@ public @ResponseBody String  testLink(ServletRequest req) throws IOException, Pa
 public @ResponseBody String  testHibernateBean() throws IOException, ParseException {
 	System.out.println("testLink startup");
 	 	    
-	
+	System.out.println("hi");
 
 	try {
 	testService.testHibernateBean();
