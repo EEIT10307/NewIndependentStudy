@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -18,8 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.google.gson.Gson;
-
-import testbean.TestHibernateBean;
 
 
 
@@ -74,7 +70,12 @@ public class SpringConfig {
 		 //    props.setProperty("hibernate.current_session_context_class", "thread");
 		     builder.addProperties(props); 
 		     //掃bean使用
-		     builder.addAnnotatedClasses(TestHibernateBean.class);
+//		     builder.addAnnotatedClasses(TestHibernateBean.class , AcceSerialNum.class , AcceStock.class , BikeDetail.class 
+//		    		 , BikeReview.class , BranchDetail.class , BranchScenes.class , ChatRoom.class , Discount.class , EveryBikeInfo.class
+//		    		 ,EveryBikeMileage.class , MaintenanceDetail.class);
+		  
+		     builder.scanPackages("projectbean");
+		     
 		     return builder.buildSessionFactory() ; 
 	  
 	  }

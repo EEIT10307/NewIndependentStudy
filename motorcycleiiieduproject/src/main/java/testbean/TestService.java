@@ -24,13 +24,23 @@ public class TestService {
 	
 	@Transactional
 	public  void testLinkDAO() throws ParseException {
-		   Session session = factory.getCurrentSession()  ; 
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
 		System.out.println("testLinkDAO start up  ");
 		testDAO.testFactory();
 		
 	}
 	
 
+	@Transactional
+	public  void testHibernateBean() throws ParseException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("testLinkDAO start up  ");
+		testDAO.testHibernateBean();
+		
+	}
+	
 	
 
 }

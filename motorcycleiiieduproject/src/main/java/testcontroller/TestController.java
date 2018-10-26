@@ -43,6 +43,21 @@ public @ResponseBody String  testLink(ServletRequest req) throws IOException, Pa
 	
 }
 	
+
+@RequestMapping(value = "/testhiber"  , produces = "text/html; charset = UTF-8")	
+public @ResponseBody String  testHibernateBean() throws IOException, ParseException {
+	System.out.println("testLink startup");
+	 	    
+	
+
+	try {
+	testService.testHibernateBean();
+	}catch (Exception e) {
+		return "Fail" ; 
+	}
+	return "OK" ;
+	
+}
 	
 
 }
