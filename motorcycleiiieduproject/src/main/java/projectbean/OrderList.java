@@ -1,16 +1,21 @@
 package projectbean;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class OrderList {
+public class OrderList implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String orderSerialNum;
 	private String phone ; 
 	private String bikeModel;
@@ -31,6 +36,101 @@ public class OrderList {
 	private boolean payOrNot; 
 
 	
+	
+	
+	/**
+	 * 
+	 */
+	public OrderList() {
+		super();
+	}
+	/**
+	 * 測試用 沒有licensePlate
+	 * @param orderSerialNum
+	 * @param phone
+	 * @param bikeModel
+	 * @param pickupDate
+	 * @param dropoffDate
+	 * @param totalDiscount
+	 * @param bikePrice
+	 * @param accessoriesAmount
+	 * @param accessoriesTotalPrice
+	 * @param orderTotalPrice
+	 * @param orderTime
+	 * @param pickupStore
+	 * @param dropoffStore
+	 * @param discountName
+	 * @param orderStatus
+	 * @param is_member
+	 * @param payOrNot
+	 */
+	public OrderList(String orderSerialNum, String phone, String bikeModel, Date pickupDate,
+			Date dropoffDate, Double totalDiscount, Integer bikePrice, String accessoriesAmount,
+			Integer accessoriesTotalPrice, Integer orderTotalPrice, Date orderTime, String pickupStore,
+			String dropoffStore, String discountName, String orderStatus, boolean is_member, boolean payOrNot) {
+		super();
+		this.orderSerialNum = orderSerialNum;
+		this.phone = phone;
+		this.bikeModel = bikeModel;
+		this.pickupDate = pickupDate;
+		this.dropoffDate = dropoffDate;
+		this.totalDiscount = totalDiscount;
+		this.bikePrice = bikePrice;
+		this.accessoriesAmount = accessoriesAmount;
+		this.accessoriesTotalPrice = accessoriesTotalPrice;
+		this.orderTotalPrice = orderTotalPrice;
+		this.orderTime = orderTime;
+		this.pickupStore = pickupStore;
+		this.dropoffStore = dropoffStore;
+		this.discountName = discountName;
+		this.orderStatus = orderStatus;
+		this.is_member = is_member;
+		this.payOrNot = payOrNot;
+	}
+	/**
+	 * @param orderSerialNum
+	 * @param phone
+	 * @param bikeModel
+	 * @param licensePlate
+	 * @param pickupDate
+	 * @param dropoffDate
+	 * @param totalDiscount
+	 * @param bikePrice
+	 * @param accessoriesAmount
+	 * @param accessoriesTotalPrice
+	 * @param orderTotalPrice
+	 * @param orderTime
+	 * @param pickupStore
+	 * @param dropoffStore
+	 * @param discountName
+	 * @param orderStatus
+	 * @param is_member
+	 * @param payOrNot
+	 */
+	public OrderList(String orderSerialNum, String phone, String bikeModel, EveryBikeInfo licensePlate, Date pickupDate,
+			Date dropoffDate, Double totalDiscount, Integer bikePrice, String accessoriesAmount,
+			Integer accessoriesTotalPrice, Integer orderTotalPrice, Date orderTime, String pickupStore,
+			String dropoffStore, String discountName, String orderStatus, boolean is_member, boolean payOrNot) {
+		super();
+		this.orderSerialNum = orderSerialNum;
+		this.phone = phone;
+		this.bikeModel = bikeModel;
+		this.licensePlate = licensePlate;
+		this.pickupDate = pickupDate;
+		this.dropoffDate = dropoffDate;
+		this.totalDiscount = totalDiscount;
+		this.bikePrice = bikePrice;
+		this.accessoriesAmount = accessoriesAmount;
+		this.accessoriesTotalPrice = accessoriesTotalPrice;
+		this.orderTotalPrice = orderTotalPrice;
+		this.orderTime = orderTime;
+		this.pickupStore = pickupStore;
+		this.dropoffStore = dropoffStore;
+		this.discountName = discountName;
+		this.orderStatus = orderStatus;
+		this.is_member = is_member;
+		this.payOrNot = payOrNot;
+	}
 	public boolean isPayOrNot() {
 		return payOrNot;
 	}
@@ -38,7 +138,6 @@ public class OrderList {
 		this.payOrNot = payOrNot;
 	}
 	@Id
-	@GeneratedValue(strategy  = GenerationType.AUTO)
 	public String getOrderSerialNum() {
 		return orderSerialNum;
 	}
@@ -60,7 +159,7 @@ public class OrderList {
 		this.bikeModel = bikeModel;
 	}
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "licensePlate" , nullable = false)
+	@JoinColumn(referencedColumnName = "licensePlate" , nullable = false) 
 	public EveryBikeInfo getLicensePlate() {
 		return licensePlate;
 	}

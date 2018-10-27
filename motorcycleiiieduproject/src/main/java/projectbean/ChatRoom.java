@@ -1,5 +1,7 @@
 package projectbean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ChatRoom {
+public class ChatRoom implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer chatRoomSerialNum ; 
 	private MemberDetail chatSender; 
 	private MemberDetail chatReceiver; 

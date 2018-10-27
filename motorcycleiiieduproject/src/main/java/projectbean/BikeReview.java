@@ -1,5 +1,7 @@
 package projectbean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class BikeReview {
+public class BikeReview implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer bikeReviewSerialNum ; 
 	private OrderList orderSerialNum ; //多對一 對order
 	private MemberDetail email ; 

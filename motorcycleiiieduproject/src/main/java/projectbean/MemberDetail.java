@@ -1,5 +1,6 @@
 package projectbean;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Column;
@@ -13,8 +14,12 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"email"} ) , @UniqueConstraint(columnNames = {"phone"} )})
 
-public class MemberDetail {
+public class MemberDetail implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer memberSerialNum ; 
 	private String  email ; 
 	private String  password;

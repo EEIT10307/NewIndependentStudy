@@ -1,5 +1,7 @@
 package projectbean;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +12,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"acceType"} ) })
-public class AcceSerialNum {
+public class AcceSerialNum implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String acceSerialNum;
 	private String acceType  ;
 	

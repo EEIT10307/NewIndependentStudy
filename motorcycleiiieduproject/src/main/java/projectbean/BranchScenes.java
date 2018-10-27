@@ -1,5 +1,7 @@
 package projectbean;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BranchScenes {
+public class BranchScenes implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer branchDetailSerialNum;
 	private BranchDetail branchName ; 
 	private String spotName; 
@@ -25,7 +31,7 @@ public class BranchScenes {
 		this.branchDetailSerialNum = branchDetailSerialNum;
 	}
 	@ManyToOne
-	@JoinColumn(referencedColumnName  = "branch" , nullable = false)
+	@JoinColumn(referencedColumnName  = "branchName" , nullable = false)
 	public BranchDetail getBranchName() {
 		return branchName;
 	}
