@@ -17,7 +17,7 @@ public class QAndA implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer QAndASerialNum ; 
+	private Integer qAndASerialNum ; 
 	private String  questioner; 
 	private String questionCotent; 
 	 private BikeDetail bikeDetail;
@@ -29,10 +29,10 @@ public class QAndA implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getQAndASerialNum() {
-		return QAndASerialNum;
+		return qAndASerialNum;
 	}
 	public void setQAndASerialNum(Integer qAndASerialNum) {
-		QAndASerialNum = qAndASerialNum;
+		this.qAndASerialNum = qAndASerialNum;
 	}
 	@Column(nullable = false)
 	public String getQuestioner() {

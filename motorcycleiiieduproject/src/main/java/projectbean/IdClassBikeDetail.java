@@ -7,9 +7,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class IdClassBikeDetail implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String bikeModel ;
 	private String modelYear;
@@ -39,6 +37,19 @@ public class IdClassBikeDetail implements Serializable {
 		this.modelYear = modelYear;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+	/**
+	 * 
+	 */
 	
 }

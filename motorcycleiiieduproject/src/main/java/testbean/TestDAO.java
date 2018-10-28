@@ -7,9 +7,16 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -209,5 +216,35 @@ public class TestDAO {
 
 		bf.close();
 	}
+	
+	
+	
+	
+	public void createCriteria() {
+		
+       //        factory.getCurrentSession().createCriteria(OrderList.class);
+                  CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+                  CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+                       Root<OrderList> from = createQuery.from(OrderList.class);
+                        ParameterExpression<String> par = buider.parameter(String.class);
+                        createQuery.select(from).where(buider.equal(from.get("bikeModel"), par));                      
+                   Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery); 
+                   queryword.setParameter(par, "R3");
+                       List<OrderList> list = queryword.getResultList();
+                   
+                   
+                   
+                   for( OrderList loop:list) {
+                	   System.out.println(loop);
+                   }
+                      
+                 
+	}
+	
+	
+	
+	
+	
+	
 
 }

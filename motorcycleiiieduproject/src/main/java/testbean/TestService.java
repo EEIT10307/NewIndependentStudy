@@ -69,5 +69,16 @@ public class TestService {
 		
 	}
 	
+	@Transactional
+public void createCriteria() {
+		
+		System.out.println("createCriteria go");
+		
+		testDAO.createCriteria();
+		
+		
+		
+	}
+	
 
 }

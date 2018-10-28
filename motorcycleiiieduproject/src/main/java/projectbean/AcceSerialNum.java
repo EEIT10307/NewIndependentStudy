@@ -19,10 +19,7 @@ public class AcceSerialNum implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String acceSerialNum;
-	private String acceType  ;
-	
-
-
+	private String acceType ;
 	@Id
     @GeneratedValue(generator="acceid")
     @GenericGenerator(name="acceid",strategy="assigned") 

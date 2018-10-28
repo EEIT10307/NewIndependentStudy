@@ -254,6 +254,19 @@ public class OrderList implements Serializable{
 	}
 	public void setIs_member(boolean is_member) {
 		this.is_member = is_member;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "OrderList [orderSerialNum=" + orderSerialNum + ", phone=" + phone + ", bikeModel=" + bikeModel
+				+ ", licensePlate=" + licensePlate + ", pickupDate=" + pickupDate + ", dropoffDate=" + dropoffDate
+				+ ", totalDiscount=" + totalDiscount + ", bikePrice=" + bikePrice + ", accessoriesAmount="
+				+ accessoriesAmount + ", accessoriesTotalPrice=" + accessoriesTotalPrice + ", orderTotalPrice="
+				+ orderTotalPrice + ", orderTime=" + orderTime + ", pickupStore=" + pickupStore + ", dropoffStore="
+				+ dropoffStore + ", discountName=" + discountName + ", orderStatus=" + orderStatus + ", is_member="
+				+ is_member + ", payOrNot=" + payOrNot + "]";
 	} 
 	
 	
