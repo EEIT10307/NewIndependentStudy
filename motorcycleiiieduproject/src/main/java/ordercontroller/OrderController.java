@@ -1,4 +1,4 @@
-package testcontroller;
+package ordercontroller;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import orderdao.BasicOrderBean;
+import orderdao.BikeDetailToGson;
+import orderservice.OrderIFaceService;
 import projectbean.BikeDetail;
 import projectbean.OrderList;
-import testbean.BikeDetailToGson;
-import testbean.OrderIFaceService;
 
 @Controller
 public class OrderController {

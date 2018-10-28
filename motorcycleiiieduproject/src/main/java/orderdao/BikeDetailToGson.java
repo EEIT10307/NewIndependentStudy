@@ -1,4 +1,4 @@
-package testbean;
+package orderdao;
 
 import java.util.Date;
 

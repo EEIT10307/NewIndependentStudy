@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 
 @Configuration
-@ComponentScan(basePackages={"testbean"})
+@ComponentScan(basePackages={"testbean","orderdao","orderservice"})
 @EnableTransactionManagement
 public class SpringConfig {
 

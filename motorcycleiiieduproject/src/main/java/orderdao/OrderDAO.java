@@ -1,4 +1,4 @@
-package testbean;
+package orderdao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +25,6 @@ import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import projectbean.OrderList;
-import testcontroller.BasicOrderBean;
 
 @Repository
 public class OrderDAO implements OrderIFaceDAO {
