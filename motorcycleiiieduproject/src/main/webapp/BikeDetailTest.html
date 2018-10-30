@@ -82,6 +82,8 @@ $(document).ready(function() {
 // 			"LicensePlate" : LicensePlate,
 // 			"BranchName" : BranchName,
 			var order={
+				"LicensePlate" : LicensePlate,
+		 		"BranchName" : BranchName,
 				"bikeModel":BikeModel,
 				"modelYear" : ModelYear,
 				"bikeBrand" : BikeBrand,
@@ -103,7 +105,24 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				url : "insertBikeDetail",
-				data : str,
+				data : {
+					"licensePlate" : LicensePlate,
+			 		"branchName" : BranchName,
+					"bikeModel":BikeModel,
+					"modelYear" : ModelYear,
+					"bikeBrand" : BikeBrand,
+					"engineType" : EngineType,
+					"bikeType" : BikeType,
+					"plateType" : PlateType,
+					"fuelTankCapacity" : FuelTankCapacity,
+					"seatHeight" : SeatHeight,
+					"dryWeight" : DryWeight,
+					"fuelConsumption" : FuelConsumption,
+					"tire" : Tire,
+					"fuelType" : FuelType,
+					"ABS" : ABS,
+					"hourPrice" : HourPrice
+				},
 				success : function(response) {
 
 					// 						alert("sucess");

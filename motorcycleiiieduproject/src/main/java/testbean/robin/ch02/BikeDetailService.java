@@ -9,14 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
+import projectbean.IdClassBikeDetail;
 import testbean.robin.BikeDetailIFaceDAO;
 import testbean.robin.BikeDetailIFaceService;
 
 @Service
 @Transactional
-public class BikeDetailService implements BikeDetailIFaceService{
-@Autowired
-BikeDetailIFaceDAO bikeDetailIFaceDAO;
+public class BikeDetailService implements BikeDetailIFaceService {
+	@Autowired
+	BikeDetailIFaceDAO bikeDetailIFaceDAO;
+
 	@Override
 	public boolean isDup(String id) {
 		// TODO Auto-generated method stub
@@ -43,9 +45,13 @@ BikeDetailIFaceDAO bikeDetailIFaceDAO;
 
 	@Override
 	public int save(BikeDetail bikeDetail) {
-		Date now=new Date();
+	
+		IdClassBikeDetail idClassBikeDetail =new IdClassBikeDetail();//複合主鍵
+		Date now = new Date();
 		bikeDetail.setOnSheftTime(now);
 		return bikeDetailIFaceDAO.save(bikeDetail);
 	}
+
+
 
 }
