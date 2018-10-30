@@ -1,5 +1,6 @@
 package projectbean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,16 +13,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class BikeReview {
+public class BikeReview implements Serializable{
 	
-	private Integer bikeReviewSerialNum ; //流水號
-	private OrderList orderSerialNum ; //多對一 對order 訂單流水
-	private MemberDetail email ; //會員信箱
-	private String reviewContent ; //評價內容
-	private Double satisfacation ;//滿意度
-	private java.util.Date reviewTime ; //評價時間
-	private String bikeModel ; //型號
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer bikeReviewSerialNum ; 
+	private OrderList orderSerialNum ; //多對一 對order
+	private MemberDetail email ; 
+	private String reviewContent ; 
+	private Double satisfacation ;
+	private java.util.Date reviewTime ; 
+	private String bikeModel ; 
 	
+
 	
 	public BikeReview() {
 	
@@ -37,6 +43,9 @@ public class BikeReview {
 		this.reviewTime = reviewTime;
 		this.bikeModel = bikeModel;
 	}
+	
+	
+	
 	@Column(nullable = false)
 	public String getBikeModel() {
 		return bikeModel;

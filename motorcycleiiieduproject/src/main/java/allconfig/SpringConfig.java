@@ -4,9 +4,7 @@ import java.util.Properties;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import org.hibernate.SessionFactory;
-import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +18,8 @@ import com.google.gson.Gson;
 
 
 
-
 @Configuration
-@ComponentScan(basePackages={"testbean"})
+@ComponentScan(basePackages={"testbean","orderdao","orderservice"})
 @EnableTransactionManagement
 public class SpringConfig {
 
@@ -86,8 +83,7 @@ public class SpringConfig {
 		    Gson gson = new Gson() ; 
 		   return gson ; 
 	   }
-	 
-	   
+	      
 	   @Bean
 	   public PlatformTransactionManager transactionManager() {		   
 		   JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

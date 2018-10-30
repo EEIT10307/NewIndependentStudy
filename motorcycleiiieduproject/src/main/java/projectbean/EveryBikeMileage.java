@@ -1,5 +1,8 @@
 package projectbean;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class EveryBikeMileage {
+public class EveryBikeMileage implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer everyBikeMileageSerialNum;
 	private  EveryBikeInfo licensePlate ; 
 	private  MaintenanceDetail maintenanceItem;

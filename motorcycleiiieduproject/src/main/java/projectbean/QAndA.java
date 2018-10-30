@@ -1,5 +1,8 @@
 package projectbean;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class QAndA {
+public class QAndA implements Serializable{
 	
-	private Integer QAndASerialNum ; 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer qAndASerialNum ; 
 	private String  questioner; 
 	private String questionCotent; 
 	 private BikeDetail bikeDetail;
@@ -23,10 +30,11 @@ public class QAndA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getQAndASerialNum() {
-		return QAndASerialNum;
+		return qAndASerialNum;
 	}
 	public void setQAndASerialNum(Integer qAndASerialNum) {
-		QAndASerialNum = qAndASerialNum;
+		this.qAndASerialNum = qAndASerialNum;
+
 	}
 	@Column(nullable = false)
 	public String getQuestioner() {

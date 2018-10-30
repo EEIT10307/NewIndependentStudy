@@ -1,5 +1,7 @@
 package projectbean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +11,16 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"branch"} ) })
-public class BranchDetail {
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"branchName"} ) })
+public class BranchDetail implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer branchSerialNum;
-	private String branch;
+	private String branchName;
 	private String branchArea ;
 	private String branchCounty ; 
 	private String branchAddress ; 
@@ -30,11 +36,12 @@ public class BranchDetail {
 		this.branchSerialNum = branchSerialNum;
 	}
 	@Column(nullable = false)
-	public String getBranch() {
-		return branch;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+
 	}
 	@Column(nullable = false)
 	public String getBranchArea() {

@@ -1,5 +1,8 @@
 package projectbean;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class EveryBikeInfo {
+public class EveryBikeInfo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String licensePlate ; 
     private BikeDetail bikeDetail;
     private BranchDetail branchName ; 
@@ -65,7 +72,7 @@ public class EveryBikeInfo {
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn( referencedColumnName = "branch")
+	@JoinColumn( referencedColumnName = "branchName")
 	public BranchDetail getBranchName() {
 		return branchName;
 	}

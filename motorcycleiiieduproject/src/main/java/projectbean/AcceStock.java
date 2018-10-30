@@ -1,5 +1,8 @@
 package projectbean;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +16,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"acceName"} ) })
-public class AcceStock {
+public class AcceStock implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String acceStockSerialNum;
 	private String acceName  ;
 	private BranchDetail branchName;
@@ -42,7 +49,8 @@ public class AcceStock {
 		this.acceName = acceName;
 	}
 	@ManyToOne
-	@JoinColumn(referencedColumnName  = "branch" , nullable = false)
+	@JoinColumn(referencedColumnName  = "branchName" , nullable = false)
+
 	public BranchDetail getBranchName() {
 		return branchName;
 	}

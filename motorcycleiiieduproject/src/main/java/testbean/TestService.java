@@ -1,5 +1,6 @@
 package testbean;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import javax.transaction.Transactional;
@@ -41,6 +42,44 @@ public class TestService {
 		
 	}
 	
+	
+	@Transactional
+	public  void makeFakeBranchDetail() throws ParseException, NumberFormatException, IOException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("makeFakeBranchDetail start up  ");
+		testDAO.makeFakeBranchDetail();
+		
+	}
+	@Transactional
+	public  void makeFakeBikedetail_EveryBikeInfor() throws ParseException, NumberFormatException, IOException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("makeFakeBikedetail_EveryBikeInfor start up  ");
+		testDAO.makeFakeBikedetail_EveryBikeInfor();
+		
+	}
+	
+	@Transactional
+	public  void makeFakeOrderlist() throws ParseException, NumberFormatException, IOException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("makeFakeBikedetail_EveryBikeInfor start up  ");
+		testDAO.makeFakeOrderlist();
+		
+	}
+	
+	@Transactional
+public void createCriteria() {
+		
+		System.out.println("createCriteria go");
+		
+		testDAO.createCriteria();
+		
+		
+		
+	}
+
 	
 
 }

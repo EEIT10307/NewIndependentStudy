@@ -12,16 +12,17 @@ import testcontroller.InterceptorUse;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	
 //註冊interceptor使用
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
-		    InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
-		    myinter.addPathPatterns("/BikeReviewInsert","/insertBikeDetail") ; 		   
-		WebMvcConfigurer.super.addInterceptors(registry);
+		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
+	    myinter.addPathPatterns("/BikeReviewInsert","/insertBikeDetail") ; 		   
+	WebMvcConfigurer.super.addInterceptors(registry);
+
 		
 	}
 	//靜態資源使用預設servlet
