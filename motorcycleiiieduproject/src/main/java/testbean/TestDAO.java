@@ -24,6 +24,7 @@ import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import projectbean.IdClassBikeDetail;
+import projectbean.MaintenanceDetail;
 import projectbean.OrderList;
 import projectbean.WebInformationForManager;
 
@@ -112,7 +113,7 @@ public class TestDAO {
 
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/OrderList.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -135,7 +136,7 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -156,10 +157,10 @@ public class TestDAO {
 	public void makeFakeBikedetail_EveryBikeInfor() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail.txt")));
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
 
 		String line;
 		String line2;
@@ -217,7 +218,20 @@ public class TestDAO {
 		bf.close();
 	}
 	
-	
+	public void makeFakeMaintenanceDetail() throws IOException, NumberFormatException, ParseException {
+
+		BufferedReader bf = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\MaintenanceDetail.txt")));
+		String line;
+		while ((line = bf.readLine()) != null) {
+			String[] lines = line.split(",");
+			MaintenanceDetail maintenanceDetail=new MaintenanceDetail();
+			maintenanceDetail.setMaintenanceItem(lines[0]);
+			maintenanceDetail.setRequiredMileage(Double.valueOf(lines[1]));
+			factory.getCurrentSession().persist(maintenanceDetail);
+		}
+		bf.close();
+	}
 	
 	
 	public void createCriteria() {
@@ -231,9 +245,7 @@ public class TestDAO {
                    Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery); 
                    queryword.setParameter(par, "R3");
                        List<OrderList> list = queryword.getResultList();
-                   
-                   
-                   
+
                    for( OrderList loop:list) {
                 	   System.out.println(loop);
                    }
