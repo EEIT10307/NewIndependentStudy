@@ -38,6 +38,7 @@ public class OrderDAO implements OrderIFaceDAO {
 	public List<OrderList> showAllOrderFromShop(String shopname) {
 
 		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		
 		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
 		Root<OrderList> fromClass = createQuery.from(OrderList.class);
 		ParameterExpression<String> pickupStore = buider.parameter(String.class);
@@ -73,7 +74,7 @@ public class OrderDAO implements OrderIFaceDAO {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date parsePickupDate = sdf.parse(customerquery.getPickupDate());
-		Date parseDropoffDate = sdf.parse(customerquery.getDropoffDate());
+		Date parseDropoffDate = sdf.parse(customerquery.getDropofDate());
 		List<String> motorlist = new ArrayList<String>();
 		// 開始比對訂單......
 		for (OrderList loop : orderbranch) {
