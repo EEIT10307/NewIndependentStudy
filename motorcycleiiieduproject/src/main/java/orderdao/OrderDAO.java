@@ -60,7 +60,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
 		createQuery.select(fromClass);
 		List<BranchDetail> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
-		List<String> branchnamelist = new ArrayList<>();
+		List<String> branchnamelist = new ArrayList<String>();
 		for (BranchDetail loop : branchlist) {
 			branchnamelist.add(loop.getBranchName());
 		}

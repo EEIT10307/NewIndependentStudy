@@ -35,7 +35,7 @@ public class BikeDetail implements Serializable{
     private Integer hourPrice;
     private java.util.Date onSheftTime;
 
-    private List<EveryBikeInfo> everyBikeInfos = new ArrayList<>();
+    private List<EveryBikeInfo> everyBikeInfos = new ArrayList<EveryBikeInfo>();
 
  
 

@@ -12,7 +12,7 @@ import testcontroller.InterceptorUse;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	

@@ -77,7 +77,7 @@ public class TestController {
 		return "OK";
 
 	}
-	//製做訂單假資料
+	//製作訂單假資料
 	@RequestMapping(value = "/makeFakeOrderlist", produces = "text/html; charset = UTF-8")
 	public @ResponseBody String makeFakeOrderlist() throws IOException, ParseException {
 
@@ -88,8 +88,23 @@ public class TestController {
 			return "Fail";
 		}
 		return "OK";
-
 	}
 
+
+	//製作保養項目假資料
+	@RequestMapping(value = "/makeFakeMaintenanceDetail", produces = "text/html; charset = UTF-8")
+	public @ResponseBody String makeFakeMaintenanceDetail() throws IOException, ParseException {
+
+		try {
+			testService.makeFakeMaintenanceDetail();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Fail";
+		}
+		return "OK";
+	}
+	
+	
+	
 
 }
