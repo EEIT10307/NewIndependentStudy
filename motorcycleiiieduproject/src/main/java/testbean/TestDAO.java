@@ -112,7 +112,7 @@ public class TestDAO {
 
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/OrderList.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\OrderList.txt")));
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -135,7 +135,7 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BranchDetail.txt")));
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -156,10 +156,10 @@ public class TestDAO {
 	public void makeFakeBikedetail_EveryBikeInfor() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt")));
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt")));
 
 		String line;
 		String line2;

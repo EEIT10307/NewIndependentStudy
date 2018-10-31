@@ -8,7 +8,7 @@ import projectbean.BikeDetail;
 import projectbean.BikeReview;
 
 @Repository
-public interface BikeDetailIFaceDAO {
+public interface BikeDetailIFaceDao {
 	boolean isDup(String id);
 
 	List<BikeDetail> getAllMembers();

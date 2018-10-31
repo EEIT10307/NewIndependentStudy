@@ -16,5 +16,8 @@ public interface BikeDetailIFaceService {
 
 	int updateMember(BikeReview mb);
 
-	int save(BikeDetail bikeDetail);
+	int save(String licensePlate, int branchName, String bikeModel,
+			String modelYear, String bikeBrand, String engineType, String bikeType, String plateType,
+			Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption, String tire,
+			String fuelType, Boolean aBS, int  hourPrice);
 }

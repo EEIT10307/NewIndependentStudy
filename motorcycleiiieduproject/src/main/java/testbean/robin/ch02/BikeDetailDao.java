@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
 import projectbean.IdClassBikeDetail;
-import testbean.robin.BikeDetailIFaceDAO;
+import testbean.robin.BikeDetailIFaceDao;
 @Repository
-public class BikeDetailDao implements BikeDetailIFaceDAO{
+public class BikeDetailDao implements BikeDetailIFaceDao{
 	@Autowired
 	SessionFactory Factory;
 

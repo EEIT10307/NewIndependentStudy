@@ -15,17 +15,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import projectbean.BranchDetail;
+import projectbean.EveryBikeInfo;
+import testbean.robin.BikeDetailIFaceService;
 import testbean.robin.BikeReviewIFaceService;
 import testbean.robin.BranchDetailIFaceService;
+import testbean.robin.EveryBikeInfoIFaceService;
 
 @Controller
-public class TestBikeReviewController {
-
+public class TestRobinController {
+//羅冰負責的工作
 	@Autowired
 	BikeReviewIFaceService bikeReviewIFaceService;// 商品留言板
 	@Autowired
 	BranchDetailIFaceService branchDetailIFaceService;// 查詢分店
-
+	@Autowired
+	BikeDetailIFaceService bikeDetailIFaceService;
+	@Autowired
+	EveryBikeInfoIFaceService everyBikeInfoIFaceService;
 	@Autowired
 	Gson gson;
 
@@ -51,20 +57,44 @@ public class TestBikeReviewController {
 		System.out.println(gson.toJson(all));
 		return gson.toJson(all);
 	}
-	
+
+//羅冰的參考
+//	"licensePlate" 車牌
+//	"branchName"分店
+//	"bikeModel" 型號
+//	"modelYear" 年份
+//	"bikeBrand" 廠牌
+//	"engineType" CC數
+//	"bikeType" 車種
+//	"plateType"  紅白黃牌
+//	"fuelTankCapacity" 油箱容量
+//	"seatHeight" 座高
+//	"dryWeight"  車子乾重:
+//	"fuelConsumption"  油耗
+//	"tire"  輪胎
+//	"fuelType"  使用燃料
+//	"aBS"  煞車ABS
+//	"hourPrice" 每小時價格
 	@RequestMapping(value = "/insertBikeDetail", method = RequestMethod.POST) // 新增機車資料
-	public @ResponseBody String insertBikeDetail(String licensePlate,String BranchName,String modelYear,String bikeBrand,String engineType,String bikeType,String plateType
-			,Double fuelTankCapacity,Double seatHeight,Double dryWeight,Double fuelConsumption,String tire,String fuelType,Boolean ABS,String hourPrice) throws IOException {
+	public @ResponseBody String insertBikeDetail(String licensePlate, int branchName, String bikeModel,
+			String modelYear, String bikeBrand, String engineType, String bikeType, String plateType,
+			Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption, String tire,
+			String fuelType, Boolean aBS, int hourPrice) throws IOException {
 		System.out.println("安安");
-		System.out.println(licensePlate);
-//		System.out.println(reader);
-//		BikeDetail bike=gson.fromJson(reader, BikeDetail.class);
-//		System.out.println(bike);
-//		bikeDetailIFaceService.save(bike);
-	
-		
-		
+		System.out.println(branchName);
+		bikeDetailIFaceService.save(licensePlate, branchName, bikeModel, modelYear, bikeBrand, engineType, bikeType, plateType, fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice);
 		return "";
 	}
-
+	@RequestMapping(value = "/selectEveryBikeInfo", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 搜尋機車資料 取型號
+	public @ResponseBody String selectEveryBikeInfo() throws IOException {
+		System.out.println("安安");
+		List<EveryBikeInfo> all = everyBikeInfoIFaceService.getAllMembers();
+		EveryBikeInfo s1 = all.get(0);
+		String s2 = s1.getBikeDetail().getIdClassBikeDetail().getBikeModel();
+		System.out.println(s2);
+//		gson.toJson(all);
+//		System.out.println(gson.toJson(all));
+		return "";
+	}
+	
 }
