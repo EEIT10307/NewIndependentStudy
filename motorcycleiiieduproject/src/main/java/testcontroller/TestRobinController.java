@@ -1,5 +1,4 @@
 package testcontroller;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -9,8 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -139,8 +136,7 @@ public class TestRobinController {
 	public @ResponseBody String showAllshowAllEveryBikeInfo(@RequestBody EveryBikeInfoBean everyBikeInfoquery) {
 		System.out.println("網頁傳入=" + everyBikeInfoquery);
 		try {
-			List<EveryBikeInfo> selectEveryBikeInfo = everyBikeInfoIFaceService
-					.showAllEveryBikeInfo(everyBikeInfoquery.getEveryBikeInfoModel());
+			List<EveryBikeInfo> selectEveryBikeInfo = everyBikeInfoIFaceService.showAllEveryBikeInfo(everyBikeInfoquery.getEveryBikeInfoModel());
 
 //		System.out.println("46行:"+selectMaintenancebranch.get(0).getBranchName().getBranchName());
 			Set<String> list = new HashSet<String>();
@@ -180,5 +176,6 @@ public class TestRobinController {
 
 		return "OK";
 	}
+
 
 }

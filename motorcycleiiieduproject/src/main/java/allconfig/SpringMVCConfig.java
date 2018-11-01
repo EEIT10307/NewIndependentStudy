@@ -20,6 +20,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
+
 	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate") ; 		   
 	WebMvcConfigurer.super.addInterceptors(registry);
 

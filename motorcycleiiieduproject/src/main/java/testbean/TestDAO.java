@@ -59,7 +59,6 @@ public class TestDAO {
 	public void testHibernateBean() throws ParseException {
 		System.out.println("test bean go ");
 		Session session = factory.getCurrentSession();
-
 		WebInformationForManager testSpring = new WebInformationForManager();
 		testSpring.setWebContent("hiSpring");
 		testSpring.setWebElements("HI PROJECT");
@@ -70,7 +69,6 @@ public class TestDAO {
 
 		/* ====new 機車車牌==== */
 		EveryBikeInfo everyBikeInfo1 = new EveryBikeInfo();
-
 		// 取得分店實體 （需要在選項內埋分店的ID)
 		BranchDetail branchDetail = session.get(BranchDetail.class, 2);
 		everyBikeInfo1.setBranchName(branchDetail);
@@ -114,7 +112,8 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\OrderList.txt")));
+			new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
+
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -138,7 +137,9 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BranchDetail.txt")));
+						new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));
+
+
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
@@ -167,6 +168,7 @@ public class TestDAO {
 		BufferedReader motorpl = new BufferedReader(
 
 				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt")));
+
 
 		String line;
 		String line2;
@@ -256,5 +258,4 @@ public class TestDAO {
 		}
 
 	}
-
 }

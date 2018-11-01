@@ -3,9 +3,17 @@ package maintenance;
 import java.util.List;
 
 import projectbean.EveryBikeInfo;
+import projectbean.EveryBikeMileage;
 
 public interface MaintenanceIFaceDAO {
 	List<String> showAllBikePlate();
 	List<EveryBikeInfo>showAllisReadyMaintenanceBike(String shopName);
-	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+	List<EveryBikeInfoToGson> everyBikeInfoforGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+	
+	
+	int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage);
+	List<EveryBikeMileage>showEveryBikeMileagebyStore(String shopName);
+	List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage);
+
+
 }

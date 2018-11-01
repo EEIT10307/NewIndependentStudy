@@ -17,7 +17,7 @@ public class OrderListService implements OrderListIFaceService {
 
 	@Override
 	public List<OrderList> selectone(String OrderSerialNum) {
-		 
+
 		return orderListIFaceDao.selectone(OrderSerialNum);
 	}
 
