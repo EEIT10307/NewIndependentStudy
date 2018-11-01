@@ -36,4 +36,9 @@ public class MaintenanceService implements MaintenanceIFaceService {
 		
 	}
 
+	@Override
+	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) {
+		return testMaintenanceDAO.insertNEWMaintenanceDetail(maintenanceItem, requiredMileage);
+	}
+
 }
