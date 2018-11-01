@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projectbean.EveryBikeInfo;
+import projectbean.EveryBikeMileage;
 
 @Service
 @Transactional
@@ -31,14 +32,24 @@ public class MaintenanceService implements MaintenanceIFaceService {
 	}
 
 	@Override
-	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
-		return testMaintenanceDAO.forGsonConvert(finalEveryBikeInfo);
+	public List<EveryBikeInfoToGson> everyBikeInfoforGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
+		return testMaintenanceDAO.everyBikeInfoforGsonConvert(finalEveryBikeInfo);
 		
 	}
 
 	@Override
 	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) {
 		return testMaintenanceDAO.insertNEWMaintenanceDetail(maintenanceItem, requiredMileage);
+	}
+
+	@Override
+	public List<EveryBikeMileage> showEveryBikeMileagebyStore(String shopName) {
+		return testMaintenanceDAO.showEveryBikeMileagebyStore(shopName);
+	}
+
+	@Override
+	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {
+		return testMaintenanceDAO.everyBikeMileageforGsonConvert(finalEveryBikeMileage);
 	}
 
 }

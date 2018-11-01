@@ -1,5 +1,6 @@
 package projectbean;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -33,6 +34,7 @@ public class QAndA implements Serializable{
 	}
 	public void setQAndASerialNum(Integer qAndASerialNum) {
 		this.qAndASerialNum = qAndASerialNum;
+
 	}
 	@Column(nullable = false)
 	public String getQuestioner() {

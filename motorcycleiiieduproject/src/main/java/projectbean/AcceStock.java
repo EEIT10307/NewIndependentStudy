@@ -1,5 +1,6 @@
 package projectbean;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -49,6 +50,7 @@ public class AcceStock implements Serializable{
 	}
 	@ManyToOne
 	@JoinColumn(referencedColumnName  = "branchName" , nullable = false)
+
 	public BranchDetail getBranchName() {
 		return branchName;
 	}

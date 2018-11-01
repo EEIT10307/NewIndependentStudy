@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<select id='BranchName'></select>
+<input type="submit" >
+</body>
+<script type="text/javascript">
+$("input").click(function () {
+	$.ajax({
+	type : "post",
+	url : "selectEveryBikeInfo",
+	success : function(response) {
+		// 				alert("sucess");
+		var shop = JSON.parse(response);
+		//迴圈
+		for (i in shop) {
+			//指定分店的欄位
+			var zx = shop[i].branchName;
+//							alert(zx);
+			//產生option
+			i++;
+			var opt = $("<option>").val(i).text(zx);
+			//傳回id=showshop 產生 分店 下拉式選單
+			$("#BranchName").append(opt);
+		}
+	}
+});
+})
+
+
+</script>
+</html>

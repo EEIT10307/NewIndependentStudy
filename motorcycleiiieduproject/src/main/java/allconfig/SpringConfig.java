@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -82,8 +81,7 @@ public class SpringConfig {
 		    Gson gson = new Gson() ; 
 		   return gson ; 
 	   }
-	   
-	   
+	      
 	   @Bean
 	   public PlatformTransactionManager transactionManager() {		   
 		   JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

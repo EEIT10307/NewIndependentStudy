@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>羅冰</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<style>
+select{width:173px}
+input.current {background: #c0c0c0}
+</style>
+<body>
+
+<table>
+			<tr><td>車牌:</td><td><input 		type="text" id="LicensePlate" value="MFD-001"></td></tr>
+			<tr><td>分店:</td><td><select id="BranchName" ></select></td></tr>
+			<tr><td>型號:</td><td><input 		type="text" class="BikeModel" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1"></select></td></tr>
+			<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" value="1985"><select id="ModelYear1"><option>年份</option></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
+						
+			<tr class="BikeBrand"><td>廠牌:</td><td><input    		type="text"  	id="BikeBrand" 			value="YAMAHA"></td></tr>
+			<tr class="EngineType"><td>CC數:</td><td><input  			type="text"  	id="EngineType"			value="2000"></td></tr>
+			<tr class="BikeType"><td>車種:</td><td><input    			type="text"  	id="BikeType" 			value="紅牌"></td></tr>
+			<tr class="PlateType"><td>紅黃白牌:</td><td><input 		type="text" 	id="PlateType" 	 		value="白牌"></td></tr>
+			<tr class="FuelTankCapacity"><td>油箱容量:</td><td><input	type="text" 	id="FuelTankCapacity" 	value="150"></td></tr>
+			<tr class="SeatHeight"><td>座高:</td><td><input 			type="text"  	id="SeatHeight" 		value="115"></td></tr>
+			<tr class="DryWeight"><td>車子乾重:</td><td><input 		type="text"  	id="DryWeight" 			value="175"></td></tr>
+			<tr class="FuelConsumption"><td>油耗:</td><td><input 		type="text"  	id="FuelConsumption"	value="30"></td></tr>
+			<tr class="Tire"><td>輪胎:</td><td><input 				type="text"		id="Tire"				value="普利斯頓17吋"></td></tr>
+			<tr class="FuelType"><td>使用燃料:</td><td><input 			type="text"		id="FuelType" 			value="98"></td></tr>
+			<tr class="ABS"><td>ABS:</td><td><select id="ABS"><option value="1">是</option><option value="0">否</option></select></td></tr>
+			<tr class="HourPrice"><td>每小時價格:</td><td><input type="text"				id="HourPrice" value="200"></td></tr>
+			</table>
+			<input type="submit" id="submit">
+</body>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	//只新增車牌 其他隱藏
+	$("#BikeModel1").hide();
+	$("#ModelYear1").hide();
+	$("#checkbox").click(function() {
+		$(".BikeModel").toggle();
+		$(".ModelYear").toggle();
+		$(".BikeBrand").toggle();
+		$(".EngineType").toggle();
+		$(".BikeType").toggle();
+		$(".PlateType").toggle();
+		$(".FuelTankCapacity").toggle();
+		$(".SeatHeight").toggle();
+		$(".DryWeight").toggle();
+		$(".FuelConsumption").toggle();
+		$(".Tire").toggle();
+		$(".FuelType").toggle();
+		$(".ABS").toggle();
+		$(".HourPrice").toggle();
+
+		$("#BikeModel1").toggle();
+		$("#ModelYear1").toggle();
+	});
+// ---------------------------------------------------------------------------------
+	//查詢分店
+	$.ajax({
+		type : "post",
+		url : "selectBranchDetail",
+		success : function(response) {
+			// 				alert("sucess");
+			var shop = JSON.parse(response);
+			//迴圈
+			for (i in shop) {
+				//指定分店的欄位
+				var zx = shop[i].branchName;
+//								alert(zx);
+				//產生option
+				i++;
+				var opt = $("<option>").val(i).text(zx);
+				//傳回id=showshop 產生 分店 下拉式選單
+				$("#BranchName").append(opt);
+			}
+		}
+	});
+// 	-------------------------------------------------------------------------------
+	//新增車子詳細資訊
+	$("#submit").click(function(e) {
+		var LicensePlate = $("#LicensePlate").val();//車牌
+		var BranchName = $("#BranchName").val();//分店
+		
+		var BikeModel = $("#BikeModel").val();//型號
+		var ModelYear = $("#ModelYear").val();//年份
+		var BikeBrand = $("#BikeBrand").val();//廠牌
+		var EngineType = $("#EngineType").val();//CC數
+		var BikeType = $("#BikeType").val();//車種
+		var PlateType = $("#PlateType").val();//紅白黃牌
+		var FuelTankCapacity = $("#FuelTankCapacity").val();//油箱容量
+		var SeatHeight = $("#SeatHeight").val();//座高
+		var DryWeight = $("#DryWeight").val();//車子乾重:
+		var FuelConsumption = $("#FuelConsumption").val();//油耗
+		var Tire = $("#Tire").val();//輪胎
+		var FuelType = $("#FuelType").val();//使用燃料
+		var ABS = $("#ABS").val();//煞車ABS
+		var HourPrice = $("#HourPrice").val();//每小時價格
+			
+			if (ABS == 1) {
+				ABS = true;
+			} else {
+				ABS = false;
+			}
+
+			$.ajax({
+				type : "POST",
+				url : "insertBikeDetail",
+				data : {		
+					"licensePlate" : LicensePlate,
+			 		"branchName" : BranchName,
+					"bikeModel":BikeModel,
+					"modelYear" : ModelYear,
+					"bikeBrand" : BikeBrand,
+					"engineType" : EngineType,
+					"bikeType" : BikeType,
+					"plateType" : PlateType,
+					"fuelTankCapacity" : FuelTankCapacity,
+					"seatHeight" : SeatHeight,
+					"dryWeight" : DryWeight,
+					"fuelConsumption" : FuelConsumption,
+					"tire" : Tire,
+					"fuelType" : FuelType,
+					"aBS" : ABS,
+					"hourPrice" : HourPrice
+				},
+				success : function(response) {
+
+					// 						alert("sucess");
+
+					// 						alert(response);
+
+				}
+			});
+
+		});
+	});
+// ----------------------------------------------------------------------------------
+$.ajax({
+		type : "post",
+		url : "selectEveryBikeInfo",
+		success : function(response) {
+			// 				alert("sucess");
+			var shop = JSON.parse(response);
+			//迴圈
+			for (i in shop) {
+				//指定分店的欄位
+				var zx = shop[i].bikeModel.idClassBikeDetail.bikeModel;
+//								alert(zx);
+				//產生option
+				i++;
+				var opt = $("<option>").val(i).text(zx);
+				//傳回id=showshop 產生 分店 下拉式選單
+				$(".BikeModel1").append(opt);
+			}
+		}
+	});
+</script>
+
+</html>
