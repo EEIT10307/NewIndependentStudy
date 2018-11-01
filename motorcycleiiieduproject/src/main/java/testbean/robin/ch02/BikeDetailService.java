@@ -58,7 +58,8 @@ public class BikeDetailService implements BikeDetailIFaceService {
 		BranchDetail branchDetail=session.get(BranchDetail.class, branchName);//分店 需要分店的流水號 加入機車 建構子
 		EveryBikeInfo everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false,branchDetail);// 機車個別資訊 新增
 		IdClassBikeDetail idClassBikeDetail = new IdClassBikeDetail(bikeModel, modelYear);// 型號跟年份 複合主鍵
-		Date now = new Date();
+
+		Date now = new Date(); 
 		
 		BikeDetail bikeDetail = new BikeDetail(idClassBikeDetail,bikeBrand,engineType,bikeType, plateType,fuelTankCapacity,seatHeight,
 				dryWeight,fuelConsumption,tire,fuelType,aBS, hourPrice,now);//機車 詳細資訊新增

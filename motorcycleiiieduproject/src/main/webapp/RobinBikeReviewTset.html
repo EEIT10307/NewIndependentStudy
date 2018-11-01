@@ -26,6 +26,7 @@
 	<input type="submit" id="button">
 
 	<script>
+<<<<<<< HEAD
 		// 	function resetField(fieldId) {
 		// 	    var field = document.getElementById(fieldId);
 		// // 	    alert(field);           // object
@@ -60,6 +61,21 @@
 
 						// 						alert(response);
 
+=======
+		$(document).ready(function() {
+			$("#button").click(function(e) {
+				var OrderSerialNum = $("#OrderSerialNum").val();
+				var Email = $("#Email").val();
+				var Satisfacation = $("#Satisfacation").val();
+				var bikeModel = $("#bikeModel").val();
+				var ReviewContent = $("textarea").val();
+// 				alert("hi");
+				$.ajax({
+					type : "post",
+					url : "insert",
+					data : {"orderSerialNum":OrderSerialNum,"email":Email,"satisfacation":Satisfacation,"bikeModel":bikeModel,"reviewContent":ReviewContent},
+					success : function(response) {
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 					}
 				});
 

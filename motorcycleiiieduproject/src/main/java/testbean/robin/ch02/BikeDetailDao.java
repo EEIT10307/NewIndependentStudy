@@ -25,8 +25,8 @@ public class BikeDetailDao implements BikeDetailIFaceDao{
 		if (list.size() > 0) {
 			dup = true;
 		}
-
 		return dup;
+
 	}
 
 	@Override

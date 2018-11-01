@@ -112,7 +112,8 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
+			new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
+
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -124,9 +125,9 @@ public class TestDAO {
 					Double.valueOf(lines[6]), Integer.valueOf(lines[7]), lines[8], Integer.valueOf(lines[9]),
 					Integer.valueOf(lines[10]), sim.parse(lines[11]), lines[12], lines[13], lines[14], lines[15],
 					Boolean.valueOf(lines[16]), Boolean.valueOf(lines[17]));
-			
+
 			odlistnew.setLicensePlate(factory.getCurrentSession().get(EveryBikeInfo.class, lines[3]));
-			
+
 			factory.getCurrentSession().persist(odlistnew);
 
 		}
@@ -137,6 +138,7 @@ public class TestDAO {
 
 		BufferedReader bf = new BufferedReader(
 						new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));
+
 
 
 		String line;
@@ -162,12 +164,10 @@ public class TestDAO {
 
 				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt")));
 
-
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
 				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt")));
-
 
 
 		String line;
@@ -225,43 +225,37 @@ public class TestDAO {
 
 		bf.close();
 	}
-	
+
 	public void makeFakeMaintenanceDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\MaintenanceDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\MaintenanceDetail.txt")));
 		String line;
 		while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
-			MaintenanceDetail maintenanceDetail=new MaintenanceDetail();
+			MaintenanceDetail maintenanceDetail = new MaintenanceDetail();
 			maintenanceDetail.setMaintenanceItem(lines[0]);
 			maintenanceDetail.setRequiredMileage(Double.valueOf(lines[1]));
 			factory.getCurrentSession().persist(maintenanceDetail);
 		}
 		bf.close();
 	}
-	
-	
-	public void createCriteria() {
-		
-       //        factory.getCurrentSession().createCriteria(OrderList.class);
-                  CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
-                  CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
-                       Root<OrderList> from = createQuery.from(OrderList.class);
-                        ParameterExpression<String> par = buider.parameter(String.class);
-                        createQuery.select(from).where(buider.equal(from.get("bikeModel"), par));                      
-                   Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery); 
-                   queryword.setParameter(par, "R3");
-                       List<OrderList> list = queryword.getResultList();
 
-                   for( OrderList loop:list) {
-                	   System.out.println(loop);
-                   }
-                      
-                 
+	public void createCriteria() {
+
+		// factory.getCurrentSession().createCriteria(OrderList.class);
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+		Root<OrderList> from = createQuery.from(OrderList.class);
+		ParameterExpression<String> par = buider.parameter(String.class);
+		createQuery.select(from).where(buider.equal(from.get("bikeModel"), par));
+		Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery);
+		queryword.setParameter(par, "R3");
+		List<OrderList> list = queryword.getResultList();
+
+		for (OrderList loop : list) {
+			System.out.println(loop);
+		}
+
 	}
-	
-	
-	
-	
 }

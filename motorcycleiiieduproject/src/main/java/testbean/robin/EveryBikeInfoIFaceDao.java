@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import maintenance.EveryBikeInfoToGson;
 import projectbean.EveryBikeInfo;
 @Repository
 public interface EveryBikeInfoIFaceDao {
-	boolean isDup(String id);
+	List<EveryBikeInfo> selectModelAll(String Year);
 
 	List<EveryBikeInfo> getAllMembers();
 
@@ -18,4 +19,6 @@ public interface EveryBikeInfoIFaceDao {
 	int updateMember(EveryBikeInfo mb);
 
 	int save(EveryBikeInfo everyBikeInfo);
+	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
+	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
 }

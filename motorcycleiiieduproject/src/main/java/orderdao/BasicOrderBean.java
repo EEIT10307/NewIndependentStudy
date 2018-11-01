@@ -14,10 +14,10 @@ public class BasicOrderBean {
 	public void setPickupDate(String pickupDate) {
 		this.pickupDate = pickupDate;
 	}
-	public String getDropofDate() {
+	public String getDropoffDate() {
 		return dropofDate;
 	}
-	public void setDropofDate(String dropofDate) {
+	public void setDropoffDate(String dropofDate) {
 		this.dropofDate = dropofDate;
 	}
 	public String getPickupStore() {

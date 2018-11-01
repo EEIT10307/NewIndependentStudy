@@ -20,7 +20,7 @@ public class MaintenanceDetail implements Serializable{
 	private String maintenanceItem ; 
 	private Double requiredMileage ;
 	@Id
-
+ 
 	public String getMaintenanceItem() {
 		return maintenanceItem;
 	}

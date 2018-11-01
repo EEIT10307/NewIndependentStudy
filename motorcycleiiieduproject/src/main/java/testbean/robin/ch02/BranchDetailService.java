@@ -20,5 +20,4 @@ BranchDetailIFaceDao branchDetailIFaceDao;
 		
 		return branchDetailIFaceDao.getAllMembers();
 	}
-
 }

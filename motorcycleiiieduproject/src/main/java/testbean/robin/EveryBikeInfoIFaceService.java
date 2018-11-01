@@ -2,10 +2,11 @@ package testbean.robin;
 
 import java.util.List;
 
+import maintenance.EveryBikeInfoToGson;
 import projectbean.EveryBikeInfo;
 
 public interface EveryBikeInfoIFaceService {
-	boolean isDup(String id);
+	List<EveryBikeInfo> selectModelAll(String Year);
 
 	List<EveryBikeInfo> getAllMembers();
 
@@ -15,5 +16,7 @@ public interface EveryBikeInfoIFaceService {
 
 	int updateMember(EveryBikeInfo mb);
 
-	int save(EveryBikeInfo everyBikeInfo);
+	int save(String licensePlate, int branchName, String bikeModel, String modelYear);
+	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
+	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
 }

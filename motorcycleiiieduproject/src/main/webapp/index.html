@@ -8,41 +8,34 @@
 <body>
 
 
-<h1>Hello world</h1>
-<button>按我</button>
+	<h1>Hello world</h1>
+	<button>按我</button>
 
 
 
-<script>
-$(document).ready(function () {
+	<script>
+		$(document).ready(function() {
 
+			$("button").click(function(e) {
+				alert("hi");
 
-$("button").click(function (e) { 
-   alert("hi") ; 
+				$.ajax({
+					type : "post",
+					url : "testcontroller",
+					data : "data",
+					success : function(response) {
 
-   $.ajax({
-       type: "post",
-       url: "testcontroller",
-       data: "data",
-       success: function (response) {
-           
-    	alert("sucess");
-    	   
-       alert(response);
+						alert("sucess");
 
-       }
-   });
-    
-}); 
-   
+						alert(response);
 
+					}
+				});
 
+			});
 
-});
-
-
-
-</script>
+		});
+	</script>
 
 
 

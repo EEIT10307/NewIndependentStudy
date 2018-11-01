@@ -2,8 +2,6 @@ package maintenancecontroller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import maintenance.MaintenanceBean;
 import maintenance.MaintenanceIFaceService;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
-import projectbean.OrderList;
+
 
 @Controller
 public class MaintenanceController {
@@ -61,6 +59,7 @@ public class MaintenanceController {
 			return new String("{fail:fail}");
 		}
 	}
+	
 	@RequestMapping(value = "/insertNEWMaintenanceDetail", method = RequestMethod.POST,produces = "application/text; charset = UTF-8") // 保養項目新增
 	public @ResponseBody String insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) throws IOException, ParseException {
 		System.out.println("執行新增保養項目insertNEWMaintenanceDetail");
@@ -87,4 +86,5 @@ public class MaintenanceController {
 	
 	
 	
+
 }

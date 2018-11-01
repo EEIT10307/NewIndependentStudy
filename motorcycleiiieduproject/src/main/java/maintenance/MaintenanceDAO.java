@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 import projectbean.MaintenanceDetail;
-import projectbean.OrderList;
 
 @Repository
 public class MaintenanceDAO implements MaintenanceIFaceDAO {
@@ -62,6 +61,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		}
 		return everyBikeInfoToGson;
 	}
+
 	@Override
 	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) {
 		Session session=factory.getCurrentSession();
@@ -104,6 +104,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		queryword.setParameter(branchName, shopName);
 		List<EveryBikeMileage> list = queryword.getResultList();
 
+
 		return list;
 	}
 
@@ -117,6 +118,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		return everyBikeMileageToGson;
 		
 		}
+	
 		
 		
 	}

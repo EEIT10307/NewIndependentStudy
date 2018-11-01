@@ -42,8 +42,6 @@ public class OrderController {
 			 List<BikeDetail> finalBikeDetail = tesOrderIFaceService.returnMotorDetailAndShowView(compareOrderlist, customerquery.getPickupStore());
 			 //hibernate複合主鍵物件轉為普通java
 			 List<BikeDetailToGson> forGsonConvert = tesOrderIFaceService.forGsonConvert(finalBikeDetail);
-			System.out.println("哈哈哈:"+gson.toJson(forGsonConvert));
-			 
 			 return gson.toJson(forGsonConvert);
 			// gson.toJson(finalBikeDetail,BikeDetail.class)
 		} catch (Exception e) {
