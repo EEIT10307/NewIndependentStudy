@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cleanbean.EveryBikeInfoToGson;
+import cleanbean.EveryBikeMileageToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 

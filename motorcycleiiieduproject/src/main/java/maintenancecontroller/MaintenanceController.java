@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import maintenance.EveryBikeInfoToGson;
-import maintenance.EveryBikeMileageToGson;
+import cleanbean.EveryBikeInfoToGson;
+import cleanbean.EveryBikeMileageToGson;
 import maintenance.MaintenanceBean;
 import maintenance.MaintenanceIFaceService;
 import projectbean.EveryBikeInfo;
