@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,7 @@ import projectbean.EveryBikeInfo;
 @Transactional
 public class MaintenanceService implements MaintenanceIFaceService {
 	
-	@Autowired
-	SessionFactory factory;
+	
 	
 	@Autowired
 	MaintenanceIFaceDAO testMaintenanceDAO;

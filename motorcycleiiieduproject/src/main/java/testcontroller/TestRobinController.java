@@ -1,25 +1,36 @@
 package testcontroller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import maintenance.EveryBikeInfoToGson;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import testbean.robin.BikeDetailIFaceService;
 import testbean.robin.BikeReviewIFaceService;
 import testbean.robin.BranchDetailIFaceService;
 import testbean.robin.EveryBikeInfoIFaceService;
+import testbean.robin.ch02.EveryBikeInfoAddCarsBean;
+import testbean.robin.ch02.EveryBikeInfoBean;
 
 @Controller
 public class TestRobinController {
@@ -82,19 +93,92 @@ public class TestRobinController {
 			String fuelType, Boolean aBS, int hourPrice) throws IOException {
 		System.out.println("安安");
 		System.out.println(branchName);
-		bikeDetailIFaceService.save(licensePlate, branchName, bikeModel, modelYear, bikeBrand, engineType, bikeType, plateType, fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice);
+		bikeDetailIFaceService.save(licensePlate, branchName, bikeModel, modelYear, bikeBrand, engineType, bikeType,
+				plateType, fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice);
 		return "";
 	}
-	@RequestMapping(value = "/selectEveryBikeInfo", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 搜尋機車資料 取型號
+
+	@RequestMapping(value = "/selectEveryBikeInfoBikeModel", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 搜尋機車資料
+	// 取型號
 	public @ResponseBody String selectEveryBikeInfo() throws IOException {
+
 		System.out.println("安安");
 		List<EveryBikeInfo> all = everyBikeInfoIFaceService.getAllMembers();
-		EveryBikeInfo s1 = all.get(0);
-		String s2 = s1.getBikeDetail().getIdClassBikeDetail().getBikeModel();
-		System.out.println(s2);
-//		gson.toJson(all);
-//		System.out.println(gson.toJson(all));
-		return "";
+		// 產生不重複的型號
+		Set<String> list = new HashSet<String>();
+		for (int x = 0; x < all.size(); x++) {// 如果list.add(all.get(x).getBikeDetail().getIdClassBikeDetail() 會多一筆
+												// 所以要加.getBikeModel());
+			list.add(all.get(x).getBikeDetail().getIdClassBikeDetail().getBikeModel());
+		}
+//		Iterator<IdClassBikeDetail> it = list.iterator();
+//		while(it.hasNext()) {
+//			System.out.println(it.next());
+//		}
+		return gson.toJson(list);
 	}
+
+	@RequestMapping(value = "/selectEveryBikeInfoModelYear", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 搜尋機車資料
+	// 取型號
+	public @ResponseBody String selectEfveryBikeInfo(String Year) throws IOException {
+
+		System.out.println("年份");
+		System.out.println(Year);
+
+		List<EveryBikeInfo> all = everyBikeInfoIFaceService.selectModelAll(Year);
+
+		Set<String> list = new HashSet<String>();
+		for (int x = 0; x < all.size(); x++) {// 如果list.add(all.get(x).getBikeDetail().getIdClassBikeDetail() 會多一筆
+												// 所以要加.getBikeModel());
+			list.add(all.get(x).getBikeDetail().getIdClassBikeDetail().getModelYear());
+		}
+
+		return gson.toJson(list);
+	}
+
+	@PostMapping(value = "/showAllshowAllEveryBikeInfo", produces = "text/html; charset = UTF-8") // 查詢機車所有年份
+	public @ResponseBody String showAllshowAllEveryBikeInfo(@RequestBody EveryBikeInfoBean everyBikeInfoquery) {
+		System.out.println("網頁傳入=" + everyBikeInfoquery);
+		try {
+			List<EveryBikeInfo> selectEveryBikeInfo = everyBikeInfoIFaceService
+					.showAllEveryBikeInfo(everyBikeInfoquery.getEveryBikeInfoModel());
+
+//		System.out.println("46行:"+selectMaintenancebranch.get(0).getBranchName().getBranchName());
+			Set<String> list = new HashSet<String>();
+			List<EveryBikeInfoToGson> forGsonConvert = everyBikeInfoIFaceService.forGsonConvert(selectEveryBikeInfo);
+			for (int x = 0; x < forGsonConvert.size(); x++) {
+
+				list.add(forGsonConvert.get(x).getModelYear());
+			}
+			System.out.println(list.size());
+			System.out.println("List JSON=" + gson.toJson(list));
+			System.out.println("該保養車s的JSON=" + gson.toJson(forGsonConvert));
+
+//		return gson.toJson(selectMaintenancebranch);
+			return gson.toJson(list);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			return new String("{fail:fail}");
+		}
+	}
+
+	@PostMapping(value = "/insertAllLicensePlate", produces = "text/html; charset = UTF-8") // 只新增車牌資料
+	public @ResponseBody String insertAllLicensePlate(@RequestAttribute("reader") BufferedReader reader) throws IOException {
+		//System.out.println("往端傳入===>>>"+reader.readLine());
+	//	String ss = reader.readLine();
+		 EveryBikeInfoAddCarsBean[] test = gson.fromJson(reader,  EveryBikeInfoAddCarsBean[].class );
 	
+   for(  EveryBikeInfoAddCarsBean root :test) { 
+	   System.out.println("車牌:"+root.getLicensePlate()+"分店:"+root.getBranchName()+"型號:"+root.getBikeModel()+"年份:"+root.getModelYear());
+	   String licensePlate = root.getLicensePlate();
+	   int   branchName=  root.getBranchName();
+	   String   bikeModel=root.getBikeModel();
+	   String  modelYear=root.getModelYear();
+		everyBikeInfoIFaceService.save(licensePlate, branchName, bikeModel, modelYear);
+   }
+
+		System.out.println("年份");
+
+		return "OK";
+	}
+
 }

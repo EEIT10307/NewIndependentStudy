@@ -6,16 +6,61 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
+/* //下拉式拉條長度 */
 select{width:173px}
-input.current {background: #c0c0c0}
+
+/* // 車牌 可增加或刪除*/
+ #container{
+            width:380px;
+            margin:20px auto;
+            padding:15px;
+            background-color:#eee;
+          border-radius: 15px;
+        }
+        /** 新增按钮 **/
+        #addVar{
+            margin:0 0 0 52px;
+            padding:5px;
+            display:inline-block;
+            background-color:#3A9668;
+            color:#f1f1f1;
+            border:1px solid #005;
+            border-radius: 4px;
+        }
+        /** 删除按钮 **/
+        .removeVar{
+            margin:auto;
+            padding:5px;
+            display:inline-block;
+            background-color:#B02109;
+            color:#f1f1f1;
+            border:1px solid #005;
+          border-radius: 4px;
+        }
+ 
+        #addVar:hover, .removeVar:hover{
+            cursor: pointer;
+        }
+ 
+        .alignRight{
+            text-align: right;
+        }
+ 
+        input, textarea{
+            padding:5px;
+            font-size: 16px;
+        }
 </style>
 <body>
 
-<table>
-			<tr><td>車牌:</td><td><input 		type="text" id="LicensePlate" value="MFD-001"></td></tr>
-			<tr><td>分店:</td><td><select id="BranchName" ></select></td></tr>
+<table >
+			<tr><td></td><td><span id="addVar">新增車牌</span></td></tr>
+			<tr><td>車牌:</td><td><input type="text" id="LicensePlate" name="test" value="MFD-001" class="LicensePlate"></td></tr>
+			<tbody class="add">	</tbody>
+		
+			<tr><td>分店:</td><td><select id="BranchName" class="BranchName"></select></td></tr>
 			<tr><td>型號:</td><td><input 		type="text" class="BikeModel" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1"></select></td></tr>
-			<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" value="1985"><select id="ModelYear1"><option>年份</option></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
+			<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1"></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
 						
 			<tr class="BikeBrand"><td>廠牌:</td><td><input    		type="text"  	id="BikeBrand" 			value="YAMAHA"></td></tr>
 			<tr class="EngineType"><td>CC數:</td><td><input  			type="text"  	id="EngineType"			value="2000"></td></tr>
@@ -30,14 +75,35 @@ input.current {background: #c0c0c0}
 			<tr class="ABS"><td>ABS:</td><td><select id="ABS"><option value="1">是</option><option value="0">否</option></select></td></tr>
 			<tr class="HourPrice"><td>每小時價格:</td><td><input type="text"				id="HourPrice" value="200"></td></tr>
 			</table>
-			<input type="submit" id="submit">
+			<input type="submit" id="submit" class="submit" >
+<!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
+			<input type="submit" id="submit1" class="submit1" >
 </body>
+<script>
+        //初始参数个数
+        var varCount = 0;
+ 
+        $(function () {
+          //新增按钮点击
+            $('#addVar').on('click', function(){
+                varCount++;
+				$(".add").append('<tr><td>車牌'+varCount+':</td><td><input type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar">删除</span></td></tr>');
+            });
+ 
+          //删除按钮点击
+          $('table').on('click', '.removeVar', function(){
+			$(this).closest('tr').remove();
+            varCount--;
+          });
+        });
+    </script>
 <script type="text/javascript">
 
 $(document).ready(function() {
 	//只新增車牌 其他隱藏
 	$("#BikeModel1").hide();
 	$("#ModelYear1").hide();
+	$("#submit1").hide();
 	$("#checkbox").click(function() {
 		$(".BikeModel").toggle();
 		$(".ModelYear").toggle();
@@ -53,9 +119,11 @@ $(document).ready(function() {
 		$(".FuelType").toggle();
 		$(".ABS").toggle();
 		$(".HourPrice").toggle();
-
 		$("#BikeModel1").toggle();
 		$("#ModelYear1").toggle();
+		
+		$("#submit1").toggle();
+		$(".submit").toggle();
 	});
 // ---------------------------------------------------------------------------------
 	//查詢分店
@@ -136,27 +204,103 @@ $(document).ready(function() {
 			});
 
 		});
-	});
+
 // ----------------------------------------------------------------------------------
-$.ajax({
+	//產生型號 到下拉式選單
+	$.ajax({
 		type : "post",
-		url : "selectEveryBikeInfo",
+		url : "selectEveryBikeInfoBikeModel",
 		success : function(response) {
-			// 				alert("sucess");
+// 			alert("sucess");
 			var shop = JSON.parse(response);
 			//迴圈
 			for (i in shop) {
-				//指定分店的欄位
-				var zx = shop[i].bikeModel.idClassBikeDetail.bikeModel;
-//								alert(zx);
+				//指定型號的欄位
+				var zx = shop[i];
+				// alert(zx);
+				
 				//產生option
 				i++;
-				var opt = $("<option>").val(i).text(zx);
-				//傳回id=showshop 產生 分店 下拉式選單
+				var opt = $("<option>").val(zx).text(zx);
+				//傳回id=showshop 產生 型號 下拉式選單
 				$(".BikeModel1").append(opt);
 			}
 		}
 	});
+// 	-------------------------------------------------------------------------------------
+
+//查詢年份 給下拉式選單
+	$(".BikeModel1").change(function() {
+// 		alert("7788不要9")
+// 		alert($(".BikeModel1").val());
+	//每下拉一次清空
+	$(".ModelYear1").html("");
+	var cd= {"everyBikeInfoModel":$(".BikeModel1").val()}; 
+	var str=JSON.stringify(cd);
+		$.ajax({
+			type : "post",
+			url : "showAllshowAllEveryBikeInfo",
+			data:str,
+		 	contentType:"application/json; charset=utf-8",
+			success : function(response) {
+				var shop  =JSON.parse(response);
+				//迴圈
+				for (i in shop) {
+					//指定型號的欄位
+					var zx = shop[i];
+					//產生option
+					i++;
+					var opt = $("<option>").val(zx).text(zx);
+					//傳回id=showshop 產生 型號 下拉式選單
+					$(".ModelYear1").append(opt);
+				}
+			}
+		});
+	});
+// 	-------------------------------------------------------------------------------------
+//只新增車牌
+	
+		$(".submit1").click(function() {
+			var show
+			var LicensePlate = $(".LicensePlate").val();
+			var BranchName = $(".BranchName").val();
+			var BikeModel1 = $(".BikeModel1").val();
+			var ModelYear1 = $(".ModelYear1").val();
+					alert(LicensePlate)
+			//		alert(BranchName)
+				//	alert(BikeModel1)
+					//alert(ModelYear1)
+					var allLicensePlatearray = []
+					
+					
+ 			$("[name='test']").each(function(){
+ 				show=$(this).val();
+ 				alert(show)
+ 				var allLicensePlate = {}
+ 				allLicensePlate["licensePlate"] = show ;
+ 				allLicensePlate["branchName"] = BranchName ;
+ 				allLicensePlate["bikeModel"] = BikeModel1 ;
+ 				allLicensePlate["modelYear"] = ModelYear1 ;
+ 				
+ 				allLicensePlatearray.push(allLicensePlate) ; 
+ 				
+ 			})
+ 			alert(JSON.stringify(allLicensePlatearray))
+ 			
+ 			var jsonarray = JSON.stringify(allLicensePlatearray)
+			$.ajax({
+				type : "post",
+				url : "insertAllLicensePlate",
+				data :jsonarray,
+				success : function(response) {
+
+				}
+			});
+		});
+});
+
+
+
 </script>
 
 </html>

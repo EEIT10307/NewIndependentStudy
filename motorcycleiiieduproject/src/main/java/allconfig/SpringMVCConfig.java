@@ -20,10 +20,10 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
-	    myinter.addPathPatterns("/BikeReviewInsert") ; 		   
+	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate") ; 		   
 	WebMvcConfigurer.super.addInterceptors(registry);
 
-		
+		 
 	}
 	//靜態資源使用預設servlet
 	@Override

@@ -17,7 +17,6 @@ import maintenance.EveryBikeInfoToGson;
 import maintenance.MaintenanceBean;
 import maintenance.MaintenanceIFaceService;
 import projectbean.EveryBikeInfo;
-import projectbean.OrderList;
 
 @Controller
 public class MaintenanceController {
