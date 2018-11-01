@@ -1,4 +1,4 @@
-package testbean.robin.ch02;
+package cleanbean;
 
 public class EveryBikeInfoBean {
 	private String everyBikeInfoModel;

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import cleanbean.EveryBikeInfoBean;
 import maintenance.EveryBikeInfoToGson;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
@@ -27,7 +28,6 @@ import testbean.robin.BikeReviewIFaceService;
 import testbean.robin.BranchDetailIFaceService;
 import testbean.robin.EveryBikeInfoIFaceService;
 import testbean.robin.ch02.EveryBikeInfoAddCarsBean;
-import testbean.robin.ch02.EveryBikeInfoBean;
 
 @Controller
 public class TestRobinController {
