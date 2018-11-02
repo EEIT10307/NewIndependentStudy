@@ -101,12 +101,15 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		ParameterExpression<String> branchName = buider.parameter(String.class);
 		createQuery.select(fromClass).where(buider.equal(fromClass.get("licensePlate").get("branchName").get("branchName"), branchName));
 		Query<EveryBikeMileage> queryword = factory.getCurrentSession().createQuery(createQuery);
+		
 		queryword.setParameter(branchName, shopName);
 		List<EveryBikeMileage> list = queryword.getResultList();
 
 
 		return list;
 	}
+	
+
 
 	@Override
 	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {

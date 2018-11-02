@@ -2,7 +2,7 @@ package cleanbean;
 
 public class EveryBikeInfoBean {
 	private String everyBikeInfoModel;
-
+//有事問robin  
 	public String getEveryBikeInfoModel() {
 		return everyBikeInfoModel;
 	}

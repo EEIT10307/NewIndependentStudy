@@ -115,6 +115,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		// select * from everbikeinfo.class where
 		// everbikeinfo.class.BranchName.branchName = 傳入店名
 		createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName").get("branchName"), checkshopname));
+		
 		// 查詢物件
 		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);
 		// 定義參數

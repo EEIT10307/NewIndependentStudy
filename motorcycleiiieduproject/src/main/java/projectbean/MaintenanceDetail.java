@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +21,7 @@ public class MaintenanceDetail implements Serializable{
 	private String maintenanceItem ; 
 	private Double requiredMileage ;
 	@Id
- 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getMaintenanceItem() {
 		return maintenanceItem;
 	}

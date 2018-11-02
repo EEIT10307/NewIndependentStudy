@@ -12,7 +12,7 @@ import testcontroller.InterceptorUse;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","everybikeInfocontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	
@@ -21,7 +21,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
 
-	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate") ; 		   
+	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate","/insertBikeDetail") ; 		   
 	WebMvcConfigurer.super.addInterceptors(registry);
 
 		 
