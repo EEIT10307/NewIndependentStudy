@@ -14,6 +14,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cleanbean.EveryBikeInfoToGson;
+import cleanbean.EveryBikeMileageToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 import projectbean.MaintenanceDetail;

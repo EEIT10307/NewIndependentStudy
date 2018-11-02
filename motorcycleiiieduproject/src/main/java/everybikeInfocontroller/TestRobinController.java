@@ -190,7 +190,7 @@ public class TestRobinController {
 	@PostMapping(value = "/selectBikeDetail", produces = "text/html; charset = UTF-8") //查詢機車詳細訂單
 	public @ResponseBody String insertAllLicensePlateD(String lice) throws IOException {
 		System.out.println(lice);
-
+		
 		return "OK";
 	}
 	
