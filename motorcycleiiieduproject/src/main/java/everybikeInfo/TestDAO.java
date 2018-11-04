@@ -1,4 +1,4 @@
-package testbean;
+package everybikeInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,6 +24,7 @@ import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import projectbean.IdClassBikeDetail;
+import projectbean.MaintenanceDetail;
 import projectbean.OrderList;
 import projectbean.WebInformationForManager;
 
@@ -58,7 +59,6 @@ public class TestDAO {
 	public void testHibernateBean() throws ParseException {
 		System.out.println("test bean go ");
 		Session session = factory.getCurrentSession();
-
 		WebInformationForManager testSpring = new WebInformationForManager();
 		testSpring.setWebContent("hiSpring");
 		testSpring.setWebElements("HI PROJECT");
@@ -69,7 +69,6 @@ public class TestDAO {
 
 		/* ====new 機車車牌==== */
 		EveryBikeInfo everyBikeInfo1 = new EveryBikeInfo();
-
 		// 取得分店實體 （需要在選項內埋分店的ID)
 		BranchDetail branchDetail = session.get(BranchDetail.class, 2);
 		everyBikeInfo1.setBranchName(branchDetail);
@@ -112,7 +111,10 @@ public class TestDAO {
 
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/OrderList.txt")));
+
+			new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
+
+
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
@@ -123,9 +125,9 @@ public class TestDAO {
 					Double.valueOf(lines[6]), Integer.valueOf(lines[7]), lines[8], Integer.valueOf(lines[9]),
 					Integer.valueOf(lines[10]), sim.parse(lines[11]), lines[12], lines[13], lines[14], lines[15],
 					Boolean.valueOf(lines[16]), Boolean.valueOf(lines[17]));
-			
+
 			odlistnew.setLicensePlate(factory.getCurrentSession().get(EveryBikeInfo.class, lines[3]));
-			
+
 			factory.getCurrentSession().persist(odlistnew);
 
 		}
@@ -135,7 +137,10 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+						new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));
+
+
+
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -156,10 +161,14 @@ public class TestDAO {
 	public void makeFakeBikedetail_EveryBikeInfor() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt")));
+
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt")));
+
 
 		String line;
 		String line2;
@@ -216,35 +225,37 @@ public class TestDAO {
 
 		bf.close();
 	}
-	
-	
-	
-	
-	public void createCriteria() {
-		
-       //        factory.getCurrentSession().createCriteria(OrderList.class);
-                  CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
-                  CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
-                       Root<OrderList> from = createQuery.from(OrderList.class);
-                        ParameterExpression<String> par = buider.parameter(String.class);
-                        createQuery.select(from).where(buider.equal(from.get("bikeModel"), par));                      
-                   Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery); 
-                   queryword.setParameter(par, "R3");
-                       List<OrderList> list = queryword.getResultList();
-                   
-                   
-                   
-                   for( OrderList loop:list) {
-                	   System.out.println(loop);
-                   }
-                      
-                 
-	}
-	
-	
-	
-	
-	
-	
 
+	public void makeFakeMaintenanceDetail() throws IOException, NumberFormatException, ParseException {
+
+		BufferedReader bf = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\MaintenanceDetail.txt")));
+		String line;
+		while ((line = bf.readLine()) != null) {
+			String[] lines = line.split(",");
+			MaintenanceDetail maintenanceDetail = new MaintenanceDetail();
+			maintenanceDetail.setMaintenanceItem(lines[0]);
+			maintenanceDetail.setRequiredMileage(Double.valueOf(lines[1]));
+			factory.getCurrentSession().persist(maintenanceDetail);
+		}
+		bf.close();
+	}
+
+	public void createCriteria() {
+
+		// factory.getCurrentSession().createCriteria(OrderList.class);
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+		Root<OrderList> from = createQuery.from(OrderList.class);
+		ParameterExpression<String> par = buider.parameter(String.class);
+		createQuery.select(from).where(buider.equal(from.get("bikeModel"), par));
+		Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery);
+		queryword.setParameter(par, "R3");
+		List<OrderList> list = queryword.getResultList();
+
+		for (OrderList loop : list) {
+			System.out.println(loop);
+		}
+
+	}
 }

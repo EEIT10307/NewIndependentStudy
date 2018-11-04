@@ -1,4 +1,4 @@
-package testbean;
+package everybikeInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

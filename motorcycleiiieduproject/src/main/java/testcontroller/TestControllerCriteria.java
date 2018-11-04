@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import everybikeInfo.TestService;
 import orderdao.BasicOrderBean;
-import testbean.TestService;
 
 @Controller
 public class TestControllerCriteria {

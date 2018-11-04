@@ -2,6 +2,7 @@ package projectbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class BikeDetail implements Serializable{
@@ -33,13 +35,61 @@ public class BikeDetail implements Serializable{
     private Integer hourPrice;
     private java.util.Date onSheftTime;
 
-    private List<EveryBikeInfo> everyBikeInfos = new ArrayList<>();
+    private List<EveryBikeInfo> everyBikeInfos = new ArrayList<EveryBikeInfo>();
 
  
 
 
 
-    public void addEveryBikeInfo(EveryBikeInfo everyBikeInfo) {
+    public BikeDetail() {
+		
+	}
+
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String tire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.tire = tire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.onSheftTime = onSheftTime;
+	}
+
+	
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail,String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String tire, String fuelType, Boolean aBS, Integer hourPrice) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.tire = tire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+	
+	}
+
+	
+
+
+	public void addEveryBikeInfo(EveryBikeInfo everyBikeInfo) {
     	everyBikeInfos.add(everyBikeInfo);
     	everyBikeInfo.setBikeDetail(this);
     }
@@ -147,6 +197,7 @@ public class BikeDetail implements Serializable{
 	}
 	public void setABS(Boolean aBS) {
 		this.aBS = aBS;
+
 	}
 	@Column(nullable = false)
 	public Integer getHourPrice() {

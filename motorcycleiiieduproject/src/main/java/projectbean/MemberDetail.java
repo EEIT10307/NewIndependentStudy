@@ -1,5 +1,6 @@
 package projectbean;
 
+
 import java.io.Serializable;
 import java.sql.Blob;
 
@@ -100,7 +101,7 @@ public class MemberDetail implements Serializable{
 	public void setLastLoginDate(java.util.Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
-	@Column(nullable = false)
+	@Column(nullable = true)//羅冰  記得要改回去
 	public Blob getProfilePhoto() {
 		return profilePhoto;
 	}

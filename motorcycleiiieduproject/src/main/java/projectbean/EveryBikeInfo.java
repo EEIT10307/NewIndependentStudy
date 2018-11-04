@@ -1,5 +1,6 @@
 package projectbean;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -28,10 +29,10 @@ public class EveryBikeInfo implements Serializable{
 				
 	}
 	
-	public EveryBikeInfo(String licensePlate , Double totalMileage, Boolean isReadyMaintenance , BranchDetail branchName ) {
+	public EveryBikeInfo(String licensePlate ,Double totalMileage, Boolean isReadyMaintenance , BranchDetail branchName ) {
 		super();
 		this.licensePlate = licensePlate ; 
-		this.totalMileage = totalMileage;
+		this.totalMileage = totalMileage ; 
 		this.isReadyMaintenance = isReadyMaintenance;	
 		this.branchName = branchName ; 
 	

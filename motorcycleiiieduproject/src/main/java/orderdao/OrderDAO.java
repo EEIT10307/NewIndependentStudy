@@ -65,7 +65,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
 		createQuery.select(fromClass);
 		List<BranchDetail> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
-		List<String> branchnamelist = new ArrayList<>();
+		List<String> branchnamelist = new ArrayList<String>();
 		for (BranchDetail loop : branchlist) {
 			branchnamelist.add(loop.getBranchName());
 		}
@@ -129,6 +129,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		// select * from everbikeinfo.class where
 		// everbikeinfo.class.BranchName.branchName = 傳入店名
 		createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName").get("branchName"), checkshopname));
+		
 		// 查詢物件
 		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);
 		// 定義參數

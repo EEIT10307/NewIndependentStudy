@@ -1,4 +1,4 @@
-package testbean;
+package everybikeInfo;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -70,6 +70,16 @@ public class TestService {
 	}
 	
 	@Transactional
+	public  void makeFakeMaintenanceDetail() throws ParseException, NumberFormatException, IOException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("makeFakeMaintenanceDetail start up  ");
+		testDAO.makeFakeMaintenanceDetail();
+		
+	}
+	
+	
+	@Transactional
 public void createCriteria() {
 		
 		System.out.println("createCriteria go");
@@ -79,6 +89,7 @@ public void createCriteria() {
 		
 		
 	}
+
 	
 
 }

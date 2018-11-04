@@ -1,5 +1,6 @@
 package projectbean;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -12,17 +13,26 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class EveryBikeMileage implements Serializable{
-	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Integer everyBikeMileageSerialNum;
 	private  EveryBikeInfo licensePlate ; 
 	private  MaintenanceDetail maintenanceItem;
 	private Double currentMileage ;
 	
+	
+	
+	
+	public EveryBikeMileage() {
+
+		
+	}
+	public EveryBikeMileage(EveryBikeInfo licensePlate, MaintenanceDetail maintenanceItem, Double currentMileage) {
+		super();
+		this.licensePlate = licensePlate;
+		this.maintenanceItem = maintenanceItem;
+		this.currentMileage = currentMileage;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getEveryBikeMileageSerialNum() {
