@@ -1,0 +1,22 @@
+.orderlistleft{ 
+    border: 1px solid #1779ba;
+    float: left;
+    height: 40em;
+}
+.orderlist{
+    border: 1px solid #ba3d17;
+    height: 13.33em;
+}
+.orderone{
+    border: 1px solid #ba3d17;
+    height: 40em;
+}
+.orderlistbody{
+    border: 1px solid #e2c8c0; 
+}
+
+.orderlistmain{
+    height: 40em;
+    overflow: auto;
+    
+}

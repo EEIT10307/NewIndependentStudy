@@ -7,12 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/orderpagecss.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <h3 class="product-color-title">pick-up date</h3>
     DATE:
-    <input type="date" name="pDate" id="pDate" >
+    <input type="date" name="pDate" id="pDate">
     TIME:
     <select name="Ptime" class="makePoption"></select>
     <br><br>
@@ -21,7 +30,7 @@
     DATE:
     <input type="date" name="dDate" id="dDate">
     TIME:
-    <select name="Dtime" class="makeDoption">     
+    <select name="Dtime" class="makeDoption">
     </select>
     <br><br>
     <h3>Pickup-Store</h3>
@@ -30,9 +39,29 @@
     <h3>Dropoff-Store</h3>
     <select name="dropoffbranchName" class="dropoffbranchName"></select>
 
-    <button id="takeserch">查詢</button>
+    <button  id="takeserch">查詢</button>
+    <br>
+    <hr>
+        <div class="col-lg-3 orderlistleft">
+            left article<br>
+            left article<br>
+            left article<br>
+            left article<br>
+            left article<br>
+            left article<br>
+            left article<br>
+        </div>
+        <div class="col-lg-9 orderlistmain">
+        <div class="col-lg-12 orderlistbody row">
+        </div>
+    </div>
+<hr>
+<h1>模擬訂單確認畫面</h1>
+<div class="ordercart">
 
-  <script src="js/orderpage.js"></script>
+</div>
+
+    <script src="js/orderpage.js"></script>
 </body>
 
 </html>

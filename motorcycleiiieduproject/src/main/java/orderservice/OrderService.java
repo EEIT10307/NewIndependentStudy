@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import orderdao.BasicOrderBean;
 import orderdao.BikeDetailToGson;
 import orderdao.OrderIFaceDAO;
+import orderdao.OrderListToGson;
+import projectbean.AcceStock;
 import projectbean.BikeDetail;
+import projectbean.Discount;
 import projectbean.OrderList;
 
 @Service
@@ -41,15 +44,16 @@ public class OrderService implements OrderIFaceService {
 
 
 	@Override
-	public List<String> compareOrderlist(BasicOrderBean customerquery, List<OrderList> orderbranch)throws ParseException  {
+	public List<OrderList> compareOrderlist(BasicOrderBean customerquery, List<OrderList> orderbranch)throws ParseException  {
 		return testOrderDAO.compareOrderlist(customerquery, orderbranch);
 	}
 
 
 	@Override
-	public List<BikeDetail> returnMotorDetailAndShowView(List<String> compareOrderlist , String shopname) {
+	public List<BikeDetail> returnMotorDetailAndShowView(List<String> compareOrderlist , String shopname , 
+			List<OrderList> orderABbranch , List<OrderList> orderFromAnotherbranch) {
 		
-		return testOrderDAO.returnMotorDetailAndShowView(compareOrderlist,shopname);
+		return testOrderDAO.returnMotorDetailAndShowView(compareOrderlist,shopname , orderABbranch , orderFromAnotherbranch );
 	}
 
 
@@ -57,6 +61,49 @@ public class OrderService implements OrderIFaceService {
 	public List<BikeDetailToGson> forGsonConvert(List<BikeDetail> finalBikeDetail) {
 		
 		return testOrderDAO.forGsonConvert(finalBikeDetail);
+	}
+
+
+	@Override
+	public List<Discount> getDiscount() {
+		
+		return testOrderDAO.getDiscount();
+	}
+
+
+	@Override
+	public List<AcceStock> compareAcceStock(BasicOrderBean customerquery ,  List<OrderList> orderABbranch ,List<OrderList> orderFromAnotherbranch) throws ParseException {
+		
+		return testOrderDAO.compareAcceStock(customerquery, orderABbranch , orderFromAnotherbranch);
+	}
+
+
+	@Override
+	public OrderList convertToOrderList(OrderListToGson customorder) throws ParseException {
+		
+		return testOrderDAO.convertToOrderList(customorder);
+	}
+
+
+	@Override
+	public void addOrderToDatabase(OrderList convertOrder , String customorderOld , List<OrderList> orderbranch , BasicOrderBean customerquery 
+			,  List<OrderList> orderABbranch  ,  List<OrderList> orderFromAnotherbranch) throws ParseException {
+		testOrderDAO.addOrderToDatabase(convertOrder , customorderOld , orderbranch , customerquery ,  orderABbranch  ,   orderFromAnotherbranch);
+		
+	}
+
+
+	@Override
+	public List<OrderList> checkAllOrderFromABShop(List<OrderList> orderbranch , String pickupdate) throws ParseException {
+		
+		return testOrderDAO.checkAllOrderFromABShop(orderbranch , pickupdate);
+	}
+
+
+	@Override
+	public List<OrderList> showAllOrderFromAnotherShop(String shopname , String pickupdate) throws ParseException {
+		// TODO Auto-generated method stub
+		return testOrderDAO.showAllOrderFromAnotherShop(shopname , pickupdate);
 	}
 
 

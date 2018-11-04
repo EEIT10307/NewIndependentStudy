@@ -4,14 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"acceName"} ) })
@@ -31,9 +28,32 @@ public class AcceStock implements Serializable{
 	
 	
 	
+	/**
+	 * 
+	 */
+	public AcceStock() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param acceStockSerialNum
+	 * @param acceName
+	 * @param branchName
+	 * @param acceNum
+	 * @param acceType
+	 * @param acceePrice
+	 */
+	public AcceStock(String acceStockSerialNum, String acceName, BranchDetail branchName, Integer acceNum,
+			AcceSerialNum acceType, Integer acceePrice) {
+		super();
+		this.acceStockSerialNum = acceStockSerialNum;
+		this.acceName = acceName;
+		this.branchName = branchName;
+		this.acceNum = acceNum;
+		this.acceType = acceType;
+		this.acceePrice = acceePrice;
+	}
 	@Id
-    @GeneratedValue(generator="assid")
-    @GenericGenerator(name="assid",strategy="assigned") 
 	public String getAcceStockSerialNum() {
 		return acceStockSerialNum;
 	}

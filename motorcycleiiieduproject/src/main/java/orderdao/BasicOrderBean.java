@@ -8,6 +8,30 @@ public class BasicOrderBean {
 	private String dropofDate ; 
 	private String pickupStore ; 
 	private String dropoffStore ;
+	
+	
+	
+	
+	/**
+	 * 
+	 */
+	public BasicOrderBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param pickupDate
+	 * @param dropofDate
+	 * @param pickupStore
+	 * @param dropoffStore
+	 */
+	public BasicOrderBean(String pickupDate, String dropofDate, String pickupStore, String dropoffStore) {
+		super();
+		this.pickupDate = pickupDate;
+		this.dropofDate = dropofDate;
+		this.pickupStore = pickupStore;
+		this.dropoffStore = dropoffStore;
+	}
 	public String getPickupDate() {
 		return pickupDate;
 	}
