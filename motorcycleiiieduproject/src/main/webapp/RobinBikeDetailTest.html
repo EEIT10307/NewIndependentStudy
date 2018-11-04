@@ -53,17 +53,15 @@ select{width:173px}
         }
 </style>
 <body>
-<form id="myForm">
+
 <table >
 			<tr><td></td><td><span id="addVar">新增車牌</span></td></tr>
 			<tr><td>車牌:</td><td><input type="text" id="LicensePlate" name="test" value="MFD-001" class="LicensePlate"></td></tr>
 			<tbody class="add">	</tbody>
+		
 			<tr><td>分店:</td><td><select id="BranchName" class="BranchName"></select></td></tr>
-		
-			<tr class="file"><td>照片:</td><td><input type="file" name="file"	id="file" multiple="multiple" /></td></tr>
-			<tr><td>型號:</td><td><input 		type="text" class="BikeModel" id="BikeModel" name="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1"></select></td></tr>
-			<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" name="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1"></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
-		
+			<tr><td>型號:</td><td><input 		type="text" class="BikeModel" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1"></select></td></tr>
+			<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1"></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
 						
 			<tr class="BikeBrand"><td>廠牌:</td><td><input    		type="text"  	id="BikeBrand" 			value="YAMAHA"></td></tr>
 			<tr class="EngineType"><td>CC數:</td><td><input  			type="text"  	id="EngineType"			value="2000"></td></tr>
@@ -78,58 +76,31 @@ select{width:173px}
 			<tr class="ABS"><td>ABS:</td><td><select id="ABS"><option value="1">是</option><option value="0">否</option></select></td></tr>
 			<tr class="HourPrice"><td>每小時價格:</td><td><input type="text"				id="HourPrice" value="200"></td></tr>
 			</table>
-				</form>
-
-			
-	<input type="submit" id="submit" class="submit" >
+			<input type="submit" id="submit" class="submit" >
 <!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
 			<input type="submit" id="submit1" class="submit1" >
 </body>
+<script>
+        //初始参数个数
+        var varCount = 0;
+ 
+        $(function () {
+          //新增按钮点击
+            $('#addVar').on('click', function(){
+                varCount++;
+				$(".add").append('<tr><td>車牌'+varCount+':</td><td><input type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar">删除</span></td></tr>');
+            });
+ 
+          //删除按钮点击
+          $('table').on('click', '.removeVar', function(){
+			$(this).closest('tr').remove();
+            varCount--;
+          });
+        });
+    </script>
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$(".submit").click(function(e) {
-		e.preventDefault(); // 停止觸發submit
-	
-		var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
-	
-		$.ajax({
-			type : "POST",
-			url : "uploadmutipart",
-			data : formData,
-			cache : false, // 不需要cache
-			processData : false, // jQuery預設會把data轉為query String, 所以要停用
-			contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
-			dataType : 'text',
-			success : function(data) {
-// 				alert("upload sucess");
-			}
-
-		});
-	});
-	
-	
-	
-	
-	
-//  -------------------------------------------------------------------------	
-    //初始参数个数
-    var varCount = 0;
-
-    $(function () {
-      //新增按钮点击
-        $('#addVar').on('click', function(){
-            varCount++;
-			$(".add").append('<tr><td>車牌'+varCount+':</td><td><input type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar">删除</span></td></tr>');
-        });
-
-      //删除按钮点击
-      $('table').on('click', '.removeVar', function(){
-		$(this).closest('tr').remove();
-        varCount--;
-      });
-    });
-
 	//只新增車牌 其他隱藏
 	$("#BikeModel1").hide();
 	$("#ModelYear1").hide();
@@ -154,7 +125,6 @@ $(document).ready(function() {
 		
 		$("#submit1").toggle();
 		$(".submit").toggle();
-		$(".file").toggle();
 	});
 // ---------------------------------------------------------------------------------
 	//查詢分店
@@ -182,7 +152,7 @@ $(document).ready(function() {
 	$("#submit").click(function(e) {
 		var LicensePlate = $("#LicensePlate").val();//車牌
 		var BranchName = $("#BranchName").val();//分店
-	
+		
 		var BikeModel = $("#BikeModel").val();//型號
 		var ModelYear = $("#ModelYear").val();//年份
 		var BikeBrand = $("#BikeBrand").val();//廠牌
@@ -197,7 +167,7 @@ $(document).ready(function() {
 		var FuelType = $("#FuelType").val();//使用燃料
 		var ABS = $("#ABS").val();//煞車ABS
 		var HourPrice = $("#HourPrice").val();//每小時價格
-			
+			alert(LicensePlate)
 			if (ABS == 1) {
 				ABS = true;
 			} else {
@@ -207,7 +177,7 @@ $(document).ready(function() {
 										
  			$("[name='test']").each(function(){
  				show=$(this).val();
- 				
+ 				alert(show)
  				var allLicensePlate = {}
  				allLicensePlate["licensePlate"] = show ;
  				allLicensePlate["branchName"] = BranchName ;
@@ -229,29 +199,19 @@ $(document).ready(function() {
  				allLicensePlatearray.push(allLicensePlate) ; 
  				
  			})
- 			
+ 			alert(JSON.stringify(allLicensePlatearray))
  			
  			var jsonarray = JSON.stringify(allLicensePlatearray)
- 			
 		$.ajax({
 				type : "POST",
 				url : "insertBikeDetail",
 				data : jsonarray,
-				contentType:"application/json; charset=utf-8",
-				success : function(data) {
-				
-					var shop = JSON.parse(data);
-		
-					//迴圈
-					for (i in shop) {
-						//指定型號的欄位
-						var zx =shop[i];
-						alert(zx);
+				success : function(response) {
+
+					// 						alert("sucess");
+
 					
-					}
-				},
-				error: function (data) {
-					
+
 				}
 			});
 		
@@ -277,48 +237,6 @@ $(document).ready(function() {
 				//傳回id=showshop 產生 型號 下拉式選單
 				$(".BikeModel1").append(opt);
 			}
-			var cd= {"everyBikeInfoModel":$(".BikeModel1").val()}; 
-			var str=JSON.stringify(cd);
-				$.ajax({
-					type : "post",
-					url : "showAllshowAllEveryBikeInfo",
-					data:str,
-				 	contentType:"application/json; charset=utf-8",
-					success : function(response) {
-						var shop  =JSON.parse(response);
-						//迴圈
-						for (i in shop) {
-							//指定型號的欄位
-							var zx = shop[i];
-							//產生option
-							i++;
-							var opt = $("<option>").val(zx).text(zx);
-							//傳回id=showshop 產生 型號 下拉式選單
-							$(".ModelYear1").append(opt);
-						}
-						var cd= {"everyBikeInfoModel":$(".BikeModel1").val()}; 
-						var str=JSON.stringify(cd);
-							$.ajax({
-								type : "post",
-								url : "showAllshowAllEveryBikeInfo",
-								data:str,
-							 	contentType:"application/json; charset=utf-8",
-								success : function(response) {
-									var shop  =JSON.parse(response);
-									//迴圈
-									for (i in shop) {
-										//指定型號的欄位
-										var zx = shop[i];
-										//產生option
-										i++;
-										var opt = $("<option>").val(zx).text(zx);
-										//傳回id=showshop 產生 型號 下拉式選單
-										$(".ModelYear1").append(opt);
-									}
-								}
-							});
-					}
-				});
 		}
 	});
 // 	-------------------------------------------------------------------------------------
@@ -352,46 +270,49 @@ $(document).ready(function() {
 		});
 	});
 // 	-------------------------------------------------------------------------------------
-
-	//只新增車牌
-
+//只新增車牌
+	
 		$(".submit1").click(function() {
 			var show
 			var LicensePlate = $(".LicensePlate").val();
 			var BranchName = $(".BranchName").val();
 			var BikeModel1 = $(".BikeModel1").val();
 			var ModelYear1 = $(".ModelYear1").val();
-			// 		
-			var allLicensePlatearray = []
-
-			$("[name='test']").each(function() {
-				show = $(this).val();
-
-				var allLicensePlate = {}
-				allLicensePlate["licensePlate"] = show;
-				allLicensePlate["branchName"] = BranchName;
-				allLicensePlate["bikeModel"] = BikeModel1;
-				allLicensePlate["modelYear"] = ModelYear1;
-
-				allLicensePlatearray.push(allLicensePlate);
-
-			})
-
-			var jsonarray = JSON.stringify(allLicensePlatearray)
+					alert(LicensePlate)
+			//		alert(BranchName)
+				//	alert(BikeModel1)
+					//alert(ModelYear1)
+					var allLicensePlatearray = []
+					
+					
+ 			$("[name='test']").each(function(){
+ 				show=$(this).val();
+ 				alert(show)
+ 				var allLicensePlate = {}
+ 				allLicensePlate["licensePlate"] = show ;
+ 				allLicensePlate["branchName"] = BranchName ;
+ 				allLicensePlate["bikeModel"] = BikeModel1 ;
+ 				allLicensePlate["modelYear"] = ModelYear1 ;
+ 				
+ 				allLicensePlatearray.push(allLicensePlate) ; 
+ 				
+ 			})
+ 			alert(JSON.stringify(allLicensePlatearray))
+ 			
+ 			var jsonarray = JSON.stringify(allLicensePlatearray)
 			$.ajax({
 				type : "post",
 				url : "insertAllLicensePlate",
-				data : jsonarray,
+				data :jsonarray,
 				success : function(response) {
-					if(response!="OK"){
-					alert(response)					
-					}else{
-// 						alert("媽!我成功了!!該跳轉了!!!")
-					}
+
 				}
 			});
 		});
-	});
+});
+
+
+
 </script>
 
 </html>

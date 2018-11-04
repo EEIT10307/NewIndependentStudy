@@ -3,6 +3,7 @@ package everybikeInfo.robin.service;
 import java.util.List;
 
 import cleanbean.BikeDetailAndEveryBikeInfo;
+
 import cleanbean.BikeDetailToGson;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
@@ -20,4 +21,5 @@ public interface BikeDetailIFaceService {
 
 	int save(BikeDetailAndEveryBikeInfo[] bikeDetailAndEveryBikeInfo);
 	int updateBikeDetai(BikeDetailToGson bikeDetailToGson);
+
 }

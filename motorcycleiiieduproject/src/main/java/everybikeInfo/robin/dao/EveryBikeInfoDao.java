@@ -1,5 +1,6 @@
 package everybikeInfo.robin.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,5 +156,6 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 	
 		return everyBikeInfoToGson;
 	}
+
 
 }

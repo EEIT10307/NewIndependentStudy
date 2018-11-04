@@ -1,5 +1,6 @@
 package everybikeInfo.robin.dao;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -126,6 +127,7 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 	public int updateMember(BikeReview mb) {
 		// TODO Auto-generated method stub
 		return 0;
+
 	}
 
 }

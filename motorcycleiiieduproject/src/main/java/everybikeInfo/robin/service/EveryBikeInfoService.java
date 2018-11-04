@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import cleanbean.BikeDetailToGson;
 import everybikeInfo.robin.dao.EveryBikeInfoIFaceDao;
 import maintenance.EveryBikeInfoToGson;
@@ -91,6 +92,7 @@ public class EveryBikeInfoService implements EveryBikeInfoIFaceService {
 	public List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop) {
 		
 		return everyBikeInfoIFaceDao.forGsonConvertBikeDetail(loop);
+
 	}
 	
 

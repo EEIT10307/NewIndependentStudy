@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cleanbean.BikeDetailAndEveryBikeInfo;
+
 import cleanbean.BikeDetailToGson;
 import everybikeInfo.robin.dao.BikeDetailIFaceDao;
 import projectbean.BikeDetail;
@@ -115,6 +116,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 	public int updateBikeDetai(BikeDetailToGson bikeDetailToGson) {
 		
 		return bikeDetailIFaceDAO.updateBikeDetai(bikeDetailToGson);
+
 	}
 
 }

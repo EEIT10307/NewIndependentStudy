@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+
 import cleanbean.BikeDetailToGson;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
@@ -23,4 +24,5 @@ public interface BikeDetailIFaceDao {
 	int merge(BikeDetail bikeDetail);
 
 	int updateBikeDetai(BikeDetailToGson bikeDetailToGson);
+
 }
