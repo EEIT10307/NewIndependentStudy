@@ -1,4 +1,4 @@
-package orderdao;
+package cleanbean;
 
 
 

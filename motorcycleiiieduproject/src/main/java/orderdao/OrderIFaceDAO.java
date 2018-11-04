@@ -3,6 +3,8 @@ package orderdao;
 import java.text.ParseException;
 import java.util.List;
 
+import cleanbean.BasicOrderBean;
+import cleanbean.BikeDetailToGsonHaoUse;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.Discount;
@@ -23,7 +25,7 @@ public interface OrderIFaceDAO {
 	List<BikeDetail> returnMotorDetailAndShowView(List<String> compareOrderlist, String shopname ,List<OrderList> orderABbranch , 
 			List<OrderList> orderFromAnotherbranch );
 
-	List<BikeDetailToGson> forGsonConvert(List<BikeDetail> finalBikeDetail);
+	List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail);
 
 	List<Discount> getDiscount();
 

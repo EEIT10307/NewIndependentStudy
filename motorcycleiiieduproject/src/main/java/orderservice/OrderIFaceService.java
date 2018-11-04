@@ -3,8 +3,9 @@ package orderservice;
 import java.text.ParseException;
 import java.util.List;
 
-import orderdao.BasicOrderBean;
-import orderdao.BikeDetailToGson;
+import cleanbean.BasicOrderBean;
+import cleanbean.BikeDetailToGson;
+import cleanbean.BikeDetailToGsonHaoUse;
 import orderdao.OrderListToGson;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
@@ -26,7 +27,7 @@ public interface OrderIFaceService {
 	List<BikeDetail> returnMotorDetailAndShowView(List<String> compareOrderlist, String shopname , List<OrderList> orderABbranch ,
 			List<OrderList> orderFromAnotherbranch );
 
-	List<BikeDetailToGson> forGsonConvert(List<BikeDetail> finalBikeDetail);
+	List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail);
 
 	List<Discount> getDiscount();
 

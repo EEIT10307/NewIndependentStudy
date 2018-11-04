@@ -9,8 +9,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import orderdao.BasicOrderBean;
-import orderdao.BikeDetailToGson;
+import cleanbean.BasicOrderBean;
+import cleanbean.BikeDetailToGson;
+import cleanbean.BikeDetailToGsonHaoUse;
 import orderdao.OrderIFaceDAO;
 import orderdao.OrderListToGson;
 import projectbean.AcceStock;
@@ -58,7 +59,7 @@ public class OrderService implements OrderIFaceService {
 
 
 	@Override
-	public List<BikeDetailToGson> forGsonConvert(List<BikeDetail> finalBikeDetail) {
+	public List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail) {
 		
 		return testOrderDAO.forGsonConvert(finalBikeDetail);
 	}

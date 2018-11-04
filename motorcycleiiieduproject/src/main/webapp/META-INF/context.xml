@@ -6,7 +6,7 @@
                driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 
                url="jdbc:sqlserver://localhost:1433;database=homemotor"/>
-
+<!-- //172.20.10.14 -->
 
                
                <!-- 如果SQL放在同的環境請自行改成localHost -->

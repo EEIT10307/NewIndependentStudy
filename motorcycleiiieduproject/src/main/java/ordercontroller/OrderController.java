@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import orderdao.BasicOrderBean;
-import orderdao.BikeDetailToGson;
+import cleanbean.BasicOrderBean;
+import cleanbean.BikeDetailToGsonHaoUse;
 import orderdao.OrderListToGson;
 import orderservice.OrderIFaceService;
 import projectbean.AcceStock;
@@ -63,7 +63,7 @@ public class OrderController {
 			List<BikeDetail> finalBikeDetail = tesOrderIFaceService.returnMotorDetailAndShowView(comPareOrderListMotorModel,
 					customerquery.getPickupStore() ,orderABbranch  , orderFromAnotherbranch  );
 			// hibernate複合主鍵物件轉為普通java
-			List<BikeDetailToGson> forGsonConvert = tesOrderIFaceService.forGsonConvert(finalBikeDetail);
+			List<BikeDetailToGsonHaoUse> forGsonConvert = tesOrderIFaceService.forGsonConvert(finalBikeDetail);
 			return gson.toJson(forGsonConvert);
 			// gson.toJson(finalBikeDetail,BikeDetail.class)
 		} catch (Exception e) {

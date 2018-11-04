@@ -1,8 +1,8 @@
-package orderdao;
+package cleanbean;
 
 import java.util.Date;
 
-public class BikeDetailToGson {
+public class BikeDetailToGsonHaoUse {
 	
 	private String bikeModel ;
 	private String modelYear;
@@ -40,7 +40,7 @@ public class BikeDetailToGson {
 	 * @param hourPrice
 	 * @param onSheftTime
 	 */
-	public BikeDetailToGson(String bikeModel, String modelYear, String bikeBrand, String engineType, String bikeType,
+	public BikeDetailToGsonHaoUse(String bikeModel, String modelYear, String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
 			String tire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime) {
 		super();

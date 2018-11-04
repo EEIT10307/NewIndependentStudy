@@ -24,6 +24,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BasicOrderBean;
+import cleanbean.BikeDetailToGsonHaoUse;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
@@ -256,12 +258,12 @@ public class OrderDAO implements OrderIFaceDAO {
 	}
 
 	@Override
-	public List<BikeDetailToGson> forGsonConvert(List<BikeDetail> finalBikeDetail) {
+	public List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail) {
 
-		ArrayList<BikeDetailToGson> bikeDetailToGsonList = new ArrayList<BikeDetailToGson>();
+		List<BikeDetailToGsonHaoUse> bikeDetailToGsonList = new ArrayList<BikeDetailToGsonHaoUse>();
 
 		for (BikeDetail loop : finalBikeDetail) {
-			bikeDetailToGsonList.add(new BikeDetailToGson(loop.getIdClassBikeDetail().getBikeModel(),
+			bikeDetailToGsonList.add(new BikeDetailToGsonHaoUse(loop.getIdClassBikeDetail().getBikeModel(),
 					loop.getIdClassBikeDetail().getModelYear(), loop.getBikeBrand(), loop.getEngineType(),
 					loop.getBikeType(), loop.getPlateType(), loop.getFuelTankCapacity(), loop.getSeatHeight(),
 					loop.getDryWeight(), loop.getFuelConsumption(), loop.getTire(), loop.getFuelType(), loop.getABS(),
