@@ -663,8 +663,12 @@ System.out.println("==Athoer=="+acceUseOrderFromAnotherbranch.toString());
 		//處理不在甲地的訂單（不在這邊的配件會沒有相關資訊 所以要抓出來） 
 		  //  List<String> checkAnothershopList = new ArrayList<String>();
 		    //HashSet<String> checkAnothershopSet = new HashSet<String>();
-		    HashMap<String, Integer> checkAnothershopMap = new HashMap<String , Integer>();
+		   if(acceUseOrderFromAnotherbranch.size() != 0 ) {
+		
+		HashMap<String, Integer> checkAnothershopMap = new HashMap<String , Integer>();
 		    //先整理一下庫存ＫＶ
+		    
+		    
 		      for(OrderList loop:acceUseOrderFromAnotherbranch) {
 		    	  String[] aftersplit = loop.getAccessoriesAmount().replace("{", "").replace("}", "").replace("[", "")
 							.replace("]", "").replace("\"", "").trim().split(","); 
@@ -707,7 +711,9 @@ System.out.println("==Athoer=="+acceUseOrderFromAnotherbranch.toString());
 			}	
 		}	
 	}
-
+		   }
+	
+	
 		return afterCompareAcc;
 	}
 
