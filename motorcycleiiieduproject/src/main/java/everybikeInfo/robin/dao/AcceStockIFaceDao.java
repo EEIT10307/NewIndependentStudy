@@ -13,4 +13,8 @@ public interface AcceStockIFaceDao {
 	BranchDetail selectoneBikeDetail(String BranchName);
 	AcceSerialNum selectAcceSerialNum(String AcceType);
 	List<AcceSerialNum> allAcceSerialNum();
+
+	BranchDetail selectBranchBranchSerialNum(int branchSerialNum);
+	Long   countAcceStockx();
+
 }

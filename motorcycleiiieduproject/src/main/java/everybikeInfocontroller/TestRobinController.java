@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import cleanbean.AcceStockBean;
 import cleanbean.BikeDetailAndEveryBikeInfo;
 import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
@@ -138,7 +139,7 @@ public class TestRobinController {
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-						new File("C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image","R3_1990_00" + i + ".jpg"))); // 上傳檔案位置為D:\
+						new File("C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image","R3_1990_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
 				outputStream.flush();
@@ -250,31 +251,20 @@ public class TestRobinController {
 		bikeDetailIFaceService.updateBikeDetai(bikeDetail);
 		return "";
 	}
-	@PostMapping(value = "/selectAcceStock", produces = "text/html; charset = UTF-8") // 新增配件
+	@PostMapping(value = "/selectAcceSerialNum", produces = "text/html; charset = UTF-8") // 新增配件
 	public @ResponseBody String insertAcceStock() throws IOException {
 		List<AcceSerialNum> all = acceStockIFaceService.allAcceSerialNum();
-		
 		return gson.toJson(all);
 	}
+	@PostMapping(value = "/insertAcceStock", produces = "text/html; charset = UTF-8") // 新增配件
+	public @ResponseBody String insertAcceStock(@RequestBody AcceStockBean acceStockBean) throws IOException {
+		System.out.println("新增"+acceStockBean);
+		acceStockIFaceService.insertAcceStock(acceStockBean);
+		
+		return "";
+	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
-//	@RequestMapping(value = "/upload",method = RequestMethod.POST , produces = MediaType.TEXT_PLAIN_VALUE)
-//	  public@ResponseBody String upload(@RequestParam("file") MultipartFile file) throws IOException {
-//		System.out.println(file.getOriginalFilename());
-//	    if (!file.getOriginalFilename().isEmpty()) {
-//	      BufferedOutputStream outputStream = new BufferedOutputStream(
-//	            new FileOutputStream(
-//	                  new File("C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image", "hasha.jpg"))); // 上傳檔案位置為D:\
-//	      outputStream.write(file.getBytes());
-//	      outputStream.flush();
-//	      
-//	      
-//	      outputStream.close();
-//	    }else{
-//	      return "fail";
-//	    }
-//	    
-//	    return "success";
-//	}	
+
 	@RequestMapping(value = "/uploadmutipart", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE) // 測試上傳照片(多張)
 	public @ResponseBody String uploadmutipart(@RequestParam("file") MultipartFile[] files,@RequestParam("BikeModel") String BikeModel,@RequestParam("ModelYear") String ModelYear) throws IOException {
 		for (int i = 0; i < files.length; i++) {
@@ -284,7 +274,7 @@ public class TestRobinController {
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-						new File("C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
+						new File("C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
 								BikeModel+"_"+ModelYear+"_00"+ i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
