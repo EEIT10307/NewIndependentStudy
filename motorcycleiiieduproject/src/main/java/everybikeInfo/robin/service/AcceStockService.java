@@ -41,6 +41,7 @@ public class AcceStockService implements AcceStockIFaceService {
 		return acceStockIFaceDao.allAcceSerialNum();
 	}
 
+
 	@Override
 	public BranchDetail selectBranchBranchSerialNum(int branchSerialNum) {
 		// TODO Auto-generated method stub

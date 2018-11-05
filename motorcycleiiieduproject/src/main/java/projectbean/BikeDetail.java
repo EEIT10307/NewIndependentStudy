@@ -64,6 +64,8 @@ public class BikeDetail implements Serializable{
 		this.hourPrice = hourPrice;
 		this.onSheftTime = onSheftTime;
 	}
+
+
 	
 	public BikeDetail(IdClassBikeDetail idClassBikeDetail,String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
@@ -86,6 +88,7 @@ public class BikeDetail implements Serializable{
 	}
 
 	
+
 
 	public void addEveryBikeInfo(EveryBikeInfo everyBikeInfo) {
     	everyBikeInfos.add(everyBikeInfo);

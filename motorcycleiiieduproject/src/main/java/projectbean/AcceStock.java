@@ -1,17 +1,16 @@
 package projectbean;
 
+
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "acceName" }) })
@@ -24,6 +23,7 @@ public class AcceStock implements Serializable {
 	private Integer acceNum;
 	private AcceSerialNum acceType;
 	private Integer acceePrice;
+
 
 	public AcceStock() {
 
@@ -41,8 +41,6 @@ public class AcceStock implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(generator = "assid")
-	@GenericGenerator(name = "assid", strategy = "assigned")
 	public String getAcceStockSerialNum() {
 		return acceStockSerialNum;
 	}
@@ -98,5 +96,6 @@ public class AcceStock implements Serializable {
 	public void setAcceePrice(Integer acceePrice) {
 		this.acceePrice = acceePrice;
 	}
+
 
 }

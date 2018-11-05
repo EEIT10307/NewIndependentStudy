@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BikeReviewTset評價新增 Insert</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+	訂單流水:
+	<input type="text" name="OrderSerialNum" id="OrderSerialNum" value="2018030101001">
+	<!--//訂單流水 -->
+	<br> 會員信箱 :
+	<input type="text" name="email" id="Email" value="4">
+	<!--//會員信箱 -->
+	<br> 滿意度:
+	<input type="text" name="Satisfacation" id="Satisfacation" value="2">
+	<!--//滿意度 -->
+	<br> 型號:
+	<input type="text" name="bikeModel" id="bikeModel" value="型號1">
+	<!--//型號 -->
+	<br> 評價內容:
+	<textarea id="ReviewContent" name="ReviewContent"> 好棒棒</textarea>
+	<!--//評價內容 -->
+	<br>
+	<input type="submit" id="button">
+
+	<script>
+<<<<<<< HEAD
+		// 	function resetField(fieldId) {
+		// 	    var field = document.getElementById(fieldId);
+		// // 	    alert(field);           // object
+		// // 	    alert(field.value);     // text field value    
+		// 	    // Do whatever you want with the field object here 
+		// 	} 
+
+		$(document).ready(function() {
+			$("#button").click(function(e) {
+				var OrderSerialNum = $("#OrderSerialNum").val();
+				var Email = $("#Email").val();
+				var Satisfacation = $("#Satisfacation").val();
+				var bikeModel = $("#bikeModel").val();
+				var ReviewContent = $("textarea").val();
+
+				// 				alert(OrderSerialNum);訂單流水
+								//使用會員地流水號 信箱
+				// 				alert(Email);會員信箱
+				// 				alert(Satisfacation);滿意度
+				// 				alert(ReviewContent);評價內容
+				alert("hi");
+				// 				var mix={"OrderSerialNum":OrderSerialNum,"Email":Email,"Satisfacation":Satisfacation,"ReviewContent":ReviewContent};
+				// 				var BikeReviewTsetJSON=JSON.stringify(mix);
+				// 				alert(BikeReviewTsetJSON);
+				$.ajax({
+					type : "post",
+					url : "insert",
+					data : {"orderSerialNum":OrderSerialNum,"email":Email,"satisfacation":Satisfacation,"bikeModel":bikeModel,"reviewContent":ReviewContent},
+					success : function(response) {
+
+						// 						alert("sucess");
+
+						// 						alert(response);
+
+=======
+		$(document).ready(function() {
+			$("#button").click(function(e) {
+				var OrderSerialNum = $("#OrderSerialNum").val();
+				var Email = $("#Email").val();
+				var Satisfacation = $("#Satisfacation").val();
+				var bikeModel = $("#bikeModel").val();
+				var ReviewContent = $("textarea").val();
+// 				alert("hi");
+				$.ajax({
+					type : "post",
+					url : "insert",
+					data : {"orderSerialNum":OrderSerialNum,"email":Email,"satisfacation":Satisfacation,"bikeModel":bikeModel,"reviewContent":ReviewContent},
+					success : function(response) {
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+					}
+				});
+
+			});
+		});
+	</script>
+</body>
+</html>
