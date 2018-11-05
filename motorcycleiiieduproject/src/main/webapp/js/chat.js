@@ -12,3 +12,7 @@ $(document).on('keyup','#lookup',function(){
 	   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 	});
 });
+
+$(document).on('click','#close',function(){
+	$("#chatbox").addClass("d-none");
+});
