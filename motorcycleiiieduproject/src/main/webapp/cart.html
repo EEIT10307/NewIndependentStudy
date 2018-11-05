@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<script src="js/include.js"></script>
+<script src="js/cart.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+	<div w3-include-html="navProd.html"></div>
+	<div class="container">
+		<table id="cart" class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width: 50%">商品</th>
+					<th style="width: 10%">單價</th>
+					<th style="width: 8%">數量</th>
+					<th style="width: 22%" class="text-center">小計</th>
+					<th style="width: 10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="item">
+					<td data-th="商品">
+						<div class="row">
+							<div class="col-sm-4 d-none d-md-block">
+								<img src="https://www.supermoto8.net/images/data/2171219-cb1100rs_001H_preview.jpeg" style="height: 180px; width: 180px; display: block; object-fit: cover;" class="img-responsive" />
+							</div>
+							<div class="col-sm-8">
+								<h4 class="nomargin">CB1100RS</h4>
+								<h6 id="engineType">排氣量: <span>1140</span> c.c.</h6>
+                				<h6 id="plateType">車牌: <span>紅牌</span></h6>
+                				<h6 id="plateType">年份: <span>2018</span></h6>
+							</div>
+						</div>
+					</td>
+					<td data-th="單價" id="price">$2000</td>
+					<td data-th="數量">
+						<input type="number" class="form-control text-center" min="1" max="2" value="1" id="number">
+					</td>
+					<td data-th="小計" class="text-center" id="subtotal" value="2000">2000</td>
+					<td class="actions" data-th="">
+						<button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+					</td>
+				</tr>
+				<tr class="item">
+					<td data-th="商品">
+						<div class="row">
+							<div class="col-sm-4 d-none d-md-block">
+								<img src="https://www.yamaha-motor.com.tw/styles/images/car/xmax/reel02.png" style="height: 180px; width: 180px; display: block; object-fit: cover;" class="img-responsive" />
+							</div>
+							<div class="col-sm-8">
+								<h4 class="nomargin">X-Max 300</h4>
+								<h6 id="engineType">排氣量: <span>292</span> c.c.</h6>
+                				<h6 id="plateType">車牌: <span>黃牌</span></h6>
+                				<h6 id="plateType">年份: <span>2017</span></h6>
+							</div>
+						</div>
+					</td>
+					<td data-th="單價" id="price" val="500">500</td>
+					<td data-th="數量">
+						<input type="number" class="form-control text-center" min="1" max="2" value="1" id="number">
+					</td>
+					<td data-th="小計" class="text-center" id="subtotal" value="500">500</td>
+					<td class="actions" data-th="">
+						<button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot class="justify-content-between">
+				<tr class="d-block d-sm-none justify-content-between">
+					<td class="text-center" id="total"><strong>總共$<span id="total" value="">XXX</span></strong></td>
+				</tr>
+				<tr class="align-self-end">
+					<td><a href="prodDetail.html" class="btn btn-warning align-self-start"><i class="fa fa-angle-left"></i>繼續購物</a></td>
+					<td colspan="2"></td><!--空元素-->
+					<td class="d-none d-sm-block text-right"><strong>總金額 $<span id="total">XXX</span></strong></td>
+					<td><button href="index.html" class="btn btn-success btn-block" type="submit" id="checkout">結帳<i class="fa fa-angle-right"></i></button></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div w3-include-html="login.html"></div>
+			</div>
+		</div>
+	</div>
+	<div w3-include-html="footer.html"></div>
+	<script>includeHTML();</script>
+</body>
+</html>
