@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<body>
+	<select class="BikeModel1"></select>
+	<select class="ModelYear1"></select>
+	
+	<input type="submit" id="submit1">
+	<input type="submit" id="submit2" value="更新">
+	<table id="bike"></table>
+	
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//型號跟年份的下拉式
+		$.ajax({
+			type : "post",
+			url : "selectEveryBikeInfoBikeModel",
+			success : function(response) {
+				// 								alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {
+					//指定分店的欄位
+					var zx = shop[i];
+					// 												alert(zx);
+					//產生option
+					i++;
+					var opt = $("<option>").val(zx).text(zx);
+					//傳回id=showshop 產生 分店 下拉式選單
+					$(".BikeModel1").append(opt);
+				}
+				//型號出來時  第二個拉條同時讀取第一個拉條取出年份
+				var cd = {
+					"everyBikeInfoModel" : $(".BikeModel1").find("option:selected").text()
+				};
+
+				var str = JSON.stringify(cd);
+				$.ajax({
+					type : "post",
+					url : "showAllshowAllEveryBikeInfo",
+					data : str,
+					contentType : "application/json; charset=utf-8",
+					success : function(response) {
+						var shop = JSON.parse(response);
+//	 					alert(shop)
+						//迴圈
+						for (i in shop) {
+							//指定型號的欄位
+							var zx = shop[i];
+							//產生option
+							i++;
+							var opt = $("<option>").val(zx).text(zx);
+							//傳回id=showshop 產生 型號 下拉式選單
+							$(".ModelYear1").append(opt);
+						}
+					}
+				});
+			}
+		});
+		//每拉一次換一個
+		$(".BikeModel1").change(function() {
+			$(".ModelYear1").html("");
+			var cd = {
+				"everyBikeInfoModel" : $(".BikeModel1").find("option:selected").text()
+			};
+			var str = JSON.stringify(cd);
+			$.ajax({
+				type : "post",
+				url : "showAllshowAllEveryBikeInfo",
+				data : str,
+				contentType : "application/json; charset=utf-8",
+				success : function(response) {
+					var shop = JSON.parse(response);
+					//迴圈
+					for (i in shop) {
+						//指定型號的欄位
+						var zx = shop[i];
+						//產生option
+						i++;
+						var opt = $("<option>").val(zx).text(zx);
+						//傳回id=showshop 產生 型號 下拉式選單
+						$(".ModelYear1").append(opt);
+					}
+				}
+			});
+		});
+	
+// 	------------------------------------------------------------------------------
+//送出後 回傳  機車詳細資料
+
+	$("#submit1").click(function() {
+		$("#bike").html("");
+		var BikeModel=$(".BikeModel1").val();
+		var ModelYear=$(".ModelYear1").val();
+
+		var too={"BikeModel":BikeModel,"ModelYear":ModelYear}
+		var txt="";
+		$.ajax({
+			type : "post",
+			url : "selectBikeDetial",
+			data : too,
+			success : function(response) {
+				var shop = JSON.parse(response);
+				for(i in shop){
+// 					alert(shop[i].aBS)
+					if(shop[i].aBS==true){
+						$("#zx").val(1);
+					}else{
+						$("#zx").val(0);
+					}
+					txt +="<tr><td>型號:</td><td class='bikeModel' >"+shop[i].bikeModel+"</td></tr>";
+					txt +="<tr><td>年份:</td><td class='modelYear'>"+shop[i].modelYear+"</td></tr>";
+					txt +="<tr><td>廠牌:</td><td class='bikeBrand'>"+shop[i].bikeBrand+"</td></tr>";
+					txt +="<tr><td>CC數:</td><td><input type='text'	  	class='engineType' name='you' value='"+shop[i].engineType+"'></td></tr>";
+					txt +="<tr><td>車種:</td><td><input type='text'		class='bikeType' name='you' value='"+shop[i].bikeType+"'></td></tr>";
+					txt +="<tr><td>紅白黃牌:</td><td><input type='text'		class='plateType' name='you' value='"+shop[i].plateType+"'></td></tr>";
+					txt +="<tr><td>油箱容量:</td><td><input type='text'  	class='fuelTankCapacity' name='you' value='"+shop[i].fuelTankCapacity+"'></td></tr>";
+					txt +="<tr><td>座高:</td><td><input type='text' 		class='seatHeight' name='you' value='"+shop[i].seatHeight+"'></td></tr>";
+					txt +="<tr><td>乾重:</td><td><input type='text' 		class='dryWeight' name='you' value='"+shop[i].dryWeight+"'></td></tr>";
+					txt +="<tr><td>油耗:</td><td><input type='text' 		class='fuelConsumption' name='you' value='"+shop[i].fuelConsumption+"'></td></tr>";
+					txt +="<tr><td>輪胎:</td><td><input type='text' 		class='tire' name='you' value='"+shop[i].tire+"'></td></tr>";
+					txt +="<tr><td>使用燃料:</td><td><input type='text' 	class='fuelType' name='you' value='"+shop[i].fuelType+"'></td></tr>";
+					txt +="<tr><td>煞車:</td><td><select id='zx' class='abs'><option value='1'>是</option><option value='0'>否</option></select></td></tr>";
+					txt +="<tr><td>每小時價格:</td><td><input type='text' class='hourPrice' name='you' value='"+shop[i].hourPrice+"'></td></tr>";
+					$("#bike").append(txt);
+				}
+				
+			
+				}
+			})
+		});
+// ------------------------------------------------------------------------------------------------------		
+//Update 機車詳細資料	
+		$("#submit2").click(function () {
+			//抓取所有值
+			var bikeModel=$(".bikeModel").text()
+			var modelYear=$(".modelYear").text()
+			var bikeBrand=$(".bikeBrand").text()
+			var engineType=$(".engineType").val()
+			var bikeType=$(".bikeType").val()
+			var plateType=$(".plateType").val()
+			var fuelTankCapacity=$(".fuelTankCapacity").val()//數字
+			var seatHeight=$(".seatHeight").val()//數字
+			var dryWeight=$(".dryWeight").val()//數字
+			var fuelConsumption=$(".fuelConsumption").val()//數字
+			var tire=$(".tire").val()
+			var fuelType=$(".fuelType").val()
+			var abs=$(".abs").val()
+			var hourPrice=$(".hourPrice").val()//數字
+			//!isNaN(value) 判斷是否為數字 
+					if(isNaN(fuelTankCapacity)){
+						alert("油箱容量不可輸入中文")
+						return;
+					}else if(isNaN(seatHeight)){
+						alert("座高不可輸入中文")
+						return;
+					}else if(isNaN(dryWeight)){
+						alert("乾重不可輸入中文")
+						return;
+					}else if(isNaN(fuelConsumption)){
+						alert("油耗不可輸入中文")
+						return;
+					}else if(isNaN(hourPrice)){
+						alert("每小時價格不可輸入中文")
+						return;
+					}
+			if(abs==1){
+				abs=true;
+			}else{
+				abs=false;
+			}
+			var allvalue={"bikeModel":bikeModel
+					,"modelYear":modelYear
+					,"bikeBrand":bikeBrand
+					,"engineType":engineType
+					,"bikeType":bikeType
+					,"plateType":plateType
+					,"fuelTankCapacity":fuelTankCapacity
+					,"seatHeight":seatHeight
+					,"dryWeight":dryWeight
+					,"fuelConsumption":fuelConsumption
+					,"tire":tire
+					,"fuelType":fuelType
+					,"aBS":abs
+					,"hourPrice":hourPrice}
+			var all=JSON.stringify(allvalue)
+			alert(all)
+			$.ajax({
+			type : "post",
+			url : "updateBikeDetial",
+			data :all,
+			contentType:"application/json; charset=utf-8",
+			success : function(response) {
+				
+			
+				}
+			})
+			
+		});
+		
+		
+		
+		
+	});
+</script>
+
+</html>
