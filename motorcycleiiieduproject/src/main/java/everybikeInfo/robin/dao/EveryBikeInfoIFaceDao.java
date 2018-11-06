@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+
 import cleanbean.BikeDetailToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
@@ -22,6 +23,7 @@ public interface EveryBikeInfoIFaceDao {
 	int save(EveryBikeInfo everyBikeInfo);
 	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
 //	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+
 
 	List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop);
 

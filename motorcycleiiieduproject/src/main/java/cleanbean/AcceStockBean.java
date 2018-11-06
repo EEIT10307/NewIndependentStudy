@@ -53,7 +53,9 @@ public class AcceStockBean {
 	@Override
 	public String toString() {
 		
+
 		return "AcceStockBean [acceName:"+acceName+",branchName:"+branchName+",acceNum:"+acceNum+",acceType:"+acceType+",acceePrice:"+acceePrice+"]";
+
 	}
 	
 	
