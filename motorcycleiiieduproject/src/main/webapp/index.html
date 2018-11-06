@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
+	
 </head>
 <body>
 	<div w3-include-html="nav.html"></div>
@@ -225,7 +226,22 @@
 			</div>
 		</div>
 	</div>
+	<br/>
+	<br/>
+	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">
+				<!-- <div w3-include-html="serchMotor.html"></div>  -->
+				
+			</div>
+		</div>
+	</div>
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
+	
+<script>
+	$(".loadtest111").load("serchMotor.html");
+</script>
+
 </body>
 </html>

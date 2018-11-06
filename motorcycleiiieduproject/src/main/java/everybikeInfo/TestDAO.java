@@ -95,7 +95,7 @@ public class TestDAO {
 		bikeD.setOnSheftTime(dar);
 		bikeD.setPlateType("GOGO");
 		bikeD.setSeatHeight(3.4);
-		bikeD.setTire("PULIA");
+		bikeD.setFrontTire("PULIA");
 
 		// 將車牌加入list
 		bikeD.addEveryBikeInfo(everyBikeInfo1);
@@ -190,7 +190,7 @@ public class TestDAO {
 			bikeD.setSeatHeight(Double.valueOf(lines[7]));
 			bikeD.setDryWeight(Double.valueOf(lines[8]));
 			bikeD.setFuelConsumption(Double.valueOf(lines[9]));
-			bikeD.setTire(lines[10]);
+			bikeD.setFrontTire(lines[10]);
 			bikeD.setFuelType(lines[11]);
 			bikeD.setABS(Boolean.valueOf(lines[12]));
 			bikeD.setHourPrice(Integer.valueOf(lines[13]));
