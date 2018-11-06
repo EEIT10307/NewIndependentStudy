@@ -89,7 +89,7 @@ $(window).on('load',function () {
     //顧客訂單查詢車子
     $("#motorserchdo").click(function (e) {
         e.preventDefault();
-        alert("hi")
+
         $(".orderlistbody").children().remove();
         var surchop = {
             "pickupDate": $("#pDate").val() + " " + $(".makePoption").val(),
@@ -108,3 +108,6 @@ $(window).on('load',function () {
     });
 
 });
+
+$(selector).attr(attributeName, value);
+ $(selector).attr(attributeName, value);

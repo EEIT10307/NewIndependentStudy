@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.google.gson.Gson;
 
 @Configuration
-@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","everybikeInfo"})
+@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","everybikeInfo","testfakebikedao"})
 @EnableTransactionManagement
 public class SpringConfig {
 

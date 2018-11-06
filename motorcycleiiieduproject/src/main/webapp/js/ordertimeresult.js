@@ -16,15 +16,15 @@ $(document).ready(function () {
                     "<div class='card mb-4 shadow-sm product-grid'>" +
                     "<div class='product-image'>" +
                     "<a href='#'>" +
-                    "<img class='card-img-top pic-1' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='https://www.supermoto8.net/images/data/2171219-cb1100rs_001H_preview.jpeg' data-holder-rendered='true'>" +
-                    "<img class='card-img-top pic-2' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='https://www.supermoto8.net/images/data/2171219-cb1100rs_002H_preview.jpeg' data-holder-rendered='true'></img>" +
+                    "<img class='card-img-top pic-1' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='Image/"+response[x].bikeModel+"_"+response[x].modelYear+"_001.jpg' data-holder-rendered='true'>" +
+                    "<img class='card-img-top pic-2' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='Image/"+response[x].bikeModel+"_"+response[x].modelYear+"_002.jpg' data-holder-rendered='true'></img>" +
                     "</a>" +
                     "<a href='prodDetail.html' class='select-options checkinfro' value='" + response[x].bikeModel + "'><i class='fa fa-arrow-right'></i>查看詳情</a>" +
                     "</div>" +
                     "<div class='card-body product-content'>" +
                     "<div class='title'><h3 class='m-0' id='bikeModel'>" + response[x].bikeModel + "</h3><h5 id='bikeBrand'>" + response[x].bikeBrand + "</h5></div>" +
                     "<div class='card-text'>" +
-                    "<h6 class='engineType'>排氣量: <span>" + response[x].engineType + "</span> c.c.</h6>" +
+                    "<h6 class='engineType'>引擎型式: <span>" + response[x].engineType + "</span> c.c.</h6>" +
                     "<h6 class='plateType'>車牌: <span>" + response[x].plateType + "牌</span></h6>" +
                     "<h6 class='plateType'>年份: <span>" + response[x].modelYear + "</span></h6>" +
                     "</div>" +

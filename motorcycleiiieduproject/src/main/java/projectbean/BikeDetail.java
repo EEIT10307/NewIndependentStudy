@@ -255,13 +255,6 @@ public class BikeDetail implements Serializable{
 		this.onSheftTime = onSheftTime;
 	}
 	
-	public Boolean getaBS() {
-		return aBS;
-	}
-	
-	public void setaBS(Boolean aBS) {
-		this.aBS = aBS;
-	}
 	
 	public String getFrontSuspension() {
 		return frontSuspension;

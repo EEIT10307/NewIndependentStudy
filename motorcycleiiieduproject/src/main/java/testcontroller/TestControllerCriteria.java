@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import cleanbean.BasicOrderBean;
-import everybikeInfo.TestService;
+import testfakebikedao.TestService;
 
 @Controller
 public class TestControllerCriteria {
