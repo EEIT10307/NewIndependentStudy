@@ -16,11 +16,9 @@
 	</properties>
 
 	<dependencies>
-
-
-
+	
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload 
-			上傳照片需要JAR  ROBIN-->
+			上傳照片需要JAR -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -28,7 +26,6 @@
 		</dependency>
 
 		<dependency>
-
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.0</version>
@@ -40,6 +37,7 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/antlr/antlr -->
 		<dependency>
 			<groupId>antlr</groupId>
 			<artifactId>antlr</artifactId>

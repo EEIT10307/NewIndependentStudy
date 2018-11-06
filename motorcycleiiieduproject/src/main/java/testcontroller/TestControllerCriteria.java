@@ -1,5 +1,6 @@
 package testcontroller;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -39,7 +40,7 @@ public class TestControllerCriteria {
 		return  gson.toJson(customerquery);
 
 	}
-	
+
 	
 
 }

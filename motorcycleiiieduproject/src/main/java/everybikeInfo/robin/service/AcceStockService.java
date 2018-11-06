@@ -41,4 +41,18 @@ public class AcceStockService implements AcceStockIFaceService {
 		return acceStockIFaceDao.allAcceSerialNum();
 	}
 
+
+	@Override
+	public BranchDetail selectBranchBranchSerialNum(int branchSerialNum) {
+		// TODO Auto-generated method stub
+		return acceStockIFaceDao.selectBranchBranchSerialNum(branchSerialNum);
+	}
+
+	@Override
+	public Long countAcceStockx() {
+		// TODO Auto-generated method stub
+		return acceStockIFaceDao.countAcceStockx();
+	}
+
+
 }

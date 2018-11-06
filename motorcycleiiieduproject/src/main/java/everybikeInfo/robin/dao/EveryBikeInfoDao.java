@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cleanbean.BikeDetailToGson;
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
@@ -156,6 +156,9 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 	
 		return everyBikeInfoToGson;
 	}
+
+	
+
 
 
 }
