@@ -34,6 +34,7 @@ import cleanbean.BikeDetailAndEveryBikeInfo;
 import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
 import cleanbean.EveryBikeInfoBean;
+import cleanbean.EveryBikeInfoToGson;
 import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.BikeReviewIFaceService;
@@ -204,11 +205,11 @@ public class TestRobinController {
 
 //		System.out.println("46行:"+selectMaintenancebranch.get(0).getBranchName().getBranchName());
 			Set<String> list = new HashSet<String>();
-//			List<EveryBikeInfoToGson> forGsonConvert = everyBikeInfoIFaceService.forGsonConvert(selectEveryBikeInfo);
-//			for (int x = 0; x < forGsonConvert.size(); x++) {
-//
-//				list.add(forGsonConvert.get(x).getModelYear());
-//			}
+			List<EveryBikeInfoToGson> forGsonConvert = everyBikeInfoIFaceService.forGsonConvert(selectEveryBikeInfo);
+			for (int x = 0; x < forGsonConvert.size(); x++) {
+
+				list.add(forGsonConvert.get(x).getModelYear());
+			}
 //			System.out.println(list.size());
 //			System.out.println("List JSON=" + gson.toJson(list));
 //			System.out.println("該保養車s的JSON=" + gson.toJson(forGsonConvert));

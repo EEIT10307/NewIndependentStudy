@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import cleanbean.BikeDetailToGson;
+import cleanbean.EveryBikeInfoToGson;
 import everybikeInfo.robin.dao.EveryBikeInfoIFaceDao;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
@@ -81,11 +81,11 @@ public class EveryBikeInfoService implements EveryBikeInfoIFaceService {
 		return everyBikeInfoIFaceDao.showAllEveryBikeInfo(shopName);
 	}
 
-//	@Override
-//	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
-//		// TODO Auto-generated method stub
-//		return everyBikeInfoIFaceDao.forGsonConvert(finalEveryBikeInfo);
-//	}
+	@Override
+	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
+		// TODO Auto-generated method stub
+		return everyBikeInfoIFaceDao.forGsonConvert(finalEveryBikeInfo);
+	}
 
 	@Override
 	public List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop) {

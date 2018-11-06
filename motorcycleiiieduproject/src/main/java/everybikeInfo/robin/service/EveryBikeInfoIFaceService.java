@@ -2,8 +2,8 @@ package everybikeInfo.robin.service;
 
 import java.util.List;
 
-
 import cleanbean.BikeDetailToGson;
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
@@ -20,7 +20,7 @@ public interface EveryBikeInfoIFaceService {
 
 	int save(String licensePlate, int branchName, String bikeModel, String modelYear);
 	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
-//	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
 	List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop);
 
 }

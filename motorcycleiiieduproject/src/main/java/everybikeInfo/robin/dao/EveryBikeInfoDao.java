@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cleanbean.BikeDetailToGson;
-
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
@@ -135,16 +135,16 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 
 	}
 
-//	@Override
-//	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
-//		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson = new ArrayList<EveryBikeInfoToGson>();
-//		for (EveryBikeInfo loop : finalEveryBikeInfo) {
-//			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),
-//					loop.getBranchName().getBranchName(), loop.getTotalMileage(), loop.getIsReadyMaintenance(),
-//					loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));
-//		}
-//		return everyBikeInfoToGson;
-//	}
+	@Override
+	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
+		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson = new ArrayList<EveryBikeInfoToGson>();
+		for (EveryBikeInfo loop : finalEveryBikeInfo) {
+			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),
+					loop.getBranchName().getBranchName(), loop.getTotalMileage(), loop.getIsReadyMaintenance(),
+					loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));
+		}
+		return everyBikeInfoToGson;
+	}
 	
 	@Override
 	public List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop) {
