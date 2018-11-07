@@ -267,7 +267,7 @@ public class OrderDAO implements OrderIFaceDAO {
 			bikeDetailToGsonList.add(new BikeDetailToGsonHaoUse(loop.getIdClassBikeDetail().getBikeModel(),
 					loop.getIdClassBikeDetail().getModelYear(), loop.getBikeBrand(), loop.getEngineType(),
 					loop.getBikeType(), loop.getPlateType(), loop.getFuelTankCapacity(), loop.getSeatHeight(),
-					loop.getDryWeight(), loop.getFuelConsumption(), loop.getTire(), loop.getFuelType(), loop.getABS(),
+					loop.getDryWeight(), loop.getFuelConsumption(), loop.getFrontTire(), loop.getFuelType(), loop.getABS(),
 					loop.getHourPrice(), loop.getOnSheftTime()));
 		}
 		return bikeDetailToGsonList;

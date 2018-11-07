@@ -2,9 +2,8 @@ package everybikeInfo.robin.service;
 
 import java.util.List;
 
-
 import cleanbean.BikeDetailToGson;
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 

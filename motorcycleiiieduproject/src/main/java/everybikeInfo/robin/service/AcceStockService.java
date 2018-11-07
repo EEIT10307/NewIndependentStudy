@@ -54,4 +54,5 @@ public class AcceStockService implements AcceStockIFaceService {
 		return acceStockIFaceDao.countAcceStockx();
 	}
 
+
 }

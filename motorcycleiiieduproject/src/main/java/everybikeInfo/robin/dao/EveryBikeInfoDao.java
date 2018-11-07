@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cleanbean.BikeDetailToGson;
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
@@ -152,10 +152,13 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 		
 			everyBikeInfoToGson.add(new BikeDetailToGson(loop.getIdClassBikeDetail().getBikeModel(),loop.getIdClassBikeDetail().getModelYear()
 					,loop.getBikeBrand(),loop.getEngineType(),loop.getBikeType(),loop.getPlateType(),loop.getFuelTankCapacity(),loop.getSeatHeight()
-					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice()));
+					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice()));
 	
 		return everyBikeInfoToGson;
 	}
+
+	
+
 
 
 }

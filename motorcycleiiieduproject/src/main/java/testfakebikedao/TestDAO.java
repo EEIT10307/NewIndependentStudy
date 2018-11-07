@@ -1,4 +1,4 @@
-package everybikeInfo;
+package testfakebikedao;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,74 +38,7 @@ public class TestDAO {
 		System.out.println("test DAO startUP");
 	}
 
-	public void testFactory() throws ParseException {
 
-		Session session = factory.getCurrentSession();
-
-		TestHibernateBean testbea = new TestHibernateBean();
-		testbea.setAge(11);
-		testbea.setName("阿P");
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-		Date par = sdf.parse("2018-11-11 12:12:12");
-		testbea.setDate(par);
-		session.save(testbea);
-
-		System.out.println(session.toString());
-
-	}
-
-	public void testHibernateBean() throws ParseException {
-		System.out.println("test bean go ");
-		Session session = factory.getCurrentSession();
-		WebInformationForManager testSpring = new WebInformationForManager();
-		testSpring.setWebContent("hiSpring");
-		testSpring.setWebElements("HI PROJECT");
-
-		session.save(testSpring);
-
-		System.out.println(session.toString());
-
-		/* ====new 機車車牌==== */
-		EveryBikeInfo everyBikeInfo1 = new EveryBikeInfo();
-		// 取得分店實體 （需要在選項內埋分店的ID)
-		BranchDetail branchDetail = session.get(BranchDetail.class, 2);
-		everyBikeInfo1.setBranchName(branchDetail);
-		everyBikeInfo1.setLicensePlate("hel111s");
-		everyBikeInfo1.setTotalMileage(3.4);
-		everyBikeInfo1.setIsReadyMaintenance(false);
-		/* ====new 上架新商品 ==== */
-		BikeDetail bikeD = new BikeDetail();
-		// 複合主鍵 設定主鍵值
-		IdClassBikeDetail idc = new IdClassBikeDetail("GHw22wI", "1988");
-		SimpleDateFormat sim = new SimpleDateFormat("yyyy-mm-dd");
-		Date dar = sim.parse("1933-02-18");
-		// 將複合主鍵類別放到屬性
-		bikeD.setIdClassBikeDetail(idc);
-		bikeD.setABS(true);
-		bikeD.setBikeBrand("YAHAN2");
-		bikeD.setBikeType("spory222");
-		bikeD.setDryWeight(23.3);
-		bikeD.setEngineType("qwqwq");
-		bikeD.setFuelConsumption(23.3);
-		bikeD.setFuelTankCapacity(45.5);
-		bikeD.setFuelType("97");
-		bikeD.setHourPrice(45);
-		bikeD.setOnSheftTime(dar);
-		bikeD.setPlateType("GOGO");
-		bikeD.setSeatHeight(3.4);
-		bikeD.setTire("PULIA");
-
-		// 將車牌加入list
-		bikeD.addEveryBikeInfo(everyBikeInfo1);
-		bikeD.addEveryBikeInfo(new EveryBikeInfo("irrQQQW", 3.4d, false, branchDetail));
-
-		session.persist(bikeD);
-
-		System.out.println("test bean down ");
-
-	}
 
 	public void makeFakeOrderlist() throws IOException, NumberFormatException, ParseException {
 
@@ -137,10 +70,10 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-						new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));
+						new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+// /Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt 
 
-
-
+//C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -162,21 +95,23 @@ public class TestDAO {
 
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt")));
-
+				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+// /Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt 
+// C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt")));
-
-
+				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+//		/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt
+//C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
 		String line;
 		String line2;
 		SimpleDateFormat sim1 = new SimpleDateFormat("yyyy/mm/dd");
 
 		roop: while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
-
+			System.out.println(lines.toString());
+            System.out.println("test"+lines[0]);
 			/* ====new 上架新商品 ==== */
 			BikeDetail bikeD = new BikeDetail();
 			// 複合主鍵 設定主鍵值
@@ -190,25 +125,39 @@ public class TestDAO {
 			bikeD.setSeatHeight(Double.valueOf(lines[7]));
 			bikeD.setDryWeight(Double.valueOf(lines[8]));
 			bikeD.setFuelConsumption(Double.valueOf(lines[9]));
-			bikeD.setTire(lines[10]);
+			bikeD.setFrontTire(lines[10]);
 			bikeD.setFuelType(lines[11]);
 			bikeD.setABS(Boolean.valueOf(lines[12]));
 			bikeD.setHourPrice(Integer.valueOf(lines[13]));
 			Date dar = sim1.parse(lines[14]);
 			bikeD.setOnSheftTime(dar);
+			bikeD.setFrontSuspension(lines[15]);
+			bikeD.setRearSuspension(lines[16]);
+			bikeD.setRearTire(lines[17]);
+			bikeD.setHorsePower(lines[18]);
+			bikeD.setTorque(lines[19]);
+			bikeD.setFrontBrake(lines[20]);
+			bikeD.setRearBrake(lines[21]);
+			
 
 			while ((line2 = motorpl.readLine()) != null) {
+				String[] lines2 = line2.split(",");
+				int x = 1; 
 				/* ====new 機車車牌==== */
 				EveryBikeInfo everyBikeInfo1 = new EveryBikeInfo();
-				// 取得分店實體 （需要在選項內埋分店的ID)
-				BranchDetail branchDetail1 = factory.getCurrentSession().get(BranchDetail.class, 1);
-				String[] lines2 = line2.split(",");
-
 				if (line2.equals("=")) {
 					System.out.println("loop");
 					factory.getCurrentSession().persist(bikeD);
 					continue roop;
 				}
+				if(lines2[1].equals("木柵")) {
+					x = 2 ; 
+				}
+				System.out.println(lines2[1]+"來"+x);
+				// 取得分店實體 （需要在選項內埋分店的ID)
+				BranchDetail branchDetail1 = factory.getCurrentSession().get(BranchDetail.class, x);
+				
+
 
 				everyBikeInfo1.setLicensePlate(lines2[0]);
 				everyBikeInfo1.setBranchName(branchDetail1);
