@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import everybikeInfo.TestService;
+import testfakebikedao.TestService;
 
 @Controller
 public class TestController {
@@ -25,32 +25,7 @@ public class TestController {
 
 	}
 
-	@RequestMapping(value = "/testcontroller", produces = "text/html; charset = UTF-8")
-	public @ResponseBody String testLink(ServletRequest req) throws IOException, ParseException {
-		System.out.println("testLink startup");
-		BufferedReader eader = req.getReader();
-		String sss = eader.readLine();
-		System.out.println(sss);
-		try {
-			testService.testLinkDAO();
-		} catch (Exception e) {
-			return "Fail";
-		}
-		return "OK";
-
-	}
-
-	@RequestMapping(value = "/testhiber", produces = "text/html; charset = UTF-8")
-	public @ResponseBody String testHibernateBean() throws IOException, ParseException {
-
-		try {
-			testService.testHibernateBean();
-		} catch (Exception e) {
-			return "Fail";
-		}
-		return "OK";
-
-	}
+	
    //製作分店假資料
 	@RequestMapping(value = "/makeFakeBranchDetail", produces = "text/html; charset = UTF-8")
 	public @ResponseBody String makeFakeBranchDetail() throws IOException, ParseException {

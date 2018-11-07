@@ -41,6 +41,7 @@ public class BikeDetail implements Serializable{
     private String torque ;
     private String frontBrake;
     private String rearBrake;
+    private String description;
 
     private List<EveryBikeInfo> everyBikeInfos = new ArrayList<EveryBikeInfo>();
 
@@ -260,13 +261,6 @@ public class BikeDetail implements Serializable{
 		this.onSheftTime = onSheftTime;
 	}
 	
-	public Boolean getaBS() {
-		return aBS;
-	}
-	
-	public void setaBS(Boolean aBS) {
-		this.aBS = aBS;
-	}
 	
 	public String getFrontSuspension() {
 		return frontSuspension;
@@ -322,6 +316,16 @@ public class BikeDetail implements Serializable{
 	
 	public void setRearBrake(String rearBrake) {
 		this.rearBrake = rearBrake;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

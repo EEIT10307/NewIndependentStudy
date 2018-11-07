@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<<<<<<< HEAD
 <body>
 
 	配件品名:
@@ -96,5 +97,65 @@
 		})
 	});
 
+=======
+<body>
+
+配件品名:<input type="text" id="acceName"><br>
+分店名稱:<select id="branchName"></select><br>
+配件數量:    <select id="acceNum">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		</select><br>
+配件種類:<select id="acceType"></select><br>
+配件價格:<input type="text" id="acceePrice"><br>
+<input type="submit" >
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+$.ajax({
+		type : "post",
+		url : "selectBranchDetail",
+		success : function(response) {
+			// 				alert("sucess");
+			var shop = JSON.parse(response);
+			//迴圈
+			for (i in shop) {
+				//指定分店的欄位
+				var zx = shop[i].branchName;
+//								alert(zx);
+				//產生option
+				i++;
+				var opt = $("<option>").val(i).text(zx);
+				//傳回id=showshop 產生 分店 下拉式選單
+				$("#branchName").append(opt);
+			}
+		}
+	});
+selectAcceStock
+$.ajax({
+	type : "post",
+	url : "selectAcceStock",
+	success : function(response) {
+		// 				alert("sucess");
+		var shop = JSON.parse(response);
+		//迴圈
+		for (i in shop) {
+			//指定分店的欄位
+			var zx = shop[i].acceType;
+//							alert(zx);
+			//產生option
+			i++;
+			var opt = $("<option>").val(i).text(zx);
+			//傳回id=showshop 產生 分店 下拉式選單
+			$("#acceType").append(opt);
+		}
+	}
+});
+
+});
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 </script>
 </html>

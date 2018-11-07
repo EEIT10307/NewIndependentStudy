@@ -1,4 +1,4 @@
-package everybikeInfo;
+package testfakebikedao;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -22,25 +22,6 @@ public class TestService {
 		System.out.println("TestService start up ");
 	}
 	
-	
-	@Transactional
-	public  void testLinkDAO() throws ParseException {
-		   @SuppressWarnings("unused")
-		Session session = factory.getCurrentSession()  ; 
-		System.out.println("testLinkDAO start up  ");
-		testDAO.testFactory();
-		
-	}
-	
-
-	@Transactional
-	public  void testHibernateBean() throws ParseException {
-		   @SuppressWarnings("unused")
-		Session session = factory.getCurrentSession()  ; 
-		System.out.println("testLinkDAO start up  ");
-		testDAO.testHibernateBean();
-		
-	}
 	
 	
 	@Transactional

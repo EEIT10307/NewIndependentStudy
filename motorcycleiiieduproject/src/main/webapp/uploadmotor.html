@@ -10,6 +10,11 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	
+	<style type="text/css">
+		td input, td select { margin-bottom: 1%;}
+	</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	
@@ -86,28 +91,15 @@
     	  	});
             </script>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="orderlist.html">查看新預約訂單</a>
+            <a class="dropdown-item" href="orderlist.html">查詢訂單</a>
           </div>
-        </li>
-<!--         <li class="nav-item dropdown no-arrow mx-1"> -->
-<!--           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--             <i class="fas fa-envelope fa-fw"></i> -->
-<!--             <span class='badge badge-danger' id='newMessage'>7</span> -->
-<!--           </a> -->
-<!--           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown"> -->
-<!--             <a class="dropdown-item" href="">未回覆訊息</a> -->
-<!--             <a class="dropdown-item" href="#">Another action</a> -->
-<!--             <div class="dropdown-divider"></div> -->
-<!--             <a class="dropdown-item" href="#">Something else here</a> -->
-<!--           </div> -->
-<!--         </li> -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw fa-lg"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">帳號設定</a>
-            <div class="dropdown-divider"></div>
+<!--             <a class="dropdown-item" href="#">帳號設定</a> -->
+<!--             <div class="dropdown-divider"></div> -->
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
           </div>
         </li>
@@ -118,44 +110,10 @@
     <div id="wrapper">
 
       <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>保養紀錄</span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-<!--           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--             <i class="fas fa-fw fa-folder"></i> -->
-<!--             <span>Pages</span> -->
-<!--           </a> -->
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Login Screens:</h6>
-            <a class="dropdown-item" href="login.html">Login</a>
-            <a class="dropdown-item" href="register.html">Register</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other Pages:</h6>
-            <a class="dropdown-item" href="404.html">404 Page</a>
-            <a class="dropdown-item" href="blank.html">Blank Page</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>營業額分析</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="administrator.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>會員資料統計</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="uploadmotor.html">
-            <i class="fas fa-sign-in-alt pr-1"></i>
-            <span>機車上架</span></a>
-        </li>
-      </ul>
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
 
       <div id="content-wrapper">
 
@@ -166,31 +124,31 @@
         
         
         
-        <table class="col-6 offset-4">
-					<tr><td></td><td><h4 id="addVar" class='mx-auto'>新增車牌</h4></td></tr>
-					<tr><td>車牌:</td><td><input type="text" id="LicensePlate" name="test" value="MFD-001" class="LicensePlate"></td></tr>
+        <table class="col-lg-6 offset-lg-4 col-md-8 offset-md-2 col-sm-12">
+					<tr><td></td><td></td></tr>
+					<tr><td>車牌:</td><td class=' form-group d-flex justify-content-between align-middle col-lg-11 col-md-12 col-sm-12 my-0' style='padding-left:1px;'><input type="text" id="LicensePlate" name="test" value="MFD-001" class="LicensePlate form-control form-control-sm"><button id="addVar" class='btn btn-sm btn-secondary mx-2' type='button'>新增車牌</button></td></tr>
 					<tbody class="add">	</tbody>
 				
-					<tr><td>分店:</td><td><select id="BranchName" class="BranchName"></select></td></tr>
-					<tr><td>型號:</td><td><input 		type="text" class="BikeModel" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1"></select></td></tr>
-					<tr><td>年份:</td><td><input 		type="text" class="ModelYear" id="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1"></select>只新增車牌<input type="checkbox" id="checkbox"></td></tr>
+					<tr><td>分店:</td><td class="form-group"><select id="BranchName" class="BranchName form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td></tr>
+					<tr><td>型號:</td><td class="form-group"><input 	   type="text" class="BikeModel form-control form-control-sm col-lg-8 col-md-12 col-sm-12" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td></tr>
+					<tr><td>年份:</td><td class="form-group"><input 	   type="text" class="ModelYear form-control form-control-sm col-lg-8 col-md-12 col-sm-12" id="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select>只新增車牌<input type="checkbox" id="checkbox" class="mx-2"></td></tr>
 								
-					<tr class="BikeBrand"><td>廠牌:</td><td><input    		type="text"  	id="BikeBrand" 			value="YAMAHA"></td></tr>
-					<tr class="EngineType"><td>CC數:</td><td><input  			type="text"  	id="EngineType"			value="2000"></td></tr>
-					<tr class="BikeType"><td>車種:</td><td><input    			type="text"  	id="BikeType" 			value="紅牌"></td></tr>
-					<tr class="PlateType"><td>紅黃白牌:</td><td><input 		type="text" 	id="PlateType" 	 		value="白牌"></td></tr>
-					<tr class="FuelTankCapacity"><td>油箱容量:</td><td><input	type="text" 	id="FuelTankCapacity" 	value="150"></td></tr>
-					<tr class="SeatHeight"><td>座高:</td><td><input 			type="text"  	id="SeatHeight" 		value="115"></td></tr>
-					<tr class="DryWeight"><td>車子乾重:</td><td><input 		type="text"  	id="DryWeight" 			value="175"></td></tr>
-					<tr class="FuelConsumption"><td>油耗:</td><td><input 		type="text"  	id="FuelConsumption"	value="30"></td></tr>
-					<tr class="Tire"><td>輪胎:</td><td><input 				type="text"		id="Tire"				value="普利斯頓17吋"></td></tr>
-					<tr class="FuelType"><td>使用燃料:</td><td><input 			type="text"		id="FuelType" 			value="98"></td></tr>
-					<tr class="ABS"><td>ABS:</td><td><select id="ABS"><option value="1">是</option><option value="0">否</option></select></td></tr>
-					<tr class="HourPrice"><td>每小時價格:</td><td><input type="text"				id="HourPrice" value="200"></td></tr>
+					<tr class="BikeBrand"><td>廠牌:</td><td class="form-group"><input    			type="text"  	id="BikeBrand" 			value="YAMAHA"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="EngineType"><td>CC數:</td><td class="form-group"><input  			type="text"  	id="EngineType"			value="2000"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="BikeType"><td>車種:</td><td class="form-group"><input    			type="text"  	id="BikeType" 			value="紅牌"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="PlateType"><td>紅黃白牌:</td><td class="form-group"><input 			type="text" 	id="PlateType" 	 		value="白牌"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="FuelTankCapacity"><td>油箱容量:</td><td class="form-group"><input	type="text" 	id="FuelTankCapacity" 	value="150"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="SeatHeight"><td>座高:</td><td class="form-group"><input 			type="text"  	id="SeatHeight" 		value="115"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="DryWeight"><td>車子乾重:</td><td class="form-group"><input 			type="text"  	id="DryWeight" 			value="175"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="FuelConsumption"><td>油耗:</td><td class="form-group"><input 		type="text"  	id="FuelConsumption"	value="30"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="Tire"><td>輪胎:</td><td class="form-group"><input 					type="text"		id="Tire"				value="普利斯頓17吋"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="FuelType"><td>使用燃料:</td><td class="form-group"><input 			type="text"		id="FuelType" 			value="98"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
+					<tr class="ABS"><td>ABS:</td><td class="form-group"><select id="ABS" class="form-control form-control-sm col-lg-8 col-md-12 col-sm-12 text-center"><option value="1">是</option><option value="0">否</option></select></td></tr>
+					<tr class="HourPrice"><td>每小時價格:</td><td class="form-group"><input type="text"				id="HourPrice" value="200"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
 					</table>
-					<input type="submit" id="submit" class="submit btn btn-secondary col-1 offset-6 my-4" >
+					<input type="submit" id="submit" class="submit btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4" >
 		<!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
-					<input type="submit" id="submit1" class="submit1 btn btn-secondary col-1 offset-6 my-4" >
+					<input type="submit" id="submit1" class="submit1 btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4" >
 		</body>
 		<script>
 		        //初始参数个数
@@ -200,7 +158,7 @@
 		          //新增按钮点击
 		            $('#addVar').on('click', function(){
 		                varCount++;
-						$(".add").append('<tr><td>車牌'+varCount+':</td><td><input type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar">删除</span></td></tr>');
+						$(".add").append('<tr><td>車牌'+varCount+':</td><td class="form-group d-flex justify-content-between align-middle col-lg-10 col-md-12 col-sm-12 my-0" style="padding-left:3px;"><input class="form-control form-control-sm my-1" type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar btn btn-sm btn-danger mx-2 my-1">删除</span></td></tr>');
 		            });
 		 
 		          //删除按钮点击
@@ -431,7 +389,7 @@
         
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer col-10 offset-col-2">
+        <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Motorcycle 2018</span>
