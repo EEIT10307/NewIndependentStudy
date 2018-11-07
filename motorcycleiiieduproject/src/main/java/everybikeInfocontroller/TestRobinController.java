@@ -1,6 +1,5 @@
 package everybikeInfocontroller;
 
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,6 +34,8 @@ import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
 import cleanbean.EveryBikeInfoBean;
 import cleanbean.EveryBikeInfoToGson;
+import cleanbean.QaBean;
+import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.BikeReviewIFaceService;
@@ -46,6 +47,7 @@ import projectbean.AcceSerialNum;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
+import projectbean.QAndA;
 
 @Controller
 public class TestRobinController {
@@ -273,11 +275,26 @@ public class TestRobinController {
 		return "";
 	}
 
-	@PostMapping(value = "/testmail", produces = "text/html; charset = UTF-8") // 新增配件
-	public @ResponseBody String test_mail(String or,String em) throws IOException {
-		System.out.println("訂單:"+or+"信箱:"+em);
+	@PostMapping(value = "/testmail", produces = "text/html; charset = UTF-8") // emil
+	public @ResponseBody String test_mail(String or, String em) throws IOException {
+		System.out.println("訂單:" + or + "信箱:" + em);
 		testEmailIFaceService.sendemail(or, em);
 		return "";
+	}
+
+	@PostMapping(value = "/insertQA", produces = "text/html; charset = UTF-8") // 商品評價 新增
+	public @ResponseBody String insertQA(@RequestBody QaBean qaBean) throws IOException {
+
+		bikeDetailIFaceService.insertQA(qaBean);
+		return "";
+	}
+
+	@PostMapping(value = "/selectQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
+	public @ResponseBody String selectQA(String yesar) throws IOException {
+		System.out.println("OK");
+	
+		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA());
+		return gson.toJson(QQ);
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 

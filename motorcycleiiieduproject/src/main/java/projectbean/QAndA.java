@@ -2,6 +2,7 @@ package projectbean;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,14 +20,33 @@ public class QAndA implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer qAndASerialNum ; 
-	private String  questioner; 
-	private String questionCotent; 
-	 private BikeDetail bikeDetail;
-	private String administratorID; 
-	private String answerContent; 
-	private java.util.Date questionDate ; 
-	private java.util.Date answerTime ;
+	private String  questioner; //回答者姓名
+	private String questionCotent; //回答內容
+	 private BikeDetail bikeDetail;//型號和年份
+	private String administratorID; //管理員ID
+	private String answerContent; //回答內容
+	private java.util.Date questionDate ; //問時間
+	private java.util.Date answerTime ;//回答時間
 	
+	
+	public QAndA() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public QAndA(String questioner, String questionCotent, BikeDetail bikeDetail,Date questionDate) {
+		super();
+		this.questioner = questioner;
+		this.questionCotent = questionCotent;
+		this.bikeDetail = bikeDetail;
+	
+		this.questionDate = questionDate;
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getQAndASerialNum() {

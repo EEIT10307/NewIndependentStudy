@@ -1,21 +1,24 @@
 package everybikeInfo.robin.dao;
 
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cleanbean.BikeDetailToGson;
+import cleanbean.QaBean;
+import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.EveryBikeInfoIFaceService;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
 import projectbean.IdClassBikeDetail;
+import projectbean.QAndA;
 
 @Repository
 public class BikeDetailDao implements BikeDetailIFaceDao {
@@ -83,15 +86,16 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 		Session session = Factory.getCurrentSession();
 
 		System.out.println(bikeDetailToGson.getBikeType());
-		 BikeDetail op = everyBikeInfoIFaceService.selectbikeModelmodelYear(bikeDetailToGson.getBikeModel(), bikeDetailToGson.getModelYear());
-		 Date QQ = op.getOnSheftTime();
+		BikeDetail op = everyBikeInfoIFaceService.selectbikeModelmodelYear(bikeDetailToGson.getBikeModel(),
+				bikeDetailToGson.getModelYear());
+		Date QQ = op.getOnSheftTime();
 		IdClassBikeDetail idClassBikeDetailnew = new IdClassBikeDetail(bikeDetailToGson.getBikeModel(),
 				bikeDetailToGson.getModelYear());
 		BikeDetail bike = new BikeDetail(idClassBikeDetailnew, bikeDetailToGson.getBikeBrand(),
 				bikeDetailToGson.getEngineType(), bikeDetailToGson.getBikeType(), bikeDetailToGson.getPlateType(),
 				bikeDetailToGson.getFuelTankCapacity(), bikeDetailToGson.getSeatHeight(),
 				bikeDetailToGson.getDryWeight(), bikeDetailToGson.getFuelConsumption(), bikeDetailToGson.getTire(),
-				bikeDetailToGson.getFuelType(), bikeDetailToGson.getaBS(), bikeDetailToGson.getHourPrice(),QQ);
+				bikeDetailToGson.getFuelType(), bikeDetailToGson.getaBS(), bikeDetailToGson.getHourPrice(), QQ);
 
 //		BikeDetail bikeDetail=new BikeDetail(bikeDetailToGson.getBikeBrand()
 //											,bikeDetailToGson.getEngineType(),bikeDetailToGson.getBikeType()
@@ -128,6 +132,71 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 		// TODO Auto-generated method stub
 		return 0;
 
+	}
+
+	@Override
+	public int insertQA(QaBean qaBean) {
+		Session session = Factory.getCurrentSession();
+		int count = 0;
+		String BikeModel = qaBean.getBikeModel();
+		String ModelYear = qaBean.getModelYear();
+		String Questioner = qaBean.getQuestioner();
+		String QuestionCoten = qaBean.getQuestionCoten();
+		Date now = new Date();
+		IdClassBikeDetail IdClassBikeDetail = new IdClassBikeDetail("R3", "2019");
+		BikeDetail bikeDetail = new BikeDetail(IdClassBikeDetail);
+		QAndA QAndA = new QAndA(Questioner, QuestionCoten, bikeDetail, now);
+		QAndA QAndA1 = new QAndA("小明", "回答得太棒了", bikeDetail, now);
+		session.save(QAndA);
+		count++;
+		return count;
+	}
+
+	@Override
+	public List<QAndA> selectQA() {
+		Session session = Factory.getCurrentSession();
+		String hql = "From QAndA";
+		List<QAndA> po = session.createQuery(hql).getResultList();
+		if (po.size() == 0) {
+			System.out.println("QAndA:沒東西");
+			return null;
+		}
+		return po;
+	}
+
+	@Override
+	public List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA) {
+		SimpleDateFormat Format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		ArrayList<QaBeanToJson> QaBeanToJson = new ArrayList<QaBeanToJson>();
+		String Answer = null;
+		String Question = null;
+		for (QAndA op : QAndA) {
+			String Questioner = op.getQuestioner();
+			String QuestionCotent = op.getQuestionCotent();
+			String BikeModel = op.getBikeDetail().getIdClassBikeDetail().getBikeModel();
+			String ModelYear = op.getBikeDetail().getIdClassBikeDetail().getModelYear();
+			String AdministratorID = op.getAdministratorID();
+			String AnswerContent = op.getAnswerContent();
+			Date QuestionDate = op.getQuestionDate();
+			Date AnswerTime = op.getAnswerTime();
+			System.out.println("這段時間:" + AnswerTime);
+			if (QuestionDate == null) {
+				Question = null;
+			} else {
+				Question = Format.format(QuestionDate);
+			}
+			if (AnswerTime == null) {
+				Answer = null;
+			} else {
+				Answer = Format.format(AnswerTime);
+			}
+			String QuestionDate1 = Question;// 時間轉為文字
+			String AnswerTime1 = Answer;// 時間轉為文字
+
+			QaBeanToJson.add(new QaBeanToJson(Questioner, QuestionCotent, BikeModel, ModelYear, AdministratorID,
+					AnswerContent, QuestionDate1, AnswerTime1));
+		}
+		return QaBeanToJson;
 	}
 
 }
