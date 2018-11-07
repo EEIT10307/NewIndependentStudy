@@ -1,5 +1,6 @@
 package testcontroller;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import everybikeInfo.TestService;
-import orderdao.BasicOrderBean;
+import cleanbean.BasicOrderBean;
+import testfakebikedao.TestService;
 
 @Controller
 public class TestControllerCriteria {
@@ -39,7 +40,7 @@ public class TestControllerCriteria {
 		return  gson.toJson(customerquery);
 
 	}
-	
+
 	
 
 }

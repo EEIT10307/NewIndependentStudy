@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.BikeDetailToGson;
+import cleanbean.EveryBikeInfoToGson;
+import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 @Repository
 public interface EveryBikeInfoIFaceDao {
@@ -12,13 +14,17 @@ public interface EveryBikeInfoIFaceDao {
 
 	List<EveryBikeInfo> getAllMembers();
 
-	EveryBikeInfo getMember(int pk);
+	public boolean getMemberOne(String LicensePlate);
 
-	int deleteMember(String bikeModel, String modelYear);
+	boolean checkbikeModelmodelYear(String bikeModel, String modelYear);
 
-	int updateMember(EveryBikeInfo mb);
+	BikeDetail selectbikeModelmodelYear(String bikeModel, String modelYear);
 
 	int save(EveryBikeInfo everyBikeInfo);
 	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
 	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+
+
+	List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop);
+
 }

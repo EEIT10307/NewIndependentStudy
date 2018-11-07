@@ -4,6 +4,7 @@ package everybikeInfo.robin.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -15,7 +16,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.BikeDetailToGson;
+import cleanbean.EveryBikeInfoToGson;
+import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
 @Repository
@@ -25,54 +28,85 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 
 	@Override
 	public List<EveryBikeInfo> selectModelAll(String bikeDetail_bikeModel) {
-		Session session=Factory.getCurrentSession();
+		Session session = Factory.getCurrentSession();
 		String hgl = "FROM BikeDetail WHERE bikedetail0_.modelYear=:bikeDetail_bikeModel";
 		@SuppressWarnings("unchecked")
-		List<EveryBikeInfo> list = session.createQuery(hgl).setParameter("bikeDetail_bikeModel", bikeDetail_bikeModel).getResultList();
-		
+		List<EveryBikeInfo> list = session.createQuery(hgl).setParameter("bikeDetail_bikeModel", bikeDetail_bikeModel)
+				.getResultList();
+
 		return list;
 	}
 
 	@Override
 	public List<EveryBikeInfo> getAllMembers() {
-		Session session=Factory.getCurrentSession();
+		Session session = Factory.getCurrentSession();
 		String hql = "From EveryBikeInfo";
-		
+
 		List<EveryBikeInfo> allMembers = null;
-		allMembers=session.createQuery(hql).getResultList();
-		
+		allMembers = session.createQuery(hql).getResultList();
+
 		return allMembers;
 	}
 
 	@Override
-	public  EveryBikeInfo getMember(int pk) {
+	public boolean getMemberOne(String LicensePlate) {
+		Session session = Factory.getCurrentSession();
+		boolean exist = false;
+
+		String hql = "FROM EveryBikeInfo WHERE licensePlate=:licensePlate";
+		try {
+			EveryBikeInfo usera = (EveryBikeInfo) session.createQuery(hql).setParameter("licensePlate", LicensePlate)
+					.getSingleResult();
+			exist = true;
+		} catch (NoResultException ex) {
+			
+		}
+		return exist;
+	}
+
+	@Override
+	public boolean checkbikeModelmodelYear(String bikeModel, String modelYear) {
+		Session session = Factory.getCurrentSession();
+		boolean exist = false;
+		System.out.println(052550.0);
+		String hql = "FROM BikeDetail WHERE bikeModel=:bikeModel and modelYear=:modelYear";
+		try {
+			@SuppressWarnings("unchecked")
+			BikeDetail usera = (BikeDetail) session.createQuery(hql).setParameter("bikeModel", bikeModel)
+					.setParameter("modelYear", modelYear).getSingleResult();
+			exist = true;
+		} catch (NoResultException ex) {
+			
+		}
+		return exist;
+	}
+
+	@Override//BikeDetail
+	public BikeDetail selectbikeModelmodelYear(String bikeModel, String modelYear) {
+		Session session = Factory.getCurrentSession();
+		String hql = "FROM BikeDetail WHERE bikeModel=:bikeModel and modelYear=:modelYear";
+	
+			@SuppressWarnings("unchecked")
+			BikeDetail usera = (BikeDetail) session.createQuery(hql).setParameter("bikeModel", bikeModel)
+					.setParameter("modelYear", modelYear).getSingleResult();
+	
+	
 		
-		return null ;
-	}
-
-	@Override
-	public int deleteMember(String bikeModel, String modelYear) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateMember(EveryBikeInfo mb) {
-		// TODO Auto-generated method stub
-		return 0; 
+		
+		return usera;
 	}
 
 	@Override
 	public int save(EveryBikeInfo everyBikeInfo) {
-		Session session=Factory.getCurrentSession();
-		int updateCount = 0;
+		Session session = Factory.getCurrentSession();
 
+		int upadte = 0;
+		upadte++;
 		session.save(everyBikeInfo);
 
-		updateCount = 1;
-
-		return updateCount;
+		return upadte;
 	}
+
 	@Override
 	public List<EveryBikeInfo> showAllEveryBikeInfo(String shopName) {
 		// 建立查詢物件
@@ -84,8 +118,9 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 		// 定義查詢型態
 		ParameterExpression<String> bikeModel = builder.parameter(String.class);
 		// select * from everbikeinfo.class where
-		// everbikeinfo.class.BranchName.branchName = 傳入店名 
-		createQuery.select(fromClass).where(builder.equal(fromClass.get("bikeDetail").get("idClassBikeDetail").get("bikeModel"), bikeModel));
+		// everbikeinfo.class.BranchName.branchName = 傳入店名
+		createQuery.select(fromClass)
+				.where(builder.equal(fromClass.get("bikeDetail").get("idClassBikeDetail").get("bikeModel"), bikeModel));
 		// 查詢物件
 		Query<EveryBikeInfo> queryword = Factory.getCurrentSession().createQuery(createQuery);
 		// 定義參數
@@ -99,17 +134,31 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 		return list;
 
 	}
+
 	@Override
 	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
-		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson=new ArrayList<EveryBikeInfoToGson>();
-		for(EveryBikeInfo loop:finalEveryBikeInfo) {
-			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),loop.getBranchName().getBranchName(),
-					loop.getTotalMileage(),loop.getIsReadyMaintenance(),loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));
+		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson = new ArrayList<EveryBikeInfoToGson>();
+		for (EveryBikeInfo loop : finalEveryBikeInfo) {
+			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),
+					loop.getBranchName().getBranchName(), loop.getTotalMileage(), loop.getIsReadyMaintenance(),
+					loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));
 		}
 		return everyBikeInfoToGson;
 	}
-
+	
+	@Override
+	public List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop) {
+		ArrayList<BikeDetailToGson> everyBikeInfoToGson = new ArrayList<BikeDetailToGson>();
+		
+			everyBikeInfoToGson.add(new BikeDetailToGson(loop.getIdClassBikeDetail().getBikeModel(),loop.getIdClassBikeDetail().getModelYear()
+					,loop.getBikeBrand(),loop.getEngineType(),loop.getBikeType(),loop.getPlateType(),loop.getFuelTankCapacity(),loop.getSeatHeight()
+					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice()));
+	
+		return everyBikeInfoToGson;
+	}
 
 	
+
+
 
 }

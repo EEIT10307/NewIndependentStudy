@@ -167,7 +167,7 @@ $(document).ready(function() {
 		var FuelType = $("#FuelType").val();//使用燃料
 		var ABS = $("#ABS").val();//煞車ABS
 		var HourPrice = $("#HourPrice").val();//每小時價格
-			alert(LicensePlate)
+// 			alert(LicensePlate)
 			if (ABS == 1) {
 				ABS = true;
 			} else {
@@ -177,7 +177,7 @@ $(document).ready(function() {
 										
  			$("[name='test']").each(function(){
  				show=$(this).val();
- 				alert(show)
+//  				alert(show)
  				var allLicensePlate = {}
  				allLicensePlate["licensePlate"] = show ;
  				allLicensePlate["branchName"] = BranchName ;
@@ -199,7 +199,7 @@ $(document).ready(function() {
  				allLicensePlatearray.push(allLicensePlate) ; 
  				
  			})
- 			alert(JSON.stringify(allLicensePlatearray))
+//  			alert(JSON.stringify(allLicensePlatearray))
  			
  			var jsonarray = JSON.stringify(allLicensePlatearray)
 		$.ajax({
@@ -237,6 +237,27 @@ $(document).ready(function() {
 				//傳回id=showshop 產生 型號 下拉式選單
 				$(".BikeModel1").append(opt);
 			}
+			var cd= {"everyBikeInfoModel":$(".BikeModel1").val()}; 
+			var str=JSON.stringify(cd);
+				$.ajax({
+					type : "post",
+					url : "showAllshowAllEveryBikeInfo",
+					data:str,
+				 	contentType:"application/json; charset=utf-8",
+					success : function(response) {
+						var shop  =JSON.parse(response);
+						//迴圈
+						for (i in shop) {
+							//指定型號的欄位
+							var zx = shop[i];
+							//產生option
+							i++;
+							var opt = $("<option>").val(zx).text(zx);
+							//傳回id=showshop 產生 型號 下拉式選單
+							$(".ModelYear1").append(opt);
+						}
+					}
+				});
 		}
 	});
 // 	-------------------------------------------------------------------------------------

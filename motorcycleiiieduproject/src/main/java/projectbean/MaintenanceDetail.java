@@ -21,7 +21,6 @@ public class MaintenanceDetail implements Serializable{
 	private String maintenanceItem ; 
 	private Double requiredMileage ;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getMaintenanceItem() {
 		return maintenanceItem;
 	}

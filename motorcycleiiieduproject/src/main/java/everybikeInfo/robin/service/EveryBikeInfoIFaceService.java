@@ -2,7 +2,9 @@ package everybikeInfo.robin.service;
 
 import java.util.List;
 
-import maintenance.EveryBikeInfoToGson;
+import cleanbean.BikeDetailToGson;
+import cleanbean.EveryBikeInfoToGson;
+import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
 
 public interface EveryBikeInfoIFaceService {
@@ -10,13 +12,15 @@ public interface EveryBikeInfoIFaceService {
 
 	List<EveryBikeInfo> getAllMembers();
 
-	EveryBikeInfo getMember(int pk);
+	public boolean getMemberOne(String LicensePlate);
 
-	int deleteMember(String bikeModel, String modelYear);
+	BikeDetail selectbikeModelmodelYear(String bikeModel, String modelYear);
 
-	int updateMember(EveryBikeInfo mb);
+	boolean checkbikeModelmodelYear(String bikeModel, String modelYear);
 
 	int save(String licensePlate, int branchName, String bikeModel, String modelYear);
 	List<EveryBikeInfo> showAllEveryBikeInfo(String shopName);
 	List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
+	List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop);
+
 }

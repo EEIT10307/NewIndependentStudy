@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BikeDetailToGson;
+import cleanbean.QaBean;
+import cleanbean.QaBeanToJson;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
+import projectbean.QAndA;
 
 @Repository
 public interface BikeDetailIFaceDao {
@@ -20,4 +24,9 @@ public interface BikeDetailIFaceDao {
 	int updateMember(BikeReview mb);
 
 	int merge(BikeDetail bikeDetail);
+
+	int updateBikeDetai(BikeDetailToGson bikeDetailToGson);
+	int insertQA(QaBean qaBean);
+	List<QAndA> selectQA();
+	List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA);
 }
