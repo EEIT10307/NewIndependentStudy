@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	
@@ -86,21 +87,9 @@
     	  	});
             </script>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="orderlist.html">查看新預約訂單</a>
+            <a class="dropdown-item" href="orderlist.html">查詢訂單</a>
           </div>
         </li>
-<!--         <li class="nav-item dropdown no-arrow mx-1"> -->
-<!--           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--             <i class="fas fa-envelope fa-fw"></i> -->
-<!--             <span class='badge badge-danger' id='newMessage'>7</span> -->
-<!--           </a> -->
-<!--           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown"> -->
-<!--             <a class="dropdown-item" href="">未回覆訊息</a> -->
-<!--             <a class="dropdown-item" href="#">Another action</a> -->
-<!--             <div class="dropdown-divider"></div> -->
-<!--             <a class="dropdown-item" href="#">Something else here</a> -->
-<!--           </div> -->
-<!--         </li> -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw fa-lg"></i>
@@ -118,44 +107,10 @@
     <div id="wrapper">
 
       <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>保養紀錄</span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-<!--           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--             <i class="fas fa-fw fa-folder"></i> -->
-<!--             <span>Pages</span> -->
-<!--           </a> -->
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Login Screens:</h6>
-            <a class="dropdown-item" href="login.html">Login</a>
-            <a class="dropdown-item" href="register.html">Register</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other Pages:</h6>
-            <a class="dropdown-item" href="404.html">404 Page</a>
-            <a class="dropdown-item" href="blank.html">Blank Page</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>營業額分析</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="administrator.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>會員資料統計</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="uploadmotor.html">
-            <i class="fas fa-sign-in-alt pr-1"></i>
-            <span>機車上架</span></a>
-        </li>
-      </ul>
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
 
       <div id="content-wrapper">
 
@@ -174,8 +129,13 @@
 			animationEnabled: true,
 			title:{
 				text: "年齡分布",
-				horizontalAlign: "center"
+				horizontalAlign: "center",
+				fontFamily: "微軟正黑體"
 			},
+			legend:{
+		        verticalAlign: "center",
+		        horizontalAlign: "center"
+		    },
 			data: [{
 				type: "doughnut",
 				startAngle: 60,
@@ -200,8 +160,13 @@
 			animationEnabled: true,
 			title:{
 				text: "性別比例",
-				horizontalAlign: "center"
+				horizontalAlign: "center",
+				fontFamily: "微軟正黑體"
 			},
+			legend:{
+		        verticalAlign: "center",
+		        horizontalAlign: "center"
+		    },
 			data: [{
 				type: "doughnut",
 				startAngle: 60,
@@ -714,7 +679,7 @@
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer col-10 offset-col-2">
+        <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Motorcycle 2018</span>
