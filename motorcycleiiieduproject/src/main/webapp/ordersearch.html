@@ -21,6 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<style type="text/css">table td, table button, table select option{font-size: 7px;}</style>
 </head>
 <body id="page-top">
 
@@ -108,28 +109,28 @@
             <div class="card-header">查詢訂單</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table-responsive table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed;">
-                  <thead  style="width: 40% !important;">
-                    <tr>
-                      <th style="width: 8% !important;">流水號</th>
-                      <th style="width: 12% !important;">下訂時間</th>
-                      <th style="width: 8% !important;">取店</th>
-                      <th style="width: 8% !important;">取車時間</th>
-                      <th style="width: 8% !important;">還店</th>
-                      <th style="width: 8% !important;">還車時間</th>
-                      <th style="width: 8% !important;">電話</th>
-<!--                       <th style="width: 8% !important;">型號</th> -->
-                      <th style="width: 8% !important;">車牌</th>
-                      <th style="width: 8% !important;">折扣名稱</th>
-                      <th style="width: 8% !important;">折扣數</th>
-                      <th style="width: 8% !important;">機車折扣價</th>
-                      <th style="width: 8% !important;">附加配件與數量</th>
-                      <th style="width: 8% !important;">配件總價</th>
-                      <th style="width: 8% !important;">訂單總價</th>
-                      <th style="width: 8% !important;">狀態</th>
-                      <th style="width: 8% !important;">是否為會員</th>
-                      <th style="width: 8% !important;">是否已付款</th>
-                      <th style="width: 8% !important;">取興訂單</th>
+                <table class="table-responsive table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed; font-size: xx-small;">
+                  <thead>
+                    <tr class='text-center'>
+                      <th>流水號</th>
+                      <th>下訂時間</th>
+                      <th>取店</th>
+                      <th>取車時間</th>
+                      <th>還店</th>
+                      <th>還車時間</th>
+                      <th>電話</th>
+<!--                       <th>型號</th> -->
+                      <th>車牌</th>
+                      <th>折扣名稱</th>
+                      <th>折扣數</th>
+                      <th>機車折扣價</th>
+                      <th>附加配件與數量</th>
+                      <th>配件總價</th>
+                      <th>訂單總價</th>
+                      <th>狀態</th>
+                      <th>是否為會員</th>
+                      <th>是否已付款</th>
+                      <th>取消訂單</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -152,7 +153,7 @@
                       <th>狀態</th>
                       <th>是否為會員</th>
                       <th>是否已付款</th>
-                      <th>取興訂單</th>                      
+                      <th>取消訂單</th>                      
                     </tr>
                   </tfoot>
                   <tbody>
@@ -173,7 +174,7 @@
                       <td>500</td>
                       <td>2500</td>
                       <td>
-                      	<select class='form-control'>
+                      	<select class='form-control form-control-sm'>
 						  <optgroup label="訂單狀態">
 						    <option value="PRE">PRE</option>
 						    <option value="Ing">Ing</option>
@@ -189,7 +190,7 @@
                       </td>
                       <td>是</td>
                       <td>否</td>
-                      <td><button class="btn btn-danger">取消</button></td>
+                      <td><button type="button" class="btn btn-danger btn-sm">取消</button></td>
                     </tr>
                     <tr>
                       <td>2011021803</td>
@@ -208,7 +209,7 @@
                       <td>300</td>                      
                       <td>1500</td>
                       <td>
-                      	<select class='form-control'>
+                      	<select class='form-control form-control-sm'>
 						  <optgroup label="訂單狀態">
 						    <option value="PRE">PRE</option>
 						    <option value="Ing">Ing</option>
@@ -224,7 +225,7 @@
                       </td>
                       <td>是</td>
                       <td>否</td>
-                      <td><button class="btn btn-danger">取消</button></td>                  
+                      <td><button type="button" class="btn btn-danger btn-sm">取消</button></td>                  
                     </tr>
                     <tr>
                       <td>2009011219</td>
@@ -235,7 +236,7 @@
                       <td>2009/01/14 14:00</td>
                       <td>0908776602</td>
 <!--                       <td>9M-8866</td> -->
-                      <td>SAMYUNG-866</td>
+                      <td>SAM-866</td>
                       <td>無</td>
                       <td>1</td>
                       <td>2500</td>
@@ -243,7 +244,7 @@
                       <td>1000</td>
                       <td>3500</td>
                       <td>
-                      	<select class='form-control'>
+                      	<select class='form-control form-control-sm'>
 						  <optgroup label="訂單狀態">
 						    <option value="PRE">PRE</option>
 						    <option value="Ing">Ing</option>
@@ -259,7 +260,7 @@
                       </td>
                       <td>否</td>
                       <td>否</td>
-                      <td><button class="btn btn-danger">取消</button></td>
+                      <td><button type="button" class="btn btn-danger btn-sm">取消</button></td>
                     </tr>
                     <tr>
                       <td>2018031525</td>
@@ -278,7 +279,7 @@
                       <td>20</td>
                       <td>1420</td>
                       <td>
-                      	<select class='form-control'>
+                      	<select class='form-control form-control-sm'>
 						  <optgroup label="訂單狀態">
 						    <option value="PRE">PRE</option>
 						    <option value="Ing">Ing</option>
@@ -294,7 +295,7 @@
                       </td>
                       <td>否</td>
                       <td>否</td>
-                      <td><button class="btn btn-danger">取消</button></td>
+                      <td><button type="button" class="btn btn-danger btn-sm">取消</button></td>
                     </tr>
                   </tbody>
                 </table>
