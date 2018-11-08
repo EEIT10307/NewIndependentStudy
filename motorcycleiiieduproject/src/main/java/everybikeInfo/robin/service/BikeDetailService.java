@@ -10,14 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cleanbean.BikeDetailAndEveryBikeInfo;
-
 import cleanbean.BikeDetailToGson;
+import cleanbean.QaBean;
+import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.dao.BikeDetailIFaceDao;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import projectbean.IdClassBikeDetail;
+import projectbean.QAndA;
 
 @Service
 @Transactional
@@ -117,6 +119,23 @@ public class BikeDetailService implements BikeDetailIFaceService {
 		
 		return bikeDetailIFaceDAO.updateBikeDetai(bikeDetailToGson);
 
+	}
+
+	@Override
+	public int insertQA(QaBean qaBean) {
+		return bikeDetailIFaceDAO.insertQA(qaBean);
+	}
+
+	@Override
+	public List<QAndA> selectQA() {
+		// TODO Auto-generated method stub
+		return bikeDetailIFaceDAO.selectQA();
+	}
+
+	@Override
+	public List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA) {
+		// TODO Auto-generated method stub
+		return bikeDetailIFaceDAO.QaBeanToJson(QAndA);
 	}
 
 }

@@ -50,6 +50,12 @@ public class BikeDetail implements Serializable{
 
 
  
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail) {
+	
+		this.idClassBikeDetail = idClassBikeDetail;
+	}
+
+
 	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
 			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime, String frontSuspension,

@@ -13,8 +13,6 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"branchName"} ) })
 public class BranchDetail implements Serializable {
-
-	
 	/**
 	 * 
 	 */
@@ -41,7 +39,6 @@ public class BranchDetail implements Serializable {
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
-
 	}
 	@Column(nullable = false)
 	public String getBranchArea() {
