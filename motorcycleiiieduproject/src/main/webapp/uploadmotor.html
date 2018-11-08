@@ -361,29 +361,29 @@
 			
 				//一鍵完成
 				$(".onsubmit").click(function(e) {
+					
+					$("#LicensePlate").val("MMS-001");//車牌
+					$("#BikeModel").val("T-MAX 530");//型號
+					$("#ModelYear").val("2017");//年分
+					$("#BikeBrand").val("YAMAHA");//廠牌
+					$("#EngineType").val("水冷四行程雙汽缸8汽門");//cc數
+					$("#BikeType").val("Naked");//車種
+					$("#PlateType").val("白");//車牌
+					$("#FuelTankCapacity").val("15.0");//油箱容量
+					$("#SeatHeight").val("830");//座高
+					$("#DryWeight").val("195");//乾重
+					$("#FuelConsumption").val("16.2");//油耗
+					$("#Tire").val("120/70-15");//前輪胎
+					$("#FuelType").val("98");//使用燃料
+					$("#HourPrice").val("200");//每小時費用
 
-					$("#LicensePlate").val("MMS-001");
-					$("#BikeModel").val("M3");
-					$("#ModelYear").val("1794");
-					$("#BikeBrand").val("MMS-001");
-					$("#EngineType").val("MMS-001");
-					$("#BikeType").val("MMS-001");
-					$("#PlateType").val("MMS-001");
-					$("#FuelTankCapacity").val("963");
-					$("#SeatHeight").val("123");
-					$("#DryWeight").val("12345");
-					$("#FuelConsumption").val("123456");
-					$("#Tire").val("MMS-001");
-					$("#FuelType").val("MMS-001");
-					$("#HourPrice").val("12345");
-
-					$("#frontSuspension").val("MMS-001");
-					$("#rearSuspension").val("MMS-001");
-					$("#horsePower").val("200");
-					$("#rearTire").val("MMS-001");
-					$("#torque").val("MMS-001");
-					$("#frontBrake").val("MMS-001");
-					$("#rearBrake").val("MMS-001");
+					$("#frontSuspension").val("41mm倒立式前叉 120mm行程");//前懸吊
+					$("#rearSuspension").val("油壓避震 預載調較117mm");//後炫調
+					$("#horsePower").val("46.5ps/6750rpm");//馬力
+					$("#rearTire").val("160/60-15");//後輪胎
+					$("#torque").val("5.4kg-m(53Nm)/5,250rpm");//扭力
+					$("#frontBrake").val("267mm雙碟四活塞輻射卡鉗");//前煞車
+					$("#rearBrake").val("282mm單碟");//後煞車
 
 				})
 				//只新增車牌 其他隱藏
@@ -440,8 +440,10 @@
 				// 	-------------------------------------------------------------------------------
 				//新增車子詳細資訊
 				$(".submit").click(function(e) {
+					 var res = confirm("確認送出?");
+			         if(res == true){
 					e.preventDefault(); // 停止觸發submit
-					alert("upload");
+// 					alert("upload");
 					var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
 
 					$.ajax({
@@ -453,7 +455,7 @@
 						contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
 						dataType : 'text',
 						success : function(data) {
-							alert("upload sucess");
+// 							alert("");
 						}
 					})
 					var LicensePlate = $("#LicensePlate").val();//車牌
@@ -539,7 +541,10 @@
 
 						}
 					});
-
+					window.location.href="uploadmotor.html";
+			         }else{
+			        	 return;
+			         }
 				});
 
 				// ----------------------------------------------------------------------------------
