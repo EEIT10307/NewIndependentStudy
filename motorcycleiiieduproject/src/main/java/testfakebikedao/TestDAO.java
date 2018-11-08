@@ -70,7 +70,7 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-						new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+						new FileReader(new File("C:\\Users\\candylo\\Desktop\\BranchDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt 
 
 //C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt
@@ -95,13 +95,13 @@ public class TestDAO {
 
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\candylo\\Desktop\\BikeDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt 
 // C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\candylo\\Desktop\\EveryBikeInfo.txt")));
 //		/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt
 //C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
 		String line;
