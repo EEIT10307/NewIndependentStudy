@@ -318,7 +318,7 @@ public class BikeDetail implements Serializable{
 		this.rearBrake = rearBrake;
 	}
 
-
+@Column(columnDefinition="varchar(max)")
 	public String getDescription() {
 		return description;
 	}

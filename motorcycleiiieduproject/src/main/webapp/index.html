@@ -7,6 +7,10 @@
 	<link rel="stylesheet" href="css/map.css">
 	<link rel="stylesheet" href="css/timeline.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+
+	
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -223,24 +227,25 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div w3-include-html="login.html"></div>
+				
 			</div>
 		</div>
 	</div>
+
 	<br/>
 	<br/>
 	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content loadtest111">
-				<!-- <div w3-include-html="serchMotor.html"></div>  -->
+			<div class="modal-content loadtest111">	
 			</div>
+			<script>
+	        $(".loadtest111").load("serchMotor.html");
+	       </script>
 		</div>
 	</div>
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
 	
-<script>
-	$(".loadtest111").load("serchMotor.html");
-</script>
 
 </body>
 

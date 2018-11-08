@@ -108,6 +108,3 @@ $(window).on('load',function () {
     });
 
 });
-
-$(selector).attr(attributeName, value);
- $(selector).attr(attributeName, value);

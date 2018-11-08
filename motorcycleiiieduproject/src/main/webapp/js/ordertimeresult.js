@@ -19,7 +19,7 @@ $(document).ready(function () {
                     "<img class='card-img-top pic-1' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='Image/"+response[x].bikeModel+"_"+response[x].modelYear+"_001.jpg' data-holder-rendered='true'>" +
                     "<img class='card-img-top pic-2' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' style='height: 225px; width: 100%; display: block;' src='Image/"+response[x].bikeModel+"_"+response[x].modelYear+"_002.jpg' data-holder-rendered='true'></img>" +
                     "</a>" +
-                    "<a href='prodDetail.html' class='select-options checkinfro' value='" + response[x].bikeModel + "'><i class='fa fa-arrow-right'></i>查看詳情</a>" +
+                    "<a href='prodDetail.html?motorname="+response[x].bikeModel+"' class='select-options checkinfro' value='" + response[x].bikeModel + "'><i class='fa fa-arrow-right' ></i>查看詳情</a>" +
                     "</div>" +
                     "<div class='card-body product-content'>" +
                     "<div class='title'><h3 class='m-0' id='bikeModel'>" + response[x].bikeModel + "</h3><h5 id='bikeBrand'>" + response[x].bikeBrand + "</h5></div>" +
@@ -53,6 +53,10 @@ $(document).ready(function () {
             }
         }
     });
+
+   
+
+
 
 
 

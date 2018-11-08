@@ -132,7 +132,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		// select * from everbikeinfo.class where
 		// everbikeinfo.class.BranchName.branchName = 傳入店名
 		createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName").get("branchName"), checkshopname));
-		
+
 		// 查詢物件
 		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);
 		// 定義參數
@@ -264,12 +264,17 @@ public class OrderDAO implements OrderIFaceDAO {
 		List<BikeDetailToGsonHaoUse> bikeDetailToGsonList = new ArrayList<BikeDetailToGsonHaoUse>();
 
 		for (BikeDetail loop : finalBikeDetail) {
+
 			bikeDetailToGsonList.add(new BikeDetailToGsonHaoUse(loop.getIdClassBikeDetail().getBikeModel(),
 					loop.getIdClassBikeDetail().getModelYear(), loop.getBikeBrand(), loop.getEngineType(),
 					loop.getBikeType(), loop.getPlateType(), loop.getFuelTankCapacity(), loop.getSeatHeight(),
-					loop.getDryWeight(), loop.getFuelConsumption(), loop.getFrontTire(), loop.getFuelType(), loop.getABS(),
-					loop.getHourPrice(), loop.getOnSheftTime()));
+					loop.getDryWeight(), loop.getFuelConsumption(), loop.getFrontTire(), loop.getFuelType(),
+					loop.getABS(), loop.getHourPrice(), loop.getOnSheftTime(), loop.getFrontSuspension(),
+					loop.getRearSuspension(), loop.getRearTire(), loop.getHorsePower(), loop.getTorque(),
+					loop.getFrontBrake(), loop.getRearBrake(), loop.getDescription()));
+
 		}
+
 		return bikeDetailToGsonList;
 	}
 
@@ -386,8 +391,8 @@ public class OrderDAO implements OrderIFaceDAO {
 					}
 				}
 			}
-			
-			//把剩餘沒有重複的物件塞回去afterCompareAcc 準備傳回前端
+
+			// 把剩餘沒有重複的物件塞回去afterCompareAcc 準備傳回前端
 			Iterator<AcceStock> showItr = showAllAcceFromShop.iterator();
 			while (showItr.hasNext()) {
 				AcceStock word = showItr.next();
@@ -399,29 +404,27 @@ public class OrderDAO implements OrderIFaceDAO {
 			}
 			for (AcceStock loop : showAllAcceFromShop) {
 				AcceStock loopAfterCompare = new AcceStock(loop.getAcceStockSerialNum(), loop.getAcceName(),
-						loop.getBranchName(), loop.getAcceNum(),
-						loop.getAcceType(), loop.getAcceePrice());
+						loop.getBranchName(), loop.getAcceNum(), loop.getAcceType(), loop.getAcceePrice());
 				afterCompareAcc.add(loopAfterCompare);
 			}
 
 			for (AcceStock test : afterCompareAcc) {
 				System.out.println("after" + test.getAcceName() + "   " + test.getAcceNum());
 			}
-			
+
 			// 利用甲地乙還 & 乙地甲環訂單調整傳回前端的數量
 			return afterCompareAccAndABshopAndAnother(afterCompareAcc, acceUseOrderABbranch,
 					acceUseOrderFromAnotherbranch);
 		} else {
 			List<AcceStock> afterCompareAcc = new ArrayList<>();
-		
-			for( AcceStock loop:showAllAcceFromShop(customerquery.getPickupStore())) {	
+
+			for (AcceStock loop : showAllAcceFromShop(customerquery.getPickupStore())) {
 				AcceStock loopAfterCompare = new AcceStock(loop.getAcceStockSerialNum(), loop.getAcceName(),
-						loop.getBranchName(), loop.getAcceNum(),
-						loop.getAcceType(), loop.getAcceePrice());
-				afterCompareAcc.add(loopAfterCompare) ; 
+						loop.getBranchName(), loop.getAcceNum(), loop.getAcceType(), loop.getAcceePrice());
+				afterCompareAcc.add(loopAfterCompare);
 			}
-			return afterCompareAccAndABshopAndAnother(afterCompareAcc,
-					acceUseOrderABbranch, acceUseOrderFromAnotherbranch);
+			return afterCompareAccAndABshopAndAnother(afterCompareAcc, acceUseOrderABbranch,
+					acceUseOrderFromAnotherbranch);
 		}
 	}
 
@@ -608,11 +611,11 @@ public class OrderDAO implements OrderIFaceDAO {
 	public List<AcceStock> afterCompareAccAndABshopAndAnother(List<AcceStock> afterCompareAcc,
 			List<OrderList> acceUseOrderABbranch, List<OrderList> acceUseOrderFromAnotherbranch) {
 		// 首先比對甲地乙還訂單
-		for(AcceStock loopt:afterCompareAcc) {
-			System.out.println("==庫存=="+loopt.getAcceName()+"=="+loopt.getAcceNum());		
+		for (AcceStock loopt : afterCompareAcc) {
+			System.out.println("==庫存==" + loopt.getAcceName() + "==" + loopt.getAcceNum());
 		}
-System.out.println("==AB=="+acceUseOrderABbranch.toString());
-System.out.println("==Athoer=="+acceUseOrderFromAnotherbranch.toString());
+		System.out.println("==AB==" + acceUseOrderABbranch.toString());
+		System.out.println("==Athoer==" + acceUseOrderFromAnotherbranch.toString());
 //	如果甲地乙還訂單有配件 那最終回傳庫存要扣掉
 		for (OrderList abloop : acceUseOrderABbranch) {
 			if (!abloop.getAccessoriesAmount().isEmpty()) {
@@ -638,9 +641,9 @@ System.out.println("==Athoer=="+acceUseOrderFromAnotherbranch.toString());
 		}
 		// 再來比對乙地甲還訂單(在甲地的東西直接加上去就好但是要移除掉給後面的人處理)
 		Iterator<OrderList> acceUseOrderFromAnotherbranchiter = acceUseOrderFromAnotherbranch.iterator();
-		
+
 		while (acceUseOrderFromAnotherbranchiter.hasNext()) {
-			OrderList abloop = acceUseOrderFromAnotherbranchiter.next() ; 
+			OrderList abloop = acceUseOrderFromAnotherbranchiter.next();
 			if (!abloop.getAccessoriesAmount().isEmpty()) {
 				String[] aftersplit = abloop.getAccessoriesAmount().replace("{", "").replace("}", "").replace("[", "")
 						.replace("]", "").replace("\"", "").trim().split(",");
@@ -649,74 +652,72 @@ System.out.println("==Athoer=="+acceUseOrderFromAnotherbranch.toString());
 					int count = 0;
 					for (AcceStock loop : afterCompareAcc) {
 						if (listloop.split(":")[0].equals(loop.getAcceName())) {
-							afterCompareAcc.get(count).setAcceNum(afterCompareAcc.get(count).getAcceNum()
-									+ Integer.parseInt(listloop.split(":")[1]));
+							afterCompareAcc.get(count).setAcceNum(
+									afterCompareAcc.get(count).getAcceNum() + Integer.parseInt(listloop.split(":")[1]));
 							acceUseOrderFromAnotherbranchiter.remove();
 						}
 						count++;
 					}
 				}
-			}else {
+			} else {
 				acceUseOrderFromAnotherbranchiter.remove();
 			}
 		}
-		
-		//處理不在甲地的訂單（不在這邊的配件會沒有相關資訊 所以要抓出來） 
-		  //  List<String> checkAnothershopList = new ArrayList<String>();
-		    //HashSet<String> checkAnothershopSet = new HashSet<String>();
-		   if(acceUseOrderFromAnotherbranch.size() != 0 ) {
-		
-		HashMap<String, Integer> checkAnothershopMap = new HashMap<String , Integer>();
-		    //先整理一下庫存ＫＶ
-		    
-		    
-		      for(OrderList loop:acceUseOrderFromAnotherbranch) {
-		    	  String[] aftersplit = loop.getAccessoriesAmount().replace("{", "").replace("}", "").replace("[", "")
-							.replace("]", "").replace("\"", "").trim().split(","); 
-		    	    List<String> innerlist = Arrays.asList(aftersplit);
-		    	  for(  String loop2:innerlist) {
-		    		     if(checkAnothershopMap.get(loop2.split(":")[0]) == null) {
-		    		    	 checkAnothershopMap.put(loop2.split(":")[0], Integer.valueOf(loop2.split(":")[1])) ; 
-		    		     }else {
-		    		    	 checkAnothershopMap.put(loop2.split(":")[0], checkAnothershopMap.get(loop2.split(":")[0])
-		    		    			 +Integer.valueOf(loop2.split(":")[1])); 
-		    		     }
-		    	  }
-		    	  
-		      }
-		        Iterator<Entry<String, Integer>> checkmap = checkAnothershopMap.entrySet().iterator();
-		        
-		
-		        
-		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
-		CriteriaQuery<AcceStock> createQuery = buider.createQuery(AcceStock.class);
-		Root<AcceStock> fromClass = createQuery.from(AcceStock.class);
-		List<Predicate> predicatesList = new ArrayList<Predicate>();
-		while(checkmap.hasNext()) {
-      	predicatesList.add(buider.equal(fromClass.get("acceName"), checkmap.next().getKey()));
-      }
-		createQuery.select(fromClass).where(buider.and(buider.equal(fromClass.get("branchName").get("branchName"),acceUseOrderFromAnotherbranch.get(0).getPickupStore()) , 
-				buider.or(predicatesList.toArray(new Predicate[predicatesList.size()]))));
-		Query<AcceStock> queryword = factory.getCurrentSession().createQuery(createQuery);
-		List<AcceStock> list = queryword.getResultList();
-		Iterator<Entry<String, Integer>> checkmapagain = checkAnothershopMap.entrySet().iterator();
-		
-	while( checkmapagain.hasNext()) {
-		Entry<String, Integer> checkmapagainEnt = checkmapagain.next();
-		for( AcceStock loop:list) {
-			if(checkmapagainEnt.getKey().equals(loop.getAcceName())) {	
-				AcceStock loopAfterCompare = new AcceStock(loop.getAcceStockSerialNum(), loop.getAcceName(),
-						loop.getBranchName(),checkmapagainEnt.getValue() ,
-						loop.getAcceType(), loop.getAcceePrice());
-				afterCompareAcc.add(loopAfterCompare) ; 
-			}	
-		}	
-	}
-		   }
-	
-	
+
+		// 處理不在甲地的訂單（不在這邊的配件會沒有相關資訊 所以要抓出來）
+		// List<String> checkAnothershopList = new ArrayList<String>();
+		// HashSet<String> checkAnothershopSet = new HashSet<String>();
+		if (acceUseOrderFromAnotherbranch.size() != 0) {
+
+			HashMap<String, Integer> checkAnothershopMap = new HashMap<String, Integer>();
+			// 先整理一下庫存ＫＶ
+
+			for (OrderList loop : acceUseOrderFromAnotherbranch) {
+				String[] aftersplit = loop.getAccessoriesAmount().replace("{", "").replace("}", "").replace("[", "")
+						.replace("]", "").replace("\"", "").trim().split(",");
+				List<String> innerlist = Arrays.asList(aftersplit);
+				for (String loop2 : innerlist) {
+					if (checkAnothershopMap.get(loop2.split(":")[0]) == null) {
+						checkAnothershopMap.put(loop2.split(":")[0], Integer.valueOf(loop2.split(":")[1]));
+					} else {
+						checkAnothershopMap.put(loop2.split(":")[0],
+								checkAnothershopMap.get(loop2.split(":")[0]) + Integer.valueOf(loop2.split(":")[1]));
+					}
+				}
+
+			}
+			Iterator<Entry<String, Integer>> checkmap = checkAnothershopMap.entrySet().iterator();
+
+			CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+			CriteriaQuery<AcceStock> createQuery = buider.createQuery(AcceStock.class);
+			Root<AcceStock> fromClass = createQuery.from(AcceStock.class);
+			List<Predicate> predicatesList = new ArrayList<Predicate>();
+			while (checkmap.hasNext()) {
+				predicatesList.add(buider.equal(fromClass.get("acceName"), checkmap.next().getKey()));
+			}
+			createQuery.select(fromClass)
+					.where(buider.and(
+							buider.equal(fromClass.get("branchName").get("branchName"),
+									acceUseOrderFromAnotherbranch.get(0).getPickupStore()),
+							buider.or(predicatesList.toArray(new Predicate[predicatesList.size()]))));
+			Query<AcceStock> queryword = factory.getCurrentSession().createQuery(createQuery);
+			List<AcceStock> list = queryword.getResultList();
+			Iterator<Entry<String, Integer>> checkmapagain = checkAnothershopMap.entrySet().iterator();
+
+			while (checkmapagain.hasNext()) {
+				Entry<String, Integer> checkmapagainEnt = checkmapagain.next();
+				for (AcceStock loop : list) {
+					if (checkmapagainEnt.getKey().equals(loop.getAcceName())) {
+						AcceStock loopAfterCompare = new AcceStock(loop.getAcceStockSerialNum(), loop.getAcceName(),
+								loop.getBranchName(), checkmapagainEnt.getValue(), loop.getAcceType(),
+								loop.getAcceePrice());
+						afterCompareAcc.add(loopAfterCompare);
+					}
+				}
+			}
+		}
+
 		return afterCompareAcc;
 	}
 
 }
-

@@ -61,6 +61,14 @@ public class TestService {
 	
 	
 	@Transactional
+	public  void makeFakeBikeDescription() throws ParseException, NumberFormatException, IOException {
+		   @SuppressWarnings("unused")
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("makeFakeMaintenanceDetail start up  ");
+		testDAO.makeFakeBikeDescription();
+		
+	}
+	@Transactional
 public void createCriteria() {
 		
 		System.out.println("createCriteria go");
