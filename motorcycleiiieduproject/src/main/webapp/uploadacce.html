@@ -79,27 +79,20 @@
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="replymsg" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
             <span class='badge badge-danger' id='newAlert'>9+</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" id="replymsg">回覆訊息</a>
             <script type="text/javascript">
             $("#replymsg").on("click",function(){
     	  		$("#chatbox").removeClass("d-none");
     	  	});
             </script>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="orderlist.html">查詢訂單</a>
-          </div>
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw fa-lg"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-<!--             <a class="dropdown-item" href="#">帳號設定</a> -->
-<!--             <div class="dropdown-divider"></div> -->
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
           </div>
         </li>

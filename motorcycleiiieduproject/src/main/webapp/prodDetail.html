@@ -31,32 +31,33 @@
 				<aside class="col-sm-5 border-right">
 					<article class="gallery-wrap align-items-center">
 						<div class="img-big-wrap ml-3">
-							<div>
-								<a href="#"><img
+							<div id="motorpicchanged">
+								<img 
+									id="showmotorimg1"
 									src="https://moto.honda-taiwan.com.tw/Uploads/images/Motor/1000X757/2171219-cb1100rs_002H.png"
 									style='height: 420px; width: 420px; display: block; object-fit: cover;'
-									class='img-responsive'></a>
+									class='img-responsive'>
 							</div>
 						</div>
 						<!-- slider-product.// -->
 						<div class="img-small-wrap d-flex justify-content-between ml-3">
-							<div class="item-gallery">
-								<img
+							<div class="item-gallery motorpicchange" >
+								<img id="showmotorimg2"
 									src="https://moto.honda-taiwan.com.tw/Uploads/images/Motor/1000x759/%E7%B6%93%E5%85%B8CB%E7%B5%90%E5%90%88Cafe-Racer%E9%A2%A8%E6%A0%BC%E5%86%8D%E5%AE%9A%E7%BE%A9.jpg"
 									style='height: 90px; width: 90px; display: block; object-fit: cover;'>
 							</div>
-							<div class="item-gallery">
-								<img
+							<div class="item-gallery motorpicchange">
+								<img id="showmotorimg3"
 									src="https://moto.honda-taiwan.com.tw/Uploads/images/Motor/1000x759/%E5%82%B3%E7%B5%B1%E6%8C%87%E9%87%9D%E7%B5%90%E5%90%88%E9%9B%BB%E5%AD%90%E5%BC%8F%E5%84%80%E8%A1%A8.jpg"
 									style="height: 90px; width: 90px; display: block; object-fit: cover;">
 							</div>
-							<div class="item-gallery">
-								<img
+							<div class="item-gallery motorpicchange">
+								<img id="showmotorimg4"
 									src="https://moto.honda-taiwan.com.tw/Uploads/images/Motor/1000x759/%E6%B5%81%E7%B7%9A%E5%A3%93%E7%B4%8B%E5%BA%A7%E5%A2%8A%E6%9B%B4%E9%A1%AF%E7%B6%93%E5%85%B8.jpg"
 									style="height: 90px; width: 90px; display: block; object-fit: cover;">
 							</div>
-							<div class="item-gallery">
-								<img
+							<div class="item-gallery motorpicchange">
+								<img id="showmotorimg5"
 									src="https://moto.honda-taiwan.com.tw/Uploads/images/Motor/1000x759/%E5%A4%96%E5%9E%8B%E9%9B%8B%E6%B0%B8%E5%82%B3%E7%B5%B1%E5%9E%8B%E5%BC%8F%E5%9C%93%E7%87%88.jpg"
 									style="height: 90px; width: 90px; display: block; object-fit: cover;">
 							</div>
@@ -67,66 +68,51 @@
 				</aside>
 				<aside class="col-sm-7">
 					<article class="card-body px-5">
-						<h3 class="title mb-3">CB1100RS</h3>
+						<h3 class="title mb-3" id="motordetailtital">CB1100RS</h3>
 						<p class="price-detail-wrap">
 							<span class="price h3 text-warning"> <span
-								class="currency">$</span><span class="num">2000</span>
-							</span> <span>/天</span>
+								class="currency">$</span><span class="num" id="motordetailprice">2000</span>
+							</span> <span>/時</span>
 						</p>
 						<!-- price-detail-wrap .// -->
 						<dl class="item-property">
-							<dt>描述</dt>
+							<dt>訂單資訊</dt>
 							<dd>
-								<p>Here goes description consectetur adipisicing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+								PickUpDateTime:<span id="motordetailPickUpDateTime"></span><br>
+								PickUpStore:<span id="motordetailPickUpStore"></span>
+							</dd>
+							<hr>
+							<dd>
+								DropOffDateTime:<span id="motordetailDropOffDateTime"></span><br>
+								DropOffStore:<span id="motordetailDropOffStore"></span>
 							</dd>
 						</dl>
 						<dl class="param param-feature">
-							<dt>車牌</dt>
-							<dd>紅牌</dd>
+							<dt>訂單時長</dt>
+							<dd id="motordetailordertime"></dd>
+							<dt>折扣</dt>
+							<dd id="motordetailorderdiscount"></dd>
 						</dl>
 						<!-- item-property-hor .// -->
 						<dl class="param param-feature">
-							<dt>廠牌</dt>
-							<dd id="brand">Honda</dd>
+							<dt>租車金額</dt>
+							<dd id="brand" class="motordetailordertotalcount"></dd>
 						</dl>
 						<!-- item-property-hor .// -->
 						<hr>
 						<div class="row">
 							<div class="col-sm-5">
-								<dl class="param param-inline">
-									<dt>安全帽 數量:</dt>
-									<dd>
-										<select class="form-control form-control-sm"
-											style="width: 70px;">
-											<option>0</option>
-											<option>1</option>
-											<option>2</option>
-										</select>
-									</dd>
+								<dl class="param param-inline accesslist">
 								</dl>
 								<!-- item-property .// -->
 							</div>
 							<!-- col.// -->
 							<div class="col-sm-7">
 								<dl class="param param-inline">
-									<dt>重機顏色:</dt>
-									<dd>
-										<label class="form-check form-check-inline"> <input
-											class="form-check-input" type="radio"
-											name="inlineRadioOptions" id="inlineRadio2" value="option2">
-											<span class="form-check-label">白色</span>
-										</label> <label class="form-check form-check-inline"> <input
-											class="form-check-input" type="radio"
-											name="inlineRadioOptions" id="inlineRadio2" value="option2">
-											<span class="form-check-label">黑色</span>
-										</label> <label class="form-check form-check-inline"> <input
-											class="form-check-input" type="radio"
-											name="inlineRadioOptions" id="inlineRadio2" value="option2">
-											<span class="form-check-label">酒紅色</span>
-										</label>
-									</dd>
+									<dt>配件金額</dt>
+								   <dd id="accecount" class="motordetailorderaccecount">0$</dd>
+								   <dt>訂單總價試算</dt>
+								   <dd id="acceaddmotor" class="motordetailordertotalcountaddacc"></dd>
 								</dl>
 								<!-- item-property .// -->
 							</div>
@@ -134,9 +120,17 @@
 						</div>
 						<!-- row.// -->
 						<hr>
-						<a href="cart.html" class="btn btn-lg btn-primary text-uppercase">
-							直接購買 </a>
-						<!-- 			<a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> 加入購物車 </a> -->
+						<a class="btn btn-lg btn-secondary text-light text-uppercase ordergobackCheck">
+							<i class="fa fa-angle-left"></i>修改車型 </a>
+						<a class="btn btn-lg btn-primary text-light text-uppercase orderDoubleCheck">
+							Booking Now<i class="fa fa-angle-right"></i> </a>
+							
+						<!-- href="  -->
+						
+				
+					
+					
+					<!-- 			<a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> 加入購物車 </a> -->
 					</article>
 					<!-- card-body.// -->
 				</aside>
@@ -164,7 +158,7 @@
 				<div id="myTabContent" class="tab-content my-5">
 					<div class="tab-pane fade show active" role="tabpanel"
 						id="service-one">
-						<section class="container product-info">
+						<section class="container product-info" id = "motordetailorderdescription">
 							<p>CB1100系列是在「讓騎士能悠閒自在地騎乘，展現生活品味與態度」的概念下，搭載具穏定馬力輸出特性的1100cc氣冷式並列4汽缸引擎、並追求更進一步感受摩托車原本的騎乘體驗的概念下研發而成的系列車款。藉由高質感和容易操控的騎乘感，進化成為滿足騎士價值觀和擁有慾的傳統風格大型運動街車車款。</p>
 							<li>An ultra-quiet 140mm double ball-bearing fan delivers
 								great airflow at an very low noise level by varying fan speed in
@@ -199,100 +193,75 @@
 								</tr>
 								<tr>
 									<td colspan="2">型號</td>
-									<td>CB1100RS</td>
+									<td id="motordetailorderspecmodel">CB1100RS</td>
 								</tr>
 								<tr>
-									<td colspan="2">車長×車寬×車高</td>
-									<td>2,180 x 800 x 1,100 mm</td>
+									<td colspan="2">廠牌</td>
+									<td id="motordetailorderspecbrand">Yamaha</td>
 								</tr>
 								<tr>
-									<td colspan="2">油箱容量</td>
-									<td>16.8 L</td>
+									<td colspan="2">車型</td>
+									<td id="motordetailorderspecbikeType">sport</td>
 								</tr>
 								<tr>
-									<td colspan="2">軸距</td>
-									<td>1,485 mm</td>
-								</tr>
-								<tr>
-									<td colspan="2">裝備重量</td>
-									<td>252 kg</td>
-								</tr>
-								<tr>
-									<td colspan="2">前輪尺寸</td>
-									<td>120/70 ZR17 M/C (58W)</td>
-								</tr>
-								<tr>
-									<td colspan="2">後輪尺寸</td>
-									<td>180/55 ZR17 M/C (73W)</td>
+									<td colspan="2">年份</td>
+									<td id="motordetailorderspecyear">2,180 x 800 x 1,100 mm</td>
 								</tr>
 								<tr>
 									<td colspan="2">引擎型式</td>
-									<td>氣冷並列4汽缸,16汽門,DOHC</td>
+									<td id="motordetailorderspecengineType">1,485 mm</td>
 								</tr>
 								<tr>
-									<td colspan="2">內徑 x 行程</td>
-									<td>73.5 mm ╳ 67.2 mm</td>
+									<td colspan="2">油箱容量</td>
+									<td id="motordetailorderspecfuelTank">16.8 L</td>
 								</tr>
 								<tr>
-									<td colspan="2">壓縮比</td>
-									<td>9.5 : 1</td>
+									<td colspan="2">乾重</td>
+									<td id="motordetailorderspecdryWeight">252 kg</td>
 								</tr>
 								<tr>
-									<td colspan="2">排氣量</td>
-									<td>1140 c.c.</td>
+									<td colspan="2">前輪尺寸</td>
+									<td id="motordetailorderspecfronttire">120/70 ZR17 M/C (58W)</td>
 								</tr>
 								<tr>
-									<td colspan="2">供油方式</td>
-									<td>PGM-FI 電子燃油噴射</td>
+									<td colspan="2">後輪尺寸</td>
+									<td id="motordetailorderspecreartire">180/55 ZR17 M/C (73W)</td>
+								</tr>
+								<tr>
+									<td colspan="2">前懸吊</td>
+									<td id="motordetailorderspecfrontsusp">120/70 ZR17 M/C (58W)</td>
+								</tr>
+								<tr>
+									<td colspan="2">後懸吊</td>
+									<td id="motordetailorderspecrearsusp">180/55 ZR17 M/C (73W)</td>
+								</tr>
+								<tr>
+									<td colspan="2">前煞車</td>
+									<td id="motordetailorderspecfrontbrake">73.5 mm ╳ 67.2 mm</td>
+								</tr>
+								<tr>
+									<td colspan="2">後煞車</td>
+									<td id="motordetailorderspecendbrake">9.5 : 1</td>
 								</tr>
 								<tr>
 									<td colspan="2">最大馬力</td>
-									<td>88 hp / 7,500 rpm</td>
+									<td id="motordetailorderspechorsePower">1140 c.c.</td>
 								</tr>
 								<tr>
 									<td colspan="2">最大扭力</td>
-									<td>9.3 kg-m / 5,500 rpm</td>
+									<td id="motordetailorderspectorque">PGM-FI 電子燃油噴射</td>
 								</tr>
 								<tr>
-									<td colspan="2">變速型式</td>
-									<td>往復式6檔</td>
+									<td colspan="2">座高</td>
+									<td id="motordetailorderspecseatHeight">88 hp / 7,500 rpm</td>
 								</tr>
 								<tr>
-									<td colspan="2">傳動方式</td>
-									<td>鏈條</td>
+									<td colspan="2">車牌</td>
+									<td id="motordetailorderspecplateType">9.3 kg-m / 5,500 rpm</td>
 								</tr>
 								<tr>
-									<td rowspan="6">減速比</td>
-									<td class="aa">一檔</td>
-									<td>3.0833</td>
-								</tr>
-								<tr>
-									<td>二檔</td>
-									<td>1.9411</td>
-								</tr>
-								<tr>
-									<td>三檔</td>
-									<td>1.4782</td>
-								</tr>
-								<tr>
-									<td>四檔</td>
-									<td>1.2400</td>
-								</tr>
-								<tr>
-									<td>五檔</td>
-									<td>1.0740</td>
-								</tr>
-								<tr>
-									<td>六檔</td>
-									<td>0.9642</td>
-								</tr>
-								<tr>
-									<td colspan="2">前懸吊系統</td>
-									<td>43mm正立式前叉,預載可調</td>
-								</tr>
-								<tr>
-									<td colspan="2">後懸吊系統</td>
-									<td>雙槍避震器，預載可調</td>
+									<td colspan="2">油耗</td>
+									<td id="motordetailorderspecfuelConsumption">往復式6檔</td>
 								</tr>
 							</tbody>
 						</table>
@@ -453,5 +422,7 @@
 	<script>
 		$(".loadtest2222").load("review.html");
 	</script>
+
+	<script src="js/serchMotor.js"></script>
 </body>
 </html>

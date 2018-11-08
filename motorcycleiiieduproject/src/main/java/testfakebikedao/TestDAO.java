@@ -70,7 +70,7 @@ public class TestDAO {
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-						new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt")));
+						new FileReader(new File("C:\\Users\\candylo\\Desktop\\BranchDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt 
 
 //C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt
@@ -95,13 +95,13 @@ public class TestDAO {
 
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\candylo\\Desktop\\BikeDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt 
 // C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\candylo\\Desktop\\EveryBikeInfo.txt")));
 //		/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt
 //C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
 		String line;
@@ -153,7 +153,7 @@ public class TestDAO {
 				if(lines2[1].equals("木柵")) {
 					x = 2 ; 
 				}
-				System.out.println(lines2[1]+"來"+x);
+		
 				// 取得分店實體 （需要在選項內埋分店的ID)
 				BranchDetail branchDetail1 = factory.getCurrentSession().get(BranchDetail.class, x);
 				
@@ -189,6 +189,50 @@ public class TestDAO {
 		}
 		bf.close();
 	}
+	
+
+	public void makeFakeBikeDescription() throws IOException, NumberFormatException, ParseException {
+
+		BufferedReader bf = new BufferedReader(
+				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
+		String lines ="";
+		String line;
+		BikeDetail bikedetail = null;
+		int x = 0 ; 
+		
+		roop:while ((line = bf.readLine()) != null) {
+			
+			if(line.equals("=")) {
+				System.out.println("lines"+lines);
+				bikedetail.setDescription(lines);
+				factory.getCurrentSession().update(bikedetail);
+				x=0 ; 
+				lines = "";
+				continue roop;
+			}
+			
+			
+			if(x == 0 ) {
+			String[] query = line.split(",");
+		 bikedetail = factory.getCurrentSession().get(BikeDetail.class, new IdClassBikeDetail(query[0], query[1]));
+			 
+System.out.println(query[0]+query[1]);
+System.out.println(("BEAN = "+bikedetail.getIdClassBikeDetail().getBikeModel()));
+		 x++;
+			   continue roop;
+			}
+					lines += line ; 
+				
+			   
+			   
+			   
+		}
+		bf.close();
+	}
+	
+	
+
+	
 
 	public void createCriteria() {
 
