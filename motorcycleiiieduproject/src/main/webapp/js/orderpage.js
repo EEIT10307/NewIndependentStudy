@@ -154,7 +154,7 @@ $(document).ready(function () {
             }
         });
     });
-
+//=========================================================
 
     
     //秀該機車詳細資料
@@ -299,6 +299,8 @@ if(acceItemString == "{}"){
         orderdetail.payOrNot = "false"
         alert(JSON.stringify(orderdetail))
 
+
+    
         //模擬為路人
         if (orderdetail.phone == "") {
 
@@ -329,13 +331,6 @@ if(acceItemString == "{}"){
         $(".ordercart").html(
             orderstring +"<button class='sendOrder'>送出訂單</button>"
             ); 
-           
-       
-
-           
-        
-        
-
     });
 
 //送出訂單鈕

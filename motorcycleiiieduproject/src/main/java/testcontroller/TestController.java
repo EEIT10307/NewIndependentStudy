@@ -79,7 +79,18 @@ public class TestController {
 		return "OK";
 	}
 	
-	
+	//製作保養項目假資料
+	@RequestMapping(value = "/makeFakeBikeDescription", produces = "text/html; charset = UTF-8")
+	public @ResponseBody String makeFakeBikeDescription() throws IOException, ParseException {
+
+		try {
+			testService.makeFakeBikeDescription();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Fail";
+		}
+		return "OK";
+	}
 	
 
 }
