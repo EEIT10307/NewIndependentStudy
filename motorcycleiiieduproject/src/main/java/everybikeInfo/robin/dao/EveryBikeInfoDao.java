@@ -152,7 +152,7 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 		
 			everyBikeInfoToGson.add(new BikeDetailToGson(loop.getIdClassBikeDetail().getBikeModel(),loop.getIdClassBikeDetail().getModelYear()
 					,loop.getBikeBrand(),loop.getEngineType(),loop.getBikeType(),loop.getPlateType(),loop.getFuelTankCapacity(),loop.getSeatHeight()
-					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice()));
+					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice(),loop.getFrontSuspension(),loop.getRearSuspension(),loop.getRearTire(),loop.getHorsePower(),loop.getTorque(),loop.getFrontBrake(),loop.getRearBrake()));
 	
 		return everyBikeInfoToGson;
 	}

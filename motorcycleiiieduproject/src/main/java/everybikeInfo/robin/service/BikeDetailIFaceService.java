@@ -23,8 +23,10 @@ public interface BikeDetailIFaceService {
 	int updateMember(BikeReview mb);
 
 	int save(BikeDetailAndEveryBikeInfo[] bikeDetailAndEveryBikeInfo);
+	
 	int updateBikeDetai(BikeDetailToGson bikeDetailToGson);
 	int insertQA(QaBean qaBean);
-	List<QAndA> selectQA();
+	List<QAndA> selectQA(String BikeModel,String ModelYear);
 	List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA);
+	int updateQA(int qAndASerialNum,String ans,String ansquction);
 }

@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <style>
 </style>
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 	<img src="Image/ffcd6ad4debd6583e6dda9a5c26d7b8d.jpg">
@@ -17,7 +23,16 @@
 		<input type="file" name="file"	id="file" multiple="multiple" />
 		<button type="submit">上傳檔案</button>
 	</form>
-	
+	<label class="btn btn-info">
+<i class="fa fa-facebook-official"></i> 上傳圖片
+</label>
+<input id="upload_img" style="display:none;" type="file">
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+<!--   <i class="fab fa-facebook-square"></i> 上傳圖片 -->
+ <i class="fas fa-motorcycle"></i>上傳圖片
+</button>
+
 </body>
 <script>
 	$("#myForm").on('submit', (function(e) {

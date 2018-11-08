@@ -4,41 +4,137 @@
 <meta charset="UTF-8">
 <title>BikeReviewTset評價新增 Insert</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<style type="text/css">
+fieldset {
+	margin: auto;
+	width: 430px;
+}
+
+/*沒有任何色彩的黑白影像*/
+.s {
+	-webkit-filter: grayscale(1);
+}
+/*顏色不變*/
+.n {
+	-webkit-filter: grayscale(0);
+}
+ 
+.cd {
+	border: 1px solid #c0c0c0;
+}
+ body{
+        background-image: url(Image/pink.gif);
+        background-repeat:no-repeat;
+        background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+       }
+</style>
+<script type="text/javascript">
+//留我
+	// http://blog.shihshih.com/css-filter/
+	document.addEventListener("DOMContentLoaded", function() {
+		var star = document.querySelectorAll("img");
+		var stars = star.length;
+		// alert(stars);
+
+		for (var i = 0; i < stars; i++) {
+			star[i].addEventListener("mouseover", mouseOver);
+
+			star[i].addEventListener("click", click);
+		}
+
+	});
+	function mouseOver() {
+
+		for (var c = 1; c <= 5; c++)
+			document.getElementById("star" + c).className = "s";
+		var z = this.id.charAt(4);
+		for (var i = 1; i <= z; i++)
+			document.getElementById("star" + i).className = "n";
+	}
+
+	function click() {
+		var a = this.id.charAt(4);
+		document.getElementById("star").value = a;
+	
+
+	}
+</script>
+
 </head>
 <body>
 
-	訂單流水:
-	<input type="text" name="OrderSerialNum" id="OrderSerialNum" value="2018030101001">
-	<!--//訂單流水 -->
-	<br> 會員信箱 :
-	<input type="text" name="email" id="Email" value="4">
-	<!--//會員信箱 -->
-	<br> 滿意度:
-	<input type="text" name="Satisfacation" id="Satisfacation" value="2">
-	<!--//滿意度 -->
-	<br> 型號:
-	<input type="text" name="bikeModel" id="bikeModel" value="型號1">
-	<!--//型號 -->
-	<br> 評價內容:
-	<textarea id="ReviewContent" name="ReviewContent"> 好棒棒</textarea>
-	<!--//評價內容 -->
-	<br>
+	<!-- 		訂單流水: -->
+	<!-- 		<input type="text" name="OrderSerialNum" id="OrderSerialNum" value="2018030101001"> -->
+	<!-- 		//訂單流水 -->
+	<!-- 		<br> 會員信箱 : -->
+	<!-- 		<input type="text" name="email" id="Email" value="4"> -->
+	<!-- 		//會員信箱 -->
+	<div id="show"></div>
+	<table class="cd">
+	<tr><td><input type="hidden" id="star" class="Satisfacation"></td></tr>
+		<tr>
+			<td>滿意度:</td>
+			<td><img id="star1" class="s" src="Image/3N.jpg" " /> 
+				<img id="star2" class="s" src="Image/3N.jpg" /> 
+				<img id="star3" class="s" src="Image/3N.jpg" /> 
+				<img id="star4" class="s" src="Image/3N.jpg" />
+				<img id="star5" class="s" src="Image/3N.jpg" />
+				<hr></td>
+		</tr>
+		<tr>
+			<td>型號:</td>
+			<td><input type="text" name="bikeModel" id="bikeModel"
+				value="型號1"></td>
+		</tr>
+		<tr>
+			<td>評價內容:</td>
+			<td><textarea id="ReviewContent" name="ReviewContent"> 好棒棒</textarea></td>
+		</tr>
+	</table>
+
+
+
 	<input type="submit" id="button">
 
 	<script>
 
+	$(".s").click(function() {
+		$("#show").html("")
+		$("#show").append("<img  src='Image/3N.jpg'/>")
+	})
+// 	--------------------------------------------------------------------------------------------
 		$(document).ready(function() {
+			var test = document.URL;
+			var t1 = test.split("?")[1];
+
+			var t2 = t1.split("&")[0];
+			var Email = t2.split("=")[1]
+				alert(Email)//信箱
+
+			var OrderSerialNum = t1.split("=")[2];
+			// 			alert(OrderSerialNum)//訂單流水
+
+			//----------------------------------------------------------------------------------------------------------------------------------------
 			$("#button").click(function(e) {
-				var OrderSerialNum = $("#OrderSerialNum").val();
-				var Email = $("#Email").val();
-				var Satisfacation = $("#Satisfacation").val();
+				// 				var OrderSerialNum = $("#OrderSerialNum").val();
+				// 				var Email = $("#Email").val();
+				var Satisfacation = $(".Satisfacation").val();
 				var bikeModel = $("#bikeModel").val();
 				var ReviewContent = $("textarea").val();
-// 				alert("hi");
+				// 				alert("hi");
 				$.ajax({
 					type : "post",
 					url : "insert",
-					data : {"orderSerialNum":OrderSerialNum,"email":Email,"satisfacation":Satisfacation,"bikeModel":bikeModel,"reviewContent":ReviewContent},
+					data : {
+						"orderSerialNum" : OrderSerialNum,
+						"email" : Email,
+						"satisfacation" : Satisfacation,
+						"bikeModel" : bikeModel,
+						"reviewContent" : ReviewContent
+					},
 					success : function(response) {
 					}
 				});
@@ -46,5 +142,7 @@
 			});
 		});
 	</script>
+
 </body>
+
 </html>

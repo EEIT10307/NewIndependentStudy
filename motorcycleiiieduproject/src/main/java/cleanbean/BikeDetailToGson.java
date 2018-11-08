@@ -16,14 +16,19 @@ public class BikeDetailToGson {
 	private Boolean aBS;// 煞車
 	private Integer hourPrice;// 每小時價格
 	
-	public BikeDetailToGson() {}
-	
-	
-	
-	
+	private String frontSuspension ; 
+    private String rearSuspension ;
+    private String rearTire ;
+    private String horsePower ; 
+    private String torque ;
+    private String frontBrake;
+    private String rearBrake;
+    
+    
 	public BikeDetailToGson(String bikeModel, String modelYear, String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
-			String tire, String fuelType, Boolean aBS, Integer hourPrice) {
+			String tire, String fuelType, Boolean aBS, Integer hourPrice, String frontSuspension, String rearSuspension,
+			String rearTire, String horsePower, String torque, String frontBrake, String rearBrake) {
 		super();
 		this.bikeModel = bikeModel;
 		this.modelYear = modelYear;
@@ -39,7 +44,122 @@ public class BikeDetailToGson {
 		this.fuelType = fuelType;
 		this.aBS = aBS;
 		this.hourPrice = hourPrice;
+		this.frontSuspension = frontSuspension;
+		this.rearSuspension = rearSuspension;
+		this.rearTire = rearTire;
+		this.horsePower = horsePower;
+		this.torque = torque;
+		this.frontBrake = frontBrake;
+		this.rearBrake = rearBrake;
 	}
+
+
+
+
+	public String getFrontSuspension() {
+		return frontSuspension;
+	}
+
+
+
+
+	public void setFrontSuspension(String frontSuspension) {
+		this.frontSuspension = frontSuspension;
+	}
+
+
+
+
+	public String getRearSuspension() {
+		return rearSuspension;
+	}
+
+
+
+
+	public void setRearSuspension(String rearSuspension) {
+		this.rearSuspension = rearSuspension;
+	}
+
+
+
+
+	public String getRearTire() {
+		return rearTire;
+	}
+
+
+
+
+	public void setRearTire(String rearTire) {
+		this.rearTire = rearTire;
+	}
+
+
+
+
+	public String getHorsePower() {
+		return horsePower;
+	}
+
+
+
+
+	public void setHorsePower(String horsePower) {
+		this.horsePower = horsePower;
+	}
+
+
+
+
+	public String getTorque() {
+		return torque;
+	}
+
+
+
+
+	public void setTorque(String torque) {
+		this.torque = torque;
+	}
+
+
+
+
+	public String getFrontBrake() {
+		return frontBrake;
+	}
+
+
+
+
+	public void setFrontBrake(String frontBrake) {
+		this.frontBrake = frontBrake;
+	}
+
+
+
+
+	public String getRearBrake() {
+		return rearBrake;
+	}
+
+
+
+
+	public void setRearBrake(String rearBrake) {
+		this.rearBrake = rearBrake;
+	}
+
+
+
+
+	public BikeDetailToGson() {}
+	
+	
+	
+	
+	
 	public String getBikeModel() {
 		return bikeModel;
 	}

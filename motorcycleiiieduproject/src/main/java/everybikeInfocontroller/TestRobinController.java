@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -47,7 +49,6 @@ import projectbean.AcceSerialNum;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
-import projectbean.QAndA;
 
 @Controller
 public class TestRobinController {
@@ -77,7 +78,6 @@ public class TestRobinController {
 
 		SimpleDateFormat fro = new SimpleDateFormat("yyyy/MM/dd hh:mm");
 		Date now = new Date();
-		String aa = fro.format(now);
 
 		bikeReviewIFaceService.save(orderSerialNum, email, reviewContent, satisfacation, now, bikeModel);// 評價留言板新增內容
 		return "OK";
@@ -131,7 +131,12 @@ public class TestRobinController {
 
 		}
 		bikeDetailIFaceService.save(bikeDetailAndEveryBikeInfo);
+	for (BikeDetailAndEveryBikeInfo root1 : bikeDetailAndEveryBikeInfo) {
 
+
+		everyBikeInfoIFaceService.save(root1.getLicensePlate(), root1.getBranchName(), root1.getBikeModel(), root1.getModelYear());
+		everyBikeMileageIFaceService.save(root1.getLicensePlate());
+		}
 		return "";
 	}
 
@@ -241,10 +246,9 @@ public class TestRobinController {
 				String modelYear = root.getModelYear();
 				everyBikeInfoIFaceService.save(licensePlate, branchName, bikeModel, modelYear);
 				everyBikeMileageIFaceService.save(licensePlate);
-				return "OK";
 			}
 		}
-		return "Fuck";
+		return "OK";
 	}
 
 	@PostMapping(value = "/selectBikeDetial", produces = "text/html; charset = UTF-8") // 查詢機車詳細訂單
@@ -290,11 +294,17 @@ public class TestRobinController {
 	}
 
 	@PostMapping(value = "/selectQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
-	public @ResponseBody String selectQA(String yesar) throws IOException {
+	public @ResponseBody String selectQA(String bikeModel,String modelYear) throws IOException {
 		System.out.println("OK");
 	
-		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA());
+		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA(bikeModel,modelYear));
 		return gson.toJson(QQ);
+	}
+	@PostMapping(value = "/updateQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
+	public @ResponseBody String updateQA(int qAndASerialNum,String ans,String ansquction) throws IOException {
+		System.out.println(ans+"OK");
+		bikeDetailIFaceService.updateQA(qAndASerialNum, ans, ansquction);
+		return "回覆成功";
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 
@@ -302,14 +312,18 @@ public class TestRobinController {
 	public @ResponseBody String uploadmutipart(@RequestParam("file") MultipartFile[] files,
 			@RequestParam("BikeModel") String BikeModel, @RequestParam("ModelYear") String ModelYear)
 			throws IOException {
+		System.out.println(BikeModel);
+		System.out.println("FQ");
 		for (int i = 0; i < files.length; i++) {
-			System.out.println(BikeModel);
-			System.out.println(ModelYear);
+		
+//			System.out.println(BikeModel);
+//			System.out.println(ModelYear);
 			MultipartFile file = files[i];
+	
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
+						"C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
 						BikeModel + "_" + ModelYear + "_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
@@ -336,8 +350,8 @@ public class TestRobinController {
 	@PostMapping(value = "/test", produces = "text/html; charset = UTF-8") //
 	public @ResponseBody String insertAllLicensePlate(String lice) throws IOException {
 		System.out.println(lice);
-		everyBikeInfoIFaceService.checkbikeModelmodelYear("RR33", "22222");
-
+//		everyBikeInfoIFaceService.checkbikeModelmodelYear("RR33", "22222");
+		everyBikeMileageIFaceService.save("MFD-001");
 		return "OK";
 	}
 

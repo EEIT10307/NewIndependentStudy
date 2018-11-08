@@ -15,6 +15,7 @@ import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.EveryBikeInfoIFaceService;
+import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
 import projectbean.BikeDetail;
 import projectbean.BikeReview;
 import projectbean.IdClassBikeDetail;
@@ -28,6 +29,8 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 	BikeDetailIFaceService bikeDetailIFaceService;
 	@Autowired
 	EveryBikeInfoIFaceService everyBikeInfoIFaceService;
+	@Autowired
+	EveryBikeMileageIFaceService everyBikeMileageIFaceService;
 
 	@Override
 	public boolean isDup(String id) {
@@ -45,7 +48,7 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 	@Override
 	public int merge(BikeDetail bikeDetail) {
 		Session session = Factory.getCurrentSession();
-
+	
 		int updateCount = 0;
 
 		session.merge(bikeDetail);
@@ -95,7 +98,8 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 				bikeDetailToGson.getEngineType(), bikeDetailToGson.getBikeType(), bikeDetailToGson.getPlateType(),
 				bikeDetailToGson.getFuelTankCapacity(), bikeDetailToGson.getSeatHeight(),
 				bikeDetailToGson.getDryWeight(), bikeDetailToGson.getFuelConsumption(), bikeDetailToGson.getTire(),
-				bikeDetailToGson.getFuelType(), bikeDetailToGson.getaBS(), bikeDetailToGson.getHourPrice(), QQ);
+				bikeDetailToGson.getFuelType(), bikeDetailToGson.getaBS(), bikeDetailToGson.getHourPrice(), QQ,bikeDetailToGson.getFrontSuspension(),bikeDetailToGson.getRearSuspension()
+				,bikeDetailToGson.getRearTire(),bikeDetailToGson.getHorsePower(),bikeDetailToGson.getTorque(),bikeDetailToGson.getFrontBrake(),bikeDetailToGson.getRearBrake());
 
 //		BikeDetail bikeDetail=new BikeDetail(bikeDetailToGson.getBikeBrand()
 //											,bikeDetailToGson.getEngineType(),bikeDetailToGson.getBikeType()
@@ -143,7 +147,7 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 		String Questioner = qaBean.getQuestioner();
 		String QuestionCoten = qaBean.getQuestionCoten();
 		Date now = new Date();
-		IdClassBikeDetail IdClassBikeDetail = new IdClassBikeDetail("R3", "2019");
+		IdClassBikeDetail IdClassBikeDetail = new IdClassBikeDetail(BikeModel, ModelYear);
 		BikeDetail bikeDetail = new BikeDetail(IdClassBikeDetail);
 		QAndA QAndA = new QAndA(Questioner, QuestionCoten, bikeDetail, now);
 		QAndA QAndA1 = new QAndA("小明", "回答得太棒了", bikeDetail, now);
@@ -163,6 +167,19 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 		}
 		return po;
 	}
+	@Override
+	public List<QAndA> selectQAwhere(String BikeModel,String ModelYear) {
+		Session session = Factory.getCurrentSession();
+		String hql = "From QAndA where bikeModel=:bikeModel and modelYear=:modelYear";
+		IdClassBikeDetail IdClassBikeDetail = new IdClassBikeDetail(BikeModel, ModelYear);
+		BikeDetail bikeDetail = new BikeDetail(IdClassBikeDetail);
+		List<QAndA> po = session.createQuery(hql).setParameter("bikeModel", bikeDetail).setParameter("modelYear", bikeDetail).getResultList();
+		if (po.size() == 0) {
+			System.out.println("QAndA:沒東西");
+			return null;
+		}
+		return po;
+	}
 
 	@Override
 	public List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA) {
@@ -171,6 +188,7 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 		String Answer = null;
 		String Question = null;
 		for (QAndA op : QAndA) {
+			int QAndASerialNum=op.getQAndASerialNum();
 			String Questioner = op.getQuestioner();
 			String QuestionCotent = op.getQuestionCotent();
 			String BikeModel = op.getBikeDetail().getIdClassBikeDetail().getBikeModel();
@@ -192,11 +210,23 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 			}
 			String QuestionDate1 = Question;// 時間轉為文字
 			String AnswerTime1 = Answer;// 時間轉為文字
-
-			QaBeanToJson.add(new QaBeanToJson(Questioner, QuestionCotent, BikeModel, ModelYear, AdministratorID,
+			QaBeanToJson.add(new QaBeanToJson(QAndASerialNum,Questioner, QuestionCotent, BikeModel, ModelYear, AdministratorID,
 					AnswerContent, QuestionDate1, AnswerTime1));
 		}
 		return QaBeanToJson;
 	}
+
+	@Override
+	public int updateQA(int qAndASerialNum, String ans, String ansquction) {
+		int count=0;
+		Session session = Factory.getCurrentSession();
+		Date now=new Date();
+		String hql = "update QAndA set administratorID=:administratorID,answerContent=:answerContent,answerTime=:answerTime where QAndASerialNum=:QAndASerialNum";
+		 session.createQuery(hql).setParameter("administratorID", ans).setParameter("answerContent", ansquction).setParameter("answerTime", now).setParameter("QAndASerialNum", qAndASerialNum).executeUpdate();
+		count++;
+		return count;
+	}
+
+	
 
 }
