@@ -137,7 +137,7 @@
 <!-- 						</label> -->
 						<tbody class="add">
 					</tbody>
-						<tr>
+						<tr >
 							<td>照片:</td>
 							<td class="form-group ">
 							<label class="btn btn-info" style="width:355px">
@@ -146,7 +146,7 @@
 							</label>
 								 </td>
 						</tr>
-						<tr>
+					<tr>
 						<td>分店:</td>
 						<td class="form-group"><select id="BranchName"
 							class="BranchName form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td>
@@ -155,13 +155,13 @@
 						<td>型號:</td>
 						<td class="form-group"><input type="text" name="BikeModel"
 							class="BikeModel form-control form-control-sm col-lg-8 col-md-12 col-sm-12"
-							id="BikeModel" value=""></td>
+							id="BikeModel" value=""> <select id="BikeModel1" class="BikeModel1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td>
 					</tr>
 					<tr>
 						<td>年份:</td>
 						<td class="form-group"><input type="text" name="ModelYear"
 							class="ModelYear form-control form-control-sm col-lg-8 col-md-12 col-sm-12"
-							id="ModelYear" value="">只新增車牌<input
+							id="ModelYear" value=""><select id="ModelYear1" class="ModelYear1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select>只新增車牌<input
 							type="checkbox" id="checkbox" class="mx-2"></td>
 					</tr>
 
@@ -282,14 +282,16 @@
 					</tr>
 				</table>
 			</form>
-				<input type="submit" id="submit"
-					class="submit btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4"
-					value="送出"> <input type="submit" id="onesubmit"
-					class="onsubmit btn btn-secondary" value="一鍵完成">
+				<input type="submit" id="submit" 
+					class="submit btn  btn-secondary col-lg-1 offset-lg-4"
+					value="送出"> 
+					
 				<!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
-				<input type="submit" id="submit1"
-					class="submit1 btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4"
-					value="送出">
+				<input type="submit" id="submit1" style="display: inline;"
+					class="submit1 btn btn-secondary col-lg-1 offset-lg-4"
+					value="送出"
+					><input type="submit" id="onesubmit" style="display: inline;"
+					class="onsubmit btn  btn-secondary col-lg-1  " value="一鍵完成">
 
 				<!-- Sticky Footer -->
 				<footer class="sticky-footer">
@@ -356,26 +358,9 @@
 		
 		$(document).ready(function() {
 		
-			$(".onsubmit").click(function(e) {
-					e.preventDefault(); // 停止觸發submit
-					alert("upload");
-					var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
-
-					$.ajax({
-						type : "POST",
-						url : "uploadmutipart",
-						data : formData,
-						cache : false, // 不需要cache
-						processData : false, // jQuery預設會把data轉為query String, 所以要停用
-						contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
-						dataType : 'text',
-						success : function(data) {
-							alert("upload sucess");
-						}
-					})
-				})
+			
 				//一鍵完成
-				$(".onesubmit").click(function(e) {
+				$(".onsubmit").click(function(e) {
 
 					$("#LicensePlate").val("MMS-001");
 					$("#BikeModel").val("M3");
@@ -406,6 +391,9 @@
 				$("#ModelYear1").hide();
 				$("#submit1").hide();
 				$("#checkbox").click(function() {
+					$(".photo").toggle();
+					
+					$("#onesubmit").toggle();
 					$(".BikeModel").toggle();
 					$(".ModelYear").toggle();
 					$(".BikeBrand").toggle();
@@ -451,7 +439,23 @@
 				});
 				// 	-------------------------------------------------------------------------------
 				//新增車子詳細資訊
-				$("#submit").click(function(e) {
+				$(".submit").click(function(e) {
+					e.preventDefault(); // 停止觸發submit
+					alert("upload");
+					var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
+
+					$.ajax({
+						type : "POST",
+						url : "uploadmutipart",
+						data : formData,
+						cache : false, // 不需要cache
+						processData : false, // jQuery預設會把data轉為query String, 所以要停用
+						contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+						dataType : 'text',
+						success : function(data) {
+							alert("upload sucess");
+						}
+					})
 					var LicensePlate = $("#LicensePlate").val();//車牌
 					var BranchName = $("#BranchName").val();//分店
 
