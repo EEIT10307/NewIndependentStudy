@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>保養項目MaintenanceDetail新增測試</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<h1>保養項目MaintenanceDetail新增測試</h1>
+	保養項目
+	<input type="text" name="maintenanceItem" id="maintenanceItem" value="靠杯喔">
+	<!--//訂單流水 -->
+	<br> 所需到達里程:
+	<input type="text" name="requiredMileage" id="requiredMileage" value="20000">
+    <br>
+	<input type="submit" id="submitinsert" value="送出新增">
+    <script>
+		$(document).ready(function(){
+            $("#submitinsert").click(function(){
+                var maintenanceItem=$("#maintenanceItem").val();
+                var requiredMileage=$("#requiredMileage").val();
+                alert(maintenanceItem);
+                alert(requiredMileage);
+                $.ajax({
+                type:"post",
+                url:"insertNEWMaintenanceDetail",
+                data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage},
+                success : function(response) {
+                        alert("success");
+						alert(response);
+				      }
+                });
+            });
+        });
+	
+	</script>
+</body>
+</html>
