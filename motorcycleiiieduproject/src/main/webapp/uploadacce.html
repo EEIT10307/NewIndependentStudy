@@ -148,12 +148,11 @@
 						}
 					}
 				});
-			selectAcceStock
 			$.ajax({
 				type : "post",
 				url : "selectAcceStock",
 				success : function(response) {
-					// 				alert("sucess");
+									alert("sucess");
 					var shop = JSON.parse(response);
 					//迴圈
 					for (i in shop) {
