@@ -2,8 +2,9 @@ package ordercontroller;
 
 import java.io.IOException;
 import java.text.ParseException;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -42,6 +43,14 @@ public class OrderController {
 	public @ResponseBody String showAllOrderFromShop(@RequestBody BasicOrderBean customerquery)
 			throws IOException, ParseException {
 		System.out.println("網頁傳入=" + customerquery);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+		if((sdf.parse(customerquery.getDropoffDate()).getTime() - 
+				sdf.parse(customerquery.getPickupDate()).getTime()) <= 0 ) {
+	
+			return gson.toJson("error") ; 
+		}else {
+			
 		try {
 			// 此方法接收使用者入的店名 將該店所有訂單取出來
 			List<OrderList> orderbranch = tesOrderIFaceService.showAllOrderFromShop(customerquery.getPickupStore());
@@ -71,7 +80,7 @@ public class OrderController {
 			e.printStackTrace();
 			return new String("{fail:fail}");
 		}
-
+		}
 	}
 
 	// 網頁店名動態顯示
