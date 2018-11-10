@@ -9,12 +9,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import cleanbean.BasicOrderBean;
-import cleanbean.BikeDetailToGson;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.ManagerOrderCondition;
+import cleanbean.OrderListToGson;
+import cleanbean.ShowManagerChangeOrderStatus;
 import orderdao.OrderIFaceDAO;
-import orderdao.OrderListToGson;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.Discount;
@@ -106,6 +106,42 @@ public class OrderService implements OrderIFaceService {
 	public List<OrderList> showAllOrderFromAnotherShop(String shopname , String pickupdate) throws ParseException {
 		// TODO Auto-generated method stub
 		return testOrderDAO.showAllOrderFromAnotherShop(shopname , pickupdate);
+	}
+
+
+	@Override
+	public List<OrderList> showMemberAndNonMemberDetail(String showMemberAndNonMemberphnoe) {
+		
+		return testOrderDAO.showMemberAndNonMemberDetail(showMemberAndNonMemberphnoe);
+	}
+
+
+	@Override
+	public List<OrderListToGson> convertOrderListToGson(List<OrderList> customorder) throws ParseException {
+		// TODO Auto-generated method stub
+		return testOrderDAO.convertOrderListToGson(customorder);
+	}
+
+
+	@Override
+	public List<OrderList> showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) {
+		// TODO Auto-generated method stub
+		return testOrderDAO.showManagerSearchDetail(managerOrderCondition);
+	}
+
+
+	@Override
+	public List<OrderListToGson> convertOrderListToGsonWithPlate(List<OrderList> customorder) throws ParseException {
+		// TODO Auto-generated method stub
+		return testOrderDAO.convertOrderListToGsonWithPlate(customorder);
+	}
+
+
+	@Override
+	public void showManagerChangeOrderStatus(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
+		// TODO Auto-generated method stub
+		testOrderDAO.showManagerChangeOrderStatus(showManagerChangeOrderStatus) ; 
+		
 	}
 
 

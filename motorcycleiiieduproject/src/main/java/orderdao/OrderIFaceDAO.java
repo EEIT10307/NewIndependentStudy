@@ -5,6 +5,9 @@ import java.util.List;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.ManagerOrderCondition;
+import cleanbean.OrderListToGson;
+import cleanbean.ShowManagerChangeOrderStatus;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.Discount;
@@ -39,4 +42,16 @@ public interface OrderIFaceDAO {
 			BasicOrderBean customerquery , List<OrderList> orderABbranch  ,  List<OrderList> orderFromAnotherbranch) throws ParseException;
 	
 	List<AcceStock> afterCompareAccAndABshopAndAnother (List<AcceStock> afterCompareAcc , List<OrderList> acceUseOrderABbranch , List<OrderList>  acceUseOrderFromAnotherbranch) ; 
+
+	List<OrderList>    showMemberAndNonMemberDetail(String showMemberAndNonMemberphnoe);
+
+	
+	List<OrderListToGson>  convertOrderListToGson(List<OrderList>  customorder) throws ParseException;
+	
+	List<OrderListToGson>  convertOrderListToGsonWithPlate(List<OrderList>  customorder) throws ParseException;
+	
+	List<OrderList>    showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) ; 
+	
+	void   showManagerChangeOrderStatus( ShowManagerChangeOrderStatus showManagerChangeOrderStatus) ;
+
 }

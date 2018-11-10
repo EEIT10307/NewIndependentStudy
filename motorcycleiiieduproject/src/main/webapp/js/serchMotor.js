@@ -201,7 +201,7 @@ acceItemString=""
     orderdetail.pickupStore = orderjson.pickupStore
     orderdetail.dropoffStore = orderjson.dropoffStore
     orderdetail.discountName = $("#motordetailorderdiscount").text()
-    orderdetail.orderStatus = "PRE"
+    orderdetail.orderStatus = "未來訂單"
     orderdetail.is_member = "false"
     orderdetail.payOrNot = "false"
 
