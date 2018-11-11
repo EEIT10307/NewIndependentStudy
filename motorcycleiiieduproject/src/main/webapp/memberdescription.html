@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Motorcycle</title>
+<link rel="stylesheet" type="text/css" href="css/memberEdit.css">
+<link rel="stylesheet" href="css/main.css">
+<!-- <link rel="stylesheet" href="css/orderlist.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<script src="js/chat.js"></script>
+	<script src="js/effect.js"></script>
+	<script src="js/include.js"></script>
+	<script src="js/memberSearch.js"></script>
+	<script src="js/memberEdit.js"></script>
+	<script src="js/memberdescription.js"></script>
+</head>
+<body>
+	<div w3-include-html="navProd.html"></div>
+	<div class="container mx-auto" id='orderMember'>
+		<h3 class="text-center my-3">會員資料</h3>
+		<div class="input-control my-5 col-lg-6 col-md-12 col-sm-12 mx-auto">
+			
+			<div class="input-group mb-3">
+				信箱:
+				<input id="desmail" type="text" class="form-control" placeholder="請輸入信箱" aria-label="請輸入信箱" aria-describedby="basic-addon2">
+				<!-- <div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id='mailnum'>修改</button>
+							  </div> -->
+			</div>
+
+				<div class="input-group mb-3">
+					密碼:
+					<input id="despassword" type="text" class="form-control" placeholder="請輸入密碼" aria-label="請輸入密碼" aria-describedby="basic-addon2">
+				</div>
+
+				<div class="input-group mb-3">
+					姓名:
+					<input id="desname" type="text" class="form-control" placeholder="請輸入姓名" aria-label="請輸入姓名" aria-describedby="basic-addon2">
+				</div>
+
+			<div class="input-group mb-3" >
+				手機號碼:
+			  <input id="desphone" type="text" class="form-control" placeholder="請輸入手機號碼" aria-label="請輸入手機號碼" aria-describedby="basic-addon2">
+			  <!-- <div class="input-group-append">
+			    <button class="btn btn-outline-secondary" type="button" id='phonenum'>修改</button>
+			  </div> -->
+			</div>
+
+			<div class="input-group mb-3">
+					生日:
+					<input id="desbirthday" type="text" class="form-control" placeholder="請輸入生日" aria-label="請輸入生日" aria-describedby="basic-addon2">
+				</div>
+				
+
+				<div class="input-group mb-3">
+						性別:
+						<input id="desgender" type="text" class="form-control" placeholder="請輸入性別" aria-label="請輸入性別" aria-describedby="basic-addon2">
+					</div>
+					
+					<div class="input-group mb-3">
+							地址:
+							<input id="desaddress" type="text" class="form-control" placeholder="請輸入地址" aria-label="請輸入地址" aria-describedby="basic-addon2">
+						</div>
+
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button" id='change'>修改</button>
+				  </div>
+			<!-- <input type="text" class="form-control" id='searchOrd' placeholder="查詢訂單"/> -->
+		</div>
+		<table id="cart" class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th style="width: 10%">訂單編號</th>
+					<th style="width: 30%">交易明細</th>
+					<th style="width: 10%">金額</th>
+					<th style="width: 20%" class="text-center">下單時間</th>
+					<th style="width: 30%">評價內容</th>
+				</tr>
+			</thead>
+			<tbody id='allord'>
+				<tr class="item">
+					<td>
+						<p id="ordSerialNum">12345678</p>
+					</td>
+					<td>
+						<h6>取車  <span class='ml-5' id='brStore'>大安店</span><span class='ml-1' id='brTime'>2018/03/22 11:00</span></h6>
+						<h6>還車  <span class='ml-5' id='rtStore'>中壢店</span><span class='ml-1' id='rtTime'>2018/03/22 14:00</span></h6>
+						<h6 id="model">車型  <span class='ml-5'>CB1100RS</span></h6>
+                		<h6 id="accessory">配件  <span class='ml-5' id='acc'>安全帽</span><span id='accNum'>x1</span></h6>
+					</td>
+					<td id="price">$2000</td>
+					<td class="text-center">2018/03/20 13:23</td>
+					<td class="actions">
+						<p class='text-right' id='rate'>滿意度<span class='ml-5'>4</span></p>
+						<p id='reviews' style="height: 120px; overflow-y:hidden;">I think I started out at under $3 per month 5 or 6 years ago. The price has steadily increased and my latest renewal offer was $16.99 per month. Additionally last year my wife started having spam problems and it seems like someone gained access to all her email correspondence. The only place that we could pin it down to was the justhost SMTP server. Support was very evasive when I tried to explain what I thought happened.</p>
+					</td>
+				</tr>
+				<tr class="item">
+					<td>
+						<p id="ordSerialNum">22222222</p>
+					</td>
+					<td>
+						<h6>取車  <span class='ml-5' id='brStore'>高雄店</span><span class='ml-1' id='brTime'>2018/12/22 11:00</span></h6>
+						<h6>還車  <span class='ml-5' id='rtStore'>台南店</span><span class='ml-1' id='rtTime'>2018/12/25 14:00</span></h6>
+						<h6 id="model">車型  <span class='ml-5'>lalaalal</span></h6>
+                		<h6 id="accessory">配件  <span class='ml-5' id='acc'>安全帽</span><span id='accNum'>x1</span></h6>
+					</td>
+					<td id="price">$500</td>
+					<td class="text-center">2018/11/20 10:23</td>
+					<td class="actions">
+						<p class='text-right' id='rate'>滿意度<span class='ml-5'>5</span></p>
+						<p id='reviews' style="height: 120px; overflow-y:hidden;">Additionally last year my wife started having spam problems and it seems like someone gained access to all her email correspondence. The only place that we could pin it down to was the justhost SMTP server. Support was very evasive when I tried to explain what I thought happened.</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div w3-include-html="footerBackAdmin.html"></div>
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div w3-include-html="login.html"></div>
+			</div>
+		</div>
+	</div>
+	<script>includeHTML();</script>
+</body>
+</html>

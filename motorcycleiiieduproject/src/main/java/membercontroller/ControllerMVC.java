@@ -170,7 +170,23 @@ public class ControllerMVC  {
 		
 	}
 	
-	
+	@RequestMapping(value="/CheckSingleServlet"  , method = RequestMethod.POST , produces = "application/json;charset=utf-8" )
+	private @ResponseBody String checksingle(@RequestAttribute("reader")  BufferedReader reader) {	
+		System.out.println("進入CheckSingleServlet");
+		MemberDetail mem = gson.fromJson(reader, MemberDetail.class);
+		String email = mem.getEmail();
+		
+		
+		
+		 MemberDetail mb = ms.getMember(email) ; 	 		    
+		    String json = gson.toJson(mb) ; 
+		     System.out.println("json = " + json);  
+//		     factory.close();
+		     return json ; 
+		     
+		    
+		 //    ,headers = "Accept=*/*"
+	}
 	
 	@RequestMapping(value="/CheckAllServlet"  , method = RequestMethod.POST , produces = "application/json;charset=utf-8" )
 	private @ResponseBody String checkall() {	
@@ -187,6 +203,7 @@ public class ControllerMVC  {
 	@RequestMapping(value = "/ChangeServlet"  , method = RequestMethod.POST)
 	private @ResponseBody String doMVCchage( @RequestAttribute("reader")  BufferedReader reader  ) throws JsonSyntaxException, JsonIOException, IOException  {     
 		MemberDetail mem = gson.fromJson(reader, MemberDetail.class) ;
+	
          ms.updateMember(mem) ;      
 	     return "" ; 
 	}
@@ -314,7 +331,7 @@ public class ControllerMVC  {
 	}	
 	
 	
-	@RequestMapping(value = "/uploadmutipart",method = RequestMethod.POST , produces = MediaType.TEXT_PLAIN_VALUE)
+	@RequestMapping(value = "/uploadmutipartMem",method = RequestMethod.POST , produces = MediaType.TEXT_PLAIN_VALUE)
 	  public@ResponseBody String uploadmutipart(@RequestParam("file") MultipartFile[] files , @RequestParam("te") String te) throws IOException {
 	for(int i = 0  ; i<files.length ; i ++) {
 		System.out.println(te);

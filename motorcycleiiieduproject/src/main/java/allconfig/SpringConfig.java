@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.google.gson.Gson;
 
 @Configuration
-@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","memberservice","memberDaoIMP"})
+@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","everybikeInfo","testfakebikedao","memberservice","memberDaoIMP"})
 @EnableTransactionManagement
 public class SpringConfig {
 
@@ -82,8 +82,8 @@ public class SpringConfig {
 		    Gson gson = new Gson() ; 
 		   return gson ; 
 	   }
-	   
-	   
+	      
+
 	   @Bean
 	   public PlatformTransactionManager transactionManager() {		   
 		   JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

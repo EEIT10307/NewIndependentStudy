@@ -14,16 +14,18 @@ public interface MemberIdao {
 
 	List<MemberDetail> getAllMembers();
 
-	MemberDetail getMember(int pk);
+	MemberDetail getMember(String  email);
 
 	int deleteMember(MemberDetail mem);
 
-	int updateMember(MemberDetail mb);
+
 //
+	MemberDetail updateMember(MemberDetail mb);
 
 	public MemberDetail checkEmailPassword(String email, String password);
 	
 	public MemberDetail checkEmail(String email);
+
 
 
 	

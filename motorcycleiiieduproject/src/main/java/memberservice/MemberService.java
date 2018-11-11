@@ -41,7 +41,7 @@ public class MemberService {
 		return memberDaoImp.isDup(email);
 	}
 	
-	@Transactional
+//	@Transactional
 	public int save(MemberDetail mb) {
 	//	MemberDaoImp dao = new MemberDaoImp();
 		 Session session = factory.getCurrentSession() ; 
@@ -74,16 +74,14 @@ public class MemberService {
 		return memberDaoImp.deleteMember(mb);
 	}
 	
-	public MemberDetail getMember(int pk) {
+	public MemberDetail getMember(String  email) {
 	//	MemberDaoImp dao = new MemberDaoImp();
-		return memberDaoImp.getMember(pk) ; 
+		return memberDaoImp.getMember(email) ; 
 	}
 
-	public int updateMember(MemberDetail mb) {
-	//	MemberDaoImp dao = new MemberDaoImp();
-		
-		memberDaoImp.updateMember(mb) ; 
-		return 0 ; 
+	public MemberDetail updateMember(MemberDetail mb) {
+	//	MemberDaoImp dao = new MemberDaoImp();				
+		return memberDaoImp.updateMember(mb) ; 
 	}
 
 	

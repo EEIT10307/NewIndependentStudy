@@ -2,6 +2,8 @@ package projectbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class BikeDetail implements Serializable{
@@ -27,19 +30,143 @@ public class BikeDetail implements Serializable{
 	private Double seatHeight;
 	private Double dryWeight;
 	private Double fuelConsumption;
-	private String tire ; 
+	private String frontTire ; 
     private String fuelType ; 
     private Boolean aBS ; 
     private Integer hourPrice;
     private java.util.Date onSheftTime;
-
+    
+    private String frontSuspension ; //前懸吊
+    private String rearSuspension ;//後懸吊
+    private String rearTire ;//後輪胎
+    private String horsePower ; //馬力
+    private String torque ;//扭力
+    private String frontBrake;//前煞車
+    private String rearBrake;//後煞車
+    private String description;//描述
+ 
+    
     private List<EveryBikeInfo> everyBikeInfos = new ArrayList<EveryBikeInfo>();
 
  
 
+public BikeDetail() {
+		
+	}
+
+ 
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail) {
+	
+		this.idClassBikeDetail = idClassBikeDetail;
+	}
 
 
-    public void addEveryBikeInfo(EveryBikeInfo everyBikeInfo) {
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime, String frontSuspension,
+			String rearSuspension, String rearTire, String horsePower, String torque, String frontBrake,
+			String rearBrake, List<EveryBikeInfo> everyBikeInfos) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.frontTire = frontTire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.onSheftTime = onSheftTime;
+		this.frontSuspension = frontSuspension;
+		this.rearSuspension = rearSuspension;
+		this.rearTire = rearTire;
+		this.horsePower = horsePower;
+		this.torque = torque;
+		this.frontBrake = frontBrake;
+		this.rearBrake = rearBrake;
+		this.everyBikeInfos = everyBikeInfos;
+	}
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime, String frontSuspension,
+			String rearSuspension, String rearTire, String horsePower, String torque, String frontBrake,
+			String rearBrake) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.frontTire = frontTire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.onSheftTime = onSheftTime;
+		this.frontSuspension = frontSuspension;
+		this.rearSuspension = rearSuspension;
+		this.rearTire = rearTire;
+		this.horsePower = horsePower;
+		this.torque = torque;
+		this.frontBrake = frontBrake;
+		this.rearBrake = rearBrake;
+	}
+
+	
+
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.frontTire = frontTire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.onSheftTime = onSheftTime;
+	}
+
+	
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail,String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String frontTire, String fuelType, Boolean aBS, Integer hourPrice) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.frontTire = frontTire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+	
+	}
+	
+
+	
+
+
+	public void addEveryBikeInfo(EveryBikeInfo everyBikeInfo) {
     	everyBikeInfos.add(everyBikeInfo);
     	everyBikeInfo.setBikeDetail(this);
     }
@@ -128,11 +255,11 @@ public class BikeDetail implements Serializable{
 		this.fuelConsumption = fuelConsumption;
 	}
 	@Column(nullable = false)
-	public String getTire() {
-		return tire;
+	public String getFrontTire() {
+		return frontTire;
 	}
-	public void setTire(String tire) {
-		this.tire = tire;
+	public void setFrontTire(String frontTire) {
+		this.frontTire = frontTire;
 	}
 	@Column(nullable = false)
 	public String getFuelType() {
@@ -147,6 +274,7 @@ public class BikeDetail implements Serializable{
 	}
 	public void setABS(Boolean aBS) {
 		this.aBS = aBS;
+
 	}
 	@Column(nullable = false)
 	public Integer getHourPrice() {
@@ -163,5 +291,72 @@ public class BikeDetail implements Serializable{
 		this.onSheftTime = onSheftTime;
 	}
 	
+	
+	public String getFrontSuspension() {
+		return frontSuspension;
+	}
+	
+	public void setFrontSuspension(String frontSuspension) {
+		this.frontSuspension = frontSuspension;
+	}
+	
+	public String getRearSuspension() {
+		return rearSuspension;
+	}
+	
+	public void setRearSuspension(String rearSuspension) {
+		this.rearSuspension = rearSuspension;
+	}
+	
+	public String getRearTire() {
+		return rearTire;
+	}
+	
+	public void setRearTire(String rearTire) {
+		this.rearTire = rearTire;
+	}
+	
+	public String getHorsePower() {
+		return horsePower;
+	}
+	
+	public void setHorsePower(String horsePower) {
+		this.horsePower = horsePower;
+	}
+	
+	public String getTorque() {
+		return torque;
+	}
+	
+	public void setTorque(String torque) {
+		this.torque = torque;
+	}
+	
+	public String getFrontBrake() {
+		return frontBrake;
+	}
+	
+	public void setFrontBrake(String frontBrake) {
+		this.frontBrake = frontBrake;
+	}
+	
+	public String getRearBrake() {
+		return rearBrake;
+	}
+	
+	public void setRearBrake(String rearBrake) {
+		this.rearBrake = rearBrake;
+	}
+
+@Column(columnDefinition="varchar(max)")
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	
 }

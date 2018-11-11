@@ -39,7 +39,7 @@ public class MemberDaoImp implements MemberIdao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
+//	@Transactional
 	public boolean isDup(String email) {
 		Session session = factory.getCurrentSession() ; 
 	//	Session session = entityManagerFactory.unwrap(Session.class) ; 
@@ -119,7 +119,7 @@ public class MemberDaoImp implements MemberIdao {
 //		   Transaction tx = null ; 
 //		   try {
 //			  tx   =   session.beginTransaction() ; 
-			list  =   session.createQuery("FROM MemberBean").getResultList() ; 
+			list  =   session.createQuery("FROM MemberDetail").getResultList() ; 
 //			tx.commit();			  
 //			  
 //		   }catch (Exception e) {
@@ -136,26 +136,27 @@ public class MemberDaoImp implements MemberIdao {
 	}
 
 	@Override
-	public MemberDetail getMember(int pk) {
+	@Transactional
+	public MemberDetail getMember(String  email) {
 		
 		Session session = factory.getCurrentSession() ; 
 //			Session session = entityManagerFactory.unwrap(Session.class) ;
-			Transaction tx = null ;  
+//			Transaction tx = null ;  
 			MemberDetail member = null ;   		          		
-		try {
-					 tx = session.beginTransaction() ; 
-			    member = session.get(MemberDetail.class, pk) ; 
+//		try {
+//					 tx = session.beginTransaction() ; 
+			    member = session.get(MemberDetail.class, email) ; 
 			  
-			    		 tx.commit();
-		}catch (Exception e) {
-					if(tx != null) {
-					tx.rollback(); 
-				}
-			e.printStackTrace();
-		}finally {
-				session.close();
-		}
-		
+//			    		 tx.commit();
+//		}catch (Exception e) {
+//					if(tx != null) {
+//					tx.rollback(); 
+//				}
+//			e.printStackTrace();
+//		}finally {
+//				session.close();
+//		}
+//		
 		
 		
 		return member;
@@ -187,26 +188,41 @@ public class MemberDaoImp implements MemberIdao {
 	}
 
 	@Override
-	@Transactional
-	public int updateMember(MemberDetail mb) {
-		Session session = factory.getCurrentSession() ; 
-//			Session session = entityManagerFactory.unwrap(Session.class) ;
-//			Transaction tx = null ;  
+//	@Transactional
+	public MemberDetail updateMember(MemberDetail mb) {
 		
-//		try {
-//					 tx = session.beginTransaction() ; 
-			 session.update(mb); 
-//			 		 tx.commit();
-//		}catch (Exception e) {
-//					if(tx != null) {
-//						tx.rollback(); 
-//					}
-//			e.printStackTrace();
-//		}finally {
-//					session.close();
-//		}
-		
-		return 0;
+		String hql = "FROM MemberDetail m WHERE m.email = :email";
+		Session session = factory.getCurrentSession();
+		String email = mb.getEmail();
+		String password = mb.getPassword();
+		String name = mb.getName();
+		String phone = mb.getPhone();
+		Date birthday = mb.getBirthday();
+		String gender = mb.getGender();
+		String address = mb.getAddress();
+
+				try {
+			MemberDetail mem = (MemberDetail) session.createQuery(hql)
+					             .setParameter("email", email)
+					             .getSingleResult();
+				
+			mem.setPassword(password);
+			mem.setName(name);
+            mem.setPhone(phone);
+            mem.setBirthday(birthday);
+            mem.setGender(gender);
+            mem.setAddress(address);
+            
+            session.update(mem);
+
+//					String check = mb.getClass().getName(); 
+//					System.out.println("check="+check);   check=bean.MemberBean
+					//                                    mb=bean.MemberBean@5d635c4a
+				} catch(NoResultException ex) {
+					mb = null;
+				}
+				return mb;
+	
 	}
 	// 檢查使用者在登入時輸入的帳號與密碼是否正確。如果正確，傳回該帳號所對應的MemberDetail物件，
     // 否則傳回 null。

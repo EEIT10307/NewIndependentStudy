@@ -9,27 +9,24 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import membercontroller.InterceptorUse;
-
-
+import testcontroller.InterceptorUse;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","membercontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","everybikeInfocontroller","membercontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	
 //註冊interceptor使用
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
-		System.out.println("註冊interceptor");
-		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse());
-		myinter.addPathPatterns("/LoginServlet", "/CheckAllServlet", "/ChangeServlet", "/DeleteServlet",
-				"/RegisterServlet","/AutoLoginCheck");
-		WebMvcConfigurer.super.addInterceptors(registry);
-		
-		  System.out.println("註冊後");	
+		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
+
+	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate","/insertBikeDetail","/LoginServlet", "/CheckAllServlet", "/ChangeServlet", "/DeleteServlet",
+				"/RegisterServlet","/AutoLoginCheck","/ChangeServlet") ; 		   
+	WebMvcConfigurer.super.addInterceptors(registry);
+
+
 	}
 	//靜態資源使用預設servlet
 	@Override
@@ -42,4 +39,6 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    resolver.setDefaultEncoding("utf-8");
 	    return resolver;
 	}
+
+
 }

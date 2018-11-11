@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(window).on('load',function () {
     
 	// 判斷是否有cookies， 
 	// 如果有cookies，判斷cookies內是否有紀錄email
@@ -6,10 +6,14 @@ $(document).ready(function () {
 //			如果是會員的email，返回resucess.html並顯示會員eamil出來
 
 //			否則要求他登入
+
+
+
  var cookie = document.cookie; 
- 
+//  alert("cookie為"+cookie);
  //Cookie是否存在
- if(cookie != "" && cookie != null){
+//  if(cookie != "" && cookie != null){
+    if(cookie!=null||cookie!="null"||cookie!=""||typeof(cookie)!="undefined"||typeof(cookie)!=undefined||typeof(cookie)!="false"||typeof(cookie)!=false){
 
     //Cookies是否有email資訊
     if(cookie.indexOf("email")==-1){
@@ -23,7 +27,7 @@ $(document).ready(function () {
         //導向resucess.html
         var combie =  {"email":email} ;
         var json    =  JSON.stringify(combie) ; 
-        alert("json="+json)
+        alert("json="+json);
         //利用ajax將json型態的email丟到Controller的AutoLoginCheck察看是否為會員的email
         $.ajax({
              type: "post",
@@ -35,11 +39,19 @@ $(document).ready(function () {
                      alert("Cookie內的email非會員信箱或沒email資訊");
                  }else{
                        
-                     var goto = "resucess.html?name="+jsonback
-                     //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                     alert("Cookie為會員資料");
-                     window.location.assign(encodeURI(goto)) ; 
-                 }
+                    //  var goto = "index.html?name="+jsonback
+                    //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                    //  alert("Cookie為會員資料");
+                    //  window.location.assign(encodeURI(goto)) ; 
+                    //  $("#memberloginstatus").innerHTML= "Welcome"+jsonback;
+                    //因為footer和nav會同時執行login，因此會執行兩次login check，使用此方式產生一個welcome字串
+                        if($("#memberloginstatus").text() == ""){
+                     $("#memberloginstatus").append("Welcome"+"   "+jsonback);
+                     $("a#login").hide();
+                     $("a#registerNav").hide();
+                     $("a#memberlogoutstatus").append("登出");
+                    }
+                    }
              }
          
         });
@@ -49,8 +61,9 @@ $(document).ready(function () {
       alert("網頁內沒任何Cookies");
   };
     
-$("#login").click(function (e) { 
-
+//$("#login").click(function (e) { 
+  $("#loginConfirm").click(function (e) { 
+	
 var email = $("[name = 'email']").val()  ; 
 var password = $("[name = 'password']").val()  ; 
 //var phone = $("[name = 'phone']").val() ; 
@@ -85,9 +98,10 @@ $.ajax({
         		window.location.assign(encodeURI(errorpage)) ; 
         	}else{
         		
-        		var goto = "resucess.html?name="+jsonback
+        		var goto = "index.html?name="+jsonback
         		//重要！！ 轉傳時要編碼一次編成ＵＲＩ
-        		window.location.assign(encodeURI(goto)) ; 
+                window.location.assign(encodeURI(goto)) ; 
+                $("#memberloginstatus").innerHTML = "Welcome"+jsonback;
         	}
         }
   
@@ -99,74 +113,32 @@ $.ajax({
 
 
 
+
+
+
+});
+
 $("#checkall").click(function (e) { 
     e.preventDefault();
     
 });
 
-
-    
+$("#pwd").blur(function (e) { 
+    e.preventDefault();
+    chkPassword();
+  
 });
- 
-
-//FB Login Start
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1066792026823320',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v3.2'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=1066792026823320&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-   
-//FB Login End
 
 });
-document.addEventListener("DOMContentLoaded", function () {
+//document.addEventListener("DOMContentLoaded", function () {
     //	document.getElementById("email").addEventListener("blur", checkName);
-        document.getElementById("password").addEventListener("blur", chkPassword);  //事件繫結，焦點離開 ，採用W3CDOM處理程序，取得password的ID:idPwd之後，binding chkPassword
+        // document.getElementById("pwd").addEventListener("blur", chkPassword );  //事件繫結，焦點離開 ，採用W3CDOM處理程序，取得password的ID:idPwd之後，binding chkPassword
 
+  //  });
 
-	// Get the modal 
-    var modal = document.getElementById('myModal'); 
-            	 
-    // Get the button that opens the modal 
-    var btn = document.getElementById("myBtn"); 
-     
-    // Get the <span> element that closes the modal 
-    var span = document.getElementsByClassName("close")[0]; 
-     
-    // When the user clicks the button, open the modal  
-    btn.onclick = function() { 
-        modal.style.display = "block"; 
-    } 
-     
-    // When the user clicks on <span> (x), close the modal 
-    span.onclick = function() { 
-        modal.style.display = "none"; 
-    } 
-
-
-
-
-
-    });
-
-function chkPassword() {
+ function chkPassword() {
     //取得元素值
-    var pwd = document.getElementById("password").value;
+    var pwd = document.getElementById("pwd").value;
     var theResult = document.getElementById("idsp");
     //判斷元素值是否為空白，密碼長度是否大於6
     var pwdLen = pwd.length;
@@ -202,5 +174,12 @@ function chkPassword() {
     else
         // alert("Password length must greater than 6")
         theResult.innerHTML ="<i><img src='Images/error.png'>密碼必需至少六個數字</i>";
+
+
+ 
+
+        
+    
 }
     //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+   

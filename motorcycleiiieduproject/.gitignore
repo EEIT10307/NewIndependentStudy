@@ -1,6 +1,21 @@
+<<<<<<< HEAD
 /.classpath
 /.project
 /.settings/
 /target/
 /.DS_Store
 /build/
+=======
+<<<<<<< HEAD
+/target/
+/.settings/
+/.project
+/.classpath
+=======
+/.classpath
+/.project
+/.settings/
+/target/
+/.DS_Store
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git

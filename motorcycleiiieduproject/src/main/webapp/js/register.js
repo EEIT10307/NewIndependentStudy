@@ -1,7 +1,7 @@
-$(document).ready(function () {
-    
+$(window).on('load',function () {   
   
 $("#register").click(function (e) { 
+
 
 var email = $("[name = 'email']").val()  ; 
 var password = $("[name = 'password']").val()  ; 
@@ -26,37 +26,40 @@ $.ajax({
         // var jsonString = JSON.stringify(registerdata);
         // alert("jsonString為"+jsonString);
         // JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
-         var parseString  =JSON.parse(registerdata);
+//          var parseString  =JSON.parse(registerdata);
         // var jsonback = parseString.email;
-        
-            alert(parseString.email);
-           var jsonback=parseString.email;
-       alert("server傳回 = " + jsonback) ;  
-       if(jsonback=="nullpage"){
-       	var nullpage = "nullpage.html?name="+jsonback
+        // alert(registerdata.type);
+        //     alert(registerdata.email);
+        //    var jsonback=registerdata.email;
+       alert("server傳回 = " + registerdata) ;  
+       if(registerdata=="nullpage"){
+       	var nullpage = "nullpage.html?name="+registerdata
        	
        	//重要！！ 轉傳時要編碼一次編成ＵＲＩ
        	window.location.assign(encodeURI(nullpage)) ;
        }else{
        	
        	
-       	if(jsonback=="errorlogintype"){
+       	if(registerdata=="errorlogintype"){
        		
-       		var errorlogintype ="errorlogintype.html?name="+jsonback
+       		var errorlogintype ="errorlogintype.html?name="+registerdata
        		
        		window.location.assign(encodeURI(errorlogintype)) ;
        	}else{
        		
        		
-       		if(jsonback=="duplicateEmail"){
+       		if(registerdata=="duplicateEmail"){
        			
-       			var duplicateEmail = "duplicateEmail.html?name="+jsonback
+       			var duplicateEmail = "duplicateEmail.html?name="+registerdata
        			
        			//重要！！ 轉傳時要編碼一次編成ＵＲＩ
        			window.location.assign(encodeURI(duplicateEmail)) ; 
        		}else{
-       			
-       			var goto = "resucess.html?name="+jsonback
+       			// JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
+         alert("註冊資料正確，registerdata為"+registerdata);
+    
+            var mailmember =  registerdata.replace("{","").replace("}","").replace("\"").split(",")[0].split(":")[1];
+       			var goto = "resucess.html?name="+mailmember
        			//重要！！ 轉傳時要編碼一次編成ＵＲＩ
        			window.location.assign(encodeURI(goto)) ; 
        		}
@@ -84,16 +87,22 @@ $("#checkall").click(function (e) {
 });
   
 
+$("#pwd").blur(function (e) { 
+    e.preventDefault();
+    chkPassword();
+  
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    //	document.getElementById("email").addEventListener("blur", checkName);
-        document.getElementById("password").addEventListener("blur", chkPassword);  //事件繫結，焦點離開 ，採用W3CDOM處理程序，取得password的ID:idPwd之後，binding chkPassword
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+    //	document.getElementById("email").addEventListener("blur", checkName);
+        // document.getElementById("pwd").addEventListener("blur", chkPassword);  //事件繫結，焦點離開 ，採用W3CDOM處理程序，取得password的ID:idPwd之後，binding chkPassword
+// });
 
 function chkPassword() {
     //取得元素值
-    var pwd = document.getElementById("password").value;
+    var pwd = document.getElementById("pwd").value;
     var theResult = document.getElementById("idsp");
     //判斷元素值是否為空白，密碼長度是否大於6
     var pwdLen = pwd.length;
@@ -131,3 +140,6 @@ function chkPassword() {
         theResult.innerHTML ="<i><img src='Images/error.png'>密碼必需至少六個數字</i>";
 }
     //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+
+
+

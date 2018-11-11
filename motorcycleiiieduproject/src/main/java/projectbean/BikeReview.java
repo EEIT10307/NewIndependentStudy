@@ -2,6 +2,8 @@ package projectbean;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,26 @@ public class BikeReview implements Serializable{
 	private Double satisfacation ;
 	private java.util.Date reviewTime ; 
 	private String bikeModel ; 
+	
+
+	
+	public BikeReview() {
+	
+	}
+	public BikeReview(OrderList orderSerialNum, MemberDetail email, String reviewContent,
+			Double satisfacation, Date reviewTime, String bikeModel) {
+		super();
+		
+		this.orderSerialNum = orderSerialNum;
+		this.email = email;
+		this.reviewContent = reviewContent;
+		this.satisfacation = satisfacation;
+		this.reviewTime = reviewTime;
+		this.bikeModel = bikeModel;
+	}
+	
+	
+
 	
 	@Column(nullable = false)
 	public String getBikeModel() {

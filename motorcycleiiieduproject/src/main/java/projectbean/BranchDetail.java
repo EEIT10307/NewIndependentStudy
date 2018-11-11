@@ -14,17 +14,17 @@ import javax.persistence.UniqueConstraint;
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"branchName"} ) })
 public class BranchDetail implements Serializable {
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer branchSerialNum;
 	private String branchName;
-	private String branchArea ;
-	private String branchCounty ; 
-	private String branchAddress ; 
-	private String branchPhone ; 
+	private String branchArea;
+	private String branchCounty; 
+	private String branchAddress; 
+	private String branchPhone; 
+
 	private java.util.Date openingDay;
 	
 	@Id

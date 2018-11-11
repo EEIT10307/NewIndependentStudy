@@ -14,6 +14,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+import cleanbean.EveryBikeInfoToGson;
+import cleanbean.EveryBikeMileageToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 import projectbean.MaintenanceDetail;
@@ -45,20 +48,15 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		ParameterExpression<String> branchName = builder.parameter(String.class);
 		createQuery.select(fromClass).where(builder.and(builder.equal(fromClass.get("branchName").get("branchName"), branchName)
 				,builder.equal(fromClass.get("isReadyMaintenance"), true)));
-		
-		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);
-		
+		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);	
 		queryword.setParameter(branchName, shopName);
 		List<EveryBikeInfo> list = queryword.getResultList();
-
-//		for (OrderList loop : list) {
-//			System.out.println("showAllOrderFromShop ="+loop.getBikeModel()+":"+loop.getPickupDate()+"=>"+loop.getDropoffDate());
-//		}
 		return list;
+		
 
 	}
 	@Override
-	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
+	public List<EveryBikeInfoToGson> everyBikeInfoforGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
 		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson=new ArrayList<EveryBikeInfoToGson>();
 		for(EveryBikeInfo loop:finalEveryBikeInfo) {
 			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),loop.getBranchName().getBranchName(),
@@ -66,6 +64,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		}
 		return everyBikeInfoToGson;
 	}
+
 	@Override
 	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) {
 		Session session=factory.getCurrentSession();
@@ -97,5 +96,39 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		System.out.println("insertCount:"+insertCount);
 		return insertCount;
 	}
+	@Override
+	public List<EveryBikeMileage> showEveryBikeMileagebyStore(String shopName) {
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<EveryBikeMileage> createQuery = buider.createQuery(EveryBikeMileage.class);
+		Root<EveryBikeMileage> fromClass = createQuery.from(EveryBikeMileage.class);
+		ParameterExpression<String> branchName = buider.parameter(String.class);
+		createQuery.select(fromClass).where(buider.equal(fromClass.get("licensePlate").get("branchName").get("branchName"), branchName));
+		Query<EveryBikeMileage> queryword = factory.getCurrentSession().createQuery(createQuery);
+		
+		queryword.setParameter(branchName, shopName);
+		List<EveryBikeMileage> list = queryword.getResultList();
 
-}
+
+		return list;
+	}
+	
+
+
+	@Override
+	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {
+		ArrayList<EveryBikeMileageToGson> everyBikeMileageToGson=new ArrayList<EveryBikeMileageToGson>();
+		for(EveryBikeMileage loop:finalEveryBikeMileage) {
+			everyBikeMileageToGson.add(new EveryBikeMileageToGson(
+					loop.getEveryBikeMileageSerialNum(),loop.getLicensePlate().getLicensePlate(),loop.getMaintenanceItem().getMaintenanceItem(),loop.getCurrentMileage()));
+		}
+		return everyBikeMileageToGson;
+		
+		}
+	
+		
+		
+	}
+
+
+
+

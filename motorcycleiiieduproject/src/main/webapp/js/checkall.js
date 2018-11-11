@@ -3,7 +3,8 @@ $(document).ready(function () {
   alert(window.sessionStorage.myjson)
 //將網頁傳過來的資料作成ＪＳＯＮ物件
   var  json  = JSON.parse(window.sessionStorage.myjson); 
-         
+
+
 var txt = "" ; 
 //取出ＪＳＯＮ物件
 for(var x = 0 ; x< json.length ; x++) {
@@ -33,7 +34,7 @@ var moth = $(this).parent().parent() ;
 var json    =  JSON.stringify(combie) ;
   $.ajax({
     type: "post",
-    url: "http://localhost:8080/motorcycleiiieduproject/DeleteServlet",
+    url: "http://localhost:8082/homehiber/DeleteServlet",
     data: json,
     success: function (response) {
      //伺服器刪除成功後要把該元素移除掉
@@ -106,7 +107,8 @@ var combie =  {"pk":PK , "name":name , "id":id , "password":password  } ;
   var json    =  JSON.stringify(combie) ;
     $.ajax({
       type: "post",
-      url: "http://localhost:8080/motorcycleiiieduproject/ChangeServlet",
+      url: "http://localhost:8082/homehiber/ChangeServlet",
+
       data: json,
       success: function (response) {
         alert("恭喜更新成功") ; 

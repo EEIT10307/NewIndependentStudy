@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 var cookies = document.cookie; 
 
-    $("#logout").click(function () { 
+    $("a#memberlogoutstatus").click(function () { 
 		
 		//是否有Cookies存在
 		if(cookies != "" || cookies != null || cookies != "null" || typeof(cookies) != undefined || typeof(cookies) != "undefined" || typeof(cookies) != false){
@@ -27,6 +27,10 @@ var cookies = document.cookie;
 				// deleteCookies();
 				alert("cookie= "+document.cookie);
 
+				$("#memberloginstatus").hide();
+				$("a#login").show();
+				$("a#registerNav").show();
+				$("a#memberlogoutstatus").hide();
 	};
 		}else{
 			alert("沒有Cookies紀錄存在");

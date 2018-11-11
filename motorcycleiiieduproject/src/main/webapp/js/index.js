@@ -1,29 +1,29 @@
 $(document).ready(function () {
-   
+
+var rr = [{"name":1},{"name":3}]
+alert(rr[0].name + rr[1].name)    
 
 
 $("#checkall").click(function (e) { 
  
 $.ajax({
     type: "POST",
-    url: "CheckAllServlet",
-    dataType: "json",
-    contentType : "application/json",
-    success: function (response) {
-     var jsons   =  JSON.stringify(response);
-     alert("MVC傳回 = " + jsons) ; 
+    url: "http://localhost:8082/homehiber/CheckAllServlet",
 
-     sessionStorage.myjson = jsons ; 
+    success: function (response) {
+
+     alert("servert傳回 = " + response) ; 
+
+     sessionStorage.myjson = response ; 
      window.location.assign ("checkall.html");     
         
-    } , 
-    error:function(){
-        
     }
-    
-  
-    
 });
+
+
+
+
+    
 });
 
 $("#myForm").on('submit',(function(e){
@@ -67,6 +67,8 @@ $("#myForm").on('submit',(function(e){
 //	   });
 //	    
 //	}); 
+
+
 
 
 });
