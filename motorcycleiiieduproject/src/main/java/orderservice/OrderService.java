@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
@@ -142,6 +143,20 @@ public class OrderService implements OrderIFaceService {
 		// TODO Auto-generated method stub
 		testOrderDAO.showManagerChangeOrderStatus(showManagerChangeOrderStatus) ; 
 		
+	}
+
+
+	@Override
+	public void showManagerFinishedOrder(FinOrderBean finOrderBean) {
+		// TODO Auto-generated method stub
+		testOrderDAO.showManagerFinishedOrder(finOrderBean);
+	}
+
+
+	@Override
+	public void showManagerFinishedDiapatcher(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
+		// TODO Auto-generated method stub
+		testOrderDAO.showManagerFinishedDiapatcher(showManagerChangeOrderStatus) ; 
 	}
 
 

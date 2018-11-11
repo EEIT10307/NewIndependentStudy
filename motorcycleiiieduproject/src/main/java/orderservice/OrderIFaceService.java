@@ -3,10 +3,9 @@ package orderservice;
 import java.text.ParseException;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
@@ -50,6 +49,11 @@ public interface OrderIFaceService {
 	List<OrderList>    showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) ; 
 	
 	  void   showManagerChangeOrderStatus( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
+	 
+	  
+	  void   showManagerFinishedOrder(FinOrderBean finOrderBean)  ; 
+	  
+	  void   showManagerFinishedDiapatcher( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
 	
 	
 }

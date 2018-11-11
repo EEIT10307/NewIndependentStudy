@@ -5,6 +5,7 @@ import java.util.List;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
@@ -53,5 +54,9 @@ public interface OrderIFaceDAO {
 	List<OrderList>    showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) ; 
 	
 	void   showManagerChangeOrderStatus( ShowManagerChangeOrderStatus showManagerChangeOrderStatus) ;
+	
+	  void   showManagerFinishedOrder(FinOrderBean finOrderBean)  ; 
+	  
+	  void   showManagerFinishedDiapatcher( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
 
 }

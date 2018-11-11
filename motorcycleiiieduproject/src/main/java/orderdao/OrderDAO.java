@@ -28,6 +28,7 @@ import org.springframework.stereotype.Repository;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
@@ -824,6 +825,60 @@ public class OrderDAO implements OrderIFaceDAO {
 		factory.getCurrentSession().update(oldorder);	
 		
 		   
+		
+	}
+
+	@Override
+	public void showManagerFinishedOrder(FinOrderBean finOrderBean) {
+		// TODO Auto-generated method stub
+		  OrderList oldorder = factory.getCurrentSession().get(OrderList.class, finOrderBean.getOrdersernum()); 
+		//如果訂單是甲店乙還
+		  if( !oldorder.getPickupStore().equals(oldorder.getDropoffStore())) {
+			   EveryBikeInfo changebike = factory.getCurrentSession().get(EveryBikeInfo.class, oldorder.getLicensePlate().getLicensePlate());
+	
+			   //取出分店物件
+			     CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+				CriteriaQuery<BranchDetail> createQuery = buider.createQuery(BranchDetail.class);
+				Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+				createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName"), oldorder.getDropoffStore()));
+				Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery.select(fromClass));
+				BranchDetail branch = queryword.getSingleResult();
+			   changebike.setBranchName(branch);
+			   
+			   factory.getCurrentSession().update(changebike);
+		  }
+		  
+		  
+		  
+		   
+		   oldorder.setOrderStatus(finOrderBean.getOrderstatus());
+		factory.getCurrentSession().update(oldorder);	
+		
+		
+		
+	}
+
+	@Override
+	public void showManagerFinishedDiapatcher(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
+		   OrderList oldorder = factory.getCurrentSession().get(OrderList.class, showManagerChangeOrderStatus.getOrdersernum()); 
+      //如果訂單是甲店乙還
+		  if( !oldorder.getPickupStore().equals(oldorder.getDropoffStore())) {
+			   EveryBikeInfo changebike = factory.getCurrentSession().get(EveryBikeInfo.class, oldorder.getLicensePlate().getLicensePlate());
+	
+			   //取出分店物件
+			     CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+				CriteriaQuery<BranchDetail> createQuery = buider.createQuery(BranchDetail.class);
+				Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+				createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName"), oldorder.getDropoffStore()));
+				Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery.select(fromClass));
+				BranchDetail branch = queryword.getSingleResult();
+			   changebike.setBranchName(branch);
+			   
+			   factory.getCurrentSession().update(changebike);
+		  }
+		   
+		   oldorder.setOrderStatus(showManagerChangeOrderStatus.getOrderstatus());
+		factory.getCurrentSession().update(oldorder);	
 		
 	}
 

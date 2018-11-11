@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
@@ -290,7 +291,32 @@ public class OrderController {
 			}
 		}
 		
-	
+		// 管理員完成訂單
+		@PostMapping(value = "/showManagerFinishedOrder", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerFinishedOrder(@RequestBody FinOrderBean finOrderBean) throws IOException, ParseException {
+			try {
+				  System.out.println(finOrderBean.toString());
+			  tesOrderIFaceService.showManagerFinishedOrder(finOrderBean);
+				   return  null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+		
+		
+		// 管理員完成調度
+		@PostMapping(value = "/showManagerFinishedDiapatcher", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerFinishedDiapatcher(@RequestBody ShowManagerChangeOrderStatus showManagerChangeOrderStatus) throws IOException, ParseException {
+			try {
+				  System.out.println(showManagerChangeOrderStatus.toString());
+			  tesOrderIFaceService.showManagerFinishedDiapatcher(showManagerChangeOrderStatus);
+				   return  null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
 	
 	
 	
