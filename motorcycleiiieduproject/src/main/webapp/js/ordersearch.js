@@ -110,7 +110,7 @@ $("#outtableDIV").html(
                         "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
                         orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
                     }else if( response[k].orderStatus == "進行中訂單"){
-                        orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>環車完成</option>" +"</optgroup>"+"</select>"
+                        orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
                         orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                     }else if (response[k].orderStatus == "未來調度"){ 
                         orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
@@ -304,7 +304,7 @@ $("#outtableDIV").html(
                             "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
                             orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
                         }else if( response[k].orderStatus == "進行中訂單"){
-                            orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>環車完成</option>" +"</optgroup>"+"</select>"
+                            orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
                             orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                         }else if (response[k].orderStatus == "未來調度"){ 
                             orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
@@ -483,7 +483,7 @@ $(`<table class='table-responsive table-bordered table-striped' id='dataTable' w
                     "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
                     orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
                 }else if( response[k].orderStatus == "進行中訂單"){
-                    orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>環車完成</option>" +"</optgroup>"+"</select>"
+                    orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
                     orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                 }else if (response[k].orderStatus == "未來調度"){ 
                     orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
@@ -539,6 +539,33 @@ $(`<table class='table-responsive table-bordered table-striped' id='dataTable' w
             });
         }
     });
+//Alert超過里程要保養囉
+var completeLicensePlate = $(".finOrder").parent().parent().children().first().next().next().next().next().next().next().next().text();
+
+$.ajax({
+    type:"post",
+    url:"showMessageIfMileageIsOverAfterComplete",
+    contentType: "application/json; charset=utf-8",
+    data:JSON.stringify({"licensePlate":completeLicensePlate}),
+    success : function(response) {
+        var maintenanceMessage=""
+        var  json3  = JSON.parse(JSON.stringify(response)); 
+          if(json3==null){
+              alert("沒爆表");
+          }else{
+              for(i in json3){
+                  var index = +i + +1;
+                  maintenanceMessage+=(index+"."+json3[i].maintenanceItem+"<br>")
+              }
+              maintenanceMessage+="項目爆表了請盡快送保養!!!";
+              alert(maintenanceMessage)
+          }
+           
+    }
+    });
+
+
+
   }
 });
 //======================================
@@ -675,7 +702,7 @@ $("#outtableDIV").html(
                        "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
                        orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
                    }else if( response[k].orderStatus == "進行中訂單"){
-                       orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>環車完成</option>" +"</optgroup>"+"</select>"
+                       orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
                        orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                    }else if (response[k].orderStatus == "未來調度"){ 
                        orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +

@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -32,6 +31,7 @@ import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
+import maintenance.MaintenanceDAO;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
@@ -44,7 +44,9 @@ public class OrderDAO implements OrderIFaceDAO {
 
 	@Autowired
 	SessionFactory factory;
-
+	@Autowired
+	MaintenanceDAO maintenanceDAO ; 
+	
 	// 查詢該店未完成的訂單總數
 	@Override
 	public List<OrderList> showAllOrderFromShop(String shopname) {
@@ -847,6 +849,12 @@ public class OrderDAO implements OrderIFaceDAO {
 			   
 			   factory.getCurrentSession().update(changebike);
 		  }
+		  
+		  //更新機車哩程
+		  maintenanceDAO.updateBikeMileage(oldorder.getLicensePlate().getLicensePlate(), Double.valueOf(finOrderBean.getNewmileage())) ; 
+		  maintenanceDAO.showMessageIfMileageIsOverAfterComplete(oldorder.getLicensePlate().getLicensePlate()) ; 
+		  
+		  
 		  
 		  
 		  
