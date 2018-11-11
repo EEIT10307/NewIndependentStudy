@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+<<<<<<< HEAD
 	<link rel="stylesheet" href="css/progressbar.css"><!-- 	進度條用 -->
 	<style type="text/css">
 		td input, td select { margin-bottom: 1%;}
@@ -461,5 +462,256 @@
       </div>
     </div>
     
+=======
+	
+	<style type="text/css">
+		td input, td select { margin-bottom: 1%;}
+	</style>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+	<script src="js/effect.js"></script>
+	<script src="js/include.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin@5.0.2/js/sb-admin.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="replymsg" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+            <script type="text/javascript">
+            $("#replymsg").on("click",function(){
+    	  		$("#chatbox").removeClass("d-none");
+    	  	});
+            </script>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+		<!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+
+      <div id="content-wrapper">
+      	<div class="container-fluid form-group col-lg-6 offset-lg-3">
+				<h4 class="text-center">新增保養項目</h4>
+				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="靠杯喔" class="form-control">
+				<!--//訂單流水 -->
+				<br> 所需到達里程:
+				<input type="text" name="requiredMileage" id="requiredMileage" value="20000" class="form-control">
+			    <br>
+				<input type="submit" id="submitinsert" value="送出新增" class="form-control btn btn-secondary btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
+			<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+				<br/><br/><h4 class='text-center my-3'>選擇分店 查詢需保養的機車</h4>
+				<div class="from-control col-6 offset-3">查詢分店:
+				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安  
+				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌
+				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店
+				</div>
+				
+				<br/><h4 class='text-center my-3'>選擇分店 查詢正在保養的機車</h4>
+				<div class="from-control col-6 offset-3">查詢分店:
+				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安  
+				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌
+				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店
+				</div>
+				
+				<div id="resultofselectedstoretoshow"></div>
+			<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+			<!-- 	<h1>選擇分店查詢目前各車保養里程項目EveryBikeMileage</h1> -->
+			<!-- 	查詢分店: -->
+			<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安   -->
+			<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌 -->
+			<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店 -->
+			<!-- 	<div id="resultofselectedstoretoshow1"></div> -->
+			    <script>
+					$(document).ready(function(){
+			//---------------------保養項目MaintenanceDetail新增測試---------------------------
+			            $("#submitinsert").click(function(){
+			                var maintenanceItem=$("#maintenanceItem").val();
+			                var requiredMileage=$("#requiredMileage").val();
+			                alert(maintenanceItem);
+			                alert(requiredMileage);
+			                $.ajax({
+			                type:"post",
+			                url:"insertNEWMaintenanceDetail",
+			                data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage},
+			                success : function(response) {
+			                        alert("success");
+									alert(response);
+							      }
+			                });
+			            });
+			//---------------------各分店目前保養里程狀態EveryBikeMileage查詢測試---------------------------
+			            $("input[type=radio].storetoshow").click(function(){
+			            	var radioValue = $("input[type=radio].storetoshow:checked").val();
+			                if(radioValue){
+			//                     alert("選擇了" + radioValue+"店");
+			//                     var json =  ; 
+			//                        alert(json)
+			                    $.ajax({
+			                        type:"post",
+			                        url:"showAllisReadyMaintenanceBike",
+			                        contentType: "application/json; charset=utf-8",
+			                        data:JSON.stringify({"maintenanceStore":radioValue}),
+			                        success : function(response) {
+			//                                 alert("success");
+			//                                 var  json2  = JSON.stringify(response); 
+			//                                 alert("response stringify後="+json2)
+			                                var  json3  = JSON.parse(JSON.stringify(response)); 
+											var txt = "" ; 
+			                                for(var x = 0 ; x< json3.length ; x++) {
+			                                	  txt +="<tr>" ; 
+			                                	  txt += "<td>"+json3[x].licensePlate+"</td>"  ;  
+			                                	  txt += "<td>"+json3[x].totalMileage+"</td>"  ; 
+			                                	  txt += "<td>"+json3[x].isReadyMaintenance+"</td>"  ; 
+			                                	  txt += "<td><button id = 'change'>送出保養</button></td>"  ; 
+			                                	   txt += "</tr>" ; 
+			                                }
+			                                $("#resultofselectedstoretoshow").html(txt);
+			
+			        				      }
+			                        });
+			                }
+			            });
+			//---------------------各分店目前保養里程狀態EveryBikeMileage查詢測試---------------------------
+			//             $(".storetoshow1").click(function(){
+			//             	var radioValue = $(".storetoshow1:checked").val();
+			//                 if(radioValue){
+			//                     $.ajax({
+			//                         type:"post",
+			//                         url:"showEveryBikeMileagebyStore",
+			//                         contentType: "application/json; charset=utf-8",
+			//                         data:JSON.stringify({"maintenanceStore":radioValue}),
+			//                         success : function(response) {
+			//                                 alert("success");
+			//                                 var  json2  = JSON.stringify(response); 
+			//                                 alert("response stringify後="+json2)
+			//                                 var  json3  = JSON.parse(JSON.stringify(response)); 
+			// 								var txt = "" ; 
+			//                                 for(var x = 0 ; x< json3.length ; x++) {
+			//                                 	  txt +="<tr>" ; 
+			//                                 	  txt += "<td>車牌"+json3[x].licensePlate+"</td>"  ;  
+			//                                 	  txt += "<td>保養項目"+json3[x].maintenanceItem+"</td>"  ; 
+			//                                 	  txt += "<td>目前累積里程"+json3[x].currentMileage+"</td>"  ; 
+			//                                 	  txt += "<td><button id = 'change'>送出保養</button></td>"  ; 
+			//                                 	   txt += "</tr>" ; 
+			//                                 }
+			//                                 $("#resultofselectedstoretoshow1").html(txt);
+			//         				      }
+			//                         });
+			//                 }
+			//             });            
+			
+			        });
+				
+				</script>
+      	</div>
+      	<!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">確定要登出?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2">登出前<br/>請確認儲存了所有修改資料<br/>否則將會發生不可預期的錯誤!!!!</div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+            <a class="btn btn-outline-secondary" href="index.html">登出</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+	<script>includeHTML();</script>
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
   </body>
 </html>

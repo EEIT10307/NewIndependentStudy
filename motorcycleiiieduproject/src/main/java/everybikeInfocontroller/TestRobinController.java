@@ -34,7 +34,6 @@ import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
 import cleanbean.EveryBikeInfoBean;
 import cleanbean.EveryBikeInfoToGson;
-
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.service.AcceStockIFaceService;

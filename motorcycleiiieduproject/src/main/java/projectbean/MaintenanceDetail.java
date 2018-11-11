@@ -5,7 +5,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class MaintenanceDetail implements Serializable{
@@ -16,7 +20,6 @@ public class MaintenanceDetail implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String maintenanceItem ; 
 	private Double requiredMileage ;
-
 	private Double requiredHourTodo ;
 	
 	@Id

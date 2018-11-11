@@ -185,7 +185,6 @@ public class TestDAO {
 			MaintenanceDetail maintenanceDetail = new MaintenanceDetail();
 			maintenanceDetail.setMaintenanceItem(lines[0]);
 			maintenanceDetail.setRequiredMileage(Double.valueOf(lines[1]));
-			maintenanceDetail.setRequiredHourTodo(Double.valueOf(lines[2]));
 			factory.getCurrentSession().persist(maintenanceDetail);
 		}
 		bf.close();

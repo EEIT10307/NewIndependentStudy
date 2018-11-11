@@ -140,7 +140,6 @@ public BikeDetail() {
 		this.onSheftTime = onSheftTime;
 	}
 
-
 	
 	public BikeDetail(IdClassBikeDetail idClassBikeDetail,String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,

@@ -1,6 +1,5 @@
 package everybikeInfo.robin.dao;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

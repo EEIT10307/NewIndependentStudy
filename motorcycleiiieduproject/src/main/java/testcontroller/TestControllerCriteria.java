@@ -15,8 +15,6 @@ import com.google.gson.Gson;
 import cleanbean.BasicOrderBean;
 import testfakebikedao.TestService;
 
-
-
 @Controller
 public class TestControllerCriteria {
 	@Autowired

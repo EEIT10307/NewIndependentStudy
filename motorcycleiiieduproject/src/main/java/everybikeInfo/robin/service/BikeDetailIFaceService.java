@@ -4,7 +4,6 @@ import java.util.List;
 
 import cleanbean.BikeDetailAndEveryBikeInfo;
 
-
 import cleanbean.BikeDetailToGson;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
