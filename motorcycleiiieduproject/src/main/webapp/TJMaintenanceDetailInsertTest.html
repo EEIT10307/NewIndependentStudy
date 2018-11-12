@@ -3,6 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <title>保養項目MaintenanceDetail新增測試</title>
+<<<<<<< HEAD
+  <link rel="stylesheet" href="css/progressbar.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- 顯示保養資訊用 -->
+</head>
+
+<body>
+                    <div class="ckbx-style-13">
+                        <input name="ckbx-style-13" id="ckbx-style-13-1" type="checkbox" value="0">
+                        <label for="ckbx-style-13-1"></label>
+                    </div>
+<!-- //---------------------保養項目MaintenanceDetail新增測試--------------------------- -->
+	<h1>保養項目MaintenanceDetail新增測試</h1>
+	保養項目
+	<input type="text" name="maintenanceItem" id="maintenanceItem" value="TJ Lin is a fool!!">
+	<!--//訂單流水 -->
+	<br> 所需到達里程:
+	<input type="text" name="requiredMileage" id="requiredMileage" value="20000">
+		<br> 保養所需工時:
+	<input type="text" name="requiredHourTodo" id="requiredHourTodo" value="2">
+	
+    <br>
+	<input type="submit" id="submitinsert" value="送出新增">
+<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+	<br> <h1>選擇分店查詢目前各車是否該保養EveryBikeInfo</h1>
+	查詢分店:
+	<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安  
+	<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌
+	<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店
+	<div id="resultofselectedstoretoshow"></div>
+<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+	<h1>選擇分店查詢目前各車保養里程項目EveryBikeMileage</h1>
+	查詢分店:
+	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安  
+	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌
+	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店
+	<div id="resultofselectedstoretoshow1"></div>
+<!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
+	<h1>顯示目前那些車有保養項目超過規定里程</h1>
+	<input type="submit" id="showEveryMileageIsOver" value="顯示目前那些車有保養項目超過規定里程">
+	<div id="resultofeveryovermileage"></div>
+	
+<!-- 	//------------------------------------保養通知Modal--------------------------------->
+
+			<!-- Modal -->
+			<div class="modal fade" id="modal_showEveryMileageIsOver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">保養通知</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="maintenance-modal-body">
+
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+<!-- 			        <button type="button" class="btn btn-primary">已知</button> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<!-- //---------------------------------------------------------------------------- -->
+	
+	
+	
+	
+	
+	
+	
+    <script>
+		$(document).ready(function(){
+//---------------------alert目前那些車有保養項目超過規定里程---------------------------
+// 			$("#increasemileagebutton").click(function(){
+			$("#modal_showEveryMileageIsOver").modal('show');
+			
+					$("#increasemileagebutton").click(function(e){
+						$("#modal_showEveryMileageIsOver").modal('show');
+		
+					});
+				
+
+		                
+			
+			
+			
+			
+		    
+		    
+            $.ajax({
+                type:"get",
+                url:"showMessageIfMileageIsOver",
+                success : function(response) {
+                        var json3  = JSON.parse(JSON.stringify(response)); 
+						var txt = "" ; 
+                        for(var x = 0 ; x< json3.length ; x++) {
+                        	  txt += "車牌"+json3[x].licensePlate ; 
+                        	  txt += "的"+json3[x].maintenanceItem+"項目"  ; 
+                        	  txt += "目前的累積里程"+json3[x].currentMileage+"公里已超過"  ; 
+                        	  txt += "規定的"+json3[x].requiredMileage+"公里了!!<br>"  ; 
+                        }
+// 						alert(txt);
+                        $("#maintenance-modal-body").html(txt);
+                }
+				      
+                });
+//---------------------保養項目MaintenanceDetail新增測試---------------------------
+            $("#submitinsert").click(function(){
+                var maintenanceItem=$("#maintenanceItem").val();
+                var requiredMileage=$("#requiredMileage").val();
+                var requiredHourTodo=$("#requiredHourTodo").val();
+                alert(maintenanceItem);
+                alert(requiredMileage);
+                alert(requiredHourTodo);
+                $.ajax({
+                type:"post",
+                url:"insertNEWMaintenanceDetail",
+                data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
+                success : function(response) {
+                        alert("success");
+						alert(response);
+				      }
+                });
+            });
+//---------------------各分店目前保養里程狀態EveryBikeMileage查詢測試---------------------------
+            $("input[name='storetoshow']").click(function(){
+            	var radioValue = $("input[name='storetoshow']:checked").val()
+                if(radioValue){
+//                     alert("選擇了" + radioValue+"店");
+//                     var json =  ; 
+//                        alert(json)
+                    $.ajax({
+                        type:"post",
+                        url:"showAllisReadyMaintenanceBike",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify({"maintenanceStore":radioValue}),
+                        success : function(response) {
+//                                 alert("success");
+//                                 var  json2  = JSON.stringify(response); 
+//                                 alert("response stringify後="+json2)
+                                var  json3  = JSON.parse(JSON.stringify(response)); 
+								var txt = "" ; 
+                                for(var x = 0 ; x< json3.length ; x++) {
+                                	  txt +="<tr>" ; 
+                                	  txt += "<td>"+json3[x].licensePlate+"</td>"  ;  
+                                	  txt += "<td>"+json3[x].totalMileage+"</td>"  ; 
+                                	  txt += "<td>"+json3[x].isReadyMaintenance+"</td>"  ; 
+                                	  txt += "<td><button id = 'change'>送出保養</button></td>"  ; 
+                                	   txt += "</tr>" ; 
+                                }
+                                $("#resultofselectedstoretoshow").html(txt);
+
+        				      }
+                        });
+                }
+            });
+//---------------------各分店目前保養里程狀態EveryBikeMileage查詢測試---------------------------
+            $("input[name='storetoshow1']").click(function(){
+            	
+            	var radioValue = $("input[name='storetoshow1']:checked").val()
+                if(radioValue){
+                    $.ajax({
+                        type:"post",
+                        url:"showEveryBikeMileagebyStore",
+                        contentType: "application/json; charset=utf-8",
+                        data:JSON.stringify({"maintenanceStore":radioValue}),
+                        success : function(response) {
+//                                 alert("success");
+//                                 var  json2  = JSON.stringify(response); 
+//                                 alert("response stringify後="+json2)
+                                var  json3  = JSON.parse(JSON.stringify(response)); 
+								var txt = "" ; 
+                                for(var x = 0 ; x< json3.length ; x++) {
+                                    var percentage_now=json3[x].currentMileage/json3[x].requiredMileage*100;
+                                    var bar_color="blue";
+                                    if(percentage_now>=70 && percentage_now<100){
+                                    	bar_color="yellow";
+                                    }else if(percentage_now>=100){
+                                        bar_color="red";
+                                        percentage_now=100;
+                                    }
+                                    if(x>=1){
+                                        if(json3[x].licensePlate==json3[x-1].licensePlate){
+                                            txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                        }else{
+                                        	txt+="<div><h3>車牌:"+json3[x].licensePlate+"目前總里程數:"+json3[x].totalMileage+"</h3><input type='button' id='increasemileagebutton' value='點我增加總里程'>增加的里程數<input type='text' id='increasedMileagebox'><input type='button' id='confirmIncrease' value='確認送出'></div>"; 
+                                            txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                        }                     
+                                    }else{//x=0,第一個顯示的
+                                        txt+="<h3>車牌:"+json3[x].licensePlate+"目前總里程數:"+json3[x].totalMileage+"</h3>"; 
+//                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>車牌:"+json3[x].licensePlate+" 保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                            txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                    }
+                                	  
+                                }
+                                $("#resultofselectedstoretoshow1").html(txt);
+                                $('.progress-value > span').each(function(){
+                    		        $(this).prop('Counter',0).animate({
+                    		            Counter: $(this).text()
+                    		        },{
+                    		            duration: 1500,
+                    		            easing: 'swing',
+                    		            step: function (now){
+                    		                $(this).text(Math.ceil(now));
+                    		            }
+                    		        });
+                    		    });  
+                        
+                        }
+                        });
+                }
+            });            
+//---------------------顯示目前那些車有保養項目超過規定里程---------------------------
+            $("#showEveryMileageIsOver").click(function(){
+                $.ajax({
+                    type:"get",
+                    url:"showMessageIfMileageIsOver",
+                    success : function(response) {
+//                      alert("success");
+//                      var  json2  = JSON.stringify(response); 
+//                      alert("response stringify後="+json2)
+                     var  json3  = JSON.parse(JSON.stringify(response)); 
+					 var txt = "" ; 
+                     for(var x = 0 ; x< json3.length ; x++) {
+                         var percentage_now=json3[x].currentMileage/json3[x].requiredMileage*100;
+                         if(percentage_now>=100){
+                        	 percentage_now=100
+                         }
+                         
+                         if(x>=1){
+                             if(json3[x].licensePlate==json3[x-1].licensePlate){
+                                 txt += "<div class='container'><div class='row'><button id = 'sendmaintenance'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                             }else{
+                             	 txt+="<div><h3>車牌:"+json3[x].licensePlate+"目前總里程數:"+json3[x].totalMileage+"</h3>"; 
+                                 txt += "<div class='container'><div class='row'><button id = 'sendmaintenance'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                             }                     
+                         }else{//x=0,第一個顯示的																				  
+                                 txt+="<h3>車牌:"+json3[x].licensePlate+"目前總里程數:"+json3[x].totalMileage+"</h3>"; 
+                                 txt += "<div class='container'><div class='row'><button id = 'sendmaintenance'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-danger' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                         }
+                     	  
+                     }
+                     $("#resultofeveryovermileage").html(txt);
+                     $('.progress-value > span').each(function(){
+         		        $(this).prop('Counter',0).animate({
+         		            Counter: $(this).text()
+         		        },
+         		         {
+         		            duration: 1500,
+         		            easing: 'swing',
+         		            step: function (now){
+         		                $(this).text(Math.ceil(now));
+         		            }
+         		        });
+         		    });  
+    				 }
+                });
+            });     
+=======
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -108,6 +371,7 @@
 //                 }
 //             });            
 
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
         });
 	
 	</script>

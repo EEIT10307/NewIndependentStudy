@@ -1,5 +1,6 @@
 package maintenance;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
+import projectbean.MaintenanceDetail;
 
 @Service
 @Transactional
@@ -35,8 +37,8 @@ public class MaintenanceService implements MaintenanceIFaceService {
 
 
 	@Override
-	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage) {
-		return testMaintenanceDAO.insertNEWMaintenanceDetail(maintenanceItem, requiredMileage);
+	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage,Double requiredHourTodo) {
+		return testMaintenanceDAO.insertNEWMaintenanceDetail(maintenanceItem, requiredMileage,requiredHourTodo);
 	}
 
 	@Override
@@ -54,6 +56,38 @@ public class MaintenanceService implements MaintenanceIFaceService {
 		// TODO Auto-generated method stub
 		return testMaintenanceDAO.everyBikeInfoforGsonConvert(finalEveryBikeInfo);
 	}
+
+	@Override
+	public List<EveryBikeMileage> showMessageIfMileageIsOver() {
+		return testMaintenanceDAO.showMessageIfMileageIsOver();
+	}
+	@Override
+	public List<EveryBikeMileage> showMessageIfMileageIsOverAfterComplete(String licensePlate) {
+		return testMaintenanceDAO.showMessageIfMileageIsOverAfterComplete(licensePlate);
+	}
+
+	@Override
+	public String updateBikeMileage(String licensePlate,Double increasedMileage ) {
+		return testMaintenanceDAO.updateBikeMileage(licensePlate, increasedMileage);
+	}
+
+	@Override
+	public int sendMaintenance(String licensePlate) {
+		return testMaintenanceDAO.sendMaintenance(licensePlate);
+	}
+
+	@Override
+	public List<EveryBikeMileage> showBikeMaintenancingItem(String licensePlate) {
+		return testMaintenanceDAO.showBikeMaintenancingItem(licensePlate);
+	}
+
+	@Override
+	public int completeMaintenance(String licensePlate) throws ParseException {
+		return testMaintenanceDAO.completeMaintenance(licensePlate);
+	}
+
+
+
 
 
 }

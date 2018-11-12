@@ -33,6 +33,8 @@ $(window).on('load',function () {
 
     if((today.getDate())<10){
         var minDate = "0" + today.getDate() ; 
+    }else{
+        var minDate = today.getDate() ; 
     }
 
     var mindate = today.getFullYear() + "-" + minMonth + "-" + minDate;
@@ -48,6 +50,8 @@ $(window).on('load',function () {
 
     if((today.getDate())<10){
         var minfDate = "0" + futureday.getDate() ; 
+    }else{
+        var minfDate = futureday.getDate() ; 
     }
     var maxdate = futureday.getFullYear() + "-" + maxMonth + "-" + minfDate;
     $("#pDate").attr("max", maxdate);
