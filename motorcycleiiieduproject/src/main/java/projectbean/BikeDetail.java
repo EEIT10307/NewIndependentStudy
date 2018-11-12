@@ -30,7 +30,7 @@ public class BikeDetail implements Serializable{
 	private Double dryWeight;
 	private Double fuelConsumption;
 	private String frontTire ; 
-    private String fuelType ; 
+    private String fuelType ;
     private Boolean aBS ; 
     private Integer hourPrice;
     private java.util.Date onSheftTime;

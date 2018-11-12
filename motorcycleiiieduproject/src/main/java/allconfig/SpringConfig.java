@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 @EnableTransactionManagement
 public class SpringConfig {
 
-	//JNDI DataSource
+	//JNDI DataSource 
 	@Bean
 	public DataSource dataSource(){			
 		JndiObjectFactoryBean factory = new JndiObjectFactoryBean();

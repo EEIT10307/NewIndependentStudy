@@ -146,7 +146,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 	@Override
 	public List<QAndA> selectQA(String BikeModel, String ModelYear) {
 		// TODO Auto-generated method stub
-		return bikeDetailIFaceDAO.selectQA();
+		return bikeDetailIFaceDAO.selectQAwhere(BikeModel, ModelYear);
 	}
 
 	@Override

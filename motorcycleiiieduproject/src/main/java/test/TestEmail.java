@@ -49,7 +49,7 @@ public class TestEmail {
 			message.setFrom(new InternetAddress("bookwater168@gmail.com"));// 從上面打的帳號傳
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));// 傳給誰
 			message.setSubject("感謝您的下定");
-			message.setText("http://localhost:8080/motorcycleiiieduproject/RobinBikeReviewTset.html?email=1&order=2018030101001");
+			message.setText("http://localhost:8080/motorcycleiiieduproject/RobinBikeReviewTset.html?email=4&order=2018030101001");
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);

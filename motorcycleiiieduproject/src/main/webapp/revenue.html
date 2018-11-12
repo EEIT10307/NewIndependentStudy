@@ -21,45 +21,146 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 	<script src="js/chat.js"></script>
-	<script src="js/effect.js"></script>
+<!-- 	<script src="js/effect.js"></script> -->
 	<script src="js/include.js"></script>
 	
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin@5.0.2/js/sb-admin.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- 折線圖 -->
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!-- 	折線圖 -->
 	<script>
 	window.onload = function () {
-		var chart1 = new CanvasJS.Chart("chartContainer1", {
+	
+		var ppq=[];//
+		$.ajax({
+			type : "post",
+			url : "selectBranchDetail",
+			async: false,
+			success : function(response) {
+				// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {//for(頭)
+					//指定分店的欄位
+					var zx = shop[i].branchName;
+// 				{ x: new Date(2008, 0), y: 10 }, //參考用
+// 				{ x: new Date(2008, 1), y: 92.7 },
+// 				{ x: new Date(2008, 2), y: 64.9 },
+// 				{ x: new Date(2008, 3), y: 58.0 },
+// 				{ x: new Date(2008, 4), y: 63.4 },
+// 				{ x: new Date(2008, 5), y: 69.9 },
+// 				{ x: new Date(2008, 6), y: 88.9 },
+// 				{ x: new Date(2008, 7), y: 66.3 },
+// 				{ x: new Date(2008, 8), y: 82.7 },
+// 				{ x: new Date(2008, 9), y: 60.2 },
+// 				{ x: new Date(2008, 10), y: 87.3 },
+// 				{ x: new Date(2008, 11), y: 98.5 }
+					//一次查詢 一個分店月營收
+					var inside=[]
+					$.ajax({
+						type : "post",
+						url : "selecOrderTotal",
+						data:{"branchName":zx},
+						async: false,
+						success : function(response) {
+// 							alert(response)
+						var branchName = JSON.parse(response);
+// 							alert(branchName.one)
+						
+						
+						var jan={}
+						jan["x"]=new Date(2008, 0)
+						jan["y"]=branchName.one
+						var feb={}
+						feb["x"]=new Date(2008, 1)
+						feb["y"]=branchName.two
+						var mar={}
+						mar["x"]=new Date(2008, 2)
+						mar["y"]=branchName.three
+						var apr={}
+						apr["x"]=new Date(2008, 3)
+						apr["y"]=branchName.four
+						var may={}
+						may["x"]=new Date(2008, 4)
+						may["y"]=branchName.five
+						var jun={}
+						jun["x"]=new Date(2008, 5)
+						jun["y"]=branchName.six
+						var jul={}
+						jul["x"]=new Date(2008, 6)
+						jul["y"]=branchName.seven
+						var agu={}
+						agu["x"]=new Date(2008, 7)
+						agu["y"]=branchName.eight
+						var sep={}
+						sep["x"]=new Date(2008, 8)
+						sep["y"]=branchName.nine
+						var oct={}
+						oct["x"]=new Date(2008, 9)
+						oct["y"]=branchName.ten
+						var nov={}
+						nov["x"]=new Date(2008, 10)
+						nov["y"]=branchName.eleven
+						var dec={}
+						dec["x"]=new Date(2008, 11)
+						dec["y"]=branchName.twelve
+					
+						inside.push(jan)
+						inside.push(feb)
+						inside.push(mar)
+						inside.push(apr)
+						inside.push(may)
+						inside.push(jun)
+						inside.push(jul)
+						inside.push(agu)
+						inside.push(sep)
+						inside.push(oct)
+						inside.push(nov)
+						inside.push(dec)
+						
+				
+							}
+						})
+// 		-----------------------------------------------------------------------		"#369EAD"
+					var cd="#369EAD"
+					if(zx=='迴龍'){
+						cd="#7F6084"
+					}
+					if(zx=='木柵'){
+						cd='#C24642'
+					}
+					if(zx=='大安'){
+						cd='#2200AA'
+					}
+							var testshop={}
+					testshop["type"]="line"
+					testshop["name"]=zx
+					testshop["color"]=cd
+					testshop["showInLegend"]=true
+					testshop["axisYIndex"]=1
+					testshop["dataPoints"]=inside
+					
+						ppq.push(testshop)//最後推出去
+				}//for尾巴
+				
+				
+				
+			}
+		});
+		
+		
+		var chart1 = new CanvasJS.Chart("chartContainer1", {//上面的流線圖
 		//↓　valueFormatString　是控制只顯示月
 		axisX:{valueFormatString: "MMM"},
 		axisY:[{
-			title: "南崁店",
+			title: "",
 			lineColor: "#C24642",
 			tickColor: "#C24642",
 			labelFontFamily: "微軟正黑體",
 			labelFontColor: "#C24642",
 			titleFontColor: "#C24642",
 			suffix: "k"
-		},
-		{
-			title: "中壢店",
-			lineColor: "#369EAD",
-			tickColor: "#369EAD",
-			labelFontFamily: "微軟正黑體",
-			labelFontColor: "#369EAD",
-			titleFontColor: "#369EAD",
-			suffix: "k"
 		}],
-		axisY2: {
-			title: "大安店",
-			lineColor: "#7F6084",
-			tickColor: "#7F6084",
-			labelFontFamily: "微軟正黑體",
-			labelFontColor: "#7F6084",
-			titleFontColor: "#7F6084",
-			prefix: "$",
-			suffix: "k"
-		},
 		toolTip: {
 			shared: true
 		},
@@ -68,87 +169,123 @@
 			cursor: "pointer",
 			itemclick: toggleDataSeries
 		},
-		data: [{
-			type: "line",
-			name: "南崁店",
-			color: "#369EAD",
-			showInLegend: true,
-			axisYIndex: 1,
-			dataPoints: [
-				{ x: new Date(2008, 0), y: 85.4 }, 
-				{ x: new Date(2008, 1), y: 92.7 },
-				{ x: new Date(2008, 2), y: 64.9 },
-				{ x: new Date(2008, 3), y: 58.0 },
-				{ x: new Date(2008, 4), y: 63.4 },
-				{ x: new Date(2008, 5), y: 69.9 },
-				{ x: new Date(2008, 6), y: 88.9 },
-				{ x: new Date(2008, 7), y: 66.3 },
-				{ x: new Date(2008, 8), y: 82.7 },
-				{ x: new Date(2008, 9), y: 60.2 },
-				{ x: new Date(2008, 10), y: 87.3 },
-				{ x: new Date(2008, 11), y: 98.5 }
-			]
-		},
-		{
-			type: "line",
-			name: "中壢店",
-			color: "#C24642",
-			axisYIndex: 0,
-			showInLegend: true,
-			dataPoints: [
-				{ x: new Date(2008, 0), y: 32.3 }, 
-				{ x: new Date(2008, 1), y: 33.9 },
-				{ x: new Date(2008, 2), y: 26.0 },
-				{ x: new Date(2008, 3), y: 15.8 },
-				{ x: new Date(2008, 4), y: 18.6 },
-				{ x: new Date(2008, 5), y: 34.6 },
-				{ x: new Date(2008, 6), y: 37.7 },
-				{ x: new Date(2008, 7), y: 24.7 },
-				{ x: new Date(2008, 8), y: 35.9 },
-				{ x: new Date(2008, 9), y: 12.8 },
-				{ x: new Date(2008, 10), y: 38.1 },
-				{ x: new Date(2008, 11), y: 42.4 }
-			]
-		},
-		{
-			type: "line",
-			name: "大安店",
-			color: "#7F6084",
-			axisYType: "secondary",
-			showInLegend: true,
-			dataPoints: [
-				{ x: new Date(2008, 0), y: 42.5 }, 
-				{ x: new Date(2008, 1), y: 44.3 },
-				{ x: new Date(2008, 2), y: 28.7 },
-				{ x: new Date(2008, 3), y: 22.5 },
-				{ x: new Date(2008, 4), y: 25.6 },
-				{ x: new Date(2008, 5), y: 45.7 },
-				{ x: new Date(2008, 6), y: 54.6 },
-				{ x: new Date(2008, 7), y: 32.0 },
-				{ x: new Date(2008, 8), y: 43.9 },
-				{ x: new Date(2008, 9), y: 26.4 },
-				{ x: new Date(2008, 10), y: 40.3 },
-				{ x: new Date(2008, 11), y: 54.2 }
-			]
-		}]
+		data: ppq//讀取的地點
 	});
 	chart1.render();
-	
-	
-	
+// ----------------------------------------------------------------------------------	
+		var second=[]
+		$.ajax({
+			type : "post",
+			url : "selectBranchDetail",
+			async: false,
+			success : function(response) {
+				// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {//for(頭)
+					//指定分店的欄位
+					var zx = shop[i].branchName;
+// 					{ x: new Date(2009,0), y: 64.9 },//參考用
+// 					{ x: new Date(2010,0), y: 58.0 },
+// 					{ x: new Date(2011,0), y: 63.4 },
+// 					{ x: new Date(2012,0), y: 69.9 },
+// 					{ x: new Date(2013,0), y: 88.9 },
+// 					{ x: new Date(2014,0), y: 66.3 },
+// 					{ x: new Date(2015,0), y: 82.7 },
+// 					{ x: new Date(2016,0), y: 60.2 },
+// 					{ x: new Date(2017,0), y: 87.3 },
+// 					{ x: new Date(2018,0), y: 98.5 }
+					//一次查詢 一個分店月營收
+					var inside=[]
+					$.ajax({
+						type : "post",
+						url : "selecOrderTotalYear",
+						data:{"branchName":zx},
+						async: false,
+						success : function(response) {
+// 							alert(response)
+						var branchName = JSON.parse(response);
+// 							alert(branchName.one)
+						
+						
+						var jan={}
+						jan["x"]=new Date(2009, 0)
+						jan["y"]=branchName.one
+						var feb={}
+						feb["x"]=new Date(2010, 1)
+						feb["y"]=branchName.two
+						var mar={}
+						mar["x"]=new Date(2011, 2)
+						mar["y"]=branchName.three
+						var apr={}
+						apr["x"]=new Date(2012, 3)
+						apr["y"]=branchName.four
+						var may={}
+						may["x"]=new Date(2013, 4)
+						may["y"]=branchName.five
+						var jun={}
+						jun["x"]=new Date(2014, 5)
+						jun["y"]=branchName.six
+						var jul={}
+						jul["x"]=new Date(2015, 6)
+						jul["y"]=branchName.seven
+						var agu={}
+						agu["x"]=new Date(2016, 7)
+						agu["y"]=branchName.eight
+						var sep={}
+						sep["x"]=new Date(2017, 8)
+						sep["y"]=branchName.nine
+// 						var oct={}
+// 						oct["x"]=new Date(2018, 9)
+// 						oct["y"]=branchName.ten
+					
+					
+						inside.push(jan)
+						inside.push(feb)
+						inside.push(mar)
+						inside.push(apr)
+						inside.push(may)
+						inside.push(jun)
+						inside.push(jul)
+						inside.push(agu)
+						inside.push(sep)
+// 						inside.push(oct)
+
+						
+				
+							}
+						})
+// 		-----------------------------------------------------------------------		"#369EAD"
+						var cd="#369EAD"
+							if(zx=='迴龍'){
+								cd="#7F6084"
+							}
+							if(zx=='木柵'){
+								cd='#C24642'
+							}
+							if(zx=='大安'){
+								cd='#2200AA'
+							}
+					var secondshop={}
+					secondshop["type"]="line"
+					secondshop["name"]=zx
+					secondshop["color"]=cd
+					secondshop["showInLegend"]=true
+					secondshop["axisYIndex"]=1
+					secondshop["dataPoints"]=inside
+					
+					second.push(secondshop)//最後推出去
+				}//for尾巴
+				
+				
+				
+			}
+		});
 	
 		var chart2 = new CanvasJS.Chart("chartContainer2", {
-		axisY:[{
-			title: "南崁店",
-			lineColor: "#C24642",
-			tickColor: "#C24642",
-			labelFontFamily: "微軟正黑體",
-			labelFontColor: "#C24642",
-			titleFontColor: "#C24642",
-			suffix: "k"
-		},
+		axisY:[
 		{
-			title: "中壢店",
+			title: "",
 			lineColor: "#369EAD",
 			tickColor: "#369EAD",
 			labelFontFamily: "微軟正黑體",
@@ -156,16 +293,6 @@
 			titleFontColor: "#369EAD",
 			suffix: "k"
 		}],
-		axisY2: {
-			title: "大安店",
-			lineColor: "#7F6084",
-			tickColor: "#7F6084",
-			labelFontFamily: "微軟正黑體",
-			labelFontColor: "#7F6084",
-			titleFontColor: "#7F6084",
-			prefix: "$",
-			suffix: "k"
-		},
 		toolTip: {
 			shared: true
 		},
@@ -174,69 +301,7 @@
 			cursor: "pointer",
 			itemclick: toggleDataSeries
 		},
-		data: [{
-			type: "line",
-			name: "南崁店",
-			color: "#369EAD",
-			showInLegend: true,
-			axisYIndex: 1,
-			dataPoints: [
-				{ x: new Date(2017, 00, 7), y: 85.4 }, 
-				{ x: new Date(2017, 00, 14), y: 92.7 },
-				{ x: new Date(2017, 00, 21), y: 64.9 },
-				{ x: new Date(2017, 00, 28), y: 58.0 },
-				{ x: new Date(2017, 01, 4), y: 63.4 },
-				{ x: new Date(2017, 01, 11), y: 69.9 },
-				{ x: new Date(2017, 01, 18), y: 88.9 },
-				{ x: new Date(2017, 01, 25), y: 66.3 },
-				{ x: new Date(2017, 02, 4), y: 82.7 },
-				{ x: new Date(2017, 02, 11), y: 60.2 },
-				{ x: new Date(2017, 02, 18), y: 87.3 },
-				{ x: new Date(2017, 02, 25), y: 98.5 }
-			]
-		},
-		{
-			type: "line",
-			name: "中壢店",
-			color: "#C24642",
-			axisYIndex: 0,
-			showInLegend: true,
-			dataPoints: [
-				{ x: new Date(2017, 00, 7), y: 32.3 }, 
-				{ x: new Date(2017, 00, 14), y: 33.9 },
-				{ x: new Date(2017, 00, 21), y: 26.0 },
-				{ x: new Date(2017, 00, 28), y: 15.8 },
-				{ x: new Date(2017, 01, 4), y: 18.6 },
-				{ x: new Date(2017, 01, 11), y: 34.6 },
-				{ x: new Date(2017, 01, 18), y: 37.7 },
-				{ x: new Date(2017, 01, 25), y: 24.7 },
-				{ x: new Date(2017, 02, 4), y: 35.9 },
-				{ x: new Date(2017, 02, 11), y: 12.8 },
-				{ x: new Date(2017, 02, 18), y: 38.1 },
-				{ x: new Date(2017, 02, 25), y: 42.4 }
-			]
-		},
-		{
-			type: "line",
-			name: "大安店",
-			color: "#7F6084",
-			axisYType: "secondary",
-			showInLegend: true,
-			dataPoints: [
-				{ x: new Date(2017, 00, 7), y: 42.5 }, 
-				{ x: new Date(2017, 00, 14), y: 44.3 },
-				{ x: new Date(2017, 00, 21), y: 28.7 },
-				{ x: new Date(2017, 00, 28), y: 22.5 },
-				{ x: new Date(2017, 01, 4), y: 25.6 },
-				{ x: new Date(2017, 01, 11), y: 45.7 },
-				{ x: new Date(2017, 01, 18), y: 54.6 },
-				{ x: new Date(2017, 01, 25), y: 32.0 },
-				{ x: new Date(2017, 02, 4), y: 43.9 },
-				{ x: new Date(2017, 02, 11), y: 26.4 },
-				{ x: new Date(2017, 02, 18), y: 40.3 },
-				{ x: new Date(2017, 02, 25), y: 54.2 }
-			]
-		}]
+		data: second//讀取地方二
 	});
 	chart2.render();
 	
@@ -254,6 +319,8 @@
 	
 </head>
 <body id="page-top">
+<!-- //分店產生的地方 -->
+<div  id='dan'></div>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -333,7 +400,10 @@
       	<div class="container-fluid form-group col-lg-10 offset-lg-1 my-auto">
       		<br/><br/>
       		<h4 class="text-center my-2">各分店月營業額分析</h4>
-      		<!-- 折線圖 -->
+					<!-- 折線圖 -->
+					<!-- //robin 點選分店勾勾  -->
+					<div id='branchName1' class='branchName1'></div>
+					
       		<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
       		<br/><br/>
       		<h4 class="text-center my-2">各分店年營業額分析</h4>
