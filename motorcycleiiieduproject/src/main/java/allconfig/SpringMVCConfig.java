@@ -14,7 +14,8 @@ import testcontroller.InterceptorUse;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","everybikeInfocontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller",
+		"everybikeInfocontroller" ,"dispatchercontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	

@@ -1,13 +1,22 @@
 $(document).ready(function () {
 
     $("#buttontoreset").click(function (e) {
+        var t = $('#dataTable').DataTable();
+        t.clear().draw()
         e.preventDefault();
-
-
         document.getElementById("conditiontocheckorder").reset();
     });
 
    $("#ordercheckmaner").click(function (e) {
+
+    var t = $('#dataTable').DataTable();
+    t.clear()
+
+
+    
+
+var t =$('#dataTable').DataTable() ; 
+
         e.preventDefault();
         var managercheck = { "pickupstore": "", "dropoffstore": "", "orderstatus": "" }
         var count = 0;
@@ -31,66 +40,7 @@ $(document).ready(function () {
             data: JSON.stringify(managercheck),
             contentType: "application/json; charset=utf-8",
             success: function (response) {
-                table.destroy();
-
-$("#outtableDIV").html(
-    $(`<table class='table-responsive table-bordered table-striped' id='dataTable' width='100%' cellspacing='0' style='table-layout: fixed; font-size: xx-small;'>
-                      <thead>
-                        <tr class='text-center'>
-                          <th>流水號</th>
-                          <th>下訂時間</th>
-                          <th>取店</th>
-                          <th>取車時間</th>
-                          <th>還店</th>
-                          <th>還車時間</th>
-                          <th>電話</th>
-                          <th>車牌</th>
-                          <th>折扣名稱</th>
-                          <th>折扣數</th>
-                          <th>機車折扣價</th>
-                          <th>附加配件與數量</th>
-                          <th>配件總價</th>
-                          <th>訂單總價</th>
-                          <th>狀態</th>
-                          <th>是否為會員</th>
-                          <th>是否已付款</th>
-                          <th>更改訂單狀態</th>
-                          <th>更改</th>
-                        </tr>
-                      </thead>
-                      <tfoot>
-                        <tr>
-                          <th>流水號</th>
-                          <th>下訂時間</th>
-                          <th>取店</th>
-                          <th>取車時間</th>
-                          <th>還店</th>
-                          <th>還車時間</th>
-                          <th>電話</th>
-                          <th>車牌</th>
-                          <th>折扣名稱</th>
-                          <th>折扣</th>
-                          <th>機車折扣價</th>
-                          <th>附加配件與數量</th>
-                          <th>配件總價</th>
-                          <th>訂單總價</th>
-                          <th>狀態</th>
-                          <th>是否為會員</th>
-                          <th>是否已付款</th>
-                          <th>更改訂單狀態</th>
-                          <th>更改</th>                      
-                        </tr>
-                      </tfoot>
-                      <tbody id="mamnagerorderdetail">
-                       
-                      </tbody>
-                    </table>`)
-);
-
-
-
-
-
+              
 
                 for (let k in response) {
                     var buildacce = "";
@@ -120,51 +70,36 @@ $("#outtableDIV").html(
                         orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" + "<option value='已完成調度'>完成調度</option>" +"</optgroup>"+"</select>"
                         orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
                     }
+            
+   var x = response[k].totalDiscount
+   if(x == undefined){
+       x=""
+   }
+                    t.row.add([
+                        response[k].orderSerialNum ,
+                        response[k].orderTime,
+                        response[k].pickupStore,
+                        response[k].pickupDate,
+                        response[k].dropoffStore,
+                        response[k].dropoffDate,
+                        response[k].phone ,
+                        response[k].licensePlate,
+                        response[k].discountName ,
+                        x,
+                        response[k].bikePrice,
+                        buildacce,
+                        response[k].accessoriesTotalPrice,
+                        response[k].orderTotalPrice,
+                        response[k].orderStatus,
+                        response[k].is_member,
+                        response[k].payOrNot,
+                        orderoption,
+                        orderoptionbutton
+                    ]).draw(false)
 
-                    $("#mamnagerorderdetail").append(
-
-                        "<tr>" +
-                        "<td>" + response[k].orderSerialNum + "</td>" +
-                        "<td>" + response[k].orderTime + "</td>" +
-                        "<td>" + response[k].pickupStore + "</td>" +
-                        "<td>" + response[k].pickupDate + "</td>" +
-                        "<td>" + response[k].dropoffStore + "</td>" +
-                        "<td>" + response[k].dropoffDate + "</td>" +
-                        "<td>" + response[k].phone + "</td>" +
-                        "<td>" + response[k].licensePlate + "</td>" +
-                        "<td>" + response[k].discountName + "</td>" +
-                        "<td>" + response[k].totalDiscount + "</td>" +
-                        "<td>" + response[k].bikePrice + "</td>" +
-                        "<td>" + buildacce + "</td>" +
-                        "<td>" + response[k].accessoriesTotalPrice + "</td>" +
-                        "<td>" + response[k].orderTotalPrice + "</td>" +
-                        "<td>" + response[k].orderStatus + "</td>" +
-                        "<td>" + response[k].is_member + "</td>" +
-                        "<td>" + response[k].payOrNot + "</td>" +
-                        "<td>" +
-                        orderoption+
-                        "</td>" +
-                        orderoptionbutton +
-                        "</tr>");
-
-                        orderoption = "" ; 
-                        orderoptionbutton = "" ; 
-                }
                 
-                $('#dataTable').DataTable({
-                    "footerCallback": function (row, data, start, end, display) {
-                        var api = this.api(), data;
 
-                        // Remove the formatting to get integer data for summation
-                        var intVal = function (i) {
-                            return typeof i === 'string' ?
-                                i.replace(/[\$,]/g, '') * 1 :
-                                typeof i === 'number' ?
-                                    i : 0;
-                        };
-                    }
-                });
-
+                }
             }
         });
     });
@@ -193,6 +128,8 @@ $("#outtableDIV").html(
 //訂單更改
     $("#outtableDIV").on("click",  ".checkOrder" ,  function (e) {
         e.preventDefault();
+        var t = $('#dataTable').DataTable();
+        t.clear()
     //    alert($(this).parent().prev().children().val())
     //    alert($(this).parent().parent().children().first().text())
 
@@ -229,63 +166,6 @@ $("#outtableDIV").html(
                 data: JSON.stringify(managercheck),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    table.destroy();
-    
-    $("#outtableDIV").html(
-        $(`<table class='table-responsive table-bordered table-striped' id='dataTable' width='100%' cellspacing='0' style='table-layout: fixed; font-size: xx-small;'>
-                          <thead>
-                            <tr class='text-center'>
-                              <th>流水號</th>
-                              <th>下訂時間</th>
-                              <th>取店</th>
-                              <th>取車時間</th>
-                              <th>還店</th>
-                              <th>還車時間</th>
-                              <th>電話</th>
-                              <th>車牌</th>
-                              <th>折扣名稱</th>
-                              <th>折扣數</th>
-                              <th>機車折扣價</th>
-                              <th>附加配件與數量</th>
-                              <th>配件總價</th>
-                              <th>訂單總價</th>
-                              <th>狀態</th>
-                              <th>是否為會員</th>
-                              <th>是否已付款</th>
-                              <th>更改訂單狀態</th>
-                              <th>更改</th>
-                            </tr>
-                          </thead>
-                          <tfoot>
-                            <tr>
-                              <th>流水號</th>
-                              <th>下訂時間</th>
-                              <th>取店</th>
-                              <th>取車時間</th>
-                              <th>還店</th>
-                              <th>還車時間</th>
-                              <th>電話</th>
-                              <th>車牌</th>
-                              <th>折扣名稱</th>
-                              <th>折扣</th>
-                              <th>機車折扣價</th>
-                              <th>附加配件與數量</th>
-                              <th>配件總價</th>
-                              <th>訂單總價</th>
-                              <th>狀態</th>
-                              <th>是否為會員</th>
-                              <th>是否已付款</th>
-                              <th>更改訂單狀態</th>
-                              <th>更改</th>                      
-                            </tr>
-                          </tfoot>
-                          <tbody id="mamnagerorderdetail">
-                           
-                          </tbody>
-                        </table>`)
-    );
-
-    
                     for (let k in response) {
                         var buildacce = "";
                         if (response[k].accessoriesAmount != "") {
@@ -315,50 +195,35 @@ $("#outtableDIV").html(
                             orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
                         }
     
-                        $("#mamnagerorderdetail").append(
-    
-                            "<tr>" +
-                            "<td>" + response[k].orderSerialNum + "</td>" +
-                            "<td>" + response[k].orderTime + "</td>" +
-                            "<td>" + response[k].pickupStore + "</td>" +
-                            "<td>" + response[k].pickupDate + "</td>" +
-                            "<td>" + response[k].dropoffStore + "</td>" +
-                            "<td>" + response[k].dropoffDate + "</td>" +
-                            "<td>" + response[k].phone + "</td>" +
-                            "<td>" + response[k].licensePlate + "</td>" +
-                            "<td>" + response[k].discountName + "</td>" +
-                            "<td>" + response[k].totalDiscount + "</td>" +
-                            "<td>" + response[k].bikePrice + "</td>" +
-                            "<td>" + buildacce + "</td>" +
-                            "<td>" + response[k].accessoriesTotalPrice + "</td>" +
-                            "<td>" + response[k].orderTotalPrice + "</td>" +
-                            "<td>" + response[k].orderStatus + "</td>" +
-                            "<td>" + response[k].is_member + "</td>" +
-                            "<td>" + response[k].payOrNot + "</td>" +
-                            "<td>" +
-                            orderoption+
-                            "</td>" +
-                            orderoptionbutton +
-                            "</tr>");
-    
-                            orderoption = "" ; 
-                            orderoptionbutton = "" ; 
+                        t.row.add([
+                            response[k].orderSerialNum ,
+                            response[k].orderTime,
+                            response[k].pickupStore,
+                            response[k].pickupDate,
+                            response[k].dropoffStore,
+                            response[k].dropoffDate,
+                            response[k].phone ,
+                            response[k].licensePlate,
+                            response[k].discountName ,
+                            response[k].totalDiscount,
+                            response[k].bikePrice,
+                            buildacce,
+                            response[k].accessoriesTotalPrice,
+                            response[k].orderTotalPrice,
+                            response[k].orderStatus,
+                            response[k].is_member,
+                            response[k].payOrNot,
+                            orderoption,
+                            orderoptionbutton
+                        ]).draw(false)
+
+
+                   
+
+
                     }
                     
-                    $('#dataTable').DataTable({
-                        "footerCallback": function (row, data, start, end, display) {
-                            var api = this.api(), data;
-    
-                            // Remove the formatting to get integer data for summation
-                            var intVal = function (i) {
-                                return typeof i === 'string' ?
-                                    i.replace(/[\$,]/g, '') * 1 :
-                                    typeof i === 'number' ?
-                                        i : 0;
-                            };
-                        }
-                    });
-    
+                
                 }
             });
 
@@ -372,7 +237,8 @@ $("#outtableDIV").html(
 //完成訂單
 $(".addmile").click(function (e) { 
     e.preventDefault();
-
+    var t = $('#dataTable').DataTable();
+    t.clear()
 //    alert($(this).parent().prev().children().val())
 //    alert($(this).parent().parent().children().first().text())
 var godate   =   JSON.stringify({"orderstatus":$(".finOrder").parent().prev().children().val() 
@@ -408,62 +274,7 @@ $.ajax({
         data: JSON.stringify(managercheck),
         contentType: "application/json; charset=utf-8",
         success: function (response) {
-            table.destroy();
-
-$("#outtableDIV").html(
-$(`<table class='table-responsive table-bordered table-striped' id='dataTable' width='100%' cellspacing='0' style='table-layout: fixed; font-size: xx-small;'>
-                  <thead>
-                    <tr class='text-center'>
-                      <th>流水號</th>
-                      <th>下訂時間</th>
-                      <th>取店</th>
-                      <th>取車時間</th>
-                      <th>還店</th>
-                      <th>還車時間</th>
-                      <th>電話</th>
-                      <th>車牌</th>
-                      <th>折扣名稱</th>
-                      <th>折扣數</th>
-                      <th>機車折扣價</th>
-                      <th>附加配件與數量</th>
-                      <th>配件總價</th>
-                      <th>訂單總價</th>
-                      <th>狀態</th>
-                      <th>是否為會員</th>
-                      <th>是否已付款</th>
-                      <th>更改訂單狀態</th>
-                      <th>更改</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>流水號</th>
-                      <th>下訂時間</th>
-                      <th>取店</th>
-                      <th>取車時間</th>
-                      <th>還店</th>
-                      <th>還車時間</th>
-                      <th>電話</th>
-                      <th>車牌</th>
-                      <th>折扣名稱</th>
-                      <th>折扣</th>
-                      <th>機車折扣價</th>
-                      <th>附加配件與數量</th>
-                      <th>配件總價</th>
-                      <th>訂單總價</th>
-                      <th>狀態</th>
-                      <th>是否為會員</th>
-                      <th>是否已付款</th>
-                      <th>更改訂單狀態</th>
-                      <th>更改</th>                      
-                    </tr>
-                  </tfoot>
-                  <tbody id="mamnagerorderdetail">
-                   
-                  </tbody>
-                </table>`)
-);
-
+    
 
             for (let k in response) {
                 var buildacce = "";
@@ -494,49 +305,31 @@ $(`<table class='table-responsive table-bordered table-striped' id='dataTable' w
                     orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
                 }
 
-                $("#mamnagerorderdetail").append(
-
-                    "<tr>" +
-                    "<td>" + response[k].orderSerialNum + "</td>" +
-                    "<td>" + response[k].orderTime + "</td>" +
-                    "<td>" + response[k].pickupStore + "</td>" +
-                    "<td>" + response[k].pickupDate + "</td>" +
-                    "<td>" + response[k].dropoffStore + "</td>" +
-                    "<td>" + response[k].dropoffDate + "</td>" +
-                    "<td>" + response[k].phone + "</td>" +
-                    "<td>" + response[k].licensePlate + "</td>" +
-                    "<td>" + response[k].discountName + "</td>" +
-                    "<td>" + response[k].totalDiscount + "</td>" +
-                    "<td>" + response[k].bikePrice + "</td>" +
-                    "<td>" + buildacce + "</td>" +
-                    "<td>" + response[k].accessoriesTotalPrice + "</td>" +
-                    "<td>" + response[k].orderTotalPrice + "</td>" +
-                    "<td>" + response[k].orderStatus + "</td>" +
-                    "<td>" + response[k].is_member + "</td>" +
-                    "<td>" + response[k].payOrNot + "</td>" +
-                    "<td>" +
-                    orderoption+
-                    "</td>" +
-                    orderoptionbutton +
-                    "</tr>");
-
-                    orderoption = "" ; 
-                    orderoptionbutton = "" ; 
+                t.row.add([
+                    response[k].orderSerialNum ,
+                    response[k].orderTime,
+                    response[k].pickupStore,
+                    response[k].pickupDate,
+                    response[k].dropoffStore,
+                    response[k].dropoffDate,
+                    response[k].phone ,
+                    response[k].licensePlate,
+                    response[k].discountName ,
+                    response[k].totalDiscount,
+                    response[k].bikePrice,
+                    buildacce,
+                    response[k].accessoriesTotalPrice,
+                    response[k].orderTotalPrice,
+                    response[k].orderStatus,
+                    response[k].is_member,
+                    response[k].payOrNot,
+                    orderoption,
+                    orderoptionbutton
+                ]).draw(false)
+                
             }
             
-            $('#dataTable').DataTable({
-                "footerCallback": function (row, data, start, end, display) {
-                    var api = this.api(), data;
-
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function (i) {
-                        return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                                i : 0;
-                    };
-                }
-            });
+           
         }
     });
 //Alert超過里程要保養囉
@@ -571,10 +364,7 @@ $.ajax({
 //======================================
 
 $('#exampleEnterDis').modal('hide');
-// $("#exampleEnterDis").removeClass("show");
-// $("#exampleEnterDis").css("display", "none");
-// $("#exampleEnterDis").attr("aria-hidden", true);
-// $("#page-top").removeClass("modal-open");
+
 
 });
 
@@ -591,9 +381,10 @@ $("#motoplate").text($(this).parent().parent().children().first().next().next().
 //完成調度
 $("#outtableDIV").on("click",  ".finDisp" ,   function (e) {
     e.preventDefault();
+    var t = $('#dataTable').DataTable();
+    t.clear()
    //    alert($(this).parent().prev().children().val())
 //    alert($(this).parent().parent().children().first().text())
-
 var godate   =   JSON.stringify({"orderstatus":$(this).parent().prev().children().val() 
 , "ordersernum":$(this).parent().parent().children().first().text()})
 
@@ -627,63 +418,8 @@ var godate   =   JSON.stringify({"orderstatus":$(this).parent().prev().children(
            data: JSON.stringify(managercheck),
            contentType: "application/json; charset=utf-8",
            success: function (response) {
-               table.destroy();
-
-$("#outtableDIV").html(
-   $(`<table class='table-responsive table-bordered table-striped' id='dataTable' width='100%' cellspacing='0' style='table-layout: fixed; font-size: xx-small;'>
-                     <thead>
-                       <tr class='text-center'>
-                         <th>流水號</th>
-                         <th>下訂時間</th>
-                         <th>取店</th>
-                         <th>取車時間</th>
-                         <th>還店</th>
-                         <th>還車時間</th>
-                         <th>電話</th>
-                         <th>車牌</th>
-                         <th>折扣名稱</th>
-                         <th>折扣數</th>
-                         <th>機車折扣價</th>
-                         <th>附加配件與數量</th>
-                         <th>配件總價</th>
-                         <th>訂單總價</th>
-                         <th>狀態</th>
-                         <th>是否為會員</th>
-                         <th>是否已付款</th>
-                         <th>更改訂單狀態</th>
-                         <th>更改</th>
-                       </tr>
-                     </thead>
-                     <tfoot>
-                       <tr>
-                         <th>流水號</th>
-                         <th>下訂時間</th>
-                         <th>取店</th>
-                         <th>取車時間</th>
-                         <th>還店</th>
-                         <th>還車時間</th>
-                         <th>電話</th>
-                         <th>車牌</th>
-                         <th>折扣名稱</th>
-                         <th>折扣</th>
-                         <th>機車折扣價</th>
-                         <th>附加配件與數量</th>
-                         <th>配件總價</th>
-                         <th>訂單總價</th>
-                         <th>狀態</th>
-                         <th>是否為會員</th>
-                         <th>是否已付款</th>
-                         <th>更改訂單狀態</th>
-                         <th>更改</th>                      
-                       </tr>
-                     </tfoot>
-                     <tbody id="mamnagerorderdetail">
-                      
-                     </tbody>
-                   </table>`)
-);
-
-
+       
+       
                for (let k in response) {
                    var buildacce = "";
                    if (response[k].accessoriesAmount != "") {
@@ -713,49 +449,35 @@ $("#outtableDIV").html(
                        orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp' >完成調度</button></td>"
                    }
 
-                   $("#mamnagerorderdetail").append(
+                t.row.add([
+                    response[k].orderSerialNum ,
+                    response[k].orderTime,
+                    response[k].pickupStore,
+                    response[k].pickupDate,
+                    response[k].dropoffStore,
+                    response[k].dropoffDate,
+                    response[k].phone ,
+                    response[k].licensePlate,
+                    response[k].discountName ,
+                    response[k].totalDiscount,
+                    response[k].bikePrice,
+                    buildacce,
+                    response[k].accessoriesTotalPrice,
+                    response[k].orderTotalPrice,
+                    response[k].orderStatus,
+                    response[k].is_member,
+                    response[k].payOrNot,
+                    orderoption,
+                    orderoptionbutton
+                ]).draw(false)
+    
 
-                       "<tr>" +
-                       "<td>" + response[k].orderSerialNum + "</td>" +
-                       "<td>" + response[k].orderTime + "</td>" +
-                       "<td>" + response[k].pickupStore + "</td>" +
-                       "<td>" + response[k].pickupDate + "</td>" +
-                       "<td>" + response[k].dropoffStore + "</td>" +
-                       "<td>" + response[k].dropoffDate + "</td>" +
-                       "<td>" + response[k].phone + "</td>" +
-                       "<td>" + response[k].licensePlate + "</td>" +
-                       "<td>" + response[k].discountName + "</td>" +
-                       "<td>" + response[k].totalDiscount + "</td>" +
-                       "<td>" + response[k].bikePrice + "</td>" +
-                       "<td>" + buildacce + "</td>" +
-                       "<td>" + response[k].accessoriesTotalPrice + "</td>" +
-                       "<td>" + response[k].orderTotalPrice + "</td>" +
-                       "<td>" + response[k].orderStatus + "</td>" +
-                       "<td>" + response[k].is_member + "</td>" +
-                       "<td>" + response[k].payOrNot + "</td>" +
-                       "<td>" +
-                       orderoption+
-                       "</td>" +
-                       orderoptionbutton +
-                       "</tr>");
 
-                       orderoption = "" ; 
-                       orderoptionbutton = "" ; 
+            
                }
                
-               $('#dataTable').DataTable({
-                   "footerCallback": function (row, data, start, end, display) {
-                       var api = this.api(), data;
-
-                       // Remove the formatting to get integer data for summation
-                       var intVal = function (i) {
-                           return typeof i === 'string' ?
-                               i.replace(/[\$,]/g, '') * 1 :
-                               typeof i === 'number' ?
-                                   i : 0;
-                       };
-                   }
-               });
+        
+           
 
            }
        });

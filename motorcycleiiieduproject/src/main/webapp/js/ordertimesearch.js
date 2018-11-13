@@ -7,7 +7,7 @@ $(window).on('load',function () {
     var futureday = new Date();
     //    alert(today.getHours())
 
-    for (var time = 10; time < 23; time++) {
+    for (var time = 10; time < 22; time++) {
         if (time <= today.getHours()) {
             continue;
         }
@@ -89,6 +89,8 @@ $(window).on('load',function () {
     $("#dDate").attr("value", todayformat);
 
     /* 有空補個日期判別式 超過22點*/
+
+
 
     //顧客訂單查詢車子
     $("#motorserchdo").click(function (e) {
