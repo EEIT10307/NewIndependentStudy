@@ -68,7 +68,6 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 	public boolean checkbikeModelmodelYear(String bikeModel, String modelYear) {
 		Session session = Factory.getCurrentSession();
 		boolean exist = false;
-		System.out.println(052550.0);
 		String hql = "FROM BikeDetail WHERE bikeModel=:bikeModel and modelYear=:modelYear";
 		try {
 			@SuppressWarnings("unchecked")
@@ -139,6 +138,7 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
 		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson = new ArrayList<EveryBikeInfoToGson>();
 		for (EveryBikeInfo loop : finalEveryBikeInfo) {
+			System.out.println();
 			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),
 					loop.getBranchName().getBranchName(), loop.getTotalMileage(), loop.getIsReadyMaintenance(),
 					loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));

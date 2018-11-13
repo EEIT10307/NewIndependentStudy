@@ -34,6 +34,7 @@ import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
 import cleanbean.EveryBikeInfoBean;
 import cleanbean.EveryBikeInfoToGson;
+import cleanbean.OrderListRobinYear;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
 import everybikeInfo.robin.service.AcceStockIFaceService;
@@ -42,11 +43,13 @@ import everybikeInfo.robin.service.BikeReviewIFaceService;
 import everybikeInfo.robin.service.BranchDetailIFaceService;
 import everybikeInfo.robin.service.EveryBikeInfoIFaceService;
 import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
+import everybikeInfo.robin.service.OrderListIFaceService;
 import everybikeInfo.robin.service.TestEmailIFaceService;
 import projectbean.AcceSerialNum;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
+import projectbean.OrderList;
 
 @Controller
 public class TestRobinController {
@@ -66,13 +69,13 @@ public class TestRobinController {
 	@Autowired
 	TestEmailIFaceService testEmailIFaceService;
 	@Autowired
+	OrderListIFaceService orderListIFaceService;
+	@Autowired
 	Gson gson;
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST) // 留言評價版
 	public @ResponseBody String insertbikeReview(String orderSerialNum, int email, Double satisfacation,
 			String bikeModel, String reviewContent) throws IOException, ParseException {
-//		System.out.println("收到了");
-		System.out.println(orderSerialNum);// 訂單流水
 
 		SimpleDateFormat fro = new SimpleDateFormat("yyyy/MM/dd hh:mm");
 		Date now = new Date();
@@ -83,10 +86,8 @@ public class TestRobinController {
 
 	@RequestMapping(value = "/selectBranchDetail", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 查詢分店
 	public @ResponseBody String select() throws IOException {
-//		System.out.println("收到了1");
 		List<BranchDetail> all = branchDetailIFaceService.getAllMembers();
 		gson.toJson(all);
-		System.out.println(gson.toJson(all));
 		return gson.toJson(all);
 	}
 
@@ -109,7 +110,6 @@ public class TestRobinController {
 //	"hourPrice" 每小時價格
 	@RequestMapping(value = "/insertBikeDetail", method = RequestMethod.POST, produces = "text/html; charset = UTF-8") // 新增機車資料可多筆
 	public @ResponseBody String insertBikeDetail(@RequestAttribute("reader") BufferedReader reader) throws IOException {
-//		System.out.println("安安");
 
 		Map<String, String> po = new HashMap<>();
 		BikeDetailAndEveryBikeInfo[] bikeDetailAndEveryBikeInfo = gson.fromJson(reader,
@@ -118,12 +118,10 @@ public class TestRobinController {
 		for (BikeDetailAndEveryBikeInfo root : bikeDetailAndEveryBikeInfo) {
 			if (everyBikeInfoIFaceService.getMemberOne(root.getLicensePlate())) {
 				po.put("key", "此車牌重複:" + root.getLicensePlate());
-				System.out.println("第一");
 				return gson.toJson(po);
 			} else if (everyBikeInfoIFaceService.checkbikeModelmodelYear(root.getBikeModel(), root.getModelYear())) {
 				po.put("key", "重複:型號=" + root.getBikeModel() + "年份=" + root.getModelYear());
 
-				System.out.println("第二");
 				return gson.toJson(po);
 			}
 
@@ -165,7 +163,6 @@ public class TestRobinController {
 	// 取型號
 	public @ResponseBody String selectEveryBikeInfo() throws IOException {
 
-//		System.out.println("安安");
 		List<EveryBikeInfo> all = everyBikeInfoIFaceService.getAllMembers();
 		// 產生不重複的型號
 		Set<String> list = new HashSet<String>();
@@ -173,10 +170,6 @@ public class TestRobinController {
 												// 所以要加.getBikeModel());
 			list.add(all.get(x).getBikeDetail().getIdClassBikeDetail().getBikeModel());
 		}
-//		Iterator<IdClassBikeDetail> it = list.iterator();
-//		while(it.hasNext()) {
-//			System.out.println(it.next());
-//		}
 		return gson.toJson(list);
 	}
 
@@ -203,23 +196,16 @@ public class TestRobinController {
 																												// EveryBikeInfoBean
 																												// everyBikeInfoquery(使用這方法，網頁傳進來的值的名子要對應到
 																												// EveryBikeInfoBean類別裡面的一樣)
-		System.out.println("網頁傳入=" + everyBikeInfoquery);
 		try {
 			List<EveryBikeInfo> selectEveryBikeInfo = everyBikeInfoIFaceService
 					.showAllEveryBikeInfo(everyBikeInfoquery.getEveryBikeInfoModel());
 
-//		System.out.println("46行:"+selectMaintenancebranch.get(0).getBranchName().getBranchName());
 			Set<String> list = new HashSet<String>();
 			List<EveryBikeInfoToGson> forGsonConvert = everyBikeInfoIFaceService.forGsonConvert(selectEveryBikeInfo);
 			for (int x = 0; x < forGsonConvert.size(); x++) {
 
 				list.add(forGsonConvert.get(x).getModelYear());
 			}
-//			System.out.println(list.size());
-//			System.out.println("List JSON=" + gson.toJson(list));
-//			System.out.println("該保養車s的JSON=" + gson.toJson(forGsonConvert));
-
-//		return gson.toJson(selectMaintenancebranch);
 			return gson.toJson(list);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -258,12 +244,11 @@ public class TestRobinController {
 
 	@PostMapping(value = "/updateBikeDetial", produces = "text/html; charset = UTF-8") // Update 機車詳細資料
 	public @ResponseBody String updateBikeDetial(@RequestBody BikeDetailToGson bikeDetail) throws IOException {
-//		System.out.println("進來了:"+bikeDetail);
 		bikeDetailIFaceService.updateBikeDetai(bikeDetail);
 		return "";
 	}
 
-	@PostMapping(value = "/selectAcceSerialNum", produces = "text/html; charset = UTF-8") // 新增配件
+	@PostMapping(value = "/selectAcceSerialNum", produces = "text/html; charset = UTF-8") // 查詢配件
 	public @ResponseBody String insertAcceStock() throws IOException {
 		List<AcceSerialNum> all = acceStockIFaceService.allAcceSerialNum();
 		return gson.toJson(all);
@@ -271,7 +256,6 @@ public class TestRobinController {
 
 	@PostMapping(value = "/insertAcceStock", produces = "text/html; charset = UTF-8") // 新增配件
 	public @ResponseBody String insertAcceStock(@RequestBody AcceStockBean acceStockBean) throws IOException {
-		System.out.println("新增" + acceStockBean);
 		acceStockIFaceService.insertAcceStock(acceStockBean);
 
 		return "";
@@ -279,7 +263,6 @@ public class TestRobinController {
 
 	@PostMapping(value = "/testmail", produces = "text/html; charset = UTF-8") // emil
 	public @ResponseBody String test_mail(String or, String em) throws IOException {
-		System.out.println("訂單:" + or + "信箱:" + em);
 		testEmailIFaceService.sendemail(or, em);
 		return "";
 	}
@@ -292,17 +275,33 @@ public class TestRobinController {
 	}
 
 	@PostMapping(value = "/selectQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
-	public @ResponseBody String selectQA(String bikeModel,String modelYear) throws IOException {
-		System.out.println("OK");
+	public @ResponseBody String selectQAA(String bikeModel,String modelYear) throws IOException {
 	
 		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA(bikeModel,modelYear));
+		 if(QQ.size()==0) {
+			 return "";
+		 }
 		return gson.toJson(QQ);
 	}
-	@PostMapping(value = "/updateQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
+	@PostMapping(value = "/updateQA", produces = "text/html; charset = UTF-8") // 商品評價 更新
 	public @ResponseBody String updateQA(int qAndASerialNum,String ans,String ansquction) throws IOException {
-		System.out.println(ans+"OK");
 		bikeDetailIFaceService.updateQA(qAndASerialNum, ans, ansquction);
 		return "回覆成功";
+	}
+	@PostMapping(value = "/selecOrderTotal", produces = "text/html; charset = UTF-8") //查詢月營收
+	public @ResponseBody String selecOrderTotal(String branchName) throws IOException {
+		List<OrderList> order = orderListIFaceService.selecOrderTotal(branchName);
+		OrderListRobinYear orderjson=orderListIFaceService.OrderListForJson((List<OrderList>) order);
+		 
+		return gson.toJson(orderjson);
+	}
+	@PostMapping(value = "/selecOrderTotalYear", produces = "text/html; charset = UTF-8") // 查詢年營收
+	public @ResponseBody String selecOrderTotalYear(String branchName) throws IOException {
+		List<OrderList> order = orderListIFaceService.selecOrderTotalYear(branchName);
+
+		OrderListRobinYear orderjson=orderListIFaceService.OrderListForJsonYear((List<OrderList>) order);
+		return gson.toJson(orderjson);
+
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 

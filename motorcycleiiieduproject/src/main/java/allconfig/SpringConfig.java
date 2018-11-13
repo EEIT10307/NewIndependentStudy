@@ -18,11 +18,11 @@ import com.google.gson.Gson;
 
 @Configuration
 @ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance",
-		"everybikeInfo","testfakebikedao","dispatcherdao" ,"dispatcherservice"})
+		"everybikeInfo","testfakebikedao","webinfomanagerservice","webinfomanagerdao","dispatcherdao" ,"dispatcherservice"})
 @EnableTransactionManagement
 public class SpringConfig {
 
-	//JNDI DataSource
+	//JNDI DataSource 
 	@Bean
 	public DataSource dataSource(){			
 		JndiObjectFactoryBean factory = new JndiObjectFactoryBean();
