@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class BikeDetailAndEveryBikeInfo implements Serializable{
 	/**
 	 * 
-	 */
+	 */ 
 	private static final long serialVersionUID = 1L;
 	private String licensePlate;// 車牌
 	private Integer branchName;// 分店
@@ -23,6 +23,102 @@ public class BikeDetailAndEveryBikeInfo implements Serializable{
 	private String fuelType;// 使用燃料
 	private Boolean aBS;// 煞車
 	private Integer hourPrice;// 每小時價格
+	
+	private String frontSuspension ; 
+    private String rearSuspension ;
+    private String rearTire ;
+    private String horsePower ; 
+    private String torque ;
+    private String frontBrake;
+    private String rearBrake;
+    
+    
+	public BikeDetailAndEveryBikeInfo(String licensePlate, Integer branchName, String bikeModel, String modelYear,
+			String bikeBrand, String engineType, String bikeType, String plateType, Double fuelTankCapacity,
+			Double seatHeight, Double dryWeight, Double fuelConsumption, String tire, String fuelType, Boolean aBS,
+			Integer hourPrice, String frontSuspension, String rearSuspension, String rearTire, String horsePower,
+			String torque, String frontBrake, String rearBrake) {
+		super();
+		this.licensePlate = licensePlate;
+		this.branchName = branchName;
+		this.bikeModel = bikeModel;
+		this.modelYear = modelYear;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.tire = tire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.frontSuspension = frontSuspension;
+		this.rearSuspension = rearSuspension;
+		this.rearTire = rearTire;
+		this.horsePower = horsePower;
+		this.torque = torque;
+		this.frontBrake = frontBrake;
+		this.rearBrake = rearBrake;
+	}
+
+	public String getFrontSuspension() {
+		return frontSuspension;
+	}
+
+	public void setFrontSuspension(String frontSuspension) {
+		this.frontSuspension = frontSuspension;
+	}
+
+	public String getRearSuspension() {
+		return rearSuspension;
+	}
+
+	public void setRearSuspension(String rearSuspension) {
+		this.rearSuspension = rearSuspension;
+	}
+
+	public String getRearTire() {
+		return rearTire;
+	}
+
+	public void setRearTire(String rearTire) {
+		this.rearTire = rearTire;
+	}
+
+	public String getHorsePower() {
+		return horsePower;
+	}
+
+	public void setHorsePower(String horsePower) {
+		this.horsePower = horsePower;
+	}
+
+	public String getTorque() {
+		return torque;
+	}
+
+	public void setTorque(String torque) {
+		this.torque = torque;
+	}
+
+	public String getFrontBrake() {
+		return frontBrake;
+	}
+
+	public void setFrontBrake(String frontBrake) {
+		this.frontBrake = frontBrake;
+	}
+
+	public String getRearBrake() {
+		return rearBrake;
+	}
+
+	public void setRearBrake(String rearBrake) {
+		this.rearBrake = rearBrake;
+	}
 
 	public String getLicensePlate() {
 		return licensePlate;

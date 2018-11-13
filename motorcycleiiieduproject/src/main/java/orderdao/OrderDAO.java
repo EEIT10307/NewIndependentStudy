@@ -1,9 +1,9 @@
 package orderdao;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +27,11 @@ import org.springframework.stereotype.Repository;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.FinOrderBean;
+import cleanbean.ManagerOrderCondition;
+import cleanbean.OrderListToGson;
+import cleanbean.ShowManagerChangeOrderStatus;
+import maintenance.MaintenanceDAO;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
@@ -39,7 +44,9 @@ public class OrderDAO implements OrderIFaceDAO {
 
 	@Autowired
 	SessionFactory factory;
-
+	@Autowired
+	MaintenanceDAO maintenanceDAO ; 
+	
 	// 查詢該店未完成的訂單總數
 	@Override
 	public List<OrderList> showAllOrderFromShop(String shopname) {
@@ -50,8 +57,10 @@ public class OrderDAO implements OrderIFaceDAO {
 		ParameterExpression<String> pickupStore = buider.parameter(String.class);
 		createQuery.select(fromClass)
 				.where(buider.and(buider.equal(fromClass.get("pickupStore"), pickupStore),
-						buider.or(buider.equal(fromClass.get("orderStatus"), "PRE"),
-								buider.equal(fromClass.get("orderStatus"), "Ing"))));
+						buider.or(buider.equal(fromClass.get("orderStatus"), "未來訂單"),
+								buider.equal(fromClass.get("orderStatus"), "進行中訂單"),
+								buider.equal(fromClass.get("orderStatus"), "未來調度"),
+								buider.equal(fromClass.get("orderStatus"), "進行中調度"))));
 
 		Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery);
 		queryword.setParameter(pickupStore, shopname);
@@ -131,7 +140,9 @@ public class OrderDAO implements OrderIFaceDAO {
 		ParameterExpression<String> checkshopname = buider.parameter(String.class);
 		// select * from everbikeinfo.class where
 		// everbikeinfo.class.BranchName.branchName = 傳入店名
-		createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName").get("branchName"), checkshopname));
+		createQuery.select(fromClass)
+				.where(buider.and(buider.equal(fromClass.get("branchName").get("branchName"), checkshopname),
+						buider.equal(fromClass.get("isReadyMaintenance"), false)));
 
 		// 查詢物件
 		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);
@@ -597,8 +608,10 @@ public class OrderDAO implements OrderIFaceDAO {
 				.where(buider.and(buider.equal(fromClass.get("dropoffStore"), pickupstore),
 						buider.notEqual(fromClass.get("pickupStore"), fromClass.get("dropoffStore")),
 						buider.lessThanOrEqualTo(fromClass.<Date>get("dropoffDate"), sdf.parse(pickupdate)),
-						buider.or(buider.equal(fromClass.get("orderStatus"), "PRE"),
-								buider.equal(fromClass.get("orderStatus"), "Ing"))));
+						buider.or(buider.equal(fromClass.get("orderStatus"), "未來訂單"),
+								buider.equal(fromClass.get("orderStatus"), "進行中訂單"),
+								buider.equal(fromClass.get("orderStatus"), "未來調度"),
+								buider.equal(fromClass.get("orderStatus"), "進行中調度"))));
 
 		Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery);
 		queryword.setParameter(pickupstore, shopname);
@@ -718,6 +731,163 @@ public class OrderDAO implements OrderIFaceDAO {
 		}
 
 		return afterCompareAcc;
+	}
+
+	@Override
+	public List<OrderList> showMemberAndNonMemberDetail(String showMemberAndNonMemberphnoe) {
+
+		System.out.println("showMemberAndNonMemberDetail" + showMemberAndNonMemberphnoe);
+
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+		Root<OrderList> fromClass = createQuery.from(OrderList.class);
+		createQuery.select(fromClass).where(buider.equal(fromClass.get("phone"), showMemberAndNonMemberphnoe));
+		List<OrderList> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+
+		for (OrderList loop : branchlist) {
+
+			System.out.println("loop" + loop.toString());
+
+		}
+
+		return branchlist;
+	}
+
+	@Override
+	public List<OrderListToGson> convertOrderListToGson(List<OrderList> customorder) throws ParseException {
+
+		List<OrderListToGson> orderListToGson = new ArrayList<>();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (OrderList loop : customorder) {
+
+			orderListToGson.add(new OrderListToGson(loop.getOrderSerialNum(), loop.getPhone(), loop.getBikeModel(),
+					df.format(loop.getPickupDate()), df.format(loop.getDropoffDate()), loop.getTotalDiscount(),
+					loop.getBikePrice(), loop.getAccessoriesAmount(), loop.getAccessoriesTotalPrice(),
+					loop.getOrderTotalPrice(), df.format(loop.getOrderTime()), loop.getPickupStore(),
+					loop.getDropoffStore(), loop.getDiscountName(), loop.getOrderStatus(), loop.isIs_member(),
+					loop.isPayOrNot()));
+
+		}
+
+		return orderListToGson;
+	}
+
+	@Override
+	public List<OrderList> showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) {
+
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+		Root<OrderList> fromClass = createQuery.from(OrderList.class);
+		// 封裝主查詢條件
+		List<Predicate> predicatesList = new ArrayList<Predicate>();
+
+		if (managerOrderCondition.getDropoffstore() != "") {
+			predicatesList.add( buider.equal(fromClass.get("dropoffStore"), managerOrderCondition.getDropoffstore())); 
+		}
+		if (managerOrderCondition.getOrderstatus() != "") {
+			predicatesList.add( buider.equal(fromClass.get("orderStatus"), managerOrderCondition.getOrderstatus()));
+		}
+		if (managerOrderCondition.getPickupstore() != "") {
+			predicatesList.add( buider.equal(fromClass.get("pickupStore"), managerOrderCondition.getPickupstore()));
+		}
+
+		createQuery.select(fromClass).where(buider.and(predicatesList.toArray(new Predicate[predicatesList.size()])));
+		List<OrderList> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+
+		
+		
+		
+		return branchlist;
+	}
+
+	@Override
+	public List<OrderListToGson> convertOrderListToGsonWithPlate(List<OrderList> customorder) throws ParseException {
+		List<OrderListToGson> orderListToGson = new ArrayList<>();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (OrderList loop : customorder) {
+
+			orderListToGson.add(new OrderListToGson(loop.getOrderSerialNum(), loop.getPhone(), loop.getBikeModel(),loop.getLicensePlate().getLicensePlate() , 
+					df.format(loop.getPickupDate()), df.format(loop.getDropoffDate()), loop.getTotalDiscount(),
+					loop.getBikePrice(), loop.getAccessoriesAmount(), loop.getAccessoriesTotalPrice(),
+					loop.getOrderTotalPrice(), df.format(loop.getOrderTime()), loop.getPickupStore(),
+					loop.getDropoffStore(), loop.getDiscountName(), loop.getOrderStatus(), loop.isIs_member(),
+					loop.isPayOrNot()));
+			
+	
+
+		}
+
+		return orderListToGson;
+	}
+
+	@Override
+	public void showManagerChangeOrderStatus(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
+           OrderList oldorder = factory.getCurrentSession().get(OrderList.class, showManagerChangeOrderStatus.getOrdersernum()); 
+           oldorder.setOrderStatus(showManagerChangeOrderStatus.getOrderstatus());
+		factory.getCurrentSession().update(oldorder);	
+		
+		   
+		
+	}
+
+	@Override
+	public void showManagerFinishedOrder(FinOrderBean finOrderBean) {
+		// TODO Auto-generated method stub
+		  OrderList oldorder = factory.getCurrentSession().get(OrderList.class, finOrderBean.getOrdersernum()); 
+		//如果訂單是甲店乙還
+		  if( !oldorder.getPickupStore().equals(oldorder.getDropoffStore())) {
+			   EveryBikeInfo changebike = factory.getCurrentSession().get(EveryBikeInfo.class, oldorder.getLicensePlate().getLicensePlate());
+	
+			   //取出分店物件
+			     CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+				CriteriaQuery<BranchDetail> createQuery = buider.createQuery(BranchDetail.class);
+				Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+				createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName"), oldorder.getDropoffStore()));
+				Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery.select(fromClass));
+				BranchDetail branch = queryword.getSingleResult();
+			   changebike.setBranchName(branch);
+			   
+			   factory.getCurrentSession().update(changebike);
+		  }
+		  
+		  //更新機車哩程
+		  maintenanceDAO.updateBikeMileage(oldorder.getLicensePlate().getLicensePlate(), Double.valueOf(finOrderBean.getNewmileage())) ; 
+		  maintenanceDAO.showMessageIfMileageIsOverAfterComplete(oldorder.getLicensePlate().getLicensePlate()) ; 
+		  
+		  
+		  
+		  
+		  
+		   
+		   oldorder.setOrderStatus(finOrderBean.getOrderstatus());
+		factory.getCurrentSession().update(oldorder);	
+		
+		
+		
+	}
+
+	@Override
+	public void showManagerFinishedDiapatcher(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
+		   OrderList oldorder = factory.getCurrentSession().get(OrderList.class, showManagerChangeOrderStatus.getOrdersernum()); 
+      //如果訂單是甲店乙還
+		  if( !oldorder.getPickupStore().equals(oldorder.getDropoffStore())) {
+			   EveryBikeInfo changebike = factory.getCurrentSession().get(EveryBikeInfo.class, oldorder.getLicensePlate().getLicensePlate());
+	
+			   //取出分店物件
+			     CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+				CriteriaQuery<BranchDetail> createQuery = buider.createQuery(BranchDetail.class);
+				Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+				createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName"), oldorder.getDropoffStore()));
+				Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery.select(fromClass));
+				BranchDetail branch = queryword.getSingleResult();
+			   changebike.setBranchName(branch);
+			   
+			   factory.getCurrentSession().update(changebike);
+		  }
+		   
+		   oldorder.setOrderStatus(showManagerChangeOrderStatus.getOrderstatus());
+		factory.getCurrentSession().update(oldorder);	
+		
 	}
 
 }

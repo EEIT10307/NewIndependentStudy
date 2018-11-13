@@ -23,7 +23,7 @@ public class TestEmail {
 	 * 
 	 * ★★★★★使用gmail來測試"發信"★★★★★ 要先更改設定 [允許安全性較低的應用程式] 設定處於啟用狀態 如果有開啟兩段帳號登入驗證的
 	 * 要先關閉才能更改此設定。
-	 * 
+	 *  
 	 */
 
 	public static void main(String[] args) {
@@ -47,9 +47,9 @@ public class TestEmail {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("bookwater168@gmail.com"));// 從上面打的帳號傳
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater@yahoo.com.tw"));// 傳給誰
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));// 傳給誰
 			message.setSubject("感謝您的下定");
-			message.setText("測試測試1");
+			message.setText("http://localhost:8080/motorcycleiiieduproject/RobinBikeReviewTset.html?email=4&order=2018030101001");
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);

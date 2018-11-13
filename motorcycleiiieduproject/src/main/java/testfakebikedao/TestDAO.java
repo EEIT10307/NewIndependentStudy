@@ -2,6 +2,7 @@ package testfakebikedao;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -20,6 +21,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
@@ -33,20 +35,19 @@ public class TestDAO {
 
 	@Autowired
 	SessionFactory factory;
+	@Autowired
+	EveryBikeMileageIFaceService everyBikeMileageIFaceService;
 
 	public TestDAO() {
 		System.out.println("test DAO startUP");
 	}
-
-
 
 	public void makeFakeOrderlist() throws IOException, NumberFormatException, ParseException {
 
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-			new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList.txt")));
-
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList2.txt")));
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -69,11 +70,13 @@ public class TestDAO {
 
 	public void makeFakeBranchDetail() throws IOException, NumberFormatException, ParseException {
 
-		BufferedReader bf = new BufferedReader(
-						new FileReader(new File("C:\\Users\\candylo\\Desktop\\BranchDetail.txt")));
+//		BufferedReader bf = new BufferedReader(
+//				new FileReader(new File("C:\\Users\\candylo\\Desktop\\BranchDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BranchDetail.txt 
 
 //C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt
+		BufferedReader bf = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));//robin
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -93,17 +96,25 @@ public class TestDAO {
 
 	public void makeFakeBikedetail_EveryBikeInfor() throws IOException, NumberFormatException, ParseException {
 
-		BufferedReader bf = new BufferedReader(
-
-				new FileReader(new File("C:\\Users\\candylo\\Desktop\\BikeDetail.txt")));
+//		BufferedReader bf = new BufferedReader(
+//
+//				new FileReader(new File("C:\\Users\\candylo\\Desktop\\BikeDetail.txt")));
 // /Users/kuochiahao/TeamWork-workspace/fakedata/BikeDetail.txt 
 // C:\\Users\\III\\Desktop\\fakedata\\BikeDetail.txt
+//		@SuppressWarnings("resource")
+//		BufferedReader motorpl = new BufferedReader(
+//
+//				new FileReader(new File("C:\\Users\\candylo\\Desktop\\EveryBikeInfo.txt")));
+//		/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt
+//C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
+		BufferedReader bf = new BufferedReader(
+
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail.txt")));
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\candylo\\Desktop\\EveryBikeInfo.txt")));
-//		/Users/kuochiahao/TeamWork-workspace/fakedata/EveryBikeInfo.txt
-//C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+
 		String line;
 		String line2;
 		SimpleDateFormat sim1 = new SimpleDateFormat("yyyy/mm/dd");
@@ -111,7 +122,7 @@ public class TestDAO {
 		roop: while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
 			System.out.println(lines.toString());
-            System.out.println("test"+lines[0]);
+			System.out.println("test" + lines[0]);
 			/* ====new 上架新商品 ==== */
 			BikeDetail bikeD = new BikeDetail();
 			// 複合主鍵 設定主鍵值
@@ -138,11 +149,10 @@ public class TestDAO {
 			bikeD.setTorque(lines[19]);
 			bikeD.setFrontBrake(lines[20]);
 			bikeD.setRearBrake(lines[21]);
-			
 
 			while ((line2 = motorpl.readLine()) != null) {
 				String[] lines2 = line2.split(",");
-				int x = 1; 
+				int x = 1;
 				/* ====new 機車車牌==== */
 				EveryBikeInfo everyBikeInfo1 = new EveryBikeInfo();
 				if (line2.equals("=")) {
@@ -150,14 +160,12 @@ public class TestDAO {
 					factory.getCurrentSession().persist(bikeD);
 					continue roop;
 				}
-				if(lines2[1].equals("木柵")) {
-					x = 2 ; 
+				if (lines2[1].equals("木柵")) {
+					x = 2;
 				}
-		
+
 				// 取得分店實體 （需要在選項內埋分店的ID)
 				BranchDetail branchDetail1 = factory.getCurrentSession().get(BranchDetail.class, x);
-				
-
 
 				everyBikeInfo1.setLicensePlate(lines2[0]);
 				everyBikeInfo1.setBranchName(branchDetail1);
@@ -167,7 +175,6 @@ public class TestDAO {
 				bikeD.addEveryBikeInfo(everyBikeInfo1);
 
 			}
-
 			factory.getCurrentSession().persist(bikeD);
 
 		}
@@ -178,61 +185,72 @@ public class TestDAO {
 	public void makeFakeMaintenanceDetail() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("C:\\Users\\III\\Desktop\\fakedata\\MaintenanceDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\MaintenanceDetail.txt")));
 		String line;
 		while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
 			MaintenanceDetail maintenanceDetail = new MaintenanceDetail();
 			maintenanceDetail.setMaintenanceItem(lines[0]);
 			maintenanceDetail.setRequiredMileage(Double.valueOf(lines[1]));
+			maintenanceDetail.setRequiredHourTodo(Double.valueOf(lines[2]));
 			factory.getCurrentSession().persist(maintenanceDetail);
 		}
 		bf.close();
 	}
-	
 
 	public void makeFakeBikeDescription() throws IOException, NumberFormatException, ParseException {
 
 		BufferedReader bf = new BufferedReader(
 				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
-		String lines ="";
+		String lines = "";
 		String line;
 		BikeDetail bikedetail = null;
-		int x = 0 ; 
-		
-		roop:while ((line = bf.readLine()) != null) {
-			
-			if(line.equals("=")) {
-				System.out.println("lines"+lines);
+		int x = 0;
+
+		roop: while ((line = bf.readLine()) != null) {
+
+			if (line.equals("=")) {
+				System.out.println("lines" + lines);
 				bikedetail.setDescription(lines);
 				factory.getCurrentSession().update(bikedetail);
-				x=0 ; 
+				x = 0;
 				lines = "";
 				continue roop;
 			}
-			
-			
-			if(x == 0 ) {
-			String[] query = line.split(",");
-		 bikedetail = factory.getCurrentSession().get(BikeDetail.class, new IdClassBikeDetail(query[0], query[1]));
-			 
-System.out.println(query[0]+query[1]);
-System.out.println(("BEAN = "+bikedetail.getIdClassBikeDetail().getBikeModel()));
-		 x++;
-			   continue roop;
+
+			if (x == 0) {
+				String[] query = line.split(",");
+				bikedetail = factory.getCurrentSession().get(BikeDetail.class,
+						new IdClassBikeDetail(query[0], query[1]));
+
+				System.out.println(query[0] + query[1]);
+				System.out.println(("BEAN = " + bikedetail.getIdClassBikeDetail().getBikeModel()));
+				x++;
+				continue roop;
 			}
-					lines += line ; 
-				
-			   
-			   
-			   
+			lines += line;
+
 		}
 		bf.close();
 	}
-	
-	
 
-	
+	public void insertEveryBikeMileage() throws IOException {
+		@SuppressWarnings("resource")
+		BufferedReader motorpl = new BufferedReader(
+
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+		String line2;
+		roop: while ((line2 = motorpl.readLine()) != null) {
+			if (line2.equals("=")) {
+				System.out.println("loop 多的");
+				continue roop;
+			}
+			String[] lines2 = line2.split(",");
+			System.out.println("車牌:"+lines2[0]);
+			everyBikeMileageIFaceService.save(lines2[0]);	
+
+		}
+	}
 
 	public void createCriteria() {
 

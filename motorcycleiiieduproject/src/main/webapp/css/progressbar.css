@@ -1,0 +1,38 @@
+.progress-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+/*     margin: 0 0 10px; */
+}
+.progress-outer{
+    background: #fff;
+    padding: 5px 60px 5px 5px;
+    border: 5px solid #bebfbf;
+    border-radius: 45px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.progress{
+    background: #bebfbf;
+    border-radius: 20px;
+    margin: 0;
+    width: 200%;/*加寬進度條 */
+}
+.progress .progress-bar{
+    border-radius: 20px;
+    box-shadow: none;
+    animation: animate-positive 2s;
+}
+.progress .progress-value{
+    font-size: 20px;
+    font-weight: 700;
+    color: #6b7880;
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    margin:0px -200px 0px 0px;/*將進度條的字右移 */
+
+}
+@keyframes animate-positive{
+    0%{ width: 0; }
+}

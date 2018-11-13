@@ -78,7 +78,16 @@ public void createCriteria() {
 		
 		
 	}
-
+	@Transactional
+public void insertEveryBikeMileage() throws IOException {
+		Session session = factory.getCurrentSession()  ; 
+		System.out.println("EveryBikeMileage新增");
+		
+		testDAO.insertEveryBikeMileage();
+		
+		
+		
+	}
 	
 
 }

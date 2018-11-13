@@ -76,12 +76,19 @@ public class BikeDetailService implements BikeDetailIFaceService {
 		String fuelType;
 		Boolean aBS;
 		Integer hourPrice;
-
+		
+		String frontSuspension;
+		String rearSuspension;
+		String rearTire;
+		String horsePower;
+		String torque;
+		String frontBrake;
+		String rearBrake;
 		int count = 0;
 		count++;
 
 		for (BikeDetailAndEveryBikeInfo root : bikeDetailAndEveryBikeInfo) {
-
+			
 			licensePlate = root.getLicensePlate();
 			branchName = root.getBranchName();
 			bikeModel = root.getBikeModel();
@@ -98,17 +105,27 @@ public class BikeDetailService implements BikeDetailIFaceService {
 			fuelType = root.getFuelType();
 			aBS = root.getaBS();
 			hourPrice = root.getHourPrice();
+			
+			frontSuspension=root.getFrontSuspension();
+			rearSuspension=root.getRearSuspension();
+			rearTire=root.getRearTire();
+			horsePower=root.getHorsePower();
+			torque=root.getTorque();
+			frontBrake=root.getFrontBrake();
+			rearBrake=root.getRearBrake();
 
-			BranchDetail branchDetail = session.get(BranchDetail.class, branchName);// 分店 需要分店的流水號 加入機車 建構子
-			EveryBikeInfo everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false, branchDetail);// 機車個別資訊 新增
+//			BranchDetail branchDetail = session.get(BranchDetail.class, branchName);// 分店 需要分店的流水號 加入機車 建構子
+//			EveryBikeInfo everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false, branchDetail);// 機車個別資訊 新增
 			IdClassBikeDetail idClassBikeDetail = new IdClassBikeDetail(bikeModel, modelYear);// 型號跟年份 複合主鍵
 			Date now = new Date();
 			BikeDetail bikeDetail = new BikeDetail(idClassBikeDetail, bikeBrand, engineType, bikeType, plateType,
-					fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice, now);// 機車
+					fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice, now,frontSuspension,rearSuspension,
+					rearTire,horsePower,torque,frontBrake,rearBrake);// 機車
 																													// 詳細資訊新增
-			bikeDetail.addEveryBikeInfo(everyBikeInfo);
-			bikeDetailIFaceDAO.merge(bikeDetail);
-			everyBikeMileageIFaceService.save(licensePlate);
+//			bikeDetail.addEveryBikeInfo(everyBikeInfo);
+		
+			return bikeDetailIFaceDAO.merge(bikeDetail);
+			
 		}
 		return count;
 
@@ -116,7 +133,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 
 	@Override
 	public int updateBikeDetai(BikeDetailToGson bikeDetailToGson) {
-		
+
 		return bikeDetailIFaceDAO.updateBikeDetai(bikeDetailToGson);
 
 	}
@@ -127,15 +144,21 @@ public class BikeDetailService implements BikeDetailIFaceService {
 	}
 
 	@Override
-	public List<QAndA> selectQA() {
+	public List<QAndA> selectQA(String BikeModel, String ModelYear) {
 		// TODO Auto-generated method stub
-		return bikeDetailIFaceDAO.selectQA();
+		return bikeDetailIFaceDAO.selectQAwhere(BikeModel, ModelYear);
 	}
 
 	@Override
 	public List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA) {
 		// TODO Auto-generated method stub
 		return bikeDetailIFaceDAO.QaBeanToJson(QAndA);
+	}
+
+	@Override
+	public int updateQA(int qAndASerialNum, String ans, String ansquction) {
+
+		return bikeDetailIFaceDAO.updateQA(qAndASerialNum, ans, ansquction);
 	}
 
 }

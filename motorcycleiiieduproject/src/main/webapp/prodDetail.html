@@ -17,6 +17,10 @@
 .textareawidth {
 	width: 1000px
 }
+
+.tdborder {
+	border-bottom: 1px solid #c0c0c0;
+}
 </style>
 </head>
 <body>
@@ -265,62 +269,8 @@
 					<div class="tab-pane fade loadtest2222" role="tabpanel"
 						id="service-three">
 						<!-- 						<div w3-include-html="review.html"></div> -->
-
 					</div>
-					<script>
-					$(document).ready(function() {
 					
-						$.ajax({
-								type : "post",
-								url : "selectQA",
-								data : {"yesar":"yesar"},
-								contentType:"application/json; charset=utf-8",
-								success : function(response) {
-							
-								var all=JSON.parse(response);
-									for(i in all){
-										
-// 										alert(all[i].questioner);//人名
-// 										alert(all[i].questionCotent);//問題
-//                                      alert(all[i].questionDate);//時間sanswerContent
-		 								$("#appendtext").append("<tr><td>Q"+i+":</td><td>"+all[i].questioner+"</td><td>"+all[i].questionDate+"</td></tr><tr><td>"+all[i].questionCotent+"</td><td></td><td></td></tr>"+
-		 													  	"<tr><td>A"+i+":</td><td>"+all[i].administratorID+"回覆</td><td>"+all[i].answerTime+"</td></tr><tr><td>"+all[i].answerContent+"</td><td></td><td></td></tr>");
-
-									}
-								
-								}
-							});
-					
-// 					--------------------------------------------------------------------------------------------
-						//按下送出 產生商品的問與答
-							$("#zzzzz").click(function() {
-								$("#appendtext").append("<p>你好嗎</p>")
-// 								var questioner = $("#cus").val();
-// 								alert(questioner)
-// 								var questionCoten=$("#questionCoten").text();
-// 								alert(questionCoten)
-// 								if(questioner=="" || questionCoten==""){
-								
-// 									return;
-// 								}
-							
-// // 								型號and年份  BikeModel   ModelYear
-// 								var getall={"questioner":questioner,"questionCoten":questionCoten,"bikeModel":"R3","modelYear":"2019"}
-// 								var too=JSON.stringify(getall)
-// 								$.ajax({
-// 									type : "post",
-// 									url : "insertQA",
-// 									data : too,
-// 									contentType:"application/json; charset=utf-8",
-// 									success : function(response) {
-// 									}
-// 								});
-								
-								
-							})
-
-						})
-					</script>
 				</div>
 			</div>
 		</div>
@@ -344,5 +294,6 @@
 	</script>
 
 	<script src="js/serchMotor.js"></script>
+	
 </body>
 </html>

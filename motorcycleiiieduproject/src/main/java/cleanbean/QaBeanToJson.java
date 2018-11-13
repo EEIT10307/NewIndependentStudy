@@ -1,6 +1,7 @@
 package cleanbean;
 
 public class QaBeanToJson {
+	private int qAndASerialNum;
 	private String  questioner;
 	private String questionCotent;
 	private String bikeModel;
@@ -21,9 +22,10 @@ public class QaBeanToJson {
 	}
 	
 	
-	public QaBeanToJson(String questioner, String questionCotent, String bikeModel, String modelYear,
+	public QaBeanToJson(int qAndASerialNum,String questioner, String questionCotent, String bikeModel, String modelYear,
 			String administratorID, String answerContent, String questionDate, String answerTime) {
-		super();
+		
+		this.qAndASerialNum = qAndASerialNum;
 		this.questioner = questioner;
 		this.questionCotent = questionCotent;
 		this.bikeModel = bikeModel;
@@ -82,6 +84,16 @@ public class QaBeanToJson {
 	}
 	public void setAnswerTime(String answerTime) {
 		this.answerTime = answerTime;
+	}
+
+
+	public int getqAndASerialNum() {
+		return qAndASerialNum;
+	}
+
+
+	public void setqAndASerialNum(int qAndASerialNum) {
+		this.qAndASerialNum = qAndASerialNum;
 	}
 	
 }

@@ -30,24 +30,28 @@ public class BikeDetail implements Serializable{
 	private Double dryWeight;
 	private Double fuelConsumption;
 	private String frontTire ; 
-    private String fuelType ; 
+    private String fuelType ;
     private Boolean aBS ; 
     private Integer hourPrice;
     private java.util.Date onSheftTime;
-    private String frontSuspension ; 
-    private String rearSuspension ;
-    private String rearTire ;
-    private String horsePower ; 
-    private String torque ;
-    private String frontBrake;
-    private String rearBrake;
-    private String description;
-
+    
+    private String frontSuspension ; //前懸吊
+    private String rearSuspension ;//後懸吊
+    private String rearTire ;//後輪胎
+    private String horsePower ; //馬力
+    private String torque ;//扭力
+    private String frontBrake;//前煞車
+    private String rearBrake;//後煞車
+    private String description;//描述
+ 
+    
     private List<EveryBikeInfo> everyBikeInfos = new ArrayList<EveryBikeInfo>();
 
  
 
-
+public BikeDetail() {
+		
+	}
 
  
 	public BikeDetail(IdClassBikeDetail idClassBikeDetail) {
@@ -85,11 +89,36 @@ public class BikeDetail implements Serializable{
 		this.rearBrake = rearBrake;
 		this.everyBikeInfos = everyBikeInfos;
 	}
-
-
-	public BikeDetail() {
-		
+	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
+			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
+			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime, String frontSuspension,
+			String rearSuspension, String rearTire, String horsePower, String torque, String frontBrake,
+			String rearBrake) {
+		super();
+		this.idClassBikeDetail = idClassBikeDetail;
+		this.bikeBrand = bikeBrand;
+		this.engineType = engineType;
+		this.bikeType = bikeType;
+		this.plateType = plateType;
+		this.fuelTankCapacity = fuelTankCapacity;
+		this.seatHeight = seatHeight;
+		this.dryWeight = dryWeight;
+		this.fuelConsumption = fuelConsumption;
+		this.frontTire = frontTire;
+		this.fuelType = fuelType;
+		this.aBS = aBS;
+		this.hourPrice = hourPrice;
+		this.onSheftTime = onSheftTime;
+		this.frontSuspension = frontSuspension;
+		this.rearSuspension = rearSuspension;
+		this.rearTire = rearTire;
+		this.horsePower = horsePower;
+		this.torque = torque;
+		this.frontBrake = frontBrake;
+		this.rearBrake = rearBrake;
 	}
+
+	
 
 	public BikeDetail(IdClassBikeDetail idClassBikeDetail, String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,

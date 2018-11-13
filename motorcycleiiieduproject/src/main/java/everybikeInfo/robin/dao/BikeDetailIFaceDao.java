@@ -29,4 +29,6 @@ public interface BikeDetailIFaceDao {
 	int insertQA(QaBean qaBean);
 	List<QAndA> selectQA();
 	List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA);
+	int updateQA(int qAndASerialNum,String ans,String ansquction);
+	List<QAndA> selectQAwhere(String BikeModel,String ModelYear);
 }

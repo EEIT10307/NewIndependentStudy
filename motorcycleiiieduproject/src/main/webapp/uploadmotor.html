@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 	<script src="js/chat.js"></script>
-	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
 	
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
@@ -33,15 +32,16 @@
 
   <body id="page-top">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+		<a class="navbar-brand mr-1" href="index.html">後台管理</a>
 
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
-      
-      <script type="text/javascript">
+		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
+			id="sidebarToggle" href="#">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<script type="text/javascript">
       !function(t){"use strict";t("#sidebarToggle").click(
 	  			function(e) {
 	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
@@ -63,19 +63,20 @@
 	  	
 	  	
 	  </script>
-      
-      <!-- Navbar Search -->
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-secondary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
 
+		<!-- Navbar Search -->
+		<form
+			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="搜尋..."
+					aria-label="搜尋" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-secondary" type="button">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1">
@@ -98,305 +99,233 @@
         </li>
       </ul>
 
-    </nav>
+	</nav>
 
-    <div id="wrapper">
+	<div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav"></ul>
-      <script type="text/javascript">
-      	$('.sidebar').load("sidebarAdmin.html");
-      </script>
-
-      <div id="content-wrapper">
-
-        <div class="container-fluid">
-        
-        
-        <!-- /.container-fluid -->
-        
-        
-        
-        <table class="col-lg-6 offset-lg-4 col-md-8 offset-md-2 col-sm-12">
-					<tr><td></td><td></td></tr>
-					<tr><td>車牌:</td><td class=' form-group d-flex justify-content-between align-middle col-lg-11 col-md-12 col-sm-12 my-0' style='padding-left:1px;'><input type="text" id="LicensePlate" name="test" value="MFD-001" class="LicensePlate form-control form-control-sm"><button id="addVar" class='btn btn-sm btn-secondary mx-2' type='button'>新增車牌</button></td></tr>
-					<tbody class="add">	</tbody>
-				
-					<tr><td>分店:</td><td class="form-group"><select id="BranchName" class="BranchName form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td></tr>
-					<tr><td>型號:</td><td class="form-group"><input 	   type="text" class="BikeModel form-control form-control-sm col-lg-8 col-md-12 col-sm-12" id="BikeModel" value="R3">  <select id="BikeModel1" class="BikeModel1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td></tr>
-					<tr><td>年份:</td><td class="form-group"><input 	   type="text" class="ModelYear form-control form-control-sm col-lg-8 col-md-12 col-sm-12" id="ModelYear" value="1985"><select id="ModelYear1" class="ModelYear1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select>只新增車牌<input type="checkbox" id="checkbox" class="mx-2"></td></tr>
-								
-					<tr class="BikeBrand"><td>廠牌:</td><td class="form-group"><input    			type="text"  	id="BikeBrand" 			value="YAMAHA"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="EngineType"><td>CC數:</td><td class="form-group"><input  			type="text"  	id="EngineType"			value="2000"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="BikeType"><td>車種:</td><td class="form-group"><input    			type="text"  	id="BikeType" 			value="紅牌"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="PlateType"><td>紅黃白牌:</td><td class="form-group"><input 			type="text" 	id="PlateType" 	 		value="白牌"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="FuelTankCapacity"><td>油箱容量:</td><td class="form-group"><input	type="text" 	id="FuelTankCapacity" 	value="150"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="SeatHeight"><td>座高:</td><td class="form-group"><input 			type="text"  	id="SeatHeight" 		value="115"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="DryWeight"><td>車子乾重:</td><td class="form-group"><input 			type="text"  	id="DryWeight" 			value="175"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="FuelConsumption"><td>油耗:</td><td class="form-group"><input 		type="text"  	id="FuelConsumption"	value="30"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="Tire"><td>輪胎:</td><td class="form-group"><input 					type="text"		id="Tire"				value="普利斯頓17吋"	class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="FuelType"><td>使用燃料:</td><td class="form-group"><input 			type="text"		id="FuelType" 			value="98"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					<tr class="ABS"><td>ABS:</td><td class="form-group"><select id="ABS" class="form-control form-control-sm col-lg-8 col-md-12 col-sm-12 text-center"><option value="1">是</option><option value="0">否</option></select></td></tr>
-					<tr class="HourPrice"><td>每小時價格:</td><td class="form-group"><input type="text"				id="HourPrice" value="200"		class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td></tr>
-					</table>
-					<input type="submit" id="submit" class="submit btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4" >
-		<!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
-					<input type="submit" id="submit1" class="submit1 btn btn-secondary col-lg-1 offset-lg-6 col-md-4 offset-md-4 my-4" >
-		</body>
-		<script>
-		        //初始参数个数
-		        var varCount = 0;
-		 
-		        $(function () {
-		          //新增按钮点击
-		            $('#addVar').on('click', function(){
-		                varCount++;
-						$(".add").append('<tr><td>車牌'+varCount+':</td><td class="form-group d-flex justify-content-between align-middle col-lg-10 col-md-12 col-sm-12 my-0" style="padding-left:3px;"><input class="form-control form-control-sm my-1" type="text" id="LicensePlate'+varCount+'" name="test">' + '<span class="removeVar btn btn-sm btn-danger mx-2 my-1">删除</span></td></tr>');
-		            });
-		 
-		          //删除按钮点击
-		          $('table').on('click', '.removeVar', function(){
-					$(this).closest('tr').remove();
-		            varCount--;
-		          });
-		        });
-		    </script>
+		<!-- Sidebar -->
+		<ul class="sidebar navbar-nav"></ul>
 		<script type="text/javascript">
-		
-		$(document).ready(function() {
-			//只新增車牌 其他隱藏
-			$("#BikeModel1").hide();
-			$("#ModelYear1").hide();
-			$("#submit1").hide();
-			$("#checkbox").click(function() {
-				$(".BikeModel").toggle();
-				$(".ModelYear").toggle();
-				$(".BikeBrand").toggle();
-				$(".EngineType").toggle();
-				$(".BikeType").toggle();
-				$(".PlateType").toggle();
-				$(".FuelTankCapacity").toggle();
-				$(".SeatHeight").toggle();
-				$(".DryWeight").toggle();
-				$(".FuelConsumption").toggle();
-				$(".Tire").toggle();
-				$(".FuelType").toggle();
-				$(".ABS").toggle();
-				$(".HourPrice").toggle();
-				$("#BikeModel1").toggle();
-				$("#ModelYear1").toggle();
-				
-				$("#submit1").toggle();
-				$(".submit").toggle();
-			});
-		// ---------------------------------------------------------------------------------
-			//查詢分店
-			$.ajax({
-				type : "post",
-				url : "selectBranchDetail",
-				success : function(response) {
-					// 				alert("sucess");
-					var shop = JSON.parse(response);
-					//迴圈
-					for (i in shop) {
-						//指定分店的欄位
-						var zx = shop[i].branchName;
-		//								alert(zx);
-						//產生option
-						i++;
-						var opt = $("<option>").val(i).text(zx);
-						//傳回id=showshop 產生 分店 下拉式選單
-						$("#BranchName").append(opt);
-					}
-				}
-			});
-		// 	-------------------------------------------------------------------------------
-			//新增車子詳細資訊
-			$("#submit").click(function(e) {
-				var LicensePlate = $("#LicensePlate").val();//車牌
-				var BranchName = $("#BranchName").val();//分店
-				
-				var BikeModel = $("#BikeModel").val();//型號
-				var ModelYear = $("#ModelYear").val();//年份
-				var BikeBrand = $("#BikeBrand").val();//廠牌
-				var EngineType = $("#EngineType").val();//CC數
-				var BikeType = $("#BikeType").val();//車種
-				var PlateType = $("#PlateType").val();//紅白黃牌
-				var FuelTankCapacity = $("#FuelTankCapacity").val();//油箱容量
-				var SeatHeight = $("#SeatHeight").val();//座高
-				var DryWeight = $("#DryWeight").val();//車子乾重:
-				var FuelConsumption = $("#FuelConsumption").val();//油耗
-				var Tire = $("#Tire").val();//輪胎
-				var FuelType = $("#FuelType").val();//使用燃料
-				var ABS = $("#ABS").val();//煞車ABS
-				var HourPrice = $("#HourPrice").val();//每小時價格
-					alert(LicensePlate)
-					if (ABS == 1) {
-						ABS = true;
-					} else {
-						ABS = false;
-					}
-					var allLicensePlatearray = []
-												
-		 			$("[name='test']").each(function(){
-		 				show=$(this).val();
-		 				alert(show)
-		 				var allLicensePlate = {}
-		 				allLicensePlate["licensePlate"] = show ;
-		 				allLicensePlate["branchName"] = BranchName ;
-		 				allLicensePlate["bikeModel"] = BikeModel ;
-		 				allLicensePlate["modelYear"] = ModelYear ;
-		 				allLicensePlate["bikeBrand"] = BikeBrand ;
-		 				allLicensePlate["engineType"] = EngineType ;
-		 				allLicensePlate["bikeType"] = BikeType ;
-		 				allLicensePlate["plateType"] = PlateType ;
-		 				allLicensePlate["fuelTankCapacity"] = FuelTankCapacity ;
-		 				allLicensePlate["seatHeight"] = SeatHeight ;
-		 				allLicensePlate["dryWeight"] = DryWeight ;
-		 				allLicensePlate["fuelConsumption"] = FuelConsumption ;
-		 				allLicensePlate["tire"] = Tire;
-		 				allLicensePlate["fuelType"] = FuelType ;
-		 				allLicensePlate["aBS"] = ABS ;
-		 				allLicensePlate["hourPrice"] = HourPrice ;
-		 				
-		 				allLicensePlatearray.push(allLicensePlate) ; 
-		 				
-		 			})
-		 			alert(JSON.stringify(allLicensePlatearray))
-		 			
-		 			var jsonarray = JSON.stringify(allLicensePlatearray)
-				$.ajax({
-						type : "POST",
-						url : "insertBikeDetail",
-						data : jsonarray,
-						success : function(response) {
-		
-							// 						alert("sucess");
-		
-							
-		
-						}
-					});
-				
-				});
-		
-		// ----------------------------------------------------------------------------------
-			//產生型號 到下拉式選單
-			$.ajax({
-				type : "post",
-				url : "selectEveryBikeInfoBikeModel",
-				success : function(response) {
-		// 			alert("sucess");
-					var shop = JSON.parse(response);
-					//迴圈
-					for (i in shop) {
-						//指定型號的欄位
-						var zx = shop[i];
-						// alert(zx);
-						
-						//產生option
-						i++;
-						var opt = $("<option>").val(zx).text(zx);
-						//傳回id=showshop 產生 型號 下拉式選單
-						$(".BikeModel1").append(opt);
-					}
-				}
-			});
-		// 	-------------------------------------------------------------------------------------
-		
-		//查詢年份 給下拉式選單
-			$(".BikeModel1").change(function() {
-		// 		alert("7788不要9")
-		// 		alert($(".BikeModel1").val());
-			//每下拉一次清空
-			$(".ModelYear1").html("");
-			var cd= {"everyBikeInfoModel":$(".BikeModel1").val()}; 
-			var str=JSON.stringify(cd);
-				$.ajax({
-					type : "post",
-					url : "showAllshowAllEveryBikeInfo",
-					data:str,
-				 	contentType:"application/json; charset=utf-8",
-					success : function(response) {
-						var shop  =JSON.parse(response);
-						//迴圈
-						for (i in shop) {
-							//指定型號的欄位
-							var zx = shop[i];
-							//產生option
-							i++;
-							var opt = $("<option>").val(zx).text(zx);
-							//傳回id=showshop 產生 型號 下拉式選單
-							$(".ModelYear1").append(opt);
-						}
-					}
-				});
-			});
-		// 	-------------------------------------------------------------------------------------
-		//只新增車牌
-			
-				$(".submit1").click(function() {
-					var show
-					var LicensePlate = $(".LicensePlate").val();
-					var BranchName = $(".BranchName").val();
-					var BikeModel1 = $(".BikeModel1").val();
-					var ModelYear1 = $(".ModelYear1").val();
-							alert(LicensePlate)
-					//		alert(BranchName)
-						//	alert(BikeModel1)
-							//alert(ModelYear1)
-							var allLicensePlatearray = []
-							
-							
-		 			$("[name='test']").each(function(){
-		 				show=$(this).val();
-		 				alert(show)
-		 				var allLicensePlate = {}
-		 				allLicensePlate["licensePlate"] = show ;
-		 				allLicensePlate["branchName"] = BranchName ;
-		 				allLicensePlate["bikeModel"] = BikeModel1 ;
-		 				allLicensePlate["modelYear"] = ModelYear1 ;
-		 				
-		 				allLicensePlatearray.push(allLicensePlate) ; 
-		 				
-		 			})
-		 			alert(JSON.stringify(allLicensePlatearray))
-		 			
-		 			var jsonarray = JSON.stringify(allLicensePlatearray)
-					$.ajax({
-						type : "post",
-						url : "insertAllLicensePlate",
-						data :jsonarray,
-						success : function(response) {
-		
-						}
-					});
-				});
-		});
-		
-		
-		
+			$('.sidebar').load("sidebarAdmin.html");
 		</script>
-        </div>
-        
-        
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Motorcycle 2018</span>
-            </div>
-          </div>
-        </footer>
+		<div id="content-wrapper">
 
-      </div>
-      <!-- /.content-wrapper -->
+			<div class="container-fluid">
+				<!-- /.container-fluid -->
 
-    </div>
-    <!-- /#wrapper -->
 
-    <!-- Scroll to Top Button-->
+			<form id="myForm">
+				<table class="col-lg-6 offset-lg-4 col-md-8 offset-md-2 col-sm-12">
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>車牌:</td>
+						<td
+							class=' form-group d-flex justify-content-between align-middle col-lg-11 col-md-12 col-sm-12 my-0'
+							style='padding-left: 1px; width: 460px;'><input type="text"
+							id="LicensePlate" name="test" value=""
+							class="LicensePlate form-control form-control-sm">
+							<button id="addVar" class='btn btn-sm btn-secondary mx-2'
+								type='button'>新增車牌</button></td>
+					</tr>
+<!-- 						<label class="btn btn-info"> <input id="upload_img" -->
+<!-- 							style="display: none;" type="file"> 
+<i --><!-- 							class="fa fa-photo"></i> 上傳圖片 -->
+<!-- 						</label> -->
+						<tbody class="add">
+					</tbody>
+					<tr class='photo'>
+							<td>照片:</td>
+							
+							
+							
+							<td class="form-group ">
+<!-- 							<label class="btn btn-info" > -->
+<!-- 							<input type="file" name="file"	id="upload_img"  multiple="multiple" /> -->
+<!-- 							<i class="fas fa-camera-retro fa-spin "></i>上傳照片 -->
+<!-- 							</label> -->
+							
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<label class="btn btn-info" id="ccd">
+<!-- 										<span class="input-group-text">photo</span> -->
+											<i class="fas fa-camera-retro fa-spin "></i>上傳照片
+										</label>
+									</div>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input on" id="inputGroupFile01" multiple="multiple"> 
+										<label	class="custom-file-label on" for="inputGroupFile01" id="fuckyou" style="width:250px">Choose file</label>
+									</div>
+								</div>
+							</td>
+						</tr>
+					<tr>
+						<td>分店:</td>
+						<td class="form-group"><select id="BranchName"
+							class="BranchName form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td>
+					</tr>
+					<tr>
+						<td>型號:</td>
+						<td class="form-group"><input type="text" name="BikeModel"
+							class="BikeModel form-control form-control-sm col-lg-8 col-md-12 col-sm-12"
+							id="BikeModel" value=""> <select id="BikeModel1" class="BikeModel1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select></td>
+					</tr>
+					<tr>
+						<td>年份:</td>
+						<td class="form-group"><input type="text" name="ModelYear"
+							class="ModelYear form-control form-control-sm col-lg-8 col-md-12 col-sm-12"
+							id="ModelYear" value=""><select id="ModelYear1" class="ModelYear1 form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></select>只新增車牌<input
+							type="checkbox" id="checkbox" class="mx-2"></td>
+					</tr>
+
+					<tr class="BikeBrand">
+						<td>廠牌:</td>
+						<td class="form-group"><input type="text" id="BikeBrand"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="EngineType">
+						<td>CC數:</td>
+						<td class="form-group"><input type="text" id="EngineType"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="BikeType">
+						<td>車種:</td>
+						<td class="form-group"><input type="text" id="BikeType"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="PlateType">
+						<td>紅黃白牌:</td>
+						<td class="form-group"><input type="text" id="PlateType"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelTankCapacity">
+						<td>油箱容量:</td>
+						<td class="form-group"><input type="text"
+							id="FuelTankCapacity" value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="SeatHeight">
+						<td>座高:</td>
+						<td class="form-group"><input type="text" id="SeatHeight"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="DryWeight">
+						<td>車子乾重:</td>
+						<td class="form-group"><input type="text" id="DryWeight"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelConsumption">
+						<td>油耗:</td>
+						<td class="form-group"><input type="text"
+							id="FuelConsumption" value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="Tire">
+						<td>前輪尺寸:</td>
+						<td class="form-group"><input type="text" id="Tire" value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>使用燃料:</td>
+						<td class="form-group"><input type="text" id="FuelType"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="ABS">
+						<td>ABS:</td>
+						<td class="form-group"><select id="ABS"
+							class="form-control form-control-sm col-lg-8 col-md-12 col-sm-12 text-center"><option
+									value="1">是</option>
+								<option value="0">否</option></select></td>
+					</tr>
+					<tr class="HourPrice">
+						<td>每小時價格:</td>
+						<td class="form-group"><input type="text" id="HourPrice"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+
+					<tr class="FuelType">
+						<td>前懸架:</td>
+						<td class="form-group"><input type="text"
+							id="frontSuspension" value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>後懸掛:</td>
+						<td class="form-group"><input type="text" id="rearSuspension"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>後輪尺寸:</td>
+						<td class="form-group"><input type="text" id="rearTire"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>最大馬力:</td>
+						<td class="form-group"><input type="text" id="horsePower"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>最大扭力:</td>
+						<td class="form-group"><input type="text" id="torque"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>前煞車:</td>
+						<td class="form-group"><input type="text" id="frontBrake"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+					<tr class="FuelType">
+						<td>後煞車:</td>
+						<td class="form-group"><input type="text" id="rearBrake"
+							value=""
+							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
+					</tr>
+				</table>
+			</form>
+				<input type="submit" id="submit" 
+					class="submit btn  btn-secondary col-lg-1 offset-lg-4"
+					value="送出"> 
+					
+				<!-- 			//先隱藏的送出 點選只新增車牌 會出現 -->
+				<input type="submit" id="submit1" style="display: inline;"
+					class="submit1 btn btn-secondary col-lg-1 offset-lg-4"
+					value="送出"
+					><input type="submit" id="onesubmit" style="display: inline;"
+					class="onsubmit btn  btn-secondary col-lg-1  " value="一鍵完成">
+
+				<!-- Sticky Footer -->
+				<footer class="sticky-footer">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright © Motorcycle 2018</span>
+						</div>
+					</div>
+				</footer>
+
+			</div>
+			<!-- /.content-wrapper -->
+
+		</div>
+
+		<!-- /#wrapper -->
+	</div>
+	<!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
@@ -422,5 +351,365 @@
     
     <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
 	<script>includeHTML();</script>
-  </body>
+
+</body>
+  	<script>
+				//初始参数个数
+				var varCount = 0;
+
+				$(function() {
+					//新增按钮点击
+					$('#addVar')
+							.on(
+									'click',
+									function() {
+										varCount++;
+										$(".add")
+												.append(
+														'<tr><td>車牌'
+																+ varCount
+																+ ':</td><td class="form-group d-flex justify-content-between align-middle col-lg-10 col-md-12 col-sm-12 my-0" style="padding-left:3px;"><input class="form-control form-control-sm my-1" type="text" id="LicensePlate'+varCount+'" name="test" style="padding-left: 1px;width: 351.5px;">'
+																+ '<span class="removeVar btn btn-sm btn-danger mx-2 my-1">删除</span></td></tr>');
+									});
+
+					//删除按钮点击
+					$('table').on('click', '.removeVar', function() {
+						$(this).closest('tr').remove();
+						varCount--;
+					});
+				});
+			</script>
+		<script type="text/javascript">
+		
+		$(document).ready(function() {
+// 			alert("robin太廢了吧?")
+// 			$("#ccd").click(function(e) {
+// 				alert(78)
+// 			}
+		 $("input[type=file]").click(function(){
+//       alert("ALOHA")
+    });
+		 $("input#inputGroupFile01").change(function(){
+			 var files=$(this)[0].files;
+// 			 alert("選擇了"+files.length+"個檔案")
+			 $("#fuckyou").html("選擇了"+files.length+"個檔案");
+		 })
+		 
+		 
+// 		 $("input[type=file]").change(function(){
+// 			 var files=this.files
+// 		        alert("FUCKYOU:"+$(this).files.length)
+// 		    });
+				//一鍵完成
+				$(".onsubmit").click(function(e) {
+					
+					$("#LicensePlate").val("MMS-001");//車牌
+					$("#BikeModel").val("T-MAX 530");//型號
+					$("#ModelYear").val("2017");//年分
+					$("#BikeBrand").val("YAMAHA");//廠牌
+					$("#EngineType").val("水冷四行程雙汽缸8汽門");//cc數
+					$("#BikeType").val("Naked");//車種
+					$("#PlateType").val("白");//車牌
+					$("#FuelTankCapacity").val("15.0");//油箱容量
+					$("#SeatHeight").val("830");//座高
+					$("#DryWeight").val("195");//乾重
+					$("#FuelConsumption").val("16.2");//油耗
+					$("#Tire").val("120/70-15");//前輪胎
+					$("#FuelType").val("98");//使用燃料
+					$("#HourPrice").val("200");//每小時費用
+
+					$("#frontSuspension").val("41mm倒立式前叉 120mm行程");//前懸吊
+					$("#rearSuspension").val("油壓避震 預載調較117mm");//後炫調
+					$("#horsePower").val("46.5ps/6750rpm");//馬力
+					$("#rearTire").val("160/60-15");//後輪胎
+					$("#torque").val("5.4kg-m(53Nm)/5,250rpm");//扭力
+					$("#frontBrake").val("267mm雙碟四活塞輻射卡鉗");//前煞車
+					$("#rearBrake").val("282mm單碟");//後煞車
+
+				})
+				//只新增車牌 其他隱藏
+				$("#BikeModel1").hide();
+				$("#ModelYear1").hide();
+				$("#submit1").hide();
+				$("#checkbox").click(function() {
+					$(".photo").toggle();
+					
+					$("#onesubmit").toggle();
+					$(".BikeModel").toggle();
+					$(".ModelYear").toggle();
+					$(".BikeBrand").toggle();
+					$(".EngineType").toggle();
+					$(".BikeType").toggle();
+					$(".PlateType").toggle();
+					$(".FuelTankCapacity").toggle();
+					$(".SeatHeight").toggle();
+					$(".DryWeight").toggle();
+					$(".FuelConsumption").toggle();
+					$(".Tire").toggle();
+					$(".FuelType").toggle();
+					$(".ABS").toggle();
+					$(".HourPrice").toggle();
+					$("#BikeModel1").toggle();
+					$("#ModelYear1").toggle();
+
+					$("#submit1").toggle();
+					$(".submit").toggle();
+					$(".onesubmit").toggle();
+
+				});
+				// ---------------------------------------------------------------------------------
+				//查詢分店
+				$.ajax({
+					type : "post",
+					url : "selectBranchDetail",
+					success : function(response) {
+						// 				alert("sucess");
+						var shop = JSON.parse(response);
+						//迴圈
+						for (i in shop) {
+							//指定分店的欄位
+							var zx = shop[i].branchName;
+							//								alert(zx);
+							//產生option
+							i++;
+							var opt = $("<option>").val(i).text(zx);
+							//傳回id=showshop 產生 分店 下拉式選單
+							$("#BranchName").append(opt);
+						}
+					}
+				});
+				// 	-------------------------------------------------------------------------------
+				//新增車子詳細資訊
+				$(".submit").click(function(e) {
+					 var res = confirm("確認送出?");
+			         if(res == true){
+					e.preventDefault(); // 停止觸發submit
+// 					alert("upload");
+					var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
+
+					$.ajax({
+						type : "POST",
+						url : "uploadmutipart",
+						data : formData,
+						cache : false, // 不需要cache
+						processData : false, // jQuery預設會把data轉為query String, 所以要停用
+						contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+						dataType : 'text',
+						success : function(data) {
+// 							alert("");
+						}
+					})
+					var LicensePlate = $("#LicensePlate").val();//車牌
+					var BranchName = $("#BranchName").val();//分店
+
+					var BikeModel = $("#BikeModel").val();//型號
+					var ModelYear = $("#ModelYear").val();//年份
+					var BikeBrand = $("#BikeBrand").val();//廠牌
+					var EngineType = $("#EngineType").val();//CC數
+					var BikeType = $("#BikeType").val();//車種
+					var PlateType = $("#PlateType").val();//紅白黃牌
+					var FuelTankCapacity = $("#FuelTankCapacity").val();//油箱容量
+					var SeatHeight = $("#SeatHeight").val();//座高
+					var DryWeight = $("#DryWeight").val();//車子乾重:
+					var FuelConsumption = $("#FuelConsumption").val();//油耗
+					var frontTire = $("#Tire").val();//輪胎
+					var FuelType = $("#FuelType").val();//使用燃料
+					var ABS = $("#ABS").val();//煞車ABS
+					var HourPrice = $("#HourPrice").val();//每小時價格
+
+					var frontSuspension = $("#frontSuspension").val();//??中文
+					var rearSuspension = $("#rearSuspension").val();//??
+					var rearTire = $("#rearTire").val();//??
+					var horsePower = $("#horsePower").val();//??
+					var torque = $("#torque").val();//??
+					var frontBrake = $("#frontBrake").val();//??
+					var rearBrake = $("#rearBrake").val();//??
+					if (LicensePlate == "") {
+						alert("請輸入車牌!!!")
+						return;
+					}
+					if (ABS == 1) {
+						ABS = true;
+					} else {
+						ABS = false;
+					}
+					var allLicensePlatearray = []
+
+					$("[name='test']").each(function() {
+						show = $(this).val();
+						// 		 				alert(show)
+						var allLicensePlate = {}
+						allLicensePlate["licensePlate"] = show;
+						allLicensePlate["branchName"] = BranchName;
+						allLicensePlate["bikeModel"] = BikeModel;
+						allLicensePlate["modelYear"] = ModelYear;
+						allLicensePlate["bikeBrand"] = BikeBrand;
+						allLicensePlate["engineType"] = EngineType;
+						allLicensePlate["bikeType"] = BikeType;
+						allLicensePlate["plateType"] = PlateType;
+						allLicensePlate["fuelTankCapacity"] = FuelTankCapacity;
+						allLicensePlate["seatHeight"] = SeatHeight;
+						allLicensePlate["dryWeight"] = DryWeight;
+						allLicensePlate["fuelConsumption"] = FuelConsumption;
+						allLicensePlate["tire"] = frontTire;//修改過
+						allLicensePlate["fuelType"] = FuelType;
+						allLicensePlate["aBS"] = ABS;
+						allLicensePlate["hourPrice"] = HourPrice;
+
+						allLicensePlate["frontSuspension"] = frontSuspension;
+						allLicensePlate["rearSuspension"] = rearSuspension;
+						allLicensePlate["rearTire"] = rearTire;
+						allLicensePlate["horsePower"] = horsePower;
+						allLicensePlate["torque"] = torque;
+						allLicensePlate["frontBrake"] = frontBrake;
+						allLicensePlate["rearBrake"] = rearBrake;
+
+						allLicensePlatearray.push(allLicensePlate);
+
+					})
+					// 		 			alert(JSON.stringify(allLicensePlatearray))
+
+					var jsonarray = JSON.stringify(allLicensePlatearray)
+					$.ajax({
+						type : "POST",
+						url : "insertBikeDetail",
+						data : jsonarray,
+						success : function(response) {
+
+							var cd = JSON.parse(response)
+
+							alert(cd.key)
+						if(cd.key==null){
+							
+						window.location.href="uploadmotor.html";
+							}
+						}
+					});
+			         }else{
+			        	 return;
+			         }
+				});
+
+				// ----------------------------------------------------------------------------------
+				//產生型號 到下拉式選單
+				$.ajax({
+					type : "post",
+					url : "selectEveryBikeInfoBikeModel",
+					success : function(response) {
+						// 			alert("sucess");
+						var shop = JSON.parse(response);
+						//迴圈
+						for (i in shop) {
+							//指定型號的欄位
+							var zx = shop[i];
+							// alert(zx);
+
+							//產生option
+							i++;
+							var opt = $("<option>").val(zx).text(zx);
+							//傳回id=showshop 產生 型號 下拉式選單
+							$(".BikeModel1").append(opt);
+						}
+
+						var cd = {
+							"everyBikeInfoModel" : $(".BikeModel1").val()
+						};
+						var str = JSON.stringify(cd);
+						$.ajax({
+							type : "post",
+							url : "showAllshowAllEveryBikeInfo",
+							data : str,
+							contentType : "application/json; charset=utf-8",
+							success : function(response) {
+								var shop = JSON.parse(response);
+								//迴圈
+								for (i in shop) {
+									//指定型號的欄位
+									var zx = shop[i];
+// 									alert(zx)
+									//產生option
+									i++;
+									var opt = $("<option>").val(zx).text(zx);
+									//傳回id=showshop 產生 型號 下拉式選單
+									$(".ModelYear1").append(opt);
+								}
+							}
+						});
+					}
+				});
+				// 	-------------------------------------------------------------------------------------
+
+				//查詢年份 給下拉式選單
+				$(".BikeModel1").change(function() {
+					// 		alert("7788不要9")
+					// 		alert($(".BikeModel1").val());
+					//每下拉一次清空
+					$(".ModelYear1").html("");
+					var cd = {
+						"everyBikeInfoModel" : $(".BikeModel1").val()
+					};
+					var str = JSON.stringify(cd);
+					$.ajax({
+						type : "post",
+						url : "showAllshowAllEveryBikeInfo",
+						data : str,
+						
+						success : function(response) {
+							var shop = JSON.parse(response);
+							//迴圈
+							for (i in shop) {
+								//指定型號的欄位
+								var zx = shop[i];
+								//產生option
+								i++;
+								var opt = $("<option>").val(zx).text(zx);
+								//傳回id=showshop 產生 型號 下拉式選單
+								$(".ModelYear1").append(opt);
+							}
+						}
+					});
+				});
+				// 	-------------------------------------------------------------------------------------
+				//只新增車牌
+
+				$(".submit1").click(function() {
+					var show
+					var LicensePlate = $(".LicensePlate").val();
+					var BranchName = $(".BranchName").val();
+					var BikeModel1 = $(".BikeModel1").val();
+					var ModelYear1 = $(".ModelYear1").val();
+					// 							alert(LicensePlate)
+					//		alert(BranchName)
+					//	alert(BikeModel1)
+					//alert(ModelYear1)
+					var allLicensePlatearray = []
+
+					$("[name='test']").each(function() {
+						show = $(this).val();
+						// 		 				alert(show)
+						var allLicensePlate = {}
+						allLicensePlate["licensePlate"] = show;
+						allLicensePlate["branchName"] = BranchName;
+						allLicensePlate["bikeModel"] = BikeModel1;
+						allLicensePlate["modelYear"] = ModelYear1;
+
+						allLicensePlatearray.push(allLicensePlate);
+
+					})
+					// 		 			alert(JSON.stringify(allLicensePlatearray))
+
+					var jsonarray = JSON.stringify(allLicensePlatearray)
+					$.ajax({
+						type : "post",
+						url : "insertAllLicensePlate",
+						data : jsonarray,
+						success : function(response) {
+							// 							var cd=JSON.parse(response)
+
+							alert(response)
+						}
+					});
+				});
+			});
+		</script>
 </html>
