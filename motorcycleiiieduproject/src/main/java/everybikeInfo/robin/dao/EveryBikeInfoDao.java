@@ -138,7 +138,6 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 	public List<EveryBikeInfoToGson> forGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo) {
 		ArrayList<EveryBikeInfoToGson> everyBikeInfoToGson = new ArrayList<EveryBikeInfoToGson>();
 		for (EveryBikeInfo loop : finalEveryBikeInfo) {
-			System.out.println();
 			everyBikeInfoToGson.add(new EveryBikeInfoToGson(loop.getLicensePlate(),
 					loop.getBranchName().getBranchName(), loop.getTotalMileage(), loop.getIsReadyMaintenance(),
 					loop.getBikeDetail().getIdClassBikeDetail().getModelYear()));
@@ -152,7 +151,8 @@ public class EveryBikeInfoDao implements EveryBikeInfoIFaceDao {
 		
 			everyBikeInfoToGson.add(new BikeDetailToGson(loop.getIdClassBikeDetail().getBikeModel(),loop.getIdClassBikeDetail().getModelYear()
 					,loop.getBikeBrand(),loop.getEngineType(),loop.getBikeType(),loop.getPlateType(),loop.getFuelTankCapacity(),loop.getSeatHeight()
-					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice(),loop.getFrontSuspension(),loop.getRearSuspension(),loop.getRearTire(),loop.getHorsePower(),loop.getTorque(),loop.getFrontBrake(),loop.getRearBrake()));
+					,loop.getDryWeight(),loop.getFuelConsumption(),loop.getFrontTire(),loop.getFuelType(),loop.getABS(),loop.getHourPrice(),loop.getFrontSuspension()
+					,loop.getRearSuspension(),loop.getRearTire(),loop.getHorsePower(),loop.getTorque(),loop.getFrontBrake(),loop.getRearBrake(),loop.getDescription()));
 	
 		return everyBikeInfoToGson;
 	}

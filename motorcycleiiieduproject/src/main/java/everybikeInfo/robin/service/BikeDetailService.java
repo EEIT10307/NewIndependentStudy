@@ -84,6 +84,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 		String torque;
 		String frontBrake;
 		String rearBrake;
+		String description;
 		int count = 0;
 		count++;
 
@@ -113,6 +114,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 			torque=root.getTorque();
 			frontBrake=root.getFrontBrake();
 			rearBrake=root.getRearBrake();
+			description=root.getDescription();
 
 //			BranchDetail branchDetail = session.get(BranchDetail.class, branchName);// 分店 需要分店的流水號 加入機車 建構子
 //			EveryBikeInfo everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false, branchDetail);// 機車個別資訊 新增
@@ -120,7 +122,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 			Date now = new Date();
 			BikeDetail bikeDetail = new BikeDetail(idClassBikeDetail, bikeBrand, engineType, bikeType, plateType,
 					fuelTankCapacity, seatHeight, dryWeight, fuelConsumption, tire, fuelType, aBS, hourPrice, now,frontSuspension,rearSuspension,
-					rearTire,horsePower,torque,frontBrake,rearBrake);// 機車
+					rearTire,horsePower,torque,frontBrake,rearBrake,description);// 機車
 																													// 詳細資訊新增
 //			bikeDetail.addEveryBikeInfo(everyBikeInfo);
 		
@@ -144,7 +146,7 @@ public class BikeDetailService implements BikeDetailIFaceService {
 	}
 
 	@Override
-	public List<QAndA> selectQA(String BikeModel, String ModelYear) {
+	public List<QAndA> selectQAwhere(String BikeModel, String ModelYear) {
 		// TODO Auto-generated method stub
 		return bikeDetailIFaceDAO.selectQAwhere(BikeModel, ModelYear);
 	}
@@ -159,6 +161,12 @@ public class BikeDetailService implements BikeDetailIFaceService {
 	public int updateQA(int qAndASerialNum, String ans, String ansquction) {
 
 		return bikeDetailIFaceDAO.updateQA(qAndASerialNum, ans, ansquction);
+	}
+
+	@Override
+	public List<QAndA> selectQA() {
+		// TODO Auto-generated method stub
+		return bikeDetailIFaceDAO.selectQA();
 	}
 
 }

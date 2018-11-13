@@ -93,7 +93,7 @@ public BikeDetail() {
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
 			String frontTire, String fuelType, Boolean aBS, Integer hourPrice, Date onSheftTime, String frontSuspension,
 			String rearSuspension, String rearTire, String horsePower, String torque, String frontBrake,
-			String rearBrake) {
+			String rearBrake,String description) {
 		super();
 		this.idClassBikeDetail = idClassBikeDetail;
 		this.bikeBrand = bikeBrand;
@@ -116,6 +116,7 @@ public BikeDetail() {
 		this.torque = torque;
 		this.frontBrake = frontBrake;
 		this.rearBrake = rearBrake;
+		this.description = description;
 	}
 
 	

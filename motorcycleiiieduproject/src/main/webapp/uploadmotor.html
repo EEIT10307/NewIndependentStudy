@@ -296,6 +296,12 @@
 							value=""
 							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
 					</tr>
+					<tr class="FuelType">
+						<td>描述:</td>
+						<td class="form-group"><textarea  id="description"
+							
+							class="form-control form-control-sm col-lg-8 col-md-12 col-sm-12 description" style="height: 150px"></textarea></td>
+					</tr>
 				</table>
 			</form>
 				<input type="submit" id="submit" 
@@ -425,6 +431,11 @@
 					$("#torque").val("5.4kg-m(53Nm)/5,250rpm");//扭力
 					$("#frontBrake").val("267mm雙碟四活塞輻射卡鉗");//前煞車
 					$("#rearBrake").val("282mm單碟");//後煞車
+					$(".description").text("自 2001 年問世以來，TMAX 充實了數十萬騎士的移動生活，已成為現今頂級 SPORTS SCOOTER 之典範！"+
+							"2017 年推出的新款 TMAX，搭載 530cc 水冷四行程並列雙缸高性能引擎、更輕量化的車身及新型LED頭燈的導光體設計，展現出年輕、精悍的氣質！"+
+							"重新設計的躍動迴力飛鏢造型，強調連結前後的直線主題，則直接呈現出更為敏捷、輕快比例的形象。"+
+							"全車減重 9kg 的輕量化設計，操控更加輕鬆寫意，充分享受駕駛樂趣！"+
+							"搭配加長 40mm 的後搖臂，提升低速行駛時的敏捷、機動性與高速行駛時的穩定性，適應路面的能力更優良，山路或坡度行車亦不改穩定、優異性能！");//後煞車
 
 				})
 				//只新增車牌 其他隱藏
@@ -433,6 +444,7 @@
 				$("#submit1").hide();
 				$("#checkbox").click(function() {
 					$(".photo").toggle();
+					$(".description").toggle();
 					
 					$("#onesubmit").toggle();
 					$(".BikeModel").toggle();
@@ -524,6 +536,8 @@
 					var torque = $("#torque").val();//??
 					var frontBrake = $("#frontBrake").val();//??
 					var rearBrake = $("#rearBrake").val();//??
+					var description=$(".description").val();
+// 					alert(description)
 					if (LicensePlate == "") {
 						alert("請輸入車牌!!!")
 						return;
@@ -532,6 +546,9 @@
 						ABS = true;
 					} else {
 						ABS = false;
+					}
+					if(description==""){
+						description=null;
 					}
 					var allLicensePlatearray = []
 
@@ -563,6 +580,7 @@
 						allLicensePlate["torque"] = torque;
 						allLicensePlate["frontBrake"] = frontBrake;
 						allLicensePlate["rearBrake"] = rearBrake;
+						allLicensePlate["description"] = description;
 
 						allLicensePlatearray.push(allLicensePlate);
 

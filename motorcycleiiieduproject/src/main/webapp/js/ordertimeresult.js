@@ -227,7 +227,7 @@ $(".makeDoption option").each(function(){
         }
         var jsonob = JSON.stringify(surchop);
         sessionStorage.orderTime = jsonob;
-        // alert(jsonob)
+//         alert(jsonob)
 
         window.location.assign ("search1.html"); 
 

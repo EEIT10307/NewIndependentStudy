@@ -34,6 +34,7 @@ import cleanbean.BikeDetailToGson;
 import cleanbean.EveryBikeInfoAddCarsBean;
 import cleanbean.EveryBikeInfoBean;
 import cleanbean.EveryBikeInfoToGson;
+import cleanbean.MemberDetailSelectYearForJson;
 import cleanbean.OrderListRobinYear;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
@@ -43,12 +44,14 @@ import everybikeInfo.robin.service.BikeReviewIFaceService;
 import everybikeInfo.robin.service.BranchDetailIFaceService;
 import everybikeInfo.robin.service.EveryBikeInfoIFaceService;
 import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
+import everybikeInfo.robin.service.MemberDetailIFaceService;
 import everybikeInfo.robin.service.OrderListIFaceService;
 import everybikeInfo.robin.service.TestEmailIFaceService;
+import orderservice.OrderIFaceService;
 import projectbean.AcceSerialNum;
-import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
+import projectbean.MemberDetail;
 import projectbean.OrderList;
 
 @Controller
@@ -70,6 +73,10 @@ public class TestRobinController {
 	TestEmailIFaceService testEmailIFaceService;
 	@Autowired
 	OrderListIFaceService orderListIFaceService;
+	@Autowired
+	MemberDetailIFaceService memberDetailIFaceService;
+	@Autowired
+	OrderIFaceService orderIFaceService;
 	@Autowired
 	Gson gson;
 
@@ -235,10 +242,9 @@ public class TestRobinController {
 		return "OK";
 	}
 
-	@PostMapping(value = "/selectBikeDetial", produces = "text/html; charset = UTF-8") // 查詢機車詳細訂單
+	@PostMapping(value = "/selectBikeDetial", produces = "text/html; charset = UTF-8") // 查詢機車詳細
 	public @ResponseBody String selectBikeDetial(String BikeModel, String ModelYear) throws IOException {
-		BikeDetail select = everyBikeInfoIFaceService.selectbikeModelmodelYear(BikeModel, ModelYear);
-		List<BikeDetailToGson> ta = everyBikeInfoIFaceService.forGsonConvertBikeDetail(select);
+		List<BikeDetailToGson> ta = everyBikeInfoIFaceService.forGsonConvertBikeDetail(everyBikeInfoIFaceService.selectbikeModelmodelYear(BikeModel, ModelYear));
 		return gson.toJson(ta);
 	}
 
@@ -277,7 +283,16 @@ public class TestRobinController {
 	@PostMapping(value = "/selectQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
 	public @ResponseBody String selectQAA(String bikeModel,String modelYear) throws IOException {
 	
-		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA(bikeModel,modelYear));
+		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQAwhere(bikeModel,modelYear));
+		 if(QQ.size()==0) {
+			 return "";
+		 }
+		return gson.toJson(QQ);
+	}
+	@PostMapping(value = "/selectQAall", produces = "text/html; charset = UTF-8") // 商品評價 查詢
+	public @ResponseBody String selectQAall() throws IOException {
+	
+		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA());
 		 if(QQ.size()==0) {
 			 return "";
 		 }
@@ -302,6 +317,26 @@ public class TestRobinController {
 		OrderListRobinYear orderjson=orderListIFaceService.OrderListForJsonYear((List<OrderList>) order);
 		return gson.toJson(orderjson);
 
+	}
+	@PostMapping(value = "/selectMemberDetailyear", produces = "text/html; charset = UTF-8") // 查詢年營收
+	public @ResponseBody String selectMemberDetailyear() throws IOException {
+		System.out.println("yy");
+		List<MemberDetail> selectMemberyear = orderListIFaceService.selectMemberyear();
+		MemberDetailSelectYearForJson memberDetailSelectYearForJson = orderListIFaceService.MemberDetailSelectYearForJson(selectMemberyear);
+		return gson.toJson(memberDetailSelectYearForJson);
+
+	}
+	@PostMapping(value = "/selectMemberDetail", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String selectMemberDetail() throws IOException {
+			return gson.toJson(memberDetailIFaceService.memberDetailALLForJson(memberDetailIFaceService.selectMemberDetailAll()));
+	}
+	@PostMapping(value = "/selectOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String selectOrderList(String phone) throws IOException {
+			return gson.toJson(memberDetailIFaceService.selectOrderList(phone));
+	}
+	@PostMapping(value = "/getAllOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String getAllOrderList() throws IOException {
+			return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 
