@@ -74,6 +74,8 @@ public class OrderController {
 			// 此方法比對店內庫存並回傳可租車輛的資訊
 			List<BikeDetail> finalBikeDetail = tesOrderIFaceService.returnMotorDetailAndShowView(comPareOrderListMotorModel,
 					customerquery.getPickupStore() ,orderABbranch  , orderFromAnotherbranch  );
+			
+			
 			// hibernate複合主鍵物件轉為普通java
 			List<BikeDetailToGsonHaoUse> forGsonConvert = tesOrderIFaceService.forGsonConvert(finalBikeDetail);
 			return gson.toJson(forGsonConvert);
@@ -83,7 +85,7 @@ public class OrderController {
 			return new String("{fail:fail}");
 		}
 		}
-	}
+	}	
 
 	// 網頁店名動態顯示
 	@GetMapping(value = "/showAllBranch", produces = "application/JSON; charset = UTF-8")

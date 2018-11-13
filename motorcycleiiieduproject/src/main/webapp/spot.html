@@ -17,7 +17,21 @@
 </head>
 <body>
 	<div w3-include-html="navProd.html"></div>
-	<div w3-include-html="carousel.html"></div>
+	<div w3-include-html="carousel.html" id="crs"></div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    	$.ajax({
+	            type: "get",
+	            url: "queryAllWebContent",
+	            contentType: "application/json; charset=utf-8",
+	            success: function (response) {
+				   for(i=0; i<3; i++){ 
+					   $('#'+response[i].webElements).empty().append(response[i].webContent);
+				   }
+				}
+	        });	
+		});
+	</script>
 	<div class="container">
 		<div class="card-deck my-4">
 		  <div class="card">

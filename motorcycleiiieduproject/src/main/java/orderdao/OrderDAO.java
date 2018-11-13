@@ -69,7 +69,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		return list;
 	}
 
-//製作分店選擇鈕
+//取得所有分店名字
 	@Override
 	public List<String> showAllBranch() {
 		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
@@ -152,7 +152,7 @@ public class OrderDAO implements OrderIFaceDAO {
 		List<EveryBikeInfo> bikeDetaillist = queryword.getResultList();
 		List<String> motorNameToString = new ArrayList<String>();
 		for (EveryBikeInfo loop : bikeDetaillist) {
-			System.out.println("測試=" + loop.getBikeDetail().getIdClassBikeDetail().getBikeModel());
+			System.out.println("測試=" + loop.getBikeDetail().getIdClassBikeDetail().getBikeModel() );
 			motorNameToString.add(loop.getBikeDetail().getIdClassBikeDetail().getBikeModel());
 		}
 		// 將庫存轉成數量
@@ -544,6 +544,11 @@ public class OrderDAO implements OrderIFaceDAO {
 			predicatesList
 					.add(buider.notEqual(fromEbikeClass.get("licensePlate"), root.getLicensePlate().getLicensePlate()));
 		}
+		
+		// 店內車牌不能等於維修狀態
+				
+			predicatesList.add(buider.notEqual(fromEbikeClass.get("isReadyMaintenance"), true));
+				
 
 		// 封裝乙地甲環查詢條件
 		List<Predicate> predicatesFromAnotherList = new ArrayList<Predicate>();
@@ -612,11 +617,9 @@ public class OrderDAO implements OrderIFaceDAO {
 								buider.equal(fromClass.get("orderStatus"), "進行中訂單"),
 								buider.equal(fromClass.get("orderStatus"), "未來調度"),
 								buider.equal(fromClass.get("orderStatus"), "進行中調度"))));
-
 		Query<OrderList> queryword = factory.getCurrentSession().createQuery(createQuery);
 		queryword.setParameter(pickupstore, shopname);
 		List<OrderList> list = queryword.getResultList();
-
 		return list;
 	}
 
