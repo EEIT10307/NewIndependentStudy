@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cleanbean.OrderListRobin;
+import cleanbean.MemberDetailSelectYearForJson;
 import cleanbean.OrderListRobinYear;
 import everybikeInfo.robin.dao.OrderListIFaceDao;
+import projectbean.MemberDetail;
 import projectbean.OrderList;
 @Service
 @Transactional
@@ -45,5 +46,19 @@ public class OrderListService implements OrderListIFaceService {
 		// TODO Auto-generated method stub
 		return orderListIFaceDao.OrderListForJsonYear(OrderList);
 	}
+
+	@Override
+	public List<MemberDetail> selectMemberyear() {
+		// TODO Auto-generated method stub
+		return orderListIFaceDao.selectMemberyear();
+	}
+
+	@Override
+	public MemberDetailSelectYearForJson MemberDetailSelectYearForJson(List<MemberDetail> memberDetail) {
+		// TODO Auto-generated method stub
+		return orderListIFaceDao.MemberDetailSelectYearForJson(memberDetail);
+	}
+
+	
 
 }

@@ -107,7 +107,7 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 //											,bikeDetailToGson.getPlateType(),bikeDetailToGson.getFuelTankCapacity(),bikeDetailToGson.getSeatHeight()
 //											,bikeDetailToGson.getDryWeight(),bikeDetailToGson.getFuelConsumption(),bikeDetailToGson.getTire()
 //											,bikeDetailToGson.getFuelType(),bikeDetailToGson.getaBS(),bikeDetailToGson.getHourPrice());
-		String hql = "UPDATE BikeDetail set engineType=:engineType,bikeType=:bikeType,plateType=:plateType,fuelTankCapacity=:fuelTankCapacity,seatHeight=:seatHeight,dryWeight=:dryWeight,fuelConsumption=:fuelConsumption,frontTire=:tire,fuelType=:fuelType,ABS=:aBS,hourPrice=:hourPrice where bikeModel=:bikeModel and modelYear=:modelYear";
+		String hql = "UPDATE BikeDetail set engineType=:engineType,bikeType=:bikeType,plateType=:plateType,fuelTankCapacity=:fuelTankCapacity,seatHeight=:seatHeight,dryWeight=:dryWeight,fuelConsumption=:fuelConsumption,frontTire=:tire,fuelType=:fuelType,ABS=:aBS,hourPrice=:hourPrice,description=:description where bikeModel=:bikeModel and modelYear=:modelYear";
 		int updateCount = 0;
 		Query ta = session.createQuery(hql).setParameter("engineType", bikeDetailToGson.getEngineType())
 				.setParameter("bikeType", bikeDetailToGson.getBikeType())
@@ -120,7 +120,8 @@ public class BikeDetailDao implements BikeDetailIFaceDao {
 				.setParameter("fuelType", bikeDetailToGson.getFuelType()).setParameter("aBS", bikeDetailToGson.getaBS())
 				.setParameter("hourPrice", bikeDetailToGson.getHourPrice())
 				.setParameter("bikeModel", bikeDetailToGson.getBikeModel())
-				.setParameter("modelYear", bikeDetailToGson.getModelYear());
+				.setParameter("modelYear", bikeDetailToGson.getModelYear())
+				.setParameter("description", bikeDetailToGson.getDescription());
 
 		 ta.executeUpdate();
 //		session.merge(bike);

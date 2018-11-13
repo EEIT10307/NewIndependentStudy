@@ -2,7 +2,6 @@ package testfakebikedao;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,7 +14,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +25,8 @@ import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
 import projectbean.IdClassBikeDetail;
 import projectbean.MaintenanceDetail;
+import projectbean.MemberDetail;
 import projectbean.OrderList;
-import projectbean.WebInformationForManager;
 
 @Repository
 public class TestDAO {
@@ -47,7 +45,7 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList2.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList3.txt")));
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -76,7 +74,7 @@ public class TestDAO {
 
 //C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));//robin
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BranchDetail.txt")));// robin
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd");
 		while ((line = bf.readLine()) != null) {
@@ -246,8 +244,8 @@ public class TestDAO {
 				continue roop;
 			}
 			String[] lines2 = line2.split(",");
-			System.out.println("車牌:"+lines2[0]);
-			everyBikeMileageIFaceService.save(lines2[0]);	
+			System.out.println("車牌:" + lines2[0]);
+			everyBikeMileageIFaceService.save(lines2[0]);
 
 		}
 	}
@@ -266,6 +264,31 @@ public class TestDAO {
 
 		for (OrderList loop : list) {
 			System.out.println(loop);
+		}
+
+	}
+
+	public void insertMemberDetail() throws IOException, ParseException {
+		@SuppressWarnings("resource")
+		BufferedReader Member = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\MemberDetail.txt")));
+		String line;
+		SimpleDateFormat sim1 = new SimpleDateFormat("yyyy/mm/dd");
+		while ((line = Member.readLine()) != null) {
+			String[] lines = line.split(",");
+			MemberDetail member = new MemberDetail();
+			member.setAddress(lines[0]);
+			member.setBirthday(sim1.parse(lines[1]));
+			member.setEmail(lines[2]);
+			member.setGender(lines[3]);
+			member.setSigninDate(sim1.parse(lines[4]));
+			member.setName(lines[5]);
+			member.setPassword(lines[6]);
+			member.setPhone(lines[7]);
+			member.setLastLoginDate(sim1.parse(lines[8]));
+			factory.getCurrentSession().persist(member);
+			System.out.println(154546456);
+			System.out.println("地區" + lines[0]);
 		}
 
 	}

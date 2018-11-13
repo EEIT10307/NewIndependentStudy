@@ -100,5 +100,16 @@ public class TestController {
 			}
 			return "OK";
 		}
+		//新增MemberDetail假資料
+		@RequestMapping(value = "/insertFakeMemberDetail", produces = "text/html; charset = UTF-8")
+		public @ResponseBody String makeFakeMemberDetail() throws IOException, ParseException {
 
+			try {
+				testService.insertMemberDetail();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "Fail";
+			}
+			return "OK";
+		}
 }
