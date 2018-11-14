@@ -158,17 +158,6 @@ $(window).on('load', function () {
         $("#pDate").attr("min", midnightformat);
         $("#dDate").attr("min", midnightformat);
     }
-
-
-
-
-
-
-
-
-
-
-
     //顧客訂單查詢車子
     $("#motorserchdo").click(function (e) {
         e.preventDefault();
