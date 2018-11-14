@@ -19,7 +19,7 @@ import testcontroller.InterceptorUse;
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
-		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller","branchdetailcontroller","branchscenecontroller"})
+		"branchdetailcontroller","everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller","branchdetailcontroller","branchscenecontroller"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	@Autowired

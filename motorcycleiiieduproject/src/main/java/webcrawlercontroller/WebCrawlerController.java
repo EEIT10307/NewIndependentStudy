@@ -46,6 +46,7 @@ public class WebCrawlerController {
 		}	
 	}
 	//@Scheduled(fixedDelay = 15000)
+
 	@RequestMapping(value = "/updateForecastData", method = RequestMethod.GET,produces="text/html;charset=UTF-8") // 爬氣象局資料
 	public @ResponseBody String updateForecastData() throws Exception{
 		System.out.println("更新爬爬爬updateForecastData");
