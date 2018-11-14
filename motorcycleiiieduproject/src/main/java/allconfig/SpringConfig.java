@@ -19,8 +19,9 @@ import com.google.gson.Gson;
 
 @Configuration
 
-@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance",
-		"everybikeInfo","testfakebikedao","webinfomanagerservice","webinfomanagerdao","dispatcherdao" ,"dispatcherservice","memberservice","memberDaoIMP"})
+
+@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","branchdetail",
+		"everybikeInfo","testfakebikedao","webinfomanagerservice","webcrawler","webinfomanagerdao","dispatcherdao" ,"dispatcherservice","memberservice","memberDaoIMP"})
 
 @EnableTransactionManagement
 public class SpringConfig {
@@ -44,7 +45,7 @@ public class SpringConfig {
 	//JDBC DataSource
 //		@Bean
 //	public DataSource jdbcDataSource() {
-//		//不連網直接測試用
+//		//銝���蝬脩�湔�交葫閰衣��
 //		     DriverManagerDataSource jdbcd = new DriverManagerDataSource() ; 
 //		     jdbcd.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //		     jdbcd.setUrl("jdbc:sqlserver://172.20.10.14:1433;database=homeregister");
@@ -70,7 +71,7 @@ public class SpringConfig {
 		     props.setProperty("hibernate.bytecode.use_reflection_optimizer", "false");
 		 //    props.setProperty("hibernate.current_session_context_class", "thread");
 		     builder.addProperties(props); 
-		     //掃bean使用
+		     //��bean雿輻��
 //		     builder.addAnnotatedClasses(TestHibernateBean.class , AcceSerialNum.class , AcceStock.class , BikeDetail.class 
 //		    		 , BikeReview.class , BranchDetail.class , BranchScenes.class , ChatRoom.class , Discount.class , EveryBikeInfo.class
 //		    		 ,EveryBikeMileage.class , MaintenanceDetail.class);
