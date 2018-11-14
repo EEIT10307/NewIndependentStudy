@@ -1,6 +1,9 @@
-package branchdetaildao;
+package branchdetail;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,11 +17,12 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import branchdetail.BranchDetailIFaceDAO;
+import cleanbean.BranchDetailBean;
 import projectbean.BranchDetail;
-import branchdetaildao.BranchDetailIFaceDAO;
 
 @Repository
-public class BranchDetailDao implements BranchDetailIFaceDAO{
+public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 	@Autowired
 	SessionFactory factory;
 	
@@ -59,11 +63,22 @@ public class BranchDetailDao implements BranchDetailIFaceDAO{
 	}
 	
 	@Override
-	public int saveBranchDetail(BranchDetail branchDetail) {
+	public int saveBranchDetail(BranchDetailBean branchDetail) throws Exception {
 		Session session=factory.getCurrentSession();
 		int updateCount = 0;
-
-		session.save(branchDetail);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("現在時間="+sdf.format(date));
+		BranchDetail detail = new BranchDetail();
+		detail.setBranchName(branchDetail.getBranchName());
+		detail.setBranchArea(branchDetail.getBranchArea());
+		detail.setBranchCounty(branchDetail.getBranchCounty());
+		detail.setBranchAddress(branchDetail.getBranchAddress());
+		detail.setBranchPhone(branchDetail.getBranchPhone());
+		detail.setOpeningDay(sdf.parse(sdf.format(date)));
+		
+		System.out.println("到底");
+		session.save(detail);
 
 		updateCount = 1;
 
@@ -102,58 +117,4 @@ public class BranchDetailDao implements BranchDetailIFaceDAO{
 		}
 		return branchDetailToGson;
 	}
-	
-	
-	
-//	public Session getSession() {
-//		return this.factory.getCurrentSession();
-//	}
-//
-//	@Override
-//	public BranchDetail insert(BranchDetail bd) {
-//		if(bd!=null) {
-//			BranchDetail temp = this.getSession().get(BranchDetail.class, bd.getBranchSerialNum());
-//			if(temp==null) {
-//				((BranchDetailIFaceDAO) this.getSession()).insert(bd);
-//				return bd;
-//			}
-//		}
-//		return null;
-//	}
-//
-//	@Override
-//	public List<BranchDetail> select() {
-//		return this.getSession().createQuery(
-//				"from projectbean.BranchDetail", BranchDetail.class).setMaxResults(50).list();
-//	}
-//
-//	@Override
-//	public boolean delete(int branchSerialNum) {
-//		BranchDetail temp = this.getSession().get(BranchDetail.class, branchSerialNum);
-//		if(temp!=null) {
-//			this.getSession().delete(temp);
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	@Override
-//	public BranchDetail update(int branchSerialNum, String branchName, String branchArea, String branchCounty,
-//			String branchAddress, String branchPhone, Date openingDay) {
-//		BranchDetail temp = this.getSession().get(BranchDetail.class, branchSerialNum);
-//		if(temp!=null) {
-//			temp.setBranchName(branchName);
-//			temp.setBranchArea(branchArea);
-//			temp.setBranchCounty(branchCounty);
-//			temp.setBranchAddress(branchAddress);
-//			temp.setBranchPhone(branchPhone);
-//			temp.setOpeningDay(openingDay);
-//		}
-//		return temp;
-//	}
-//
-//	@Override
-//	public BranchDetail select(int branchSerialNum) {
-//		return this.getSession().get(BranchDetail.class, branchSerialNum);
-//	}
 }
