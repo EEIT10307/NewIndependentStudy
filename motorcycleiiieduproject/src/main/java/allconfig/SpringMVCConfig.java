@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,14 +14,12 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import testcontroller.InterceptorUse;
-import timercontroll.AutoBug;
-import timercontroll.TimerPicker;
-import timercontroll.UpdateForecastData;
 
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 @ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
-		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll"})
+		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" })
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	@Autowired
@@ -47,22 +46,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    resolver.setDefaultEncoding("utf-8");
 	    return resolver;
 	}
-	@Bean 
-	public TimerPicker timerPicker() {
-		   TimerPicker time = new TimerPicker();
-		   return time ;   
-	}
-	@Bean
-	public AutoBug  autoBug() {
-		AutoBug autoBug = new AutoBug();
-		return autoBug ;
-	}
 	
-	@Bean
-	public UpdateForecastData  updateForecastData() {
-		UpdateForecastData updateForecastData = new UpdateForecastData(factory);
-		return updateForecastData ;
-	}
-	
+
 	
 }

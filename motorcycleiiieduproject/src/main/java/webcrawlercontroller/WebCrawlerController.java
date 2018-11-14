@@ -3,6 +3,7 @@ package webcrawlercontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import projectbean.EveryBikeMileage;
 import projectbean.WebCrawlerForecast;
 import webcrawler.WebCrawlerIFaceService;
 
@@ -45,6 +45,7 @@ public class WebCrawlerController {
 			return new String("{fail:fail}");
 		}	
 	}
+	@Scheduled(fixedDelay = 15000)
 	@RequestMapping(value = "/updateForecastData", method = RequestMethod.GET,produces="text/html;charset=UTF-8") // 爬氣象局資料
 	public @ResponseBody String updateForecastData() throws Exception{
 		System.out.println("更新爬爬爬updateForecastData");
