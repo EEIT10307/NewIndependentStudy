@@ -18,14 +18,14 @@ import testcontroller.InterceptorUse;
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
-		"branchdetailcontroller","everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller", "timercontroll","membercontroller" })
+		"branchdetailcontroller","everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller","branchdetailcontroller","branchscenecontroller", "timercontroll","membercontroller"})
 
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	SessionFactory factory   ; 
 	
-//閮餃��interceptor雿輻��
+//註冊interceptor使用
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
@@ -36,7 +36,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 
 
 	}
-	//����鞈�皞�雿輻�券��閮貞ervlet
+	//靜態資源使用預設servlet
 	@Override
 	    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 	        configurer.enable();
