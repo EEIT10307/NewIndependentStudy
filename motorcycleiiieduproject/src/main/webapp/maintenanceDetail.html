@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>機車保養</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	<link rel="stylesheet" href="css/progressbar.css"><!-- 	進度條用 -->
+	<style type="text/css">
+		td input, td select { margin-bottom: 1%;}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+<!-- 	<script src="js/effect.js"></script> -->
+	<script src="js/include.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin@5.0.2/js/sb-admin.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <a class="dropdown-item" id="replymsg">回覆訊息</a>
+            <script type="text/javascript">
+            $("#replymsg").on("click",function(){
+    	  		$("#chatbox").removeClass("d-none");
+    	  	});
+            </script>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="orderlist.html">查詢訂單</a>
+          </div>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+<!--             <a class="dropdown-item" href="#">帳號設定</a> -->
+<!--             <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+		<!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+      <div id="content-wrapper">
+      	<div class="container-fluid form-group col-lg-6 offset-lg-3">
+				<h4 class="text-center">新增保養項目</h4>
+				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="機油" class="form-control">
+				<!--//訂單流水 -->
+				所需到達里程
+				<input type="text" name="requiredMileage" id="requiredMileage" value="20000" class="form-control">
+				保養所需工時
+				<input type="text" name="requiredHourTodo" id="requiredHourTodo" value="2" class="form-control">
+
+				<input type="submit" id="submitinsert" value="提交新增" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
+<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+				<br/>
+				<h4 class='text-center my-3'>查詢保養中的機車</h4>
+				<div class="from-control col-6 offset-3" id="radioset">
+				查詢分店:
+<<<<<<< HEAD
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安   -->
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌 -->
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店 -->
+=======
+				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安  
+				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌
+				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店
+				<input type="radio" class="xxx" name="storetoshow" value="木柵" /> 木柵
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+				</div>
+				<div id="resultofselectedstoretoshow"></div>
+<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+	<h4 class='text-center my-3'>各車保養項目里程數</h4>
+<<<<<<< HEAD
+	<div class="from-control col-6 offset-3" id="radioset1">查詢分店:
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安   -->
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌 -->
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店 -->
+=======
+	<div class="from-control col-6 offset-3">查詢分店:
+	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安  
+	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌
+	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店
+	<input type="radio" class="xxx" name="storetoshow1" value="木柵" /> 木柵
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+	</div>
+	<div id="resultofselectedstoretoshow1"></div>
+<!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
+	<h1>顯示有任意項目超過該規定里程數的車</h1>
+	<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
+	<div id="resultofeveryovermileage"></div>
+
+<!-- 	//------------------------------------保養通知Modal--------------------------------->
+
+			<!-- Modal -->
+			<div class="modal fade" id="maintenance-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="maintenance-modal-title">保養通知</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="maintenance-modal-body">
+
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+<!-- 			        <button type="button" class="btn btn-primary">已知</button> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<!-- //---------------------------------------------------------------------------- -->
+				
+				
+				
+				
+	<script>
+		$(document).ready(function(){
+			
+            $.ajax({
+                type:"get",
+                url:"showMessageIfMileageIsOver",
+                success : function(response) {
+                        var json3  = JSON.parse(JSON.stringify(response)); 
+						var txt = "" ; 
+                        for(var x = 0 ; x< json3.length ; x++) {
+                        	  txt += "車牌"+json3[x].licensePlate ; 
+                        	  txt += "的"+json3[x].maintenanceItem+"項目"  ; 
+                        	  txt += "累積的里程"+json3[x].currentMileage+"公里已超過"  ; 
+                        	  txt += "規定的"+json3[x].requiredMileage+", "+(json3[x].currentMileage-json3[x].requiredMileage)+"公里了!!<br>"  ; 
+                        }
+                        	$("#maintenance-modal-body").html(txt);
+                        if(json3!=null){
+							$("#maintenance-modal").modal('show');
+						}
+                }				      
+            });
+//---------------------長出各分店的radio---------------------------
+            $.ajax({
+                type: "get",
+                url: "showAllBranch",
+                data: "data",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+
+                    var strinres = JSON.stringify(response);
+                    var json = JSON.parse(strinres);
+                    for (var x = 0; x < json.length; x++) {
+                        $("#radioset").append($("<input type='radio' class='xxx' name='storetoshow' value='" + json[x] + "'>"),json[x])
+                        $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
+                    }
+                }
+            });
+//---------------------保養項目MaintenanceDetail新增測試---------------------------
+          $("#submitinsert").click(function(){
+              var maintenanceItem=$("#maintenanceItem").val();
+              var requiredMileage=$("#requiredMileage").val();
+              var requiredHourTodo=$("#requiredHourTodo").val();
+//               alert("項目:"+maintenanceItem+"\n所需到達里程數:"+requiredMileage+"\n保養所需工時:"+requiredHourTodo);
+              $.ajax({
+              type:"post",
+              url:"insertNEWMaintenanceDetail",
+              data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
+              success : function(response) {
+                    alert("success");
+// 	 				alert(response);
+		      }
+              });
+          });
+//---------------------查詢保養中的機車---------------------------
+	      $("#radioset").on("click","input[name='storetoshow']",function(){	  
+			  var radioValue = $("input[name='storetoshow']:checked").val()
+              if(radioValue){
+//			                     alert("選擇了" + radioValue+"店");
+//			                     var json =  ; 
+//			                     alert(json)
+			  $.ajax({
+			  type:"post",
+			  url:"showAllisReadyMaintenanceBike",
+			  contentType: "application/json; charset=utf-8",
+			  data:JSON.stringify({"maintenanceStore":radioValue}),
+			  success : function(response) {
+			  var json3  = JSON.parse(JSON.stringify(response)); 
+			  var txt = "" ; 
+			  for(var x = 0 ; x< json3.length ; x++) {
+			       txt += "<button id = 'showBikeMaintenancingItem'>"+json3[x].licensePlate+"</button>\n"  ;     
+			    }
+			      $("#resultofselectedstoretoshow").html(txt);
+						$("#resultofselectedstoretoshow").on("click","#showBikeMaintenancingItem",function(){
+							var bikeplate=	$(this).text();
+// 							alert("bikeplate="+bikeplate)
+							  $.ajax({
+								  type:"post",
+								  url:"showBikeMaintenancingItem",
+								  contentType: "application/json; charset=utf-8",
+								  data:JSON.stringify({"licensePlate":bikeplate}),
+								  success : function(response) {
+								  var  json4  = JSON.parse(JSON.stringify(response)); 
+								  var  maintenanceStatus="保養中的項目:<br>";
+								  var  requiredHourToDo=0;
+									for(i in json4){
+										var index = +i + +1;
+										maintenanceStatus+=(index+"."+json4[i].maintenanceItem+"<br>")
+										requiredHourToDo+=json4[i].requiredHourToDo;
+									}
+									
+									maintenanceStatus+="保養所需總工時"+requiredHourToDo+"小時";
+									maintenanceStatus+="<button id='maintenanceComplete' >保養完畢</button>"//保養完成按鈕
+				                    $("#maintenance-modal-title").html("車牌"+json4[0].licensePlate+"的保養狀態");
+			                        $("#maintenance-modal-body").html(maintenanceStatus);
+									$("#maintenance-modal").modal('show');
+								  $("#maintenance-modal").on("click","#maintenanceComplete",function(){
+									  alert("保養完畢按鈕點了:"+json4[0].licensePlate)
+									  $.ajax({
+										  type:"post",
+										  url:"completeMaintenance",
+										  contentType: "application/json; charset=utf-8",
+										  data:JSON.stringify({"licensePlate":json4[0].licensePlate}),
+										  success : function(response) {
+											  $("#maintenance-modal").modal('hide');
+										  }//end of success(3)
+									  })//end of ajax(3)
+								  })//end of $("#maintenance-modal").on("click","#maintenanceComplet
+								  }//end of success(2)
+								  })//end of ajax(2)
+
+						})//end of $("#resultofeveryovermileage").on("click
+						
+			  }//end of success(1)
+			  })//end of ajax(1)
+			 }
+		   })
+//---------------------各車保養項目里程數---------------------------
+	      $("#radioset1").on("click","input[name='storetoshow1']",function(){	  
+          	var radioValue = $("input[name='storetoshow1']:checked").val()
+              if(radioValue){
+                  $.ajax({
+                      type:"post",
+                      url:"showEveryBikeMileagebyStore",
+                      contentType: "application/json; charset=utf-8",
+                      data:JSON.stringify({"maintenanceStore":radioValue}),
+                      success : function(response) {
+//                               alert("success");
+//                               var  json2  = JSON.stringify(response); 
+//                               alert("response stringify後="+json2)
+                                  var  json3  = JSON.parse(JSON.stringify(response)); 
+								  var txt = "" ; 
+	                              for(var x = 0 ; x< json3.length ; x++) {
+	                                  var percentage_now=json3[x].currentMileage/json3[x].requiredMileage*100;
+		              			      var progresscolor="";
+		            			  if(percentage_now<60){
+		            					  progresscolor="bg-success";
+		            					}else if(percentage_now>=60 &&percentage_now<100){
+		            					  progresscolor=""+progresscolor+"";
+		            					}else{
+		            					  progresscolor="bg-danger";
+		            					}
+                                  if(x>=1){
+                                      if(json3[x].licensePlate==json3[x-1].licensePlate){
+                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                      }else{
+                                      	txt+="<div><h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"</h3></div>"; 
+                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                      }                     
+                                  }else{//x=0,第一個顯示的 
+                                      txt+="<h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"</h3>"; 
+                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                  }
+                              	  
+                              }
+                              $("#resultofselectedstoretoshow1").html(txt);
+                              $('.progress-value > span').each(function(){
+                  		        $(this).prop('Counter',0).animate({
+                  		            Counter: $(this).text()
+                  		        },{
+                  		            duration: 1500,
+                  		            easing: 'swing',
+                  		            step: function (now){
+                  		                $(this).text(Math.ceil(now));
+                  		            }
+                  		        });
+                  		      });  
+                      
+                      }
+                      });
+              }
+          });        
+// ---------------------顯示有任意項目超過該規定里程數的車---------------------------
+			$("#showEveryMileageIsOver").click(function(){
+				$.ajax({
+					type:"get",
+					url:"showMessageIfMileageIsOver",
+					success : function(response) {
+//			alert("success");
+//			var  json2  = JSON.stringify(response); 
+//			alert("response stringify後="+json2)
+				var  json3  = JSON.parse(JSON.stringify(response)); 
+				var txt = "" ; 
+				for(var x = 0 ; x< json3.length ; x++) {
+					var percentage_now=json3[x].currentMileage/json3[x].requiredMileage*100;
+					var progresscolor="";
+					if(percentage_now<60){
+						progresscolor="bg-success";
+					}else if(percentage_now>=60 &&percentage_now<100){
+						progresscolor=""+progresscolor+"";
+					}else{
+						progresscolor="bg-danger";
+					}
+// 					if(percentage_now>=100){
+// 						percentage_now=100
+// 						}		超過100%的話一律變100%
+				if(json3[x].isReadyMaintenance==true){
+					if(x>=1){
+						if(json3[x].licensePlate==json3[x-1].licensePlate){
+							txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'  disabled>保養中</button><div class='col-md-6'><h3 class='progress-title'>項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+							}else{
+								txt+="<div><h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"  所在分店:"+json3[x].branchName+"</h3>"; 
+								txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'  disabled>保養中</button><div class='col-md-6'><h3 class='progress-title'>項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+								}                     
+						}else{//x=0,第一個顯示的																				  
+							txt+="<h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"  所在分店:"+json3[x].branchName+"</h3>"; 
+							txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'  disabled>保養中</button><div class='col-md-6'><h3 class='progress-title'>項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+							}  
+				}else{
+					if(x>=1){
+						if(json3[x].licensePlate==json3[x-1].licensePlate){
+							txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+							}else{
+								txt+="<div><h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"  所在分店:"+json3[x].branchName+"</h3>"; 
+								txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+								}                     
+						}else{//x=0,第一個顯示的																				  
+							txt+="<h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"  所在分店:"+json3[x].branchName+"</h3>"; 
+							txt += "<div class='container'><div class='row'><button id = 'sendmaintenance' class='btn btn-secondary ' style='height:70%'>以此項目送出保養訂單</button><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"<br>保養所需工時:"+json3[x].requiredHourToDo+"hr</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+							}  
+				}
+						
+				}//end of for
+					$("#resultofeveryovermileage").html(txt);
+				
+// ---------------------送保養---------------------------
+					$("#resultofeveryovermileage").on("click","#sendmaintenance",function(){
+// 	        			alert( $(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1])
+	        			var plate=$(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1]
+						$.ajax({
+							type:"post",
+							url:"sendMaintenance",
+							data:JSON.stringify({"licensePlate":plate}),
+							contentType:"application/JSON; charset = UTF-8" , 
+							success : function(response) {
+								alert("送保養成功囉!!!");
+//	 							alert("reponse="+response)
+							}
+						});
+					});
+				
+				
+				
+					$('.progress-value > span').each(function(){
+					$(this).prop('Counter',0).animate({
+						Counter: $(this).text()
+						},
+						{
+							duration: 1500,
+							easing: 'swing',
+							step: function (now){	
+								$(this).text(Math.ceil(now));
+							}	
+						});
+					});
+
+					}//end of success
+				});
+			});
+
+
+
+
+
+
+		});			
+		</script>
+      	</div>
+      	<!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">確定要登出?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2">登出前<br/>請確認儲存了所有修改資料<br/>否則將會發生不可預期的錯誤!!!!</div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+            <a class="btn btn-outline-secondary" href="index.html">登出</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

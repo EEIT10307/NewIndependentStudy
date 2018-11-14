@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<body>
+
+	配件品名:
+	<input type="text" id="acceName" class="acceName" value="堅毅360度全方位可攜式安全帽">
+	<br> 分店名稱:
+	<select id="branchName" class="branchName"></select>
+	<br> 配件數量:
+	<select id="acceNum" class="acceNum">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	<br> 配件種類:
+	<select id="acceType" class="acceType"></select>
+	<br> 配件價格:
+	<input type="text" id="acceePrice" class="acceePrice" value="878">
+	<br>
+	<input type="submit" id="submit">
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//顯示分店
+		$.ajax({
+			type : "post",
+			url : "selectBranchDetail",
+			success : function(response) {
+				// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {
+					//指定分店的欄位
+					var zx = shop[i].branchName;
+					//								alert(zx);
+					//產生option
+					i++;
+					var opt = $("<option>").val(zx).text(zx);
+					//傳回id=showshop 產生 分店 下拉式選單
+					$("#branchName").append(opt);
+				}
+			}
+		});
+		//顯示配件種類
+		$.ajax({
+			type : "post",
+			url : "selectAcceSerialNum",
+			success : function(response) {
+// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {
+					//指定分店的欄位
+					var zx = shop[i].acceType;
+					//							alert(zx);
+					//產生option
+					i++;
+					var opt = $("<option>").val(zx).text(zx);
+					//傳回id=showshop 產生 分店 下拉式選單
+					$("#acceType").append(opt);
+				}
+			}
+		});
+// ------------------------------------------------------------------------------------------------
+//新增配件
+
+	$("#submit").click(function() {
+		var acceName=$(".acceName").val();
+		var branchName=$(".branchName").val();
+		var acceNum=$(".acceNum").val();
+		var acceType=$(".acceType").val();
+		var acceePrice=$(".acceePrice").val();
+// 		alert(acceName)
+// 		alert(branchName)
+// 		alert(acceNum)
+// 		alert(acceType)
+// 		alert(acceePrice)
+		var get={"acceName":acceName,"branchName":branchName,"acceNum":acceNum,"acceType":acceType,"acceePrice":acceePrice}
+		var all=JSON.stringify(get)
+		$.ajax({
+			type : "post",
+			url : "insertAcceStock",
+			data :all,
+			contentType : "application/json; charset=utf-8",
+			success : function(response) {
+
+			}
+		});
+		})
+	});
+
+
+</script>
+</html>
