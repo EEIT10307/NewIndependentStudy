@@ -1,6 +1,6 @@
-$(document).ready(function () {
+// $(document).ready(function () {
     
-
+$(window).on('load',function () {
 
 var cookies = document.cookie; 
 
@@ -11,13 +11,14 @@ var cookies = document.cookie;
 
 			  //Cookies是否有email資訊
 			  if(cookies.indexOf("email")==-1){
-				alert("Cookie資訊中未包含email資訊");
+				// alert("Cookie資訊中未包含email資訊");
+				$("a#memberdescription").hide();
 			}else{
 
 				var email= cookies.split("email=")[1].split(";")[0];
-				alert("Cookies內儲存email="+email);
+				// alert("Cookies內儲存email="+email);
 				var password= cookies.split("password=")[1].split(";")[0];
-				alert("Cookies內儲存password="+password);
+				// alert("Cookies內儲存password="+password);
 
 				DelEmailCookie(email);
 				DelPasswordCookie(password);
@@ -25,7 +26,7 @@ var cookies = document.cookie;
 				// document.cookie = "password" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 				// $.cookie(cookie, { expires: -1 });
 				// deleteCookies();
-				alert("cookie= "+document.cookie);
+				// alert("cookie= "+document.cookie);
 
 				$("#memberloginstatus").hide();
 				$("a#login").show();
@@ -33,7 +34,7 @@ var cookies = document.cookie;
 				$("a#memberlogoutstatus").hide();
 	};
 		}else{
-			alert("沒有Cookies紀錄存在");
+			// alert("沒有Cookies紀錄存在");
 		};
     
 });
@@ -54,7 +55,7 @@ var cookies = document.cookie;
 
 //删除emailCookie
 function  DelEmailCookie(name){
-    alert("移除cookie ="+name)
+    // alert("移除cookie ="+name)
     expire_days = -1; // 過期日期(天)
     var day = new Date();
     day.setTime(day.getTime() + (expire_days * 24 * 60 * 60 * 1000));
@@ -66,7 +67,7 @@ function  DelEmailCookie(name){
 }
 //删除passwordCookie
 function  DelPasswordCookie(name){
-    alert("移除cookie ="+name)
+    // alert("移除cookie ="+name)
     expire_days = -1; // 過期日期(天)
     var day = new Date();
     day.setTime(day.getTime() + (expire_days * 24 * 60 * 60 * 1000));

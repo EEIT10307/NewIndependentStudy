@@ -5,6 +5,7 @@
 <title>Motorcycle</title>
 <link rel="stylesheet" type="text/css" href="css/memberEdit.css">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/image.css">
 <!-- <link rel="stylesheet" href="css/orderlist.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,11 +14,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/chat.js"></script>
-	<script src="js/effect.js"></script>
+	<!-- <script src="js/effect.js"></script> -->
 	<script src="js/include.js"></script>
 	<script src="js/memberSearch.js"></script>
 	<script src="js/memberEdit.js"></script>
 	<script src="js/memberdescription.js"></script>
+	<script src="js/logout.js"></script>
 </head>
 <body>
 	<div w3-include-html="navProd.html"></div>
@@ -27,7 +29,7 @@
 			
 			<div class="input-group mb-3">
 				信箱:
-				<input id="desmail" type="text" class="form-control" placeholder="請輸入信箱" aria-label="請輸入信箱" aria-describedby="basic-addon2">
+				<input id="desmail" type="text" class="form-control" placeholder="請輸入信箱" aria-label="請輸入信箱" aria-describedby="basic-addon2" disabled>
 				<!-- <div class="input-group-append">
 								<button class="btn btn-outline-secondary" type="button" id='mailnum'>修改</button>
 							  </div> -->
@@ -68,10 +70,39 @@
 						</div>
 
 				<div class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button" id='change'>修改</button>
+					<button style="margin: auto" class="btn btn-outline-secondary" type="button" id='change'>修改</button>
 				  </div>
 			<!-- <input type="text" class="form-control" id='searchOrd' placeholder="查詢訂單"/> -->
 		</div>
+
+		<div>
+	
+			<form id="myForm">
+				<input  style="margin-left: 140px" type="text" name="te">
+				<input style="margin-left: 140px"  type="hidden" name="email" id="hiddenemail">
+				<input style="margin-left: 140px" type="file" name="file" id="file" multiple="multiple"/>
+				<button style="margin:auto" type="submit">上傳檔案</button>
+			 </form>
+			 		 
+			</div>
+			<div style="margin: auto">
+				<img  style="margin-left: 150px" id="wwwwimg"  src="Images\Front.jpg"><br/>
+		
+
+				<!-- <img id="img"  src="Images\Front.jpg"><br/> -->
+			</div> 
+<!-- <script>
+	$(document).ready(function () {
+
+		$("#myForm").on('submit', (function (e) {
+			var cookie = document.cookie;
+			var email = cookie.split("email=")[1].split(";")[0];
+         
+			$("#wwwwimg").attr("src", "Images\'Front'" + email + "'.jpg'");
+		}));
+});
+</script> -->
+<!-- 
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -127,7 +158,7 @@
 				<div w3-include-html="login.html"></div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<script>includeHTML();</script>
 </body>
 </html>

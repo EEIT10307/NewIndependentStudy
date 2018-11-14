@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +40,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import cleanbean.MemberDetailCleanBean;
 import memberservice.MemberService;
 
 import projectbean.MemberDetail;
@@ -169,17 +174,21 @@ public class ControllerMVC  {
 		
 		
 	}
-	
+	//舊寫法
 	@RequestMapping(value="/CheckSingleServlet"  , method = RequestMethod.POST , produces = "application/json;charset=utf-8" )
 	private @ResponseBody String checksingle(@RequestAttribute("reader")  BufferedReader reader) {	
 		System.out.println("進入CheckSingleServlet");
 		MemberDetail mem = gson.fromJson(reader, MemberDetail.class);
 		String email = mem.getEmail();
-		
-		
-		
-		 MemberDetail mb = ms.getMember(email) ; 	 		    
+		 MemberDetail mb = ms.getMember(email) ; 
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//			String birthday = sdf.format(mb.getBirthday());
+//         
+//        	System.out.println("生日=" + birthday);  
+//        	json = {"memberSerialNum":2,"email":"as@gmail.com"
 		    String json = gson.toJson(mb) ; 
+		  
 		     System.out.println("json = " + json);  
 //		     factory.close();
 		     return json ; 
@@ -192,20 +201,43 @@ public class ControllerMVC  {
 	private @ResponseBody String checkall() {	
 		 List<MemberDetail> list = ms.getAllMembers() ; 	 		    
 		    String json = gson.toJson(list) ; 
-		     System.out.println("json = " + json);  
+		     System.out.println("json = " + json); 
 		     factory.close();
 		     return json ; 
 		     
 		    
 		 //    ,headers = "Accept=*/*"
 	}
-	
-	@RequestMapping(value = "/ChangeServlet"  , method = RequestMethod.POST)
-	private @ResponseBody String doMVCchage( @RequestAttribute("reader")  BufferedReader reader  ) throws JsonSyntaxException, JsonIOException, IOException  {     
-		MemberDetail mem = gson.fromJson(reader, MemberDetail.class) ;
-	
-         ms.updateMember(mem) ;      
-	     return "" ; 
+	//舊寫法
+//	@RequestMapping(value = "/ChangeServlet"  , method = RequestMethod.POST)
+//	private @ResponseBody String doMVCchage( @RequestAttribute("reader")  BufferedReader reader  ) throws JsonSyntaxException, JsonIOException, IOException  {     
+//		System.out.println("進入ChangeServlet");
+//		MemberDetail mem = gson.fromJson(reader, MemberDetail.class) ;
+//				
+		@RequestMapping(value = "/ChangeServlet", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+		private @ResponseBody String checksingle(@RequestBody MemberDetailCleanBean mdcb) throws ParseException {
+			System.out.println("進入ChangeServlet");
+			System.out.println("網頁傳入=" + mdcb);
+			System.out.println(mdcb.toString());
+//			MemberDetail mem = gson.fromJson(reader, MemberDetail.class);	
+//			String email = mem.getEmail();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		                  Date birthday = sdf.parse(mdcb.getBirthday());
+		              	System.out.println("生日=" + birthday);          
+	 	String email = mdcb.getEmail();
+	 	String password = mdcb.getPassword();	 	
+		String name = mdcb.getName();
+		String phone = mdcb.getPhone();		
+		String gender = mdcb.getGender();
+		String address = mdcb.getAddress();
+		System.out.println("email:"+email+",password:"+password+"name:"+name+"phone:"+phone+"gender:"+gender+"address:"+address);
+		
+	 	 ms.updateMember(email, password, name, phone, birthday, gender, address);
+//	     System.out.println(mem.getEmail());
+//	     System.out.println(mem.getBirthday());
+		
+	 	     
+	     return "check" ; 
 	}
 	
 	@RequestMapping(value = "/DeleteServlet"  , method = RequestMethod.POST)
@@ -312,12 +344,18 @@ public class ControllerMVC  {
 	
 	
 	@RequestMapping(value = "/upload",method = RequestMethod.POST , produces = MediaType.TEXT_PLAIN_VALUE)
-	  public@ResponseBody String upload(@RequestParam("file") MultipartFile file) throws IOException {
+	  public@ResponseBody String upload(@RequestParam("file") MultipartFile file,@RequestParam("email") String email ) throws IOException {
+		
+//		System.out.println("網頁傳入=" + mdcb);
+//		System.out.println(mdcb.toString());
+//		String email = mdcb.getEmail();
+		System.out.println("進入upload");
+	    System.out.println("傳入email:"+email);
 		System.out.println(file.getOriginalFilename());
 	    if (!file.getOriginalFilename().isEmpty()) {
 	      BufferedOutputStream outputStream = new BufferedOutputStream(
 	            new FileOutputStream(
-	                  new File("C:\\Maven\\eclipse-workspace\\motorcycleiiieduproject\\src\\main\\webapp\\Images", "Front.jpg"))); // 上傳檔案位置為D:\
+	                  new File("C:\\Users\\User\\git\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Images", "Front"+email+".jpg"))); // 上傳檔案位置為D:\
 	      outputStream.write(file.getBytes());
 	      outputStream.flush();
 	      
@@ -329,6 +367,32 @@ public class ControllerMVC  {
 	    
 	    return "success";
 	}	
+	
+	
+	@RequestMapping(value = "/ProfilePhotoServlet", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	private @ResponseBody String savestring(@RequestAttribute("reader")  BufferedReader reader) throws ParseException {
+		System.out.println("進入ProfilePhotoServlet");
+		MemberDetail mem = gson.fromJson(reader, MemberDetail.class);
+		String email = mem.getEmail();
+
+		
+		 MemberDetail mb = ms.updateMemberPic(email) ; 
+		    String json = gson.toJson(mb) ; 			  
+		     System.out.println("json = " + json); 
+		 
+ 	     
+     return json ; 
+}
+	
+	@RequestMapping(value = "/PhotoStringCheckServlet", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	private @ResponseBody boolean photoStringCheck(@RequestAttribute("reader")  BufferedReader reader) throws ParseException {
+		System.out.println("進入PhotoStringCheckServlet");
+		MemberDetail mem = gson.fromJson(reader, MemberDetail.class);
+		String email = mem.getEmail();
+		boolean drop = ms.checkPhotoString(email) ;
+	
+	     return drop ; 
+	}
 	
 	
 	@RequestMapping(value = "/uploadmutipartMem",method = RequestMethod.POST , produces = MediaType.TEXT_PLAIN_VALUE)

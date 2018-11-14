@@ -17,26 +17,28 @@ $(window).on('load',function () {
 
     //Cookies是否有email資訊
     if(cookie.indexOf("email")==-1){
-        alert("Cookie資訊中未包含email資訊");
+        // alert("Cookie資訊中未包含email資訊");
+        $("a#memberdescription").hide();
+        
     }else{
 
         var email= cookie.split("email=")[1].split(";")[0];
-        alert("Cookies內儲存email="+email);
+        // alert("Cookies內儲存email="+email);
         //判斷是否為會員email，AutoLoginCheck
         //Email確認是會員
         //導向resucess.html
         var combie =  {"email":email} ;
         var json    =  JSON.stringify(combie) ; 
-        alert("json="+json);
+        // alert("json="+json);
         //利用ajax將json型態的email丟到Controller的AutoLoginCheck察看是否為會員的email
         $.ajax({
              type: "post",
              url: "AutoLoginCheck",
              data: json,
              success:function (jsonback) {
-                 alert("AutoLoginCheck傳回 = " + jsonback) ;
+                //  alert("AutoLoginCheck傳回 = " + jsonback) ;
                  if(jsonback==null){
-                     alert("Cookie內的email非會員信箱或沒email資訊");
+                    //  alert("Cookie內的email非會員信箱或沒email資訊");
                  }else{
                        
                     //  var goto = "index.html?name="+jsonback
@@ -58,7 +60,7 @@ $(window).on('load',function () {
 
     };
   }else{
-      alert("網頁內沒任何Cookies");
+    //   alert("網頁內沒任何Cookies");
   };
     
 //$("#login").click(function (e) { 
@@ -72,14 +74,14 @@ var combie =  {"email":email , "password":password} ;
 //var combie =  {"email":email , "password":password , "phone" : phone} ; 
 //原本combie是json物件 利用以下方法翻成json字串 ; 
 var json    =  JSON.stringify(combie) ; 
-alert("email:"+email)
-alert("password:"+password)
+// alert("email:"+email)
+// alert("password:"+password)
 $.ajax({
     type: "post",
     url: "http://localhost:8080/motorcycleiiieduproject/LoginServlet",
     data: json,
     success: function (jsonback) {
-        alert("server傳回 = " + jsonback) ;  
+        // alert("server傳回 = " + jsonback) ;  
 //        if(jsonback.length!=0){
 //          if(jsonback.length==8){
         if(jsonback=="nullpage"){
@@ -162,7 +164,7 @@ $("#pwd").blur(function (e) {
 
         }
         if (flag1 && flag2 && flag3){
-          theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
+        //   theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
         
         }
         else 

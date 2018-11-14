@@ -1,5 +1,6 @@
 package memberservice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cleanbean.MemberDetailCleanBean;
 import memberIDAO.MemberIdao;
 import projectbean.MemberDetail;
 
@@ -79,10 +81,24 @@ public class MemberService {
 		return memberDaoImp.getMember(email) ; 
 	}
 
-	public MemberDetail updateMember(MemberDetail mb) {
-	//	MemberDaoImp dao = new MemberDaoImp();				
-		return memberDaoImp.updateMember(mb) ; 
+
+	public MemberDetailCleanBean updateMember(MemberDetailCleanBean mdcb) {
+		// TODO Auto-generated method stub
+		return memberDaoImp.updateMember(mdcb) ; 
 	}
 
-	
+	public MemberDetail updateMember(String email, String password, String name, String phone, Date birthday, String gender,
+			String address) {
+		return memberDaoImp.updateMember(email,password,name,phone,birthday,gender,
+				address) ;
+		
+	}
+	public MemberDetail updateMemberPic(String email){
+		return memberDaoImp.updateMemberPic(email) ;
+	}
+
+	public boolean checkPhotoString(String email) {
+		// TODO Auto-generated method stub
+		return memberDaoImp.checkPhotoString(email);
+	}
 }

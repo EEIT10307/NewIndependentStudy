@@ -1,5 +1,6 @@
 package memberDaoIMP;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import cleanbean.MemberDetailCleanBean;
 import memberIDAO.MemberIdao;
 import projectbean.MemberDetail;
 
@@ -136,16 +138,23 @@ public class MemberDaoImp implements MemberIdao {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public MemberDetail getMember(String  email) {
 		
-		Session session = factory.getCurrentSession() ; 
+
 //			Session session = entityManagerFactory.unwrap(Session.class) ;
-//			Transaction tx = null ;  
-			MemberDetail member = null ;   		          		
+//			Transaction tx = null ; 
+		System.out.println("進入getMember方法");
+		String hql = "FROM MemberDetail m WHERE m.email = :email";
+		Session session = factory.getCurrentSession();
+		
+			MemberDetail member = (MemberDetail) session.createQuery(hql)
+		             .setParameter("email", email)
+		             .getSingleResult();
+	
 //		try {
 //					 tx = session.beginTransaction() ; 
-			    member = session.get(MemberDetail.class, email) ; 
+//			    member = session.get(MemberDetail.class, email) ; 
 			  
 //			    		 tx.commit();
 //		}catch (Exception e) {
@@ -163,7 +172,7 @@ public class MemberDaoImp implements MemberIdao {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public int deleteMember(MemberDetail mem) {
 		Session session = factory.getCurrentSession() ; 
 //			Session session = entityManagerFactory.unwrap(Session.class) ;
@@ -187,47 +196,65 @@ public class MemberDaoImp implements MemberIdao {
 		return 0;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	@Override
 //	@Transactional
-	public MemberDetail updateMember(MemberDetail mb) {
+	public MemberDetail updateMember(String email, String password, String name, String phone, Date birthday, String gender,
+			String address) {
+		System.out.println("進入updateMember方法");
+	
+//		MemberDetail memberDetail = new MemberDetail(email,password,name,phone,birthday,gender,
+//				address);
 		
 		String hql = "FROM MemberDetail m WHERE m.email = :email";
 		Session session = factory.getCurrentSession();
-		String email = mb.getEmail();
-		String password = mb.getPassword();
-		String name = mb.getName();
-		String phone = mb.getPhone();
-		Date birthday = mb.getBirthday();
-		String gender = mb.getGender();
-		String address = mb.getAddress();
+		
+			MemberDetail member = (MemberDetail) session.createQuery(hql)
+		             .setParameter("email", email)
+		             .getSingleResult();
+		
+			member.setPassword(password);
+			member.setName(name);
+			member.setPhone(phone);
+			member.setBirthday(birthday);
+			member.setGender(gender);
+			member.setAddress(address);
+//		String hql = "FROM MemberDetail m WHERE m.email = :email";
+//		Session session = factory.getCurrentSession();
+//		MemberDetail mem = (MemberDetail) session.createQuery(hql)
+//				.setParameter("email", email)
+//				.getSingleResult();
+		try {
+		
+			
+			session.update(member);
+//		String password = mem.getPassword();
+//		String name = mem.getName();
+//		String phone = mem.getPhone();
+//		Date birthday = mem.getBirthday();
+//		String gender = mem.getGender();
+//		String address = mem.getAddress();
 
-				try {
-			MemberDetail mem = (MemberDetail) session.createQuery(hql)
-					             .setParameter("email", email)
-					             .getSingleResult();
-				
-			mem.setPassword(password);
-			mem.setName(name);
-            mem.setPhone(phone);
-            mem.setBirthday(birthday);
-            mem.setGender(gender);
-            mem.setAddress(address);
-            
-            session.update(mem);
 
 //					String check = mb.getClass().getName(); 
 //					System.out.println("check="+check);   check=bean.MemberBean
 					//                                    mb=bean.MemberBean@5d635c4a
 				} catch(NoResultException ex) {
-					mb = null;
+					member = null;
 				}
-				return mb;
+				return member;
 	
 	}
 	// 檢查使用者在登入時輸入的帳號與密碼是否正確。如果正確，傳回該帳號所對應的MemberDetail物件，
     // 否則傳回 null。
 	@Override
-	@Transactional
+//	@Transactional
 	public MemberDetail checkEmailPassword(String email, String password) {
 		MemberDetail mb = null;
 		String hql = "FROM MemberDetail m WHERE m.email = :email and m.password = :password";
@@ -247,7 +274,7 @@ public class MemberDaoImp implements MemberIdao {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public MemberDetail checkEmail(String email) {
 		MemberDetail mb = null;
 		String hql = "FROM MemberDetail m WHERE m.email = :email";
@@ -263,6 +290,55 @@ public class MemberDaoImp implements MemberIdao {
 			mb = null;
 		}
 		return mb;
+	}
+
+	@Override
+	public MemberDetailCleanBean updateMember(MemberDetailCleanBean mdcb) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberDetail updateMemberPic(String email) {
+		System.out.println("進入updateMemberPic方法");
+		MemberDetail mb = null;
+		String hql = "FROM MemberDetail m WHERE m.email = :email";
+		Session session = factory.getCurrentSession() ; 
+		
+			mb = (MemberDetail) session.createQuery(hql)
+			             .setParameter("email", email)
+			             .getSingleResult();
+			
+			String profilePhoto ="Front"+email+".jpg";
+			mb.setProfilePhoto(profilePhoto);
+			
+			session.update(mb);
+			
+		return mb;
+	}
+
+	@Override
+	public boolean checkPhotoString(String email) {
+		System.out.println("進入checkPhotoString方法");
+		MemberDetail mb = null;
+		boolean drop =false ; 
+		String hql = "FROM MemberDetail m WHERE m.email = :email";
+		Session session = factory.getCurrentSession() ; 
+		
+			mb = (MemberDetail) session.createQuery(hql)
+			             .setParameter("email", email)
+			             .getSingleResult();
+			
+			String profilePhoto = mb.getProfilePhoto();
+			
+			if(profilePhoto != null || profilePhoto !="") {
+				System.out.println("profilePhoto有資料");
+				drop=true;
+				
+			}
+				
+				return drop;
+			
 	}
 
 

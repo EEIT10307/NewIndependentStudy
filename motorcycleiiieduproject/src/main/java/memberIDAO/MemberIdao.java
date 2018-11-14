@@ -1,7 +1,9 @@
 package memberIDAO;
 
+import java.util.Date;
 import java.util.List;
 
+import cleanbean.MemberDetailCleanBean;
 import projectbean.MemberDetail;
 
 
@@ -18,15 +20,19 @@ public interface MemberIdao {
 
 	int deleteMember(MemberDetail mem);
 
-
-//
-	MemberDetail updateMember(MemberDetail mb);
-
 	public MemberDetail checkEmailPassword(String email, String password);
 	
 	public MemberDetail checkEmail(String email);
 
 
+	MemberDetailCleanBean updateMember(MemberDetailCleanBean mdcb);
+
+	MemberDetail updateMember(String email, String password, String name, String phone, Date date, String gender,
+			String address);
+
+	MemberDetail updateMemberPic(String email);
+
+	boolean checkPhotoString(String email);
 
 	
 

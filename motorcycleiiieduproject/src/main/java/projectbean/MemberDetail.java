@@ -4,6 +4,7 @@ package projectbean;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,9 +33,24 @@ public class MemberDetail implements Serializable{
 	private String address ;
 	private java.util.Date  signinDate; 
 	private java.util.Date  lastLoginDate ; 
-	private Blob profilePhoto ;
+	private String profilePhoto ;
 	
 	
+	public MemberDetail() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MemberDetail(String email, String password, String name, String phone, Date birthday, String gender,
+			String address) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.address = address;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getMemberSerialNum() {
@@ -103,13 +119,14 @@ public class MemberDetail implements Serializable{
 		this.lastLoginDate = lastLoginDate;
 	}
 //	@Column(nullable = true)//羅冰  記得要改回去
-
-	public Blob getProfilePhoto() {
+	public String getProfilePhoto() {
 		return profilePhoto;
 	}
-	public void setProfilePhoto(Blob profilePhoto) {
+	public void setProfilePhoto(String profilePhoto) {
 		this.profilePhoto = profilePhoto;
-	} 
+	}
+
+    
 	
 	
 	

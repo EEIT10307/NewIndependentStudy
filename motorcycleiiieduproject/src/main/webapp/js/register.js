@@ -22,7 +22,7 @@ $.ajax({
 //        var goto = "resucess.html?name="+jsonbackeg
 //        //重要！！ 轉傳時要編碼一次編成ＵＲＩ
 //        window.location.assign(encodeURI(goto)) ; 
-        alert(registerdata);
+        // alert(registerdata);
         // var jsonString = JSON.stringify(registerdata);
         // alert("jsonString為"+jsonString);
         // JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
@@ -31,7 +31,7 @@ $.ajax({
         // alert(registerdata.type);
         //     alert(registerdata.email);
         //    var jsonback=registerdata.email;
-       alert("server傳回 = " + registerdata) ;  
+    //    alert("server傳回 = " + registerdata) ;  
        if(registerdata=="nullpage"){
        	var nullpage = "nullpage.html?name="+registerdata
        	
@@ -56,7 +56,7 @@ $.ajax({
        			window.location.assign(encodeURI(duplicateEmail)) ; 
        		}else{
        			// JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
-         alert("註冊資料正確，registerdata為"+registerdata);
+        //  alert("註冊資料正確，registerdata為"+registerdata);
     
             var mailmember =  registerdata.replace("{","").replace("}","").replace("\"").split(",")[0].split(":")[1];
        			var goto = "resucess.html?name="+mailmember
@@ -126,7 +126,7 @@ function chkPassword() {
 
         }
         if (flag1 && flag2 && flag3){
-          theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
+        //   theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
         
         }
         else 
