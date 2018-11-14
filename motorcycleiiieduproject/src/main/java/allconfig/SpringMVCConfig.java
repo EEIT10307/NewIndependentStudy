@@ -11,10 +11,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import testcontroller.InterceptorUse;
+import timercontroll.AutoBug;
+import timercontroll.TimerPicker;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller","everybikeInfocontroller"})
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
+		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	
@@ -39,5 +42,14 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    resolver.setDefaultEncoding("utf-8");
 	    return resolver;
 	}
-
+	@Bean 
+	public TimerPicker timerPicker() {
+		   TimerPicker time = new TimerPicker();
+		   return time ;   
+	}
+	@Bean
+	public AutoBug  autoBug() {
+		AutoBug autoBug = new AutoBug();
+		return autoBug ;
+	}
 }

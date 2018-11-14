@@ -17,11 +17,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.google.gson.Gson;
 
 @Configuration
-@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","webcrawler","everybikeInfo","testfakebikedao"})
+
+@ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance",
+		"everybikeInfo","testfakebikedao","webinfomanagerservice","webcrawler","webinfomanagerdao","dispatcherdao" ,"dispatcherservice"})
 @EnableTransactionManagement
 public class SpringConfig {
 
-	//JNDI DataSource
+	//JNDI DataSource 
 	@Bean
 	public DataSource dataSource(){			
 		JndiObjectFactoryBean factory = new JndiObjectFactoryBean();
@@ -93,6 +95,8 @@ public class SpringConfig {
 		   
 		   
 	   }
+	   
+	   
 	
 	
 }

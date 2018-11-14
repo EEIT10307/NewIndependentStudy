@@ -116,7 +116,7 @@ $(document).ready(function () {
     var futureday = new Date();
     //    alert(today.getHours())
 
-    for (var time = 10; time < 23; time++) {
+    for (var time = 10; time < 22; time++) {
         if (time <= today.getHours()) {
             continue;
         }
@@ -214,6 +214,8 @@ $(".makeDoption option").each(function(){
 
     /* 有空補個日期判別式 超過22點*/
 
+    
+
     //顧客訂單查詢車子
     $("#motorserchdo").click(function (e) {
         e.preventDefault();
@@ -227,7 +229,7 @@ $(".makeDoption option").each(function(){
         }
         var jsonob = JSON.stringify(surchop);
         sessionStorage.orderTime = jsonob;
-        // alert(jsonob)
+//         alert(jsonob)
 
         window.location.assign ("search1.html"); 
 

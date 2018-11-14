@@ -1,7 +1,5 @@
 package cleanbean;
 
-import projectbean.EveryBikeInfo;
-
 public class OrderListToGson {
 	
 	private String orderSerialNum;
@@ -67,7 +65,7 @@ public class OrderListToGson {
 		this.orderSerialNum = orderSerialNum;
 		this.phone = phone;
 		this.bikeModel = bikeModel;
-		this.licensePlate = licensePlate;
+		this.setLicensePlate(licensePlate);
 		this.pickupDate = pickupDate;
 		this.dropoffDate = dropoffDate;
 		this.totalDiscount = totalDiscount;
@@ -401,6 +399,22 @@ public class OrderListToGson {
 
 	public void setPayOrNot(boolean payOrNot) {
 		this.payOrNot = payOrNot;
+	}
+
+
+
+
+
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+
+
+
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
 	}
 	
 	

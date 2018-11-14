@@ -1,10 +1,5 @@
 $(document).ready(function () {
 
-
-
-
-
-
 var    orderdetail =  sessionStorage.orderdetailsession;
  var orderdetailstr    =  JSON.parse(orderdetail)
 
@@ -98,13 +93,6 @@ $(".addphone").click(function (e) {
 		alert("請輸入正確的手機號碼(10碼)")
 	}else{
 	orderdetailstr.phone = $(".guestphone").val();
-
-
-
-	
-	
-	alert(JSON.stringify(orderdetailstr))
-
 	$.ajax({ 
 		type: "Post",
 		url: "getlastcheckorderlist",

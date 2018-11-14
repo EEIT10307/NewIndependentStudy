@@ -44,9 +44,7 @@ public class EveryBikeMileageDao implements EveryBikeMileageIFaceDao {
 	public  List<EveryBikeMileage> selectallname(String branchname0) {
 		Session session = Factory.getCurrentSession();
 
-		System.out.println("一");
 		CriteriaBuilder buider = Factory.getCurrentSession().getCriteriaBuilder();
-		System.out.println("二");
 		CriteriaQuery<EveryBikeMileage> createQuery = buider.createQuery(EveryBikeMileage.class);
 		Root<EveryBikeMileage> fromClass = createQuery.from(EveryBikeMileage.class);
 		ParameterExpression<String> checkshopname = buider.parameter(String.class);
@@ -55,16 +53,15 @@ public class EveryBikeMileageDao implements EveryBikeMileageIFaceDao {
 		Query<EveryBikeMileage> platelist = Factory.getCurrentSession().createQuery(createQuery);
 		platelist.setParameter(checkshopname, branchname0);
 		List<EveryBikeMileage> bikeDetaillist = platelist.getResultList();
-		System.out.println("here");
 	
 		
-		for (EveryBikeMileage loop : bikeDetaillist) {
-			
-	System.out.println("車牌:"+loop.getLicensePlate().getLicensePlate());
-	System.out.println("墓碑里程:"+loop.getCurrentMileage());
-	System.out.println("項目:"+loop.getMaintenanceItem().getMaintenanceItem());
-	System.out.println("需求里程:"+loop.getMaintenanceItem().getRequiredMileage());
-		}
+//		for (EveryBikeMileage loop : bikeDetaillist) {
+//			
+//	System.out.println("車牌:"+loop.getLicensePlate().getLicensePlate());
+//	System.out.println("墓碑里程:"+loop.getCurrentMileage());
+//	System.out.println("項目:"+loop.getMaintenanceItem().getMaintenanceItem());
+//	System.out.println("需求里程:"+loop.getMaintenanceItem().getRequiredMileage());
+//		}
 		
 		return bikeDetaillist;
 	}
@@ -73,20 +70,16 @@ public class EveryBikeMileageDao implements EveryBikeMileageIFaceDao {
 	public int save(String everyBikeMileage) {
 		Session session = Factory.getCurrentSession();
 
-		System.out.println("一");
 		CriteriaBuilder buider = Factory.getCurrentSession().getCriteriaBuilder();
-		System.out.println("二");
 		CriteriaQuery<MaintenanceDetail> createQuery = buider.createQuery(MaintenanceDetail.class);
 		Root<MaintenanceDetail> fromClass = createQuery.from(MaintenanceDetail.class);
 		createQuery.select(fromClass);
 		List<MaintenanceDetail> platelist = Factory.getCurrentSession().createQuery(createQuery).getResultList();
-		System.out.println("here");
 		int insertCount=0;
 		EveryBikeInfo everyBikeInfo=new EveryBikeInfo();
 		everyBikeInfo.setLicensePlate(everyBikeMileage);
 		for (MaintenanceDetail loop : platelist) {
 		
-			System.out.println(loop.getMaintenanceItem());
 			EveryBikeMileage everyBike=new EveryBikeMileage(everyBikeInfo,loop,0.0);
 			
 			session.save(everyBike);

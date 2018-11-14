@@ -137,14 +137,30 @@
 <!-- 						</label> -->
 						<tbody class="add">
 					</tbody>
-						<tr >
+					<tr class='photo'>
 							<td>照片:</td>
+							
+							
+							
 							<td class="form-group ">
-							<label class="btn btn-info" style="width:355px">
-							<input type="file" name="file"	id="upload_img" style="display: none;" multiple="multiple" "/>
-							<i class="fas fa-camera-retro fa-spin fa-lg"></i>上傳照片
-							</label>
-								 </td>
+<!-- 							<label class="btn btn-info" > -->
+<!-- 							<input type="file" name="file"	id="upload_img"  multiple="multiple" /> -->
+<!-- 							<i class="fas fa-camera-retro fa-spin "></i>上傳照片 -->
+<!-- 							</label> -->
+							
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<label class="btn btn-info" id="ccd">
+<!-- 										<span class="input-group-text">photo</span> -->
+											<i class="fas fa-camera-retro fa-spin "></i>上傳照片
+										</label>
+									</div>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input on" id="inputGroupFile01" multiple="multiple"> 
+										<label	class="custom-file-label on" for="inputGroupFile01" id="fuckyou" style="width:250px">Choose file</label>
+									</div>
+								</div>
+							</td>
 						</tr>
 					<tr>
 						<td>分店:</td>
@@ -280,6 +296,12 @@
 							value=""
 							class=" form-control form-control-sm col-lg-8 col-md-12 col-sm-12"></td>
 					</tr>
+					<tr class="FuelType">
+						<td>描述:</td>
+						<td class="form-group"><textarea  id="description"
+							
+							class="form-control form-control-sm col-lg-8 col-md-12 col-sm-12 description" style="height: 150px"></textarea></td>
+					</tr>
 				</table>
 			</form>
 				<input type="submit" id="submit" 
@@ -335,30 +357,55 @@
     
     <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
 	<script>includeHTML();</script>
-  </body>
+
+</body>
   	<script>
-		        //初始参数个数
-		        var varCount = 0;
-		 
-		        $(function () {
-		          //新增按钮点击
-		            $('#addVar').on('click', function(){
-		                varCount++;
-						$(".add").append('<tr><td>車牌'+varCount+':</td><td class="form-group d-flex justify-content-between align-middle col-lg-10 col-md-12 col-sm-12 my-0" style="padding-left:3px;"><input class="form-control form-control-sm my-1" type="text" id="LicensePlate'+varCount+'" name="test" style="padding-left: 1px;width: 351.5px;">' + '<span class="removeVar btn btn-sm btn-danger mx-2 my-1">删除</span></td></tr>');
-		            });
-		 
-		          //删除按钮点击
-		          $('table').on('click', '.removeVar', function(){
-					$(this).closest('tr').remove();
-		            varCount--;
-		          });
-		        });
-		    </script>
+				//初始参数个数
+				var varCount = 0;
+
+				$(function() {
+					//新增按钮点击
+					$('#addVar')
+							.on(
+									'click',
+									function() {
+										varCount++;
+										$(".add")
+												.append(
+														'<tr><td>車牌'
+																+ varCount
+																+ ':</td><td class="form-group d-flex justify-content-between align-middle col-lg-10 col-md-12 col-sm-12 my-0" style="padding-left:3px;"><input class="form-control form-control-sm my-1" type="text" id="LicensePlate'+varCount+'" name="test" style="padding-left: 1px;width: 351.5px;">'
+																+ '<span class="removeVar btn btn-sm btn-danger mx-2 my-1">删除</span></td></tr>');
+									});
+
+					//删除按钮点击
+					$('table').on('click', '.removeVar', function() {
+						$(this).closest('tr').remove();
+						varCount--;
+					});
+				});
+			</script>
 		<script type="text/javascript">
 		
 		$(document).ready(function() {
-		
-			
+// 			alert("robin太廢了吧?")
+// 			$("#ccd").click(function(e) {
+// 				alert(78)
+// 			}
+		 $("input[type=file]").click(function(){
+//       alert("ALOHA")
+    });
+		 $("input#inputGroupFile01").change(function(){
+			 var files=$(this)[0].files;
+// 			 alert("選擇了"+files.length+"個檔案")
+			 $("#fuckyou").html("選擇了"+files.length+"個檔案");
+		 })
+		 
+		 
+// 		 $("input[type=file]").change(function(){
+// 			 var files=this.files
+// 		        alert("FUCKYOU:"+$(this).files.length)
+// 		    });
 				//一鍵完成
 				$(".onsubmit").click(function(e) {
 					
@@ -384,6 +431,11 @@
 					$("#torque").val("5.4kg-m(53Nm)/5,250rpm");//扭力
 					$("#frontBrake").val("267mm雙碟四活塞輻射卡鉗");//前煞車
 					$("#rearBrake").val("282mm單碟");//後煞車
+					$(".description").text("自 2001 年問世以來，TMAX 充實了數十萬騎士的移動生活，已成為現今頂級 SPORTS SCOOTER 之典範！"+
+							"2017 年推出的新款 TMAX，搭載 530cc 水冷四行程並列雙缸高性能引擎、更輕量化的車身及新型LED頭燈的導光體設計，展現出年輕、精悍的氣質！"+
+							"重新設計的躍動迴力飛鏢造型，強調連結前後的直線主題，則直接呈現出更為敏捷、輕快比例的形象。"+
+							"全車減重 9kg 的輕量化設計，操控更加輕鬆寫意，充分享受駕駛樂趣！"+
+							"搭配加長 40mm 的後搖臂，提升低速行駛時的敏捷、機動性與高速行駛時的穩定性，適應路面的能力更優良，山路或坡度行車亦不改穩定、優異性能！");//後煞車
 
 				})
 				//只新增車牌 其他隱藏
@@ -392,6 +444,7 @@
 				$("#submit1").hide();
 				$("#checkbox").click(function() {
 					$(".photo").toggle();
+					$(".description").toggle();
 					
 					$("#onesubmit").toggle();
 					$(".BikeModel").toggle();
@@ -483,6 +536,8 @@
 					var torque = $("#torque").val();//??
 					var frontBrake = $("#frontBrake").val();//??
 					var rearBrake = $("#rearBrake").val();//??
+					var description=$(".description").val();
+// 					alert(description)
 					if (LicensePlate == "") {
 						alert("請輸入車牌!!!")
 						return;
@@ -491,6 +546,9 @@
 						ABS = true;
 					} else {
 						ABS = false;
+					}
+					if(description==""){
+						description=null;
 					}
 					var allLicensePlatearray = []
 
@@ -522,6 +580,7 @@
 						allLicensePlate["torque"] = torque;
 						allLicensePlate["frontBrake"] = frontBrake;
 						allLicensePlate["rearBrake"] = rearBrake;
+						allLicensePlate["description"] = description;
 
 						allLicensePlatearray.push(allLicensePlate);
 
@@ -538,10 +597,12 @@
 							var cd = JSON.parse(response)
 
 							alert(cd.key)
-
+						if(cd.key==null){
+							
+						window.location.href="uploadmotor.html";
+							}
 						}
 					});
-					window.location.href="uploadmotor.html";
 			         }else{
 			        	 return;
 			         }
@@ -583,6 +644,7 @@
 								for (i in shop) {
 									//指定型號的欄位
 									var zx = shop[i];
+// 									alert(zx)
 									//產生option
 									i++;
 									var opt = $("<option>").val(zx).text(zx);
@@ -609,7 +671,7 @@
 						type : "post",
 						url : "showAllshowAllEveryBikeInfo",
 						data : str,
-						contentType : "application/json; charset=utf-8",
+						
 						success : function(response) {
 							var shop = JSON.parse(response);
 							//迴圈
