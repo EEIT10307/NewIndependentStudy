@@ -1,4 +1,4 @@
-package branchdetaildao;
+package branchdetail;
 
 import java.util.Date;
 

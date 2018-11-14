@@ -1,8 +1,11 @@
 package allconfig;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -10,19 +13,19 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import testcontroller.InterceptorUse;
-import timercontroll.AutoBug;
-import timercontroll.TimerPicker;
 
 @Configuration
 @EnableWebMvc
-
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller",
-		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll","membercontroller"})
+@EnableScheduling
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
+		"branchdetailcontroller","everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller", "timercontroll","membercontroller" })
 
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
+	@Autowired
+	SessionFactory factory   ; 
 	
-//註冊interceptor使用
+//閮餃��interceptor雿輻��
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
@@ -33,7 +36,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 
 
 	}
-	//靜態資源使用預設servlet
+	//����鞈�皞�雿輻�券��閮貞ervlet
 	@Override
 	    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 	        configurer.enable();
@@ -43,17 +46,6 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
 	    resolver.setDefaultEncoding("utf-8");
 	    return resolver;
-	}
-
-	@Bean 
-	public TimerPicker timerPicker() {
-		   TimerPicker time = new TimerPicker();
-		   return time ;   
-	}
-	@Bean
-	public AutoBug  autoBug() {
-		AutoBug autoBug = new AutoBug();
-		return autoBug ;
 	}
 
 }

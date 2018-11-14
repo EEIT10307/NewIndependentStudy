@@ -121,21 +121,19 @@
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
 				<h4 class='text-center my-3'>查詢保養中的機車</h4>
-				<div class="from-control col-6 offset-3">
+				<div class="from-control col-6 offset-3" id="radioset">
 				查詢分店:
-				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安  
-				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌
-				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店
-				<input type="radio" class="xxx" name="storetoshow" value="木柵" /> 木柵
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="大安" /> 大安   -->
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="石牌" /> 石牌 -->
+<!-- 				<input type="radio" class="xxx" name="storetoshow" value="新店" /> 新店 -->
 				</div>
 				<div id="resultofselectedstoretoshow"></div>
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 	<h4 class='text-center my-3'>各車保養項目里程數</h4>
-	<div class="from-control col-6 offset-3">查詢分店:
-	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安  
-	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌
-	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店
-	<input type="radio" class="xxx" name="storetoshow1" value="木柵" /> 木柵
+	<div class="from-control col-6 offset-3" id="radioset1">查詢分店:
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="大安" /> 大安   -->
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="石牌" /> 石牌 -->
+<!-- 	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店 -->
 	</div>
 	<div id="resultofselectedstoretoshow1"></div>
 <!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
@@ -191,30 +189,45 @@
 						}
                 }				      
             });
+//---------------------長出各分店的radio---------------------------
+            $.ajax({
+                type: "get",
+                url: "showAllBranch",
+                data: "data",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+
+                    var strinres = JSON.stringify(response);
+                    var json = JSON.parse(strinres);
+                    for (var x = 0; x < json.length; x++) {
+                        $("#radioset").append($("<input type='radio' class='xxx' name='storetoshow' value='" + json[x] + "'>"),json[x])
+                        $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
+                    }
+                }
+            });
 //---------------------保養項目MaintenanceDetail新增測試---------------------------
           $("#submitinsert").click(function(){
               var maintenanceItem=$("#maintenanceItem").val();
               var requiredMileage=$("#requiredMileage").val();
               var requiredHourTodo=$("#requiredHourTodo").val();
-              alert("項目:"+maintenanceItem+"\n所需到達里程數:"+requiredMileage+"\n保養所需工時:"+requiredHourTodo);
+//               alert("項目:"+maintenanceItem+"\n所需到達里程數:"+requiredMileage+"\n保養所需工時:"+requiredHourTodo);
               $.ajax({
               type:"post",
               url:"insertNEWMaintenanceDetail",
               data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
               success : function(response) {
                     alert("success");
-	 				alert(response);
+// 	 				alert(response);
 		      }
               });
           });
 //---------------------查詢保養中的機車---------------------------
-		  $("input[name='storetoshow']").click(function(){
-			  
+	      $("#radioset").on("click","input[name='storetoshow']",function(){	  
 			  var radioValue = $("input[name='storetoshow']:checked").val()
               if(radioValue){
 //			                     alert("選擇了" + radioValue+"店");
 //			                     var json =  ; 
-//			                        alert(json)
+//			                     alert(json)
 			  $.ajax({
 			  type:"post",
 			  url:"showAllisReadyMaintenanceBike",
@@ -229,7 +242,7 @@
 			      $("#resultofselectedstoretoshow").html(txt);
 						$("#resultofselectedstoretoshow").on("click","#showBikeMaintenancingItem",function(){
 							var bikeplate=	$(this).text();
-							alert("bikeplate幹="+bikeplate)
+// 							alert("bikeplate="+bikeplate)
 							  $.ajax({
 								  type:"post",
 								  url:"showBikeMaintenancingItem",
@@ -258,7 +271,6 @@
 										  contentType: "application/json; charset=utf-8",
 										  data:JSON.stringify({"licensePlate":json4[0].licensePlate}),
 										  success : function(response) {
-											  alert("FUCKYOU")
 											  $("#maintenance-modal").modal('hide');
 										  }//end of success(3)
 									  })//end of ajax(3)
@@ -273,8 +285,7 @@
 			 }
 		   })
 //---------------------各車保養項目里程數---------------------------
-          $("input[name='storetoshow1']").click(function(){
-          	
+	      $("#radioset1").on("click","input[name='storetoshow1']",function(){	  
           	var radioValue = $("input[name='storetoshow1']:checked").val()
               if(radioValue){
                   $.ajax({
@@ -383,8 +394,8 @@
 				
 // ---------------------送保養---------------------------
 					$("#resultofeveryovermileage").on("click","#sendmaintenance",function(){
-	        			alert( $(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1])
-						var plate=$(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1]
+// 	        			alert( $(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1])
+	        			var plate=$(this).parent().parent().parent().children().first().text().split(" ")[0].split(":")[1]
 						$.ajax({
 							type:"post",
 							url:"sendMaintenance",
