@@ -10,10 +10,15 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import testcontroller.InterceptorUse;
+import timercontroll.AutoBug;
+import timercontroll.TimerPicker;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","everybikeInfocontroller","membercontroller"})
+
+@ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller",
+		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll","membercontroller"})
+
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	
@@ -40,5 +45,15 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    return resolver;
 	}
 
+	@Bean 
+	public TimerPicker timerPicker() {
+		   TimerPicker time = new TimerPicker();
+		   return time ;   
+	}
+	@Bean
+	public AutoBug  autoBug() {
+		AutoBug autoBug = new AutoBug();
+		return autoBug ;
+	}
 
 }

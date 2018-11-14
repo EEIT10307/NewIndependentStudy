@@ -5,7 +5,6 @@ import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +23,10 @@ import com.google.gson.Gson;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
-import orderdao.OrderListToGson;
+import cleanbean.FinOrderBean;
+import cleanbean.ManagerOrderCondition;
+import cleanbean.OrderListToGson;
+import cleanbean.ShowManagerChangeOrderStatus;
 import orderservice.OrderIFaceService;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
@@ -73,6 +75,8 @@ public class OrderController {
 			// 此方法比對店內庫存並回傳可租車輛的資訊
 			List<BikeDetail> finalBikeDetail = tesOrderIFaceService.returnMotorDetailAndShowView(comPareOrderListMotorModel,
 					customerquery.getPickupStore() ,orderABbranch  , orderFromAnotherbranch  );
+			
+			
 			// hibernate複合主鍵物件轉為普通java
 			List<BikeDetailToGsonHaoUse> forGsonConvert = tesOrderIFaceService.forGsonConvert(finalBikeDetail);
 			return gson.toJson(forGsonConvert);
@@ -82,7 +86,7 @@ public class OrderController {
 			return new String("{fail:fail}");
 		}
 		}
-	}
+	}	
 
 	// 網頁店名動態顯示
 	@GetMapping(value = "/showAllBranch", produces = "application/JSON; charset = UTF-8")
@@ -240,5 +244,85 @@ public class OrderController {
 	
 		
 	}
+
+	
+	
+	
+	// 會員查詢訂單
+		@PostMapping(value = "/showMemberAndNonMemberDetail", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showMemberAndNonMemberDetail(@RequestBody String phone) throws IOException, ParseException {
+			System.out.println("showMemberAndNonMemberDetail");
+			System.out.println(phone.replace("\"", "").replace("{", "").replace("}", "").split(":")[1]);
+				
+			try {
+				List<OrderList> customorder = tesOrderIFaceService.showMemberAndNonMemberDetail(phone.replace("\"", "").replace("{", "").replace("}", "").split(":")[1]);
+				
+	  List<OrderListToGson> gsonorderlist = tesOrderIFaceService.convertOrderListToGson(customorder) ; 
+				
+				
+				return gson.toJson(gsonorderlist);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+	
+		// 管理員查詢訂單
+		@PostMapping(value = "/showManagerSearchDetail", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerSearchDetail(@RequestBody ManagerOrderCondition managerOrderCondition) throws IOException, ParseException {
+			try {
+				   List<OrderList> condition = tesOrderIFaceService.showManagerSearchDetail(managerOrderCondition) ; 
+				   List<OrderListToGson> gsonorderlist = tesOrderIFaceService.convertOrderListToGsonWithPlate(condition) ; 
+				   
+				   return gson.toJson(gsonorderlist);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+		
+		
+		// 管理員接收訂單
+		@PostMapping(value = "/showManagerChangeOrderStatus", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerChangeOrderStatus(@RequestBody ShowManagerChangeOrderStatus showManagerChangeOrderStatus) throws IOException, ParseException {
+			try {
+				  System.out.println(showManagerChangeOrderStatus.toString());
+				  tesOrderIFaceService.showManagerChangeOrderStatus(showManagerChangeOrderStatus);
+				   return  null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+		
+		// 管理員完成訂單
+		@PostMapping(value = "/showManagerFinishedOrder", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerFinishedOrder(@RequestBody FinOrderBean finOrderBean) throws IOException, ParseException {
+			try {
+				  System.out.println(finOrderBean.toString());
+			  tesOrderIFaceService.showManagerFinishedOrder(finOrderBean);
+				   return  null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+		
+		
+		// 管理員完成調度
+		@PostMapping(value = "/showManagerFinishedDiapatcher", produces = "application/JSON; charset = UTF-8")
+		public @ResponseBody String showManagerFinishedDiapatcher(@RequestBody ShowManagerChangeOrderStatus showManagerChangeOrderStatus) throws IOException, ParseException {
+			try {
+				  System.out.println(showManagerChangeOrderStatus.toString());
+			  tesOrderIFaceService.showManagerFinishedDiapatcher(showManagerChangeOrderStatus);
+				   return  null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new String("{\"fail\":fail}");
+			}
+		}
+	
+	
+	
 
 }

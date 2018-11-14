@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="css/timeline.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="shortcut icon" href="#" />
-
 	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -23,12 +22,60 @@
 	<script src="js/register.js"></script>
 	<script src="js/logout.js"></script>
 	
+
+
+
 </head>
 <body>
+			<!-- <div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">	
+			</div>
+			<script>
+	        $(".loadtest111").load("serchMotor.html");
+	       </script>
+		</div>
+	</div> -->
 	<div w3-include-html="nav.html"></div>
-	<div w3-include-html="carousel.html"></div>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+	<ul class="carousel-indicators">
+		<li data-target="#demo" data-slide-to="0" class="active"></li>
+		<li data-target="#demo" data-slide-to="1"></li>
+		<li data-target="#demo" data-slide-to="2"></li>
+	</ul>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img id="carousel_1" width="100%">
+			<div class="carousel-caption edit" id='editor1'>
+<!-- 				<h2>台北 Taipei</h2> -->
+<!-- 				<p>We had such a great time in LA!</p> -->
+			</div>
+		</div>
+		<div class="carousel-item">
+			<img id="carousel_2" width="100%">
+			<div class="carousel-caption edit" id='editor2'>
+<!-- 				<h2>台中 Taichuang</h2> -->
+<!-- 				<p>Thank you, Chicago!</p> -->
+			</div>
+		</div>
+		<div class="carousel-item">
+			<img id="carousel_3" width="100%">
+			<div class="carousel-caption edit" id='editor3'>
+<!-- 				<h2>台南 Tainan</h2> -->
+<!-- 				<p>We love the Big Apple!</p> -->
+			</div>
+		</div>
+	</div>
+	<a class="carousel-control-prev" href="#demo" data-slide="prev"> <span class="carousel-control-prev-icon"></span></a>
+	<a class="carousel-control-next" href="#demo" data-slide="next"> <span class="carousel-control-next-icon"></span></a>
+</div>
+
+
 	<br id="serv"/><br/>
 	<div class="marketing container">
+
 		<div class="row" >
 			<h1 class="col-lg-12 text-center"><b>關於服務</b></h1>
 	          <div class="col-lg-4">	            
@@ -53,49 +100,78 @@
 	</div>
 	<br id="news"/><br/>
 <div class="container" >
-	<div class="row featurette">
 	<div class="col-md-12 text-center"><h1 style="margin: 5% 0;"><b>活動訊息</b></h1></div>
-				<div class="col-md-7" >
-					<h3 class="featurette-heading">店長推薦<br/>
-						<span class="text-muted">XCITING S 400，展現運動跑旅新主張</span>
-					</h3>
-					<p class="text-right">2018/07/27</p>
-					<p class="lead text-justify">XCITING 400車系自2013年首度上市以來，即以「Sport Touring」為產品定位，
-					強調都會騎乘操控靈活性、同級車最佳馬力以及引擎平順安靜輸出等多重優勢，不僅廣受消費者的好評與喜愛，更迅速累積極佳的口碑，
-					成為KYMCO旗下的主力黃牌旗艦機種。而這次在「2018國際重型機車展」登場的全新XCITING S 400，以全面精進之姿展現運動跑旅新主張！
-					延續XCITING車系所強調的運動性能與靈活特性，XCITINGS 400具有更迷人的外型與科技配備。
-					XCITING S 400動力經過重新調校後，可輸出26.5kW最大馬力與38.1Nm扭力輸出，為呼應跑旅性格在性能輸出表現上更線性且綿密，
-					同時提供騎乘的極佳靈敏反應與樂趣。</p>
+	<div class="row featurette">
+				<div class="col-md-7 order-md-1 edit" id='editor4'>
+<!-- 					<h3 class="featurette-heading">店長推薦<br/> -->
+<!-- 						<span class="text-muted">XCITING S 400，展現運動跑旅新主張</span> -->
+<!-- 					</h3> -->
+<!-- 					<p class="text-right">2018/07/27</p> -->
+<!-- 					<p class="lead text-justify">XCITING 400車系自2013年首度上市以來，即以「Sport Touring」為產品定位， -->
+<!-- 					強調都會騎乘操控靈活性、同級車最佳馬力以及引擎平順安靜輸出等多重優勢，不僅廣受消費者的好評與喜愛，更迅速累積極佳的口碑， -->
+<!-- 					成為KYMCO旗下的主力黃牌旗艦機種。而這次在「2018國際重型機車展」登場的全新XCITING S 400，以全面精進之姿展現運動跑旅新主張！ -->
+<!-- 					延續XCITING車系所強調的運動性能與靈活特性，XCITINGS 400具有更迷人的外型與科技配備。 -->
+<!-- 					XCITING S 400動力經過重新調校後，可輸出26.5kW最大馬力與38.1Nm扭力輸出，為呼應跑旅性格在性能輸出表現上更線性且綿密， -->
+<!-- 					同時提供騎乘的極佳靈敏反應與樂趣。</p> -->
 				</div>
-				<div class="col-md-5 order-md-1" style="overflow: hidden;">
-					<img class="featurette-image"
-						src="https://images.pexels.com/photos/52538/motorcycle-motor-cylinder-technology-52538.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-						style="object-fit: cover; margin-left: -45%;" height='500px'>
+				<div class="col-md-5 order-md-2 edit" id='editor5' style="overflow: hidden;">
+<!-- 					<img class="featurette-image" -->
+<!-- 						src="https://images.pexels.com/photos/52538/motorcycle-motor-cylinder-technology-52538.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" -->
+<!-- 						style="object-fit: cover; margin-left: -45%;" height='500px'> -->
 				</div>
 			</div>
 			<br/><br/>
 			<div class="row featurette">
-				<div class="col-md-7 order-md-2">
-					<h3 class="featurette-heading">新車上架<br/>
-						<span class="text-muted">給您最舒適的體驗</span>
-					</h3>
-					<p class="text-right">2018/10/03</p>
-					<p class="lead text-justify">Honda Taiwan為了持續實現「Be Your Wing」的品牌精神，
-					，以多款大型二輪商品與日本原廠的服務建構二輪事業，於全國具有5個大型二輪銷售據點，
-					並以為顧客建構完善的二輪環境為核心理念推動「6S」服務，導入多款大型二輪商品，
-					更於2018年引進與全球同步之3款全新機種：GOLDWING、CRF1000L Africa Twin、CB1000R，擴充原有產品線級距，
-					滿足更多消費者需求，獲得市場好評。為持續符合消費者對於Honda Taiwan的期望，
-					3款機型之2019式樣將以全新顏色與消費者見面， 頂級巡航車款GOLDWING導入全新「珍珠白」、
-					CRF1000L Africa Twin則導入「經典紅」、「躍動藍」2種車色、CB1000R則維持原有之黑、
-					紅兩色車款，新增「質感銀」車色令消費者有更多選擇。3款機種新色車型即日起開始預接活動，有興趣的顧客可前往全國5大據點來店賞車試乘！！</p>
+				<div class="col-md-7 order-md-2 edit" id='editor6'>
+<!-- 					<h3 class="featurette-heading">新車上架<br/> -->
+<!-- 						<span class="text-muted">給您最舒適的體驗</span> -->
+<!-- 					</h3> -->
+<!-- 					<p class="text-right">2018/10/03</p> -->
+<!-- 					<p class="lead text-justify">Honda Taiwan為了持續實現「Be Your Wing」的品牌精神， -->
+<!-- 					，以多款大型二輪商品與日本原廠的服務建構二輪事業，於全國具有5個大型二輪銷售據點， -->
+<!-- 					並以為顧客建構完善的二輪環境為核心理念推動「6S」服務，導入多款大型二輪商品， -->
+<!-- 					更於2018年引進與全球同步之3款全新機種：GOLDWING、CRF1000L Africa Twin、CB1000R，擴充原有產品線級距， -->
+<!-- 					滿足更多消費者需求，獲得市場好評。為持續符合消費者對於Honda Taiwan的期望， -->
+<!-- 					3款機型之2019式樣將以全新顏色與消費者見面， 頂級巡航車款GOLDWING導入全新「珍珠白」、 -->
+<!-- 					CRF1000L Africa Twin則導入「經典紅」、「躍動藍」2種車色、CB1000R則維持原有之黑、 -->
+<!-- 					紅兩色車款，新增「質感銀」車色令消費者有更多選擇。3款機種新色車型即日起開始預接活動，有興趣的顧客可前往全國5大據點來店賞車試乘！！</p> -->
 				</div>
-				<div class="col-md-5 order-md-1" style="overflow: hidden;">
-					<img class="featurette-image"
-						src="https://moto.honda-taiwan.com.tw/Uploads/images/2019%20CB1000R%20%e8%b3%aa%e6%84%9f%e9%8a%80.jpg"
-						style="object-fit: cover; margin-left: -25%;" height='500px'>
+				<div class="col-md-5 order-md-1 edit" id='editor7' style="overflow: hidden;">
+<!-- 					<img class="featurette-image" -->
+<!-- 						src="https://moto.honda-taiwan.com.tw/Uploads/images/2019%20CB1000R%20%e8%b3%aa%e6%84%9f%e9%8a%80.jpg" -->
+<!-- 						style="object-fit: cover; margin-left: -25%;" height='500px'> -->
 				</div>
 			</div>
 		<br/>
+		
+		<script type="text/javascript">
+		var num = $('.edit').length;
+
+		$(document).ready(function(){
+	    	$.ajax({
+	            type: "get",
+	            url: "queryAllWebContent",
+	            contentType: "application/json; charset=utf-8",
+	            success: function (response) {
+		               alert(response[6].webElements+ +response[6].webContent);
+		               alert(num)
+				   for(i=0; i<num; i++){ 
+					   $('#'+response[i].webElements).empty().append(response[i].webContent);
+				   $('#editor4 h3').addClass("featurette-heading");
+				   $('#editor6 h3').addClass("featurette-heading");
+				   $('#editor4 p:first').addClass("text-right");
+				   $('#editor6 p:first').addClass("text-right");
+				   $('#editor4 p:last').addClass("lead text-justify");
+				   $('#editor6 p:last').addClass("lead text-justify");
+				   $('#editor5 img').addClass("featurette-image").css({ "object-fit": "cover", "margin-left": "-45%", "height":"500px"}).next().remove();
+				   $('#editor7 img').unwrap().addClass("featurette-image").css({ "object-fit": "cover", "margin-left": "-25%", "height":"500px"}).next().remove();
+				   }
+				}
+	        });	
+		});
+		</script>
+		
+		
 		<div class="container timeline">
 	<div class="container text-center" id="how">
 		<h1 style="margin:3% 0;"><b>租車步驟</b></h1>
@@ -238,6 +314,7 @@
 
 	<br/>
 	<br/>
+
 	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content loadtest111">	
@@ -247,6 +324,7 @@
 	       </script>
 		</div>
 	</div>
+
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
 	

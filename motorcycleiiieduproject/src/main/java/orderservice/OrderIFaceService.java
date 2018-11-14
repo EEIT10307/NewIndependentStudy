@@ -3,9 +3,11 @@ package orderservice;
 import java.text.ParseException;
 import java.util.List;
 import cleanbean.BasicOrderBean;
-import cleanbean.BikeDetailToGson;
 import cleanbean.BikeDetailToGsonHaoUse;
-import orderdao.OrderListToGson;
+import cleanbean.FinOrderBean;
+import cleanbean.ManagerOrderCondition;
+import cleanbean.OrderListToGson;
+import cleanbean.ShowManagerChangeOrderStatus;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.Discount;
@@ -34,8 +36,25 @@ public interface OrderIFaceService {
 
 	OrderList convertToOrderList(OrderListToGson customorder) throws ParseException;
 
+	List<OrderListToGson>  convertOrderListToGson(List<OrderList>  customorder) throws ParseException;
+	
 	void addOrderToDatabase(OrderList convertOrder, String customorderOld, List<OrderList> orderbranch,
 			BasicOrderBean customerquery ,  List<OrderList> orderABbranch  ,  List<OrderList> orderFromAnotherbranch) throws ParseException;
 
+
+	List<OrderList>    showMemberAndNonMemberDetail(String showMemberAndNonMemberphnoe);
+	
+	List<OrderListToGson>  convertOrderListToGsonWithPlate(List<OrderList>  customorder) throws ParseException;
+	
+	List<OrderList>    showManagerSearchDetail(ManagerOrderCondition managerOrderCondition) ; 
+	
+	  void   showManagerChangeOrderStatus( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
+	 
+	  
+	  void   showManagerFinishedOrder(FinOrderBean finOrderBean)  ; 
+	  
+	  void   showManagerFinishedDiapatcher( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
+	
+	
 
 }
