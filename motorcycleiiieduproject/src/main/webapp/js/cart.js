@@ -1,10 +1,5 @@
 $(document).ready(function () {
 
-
-
-
-
-
 var    orderdetail =  sessionStorage.orderdetailsession;
  var orderdetailstr    =  JSON.parse(orderdetail)
 
@@ -92,10 +87,12 @@ $("#checkout").attr("data-target","#exampleEnterPhone");
 $(".addphone").click(function (e) { 
 	e.preventDefault();
 
+	if(isNaN($(".guestphone").val())){
+		alert("請輸入數字")
+	}else if($(".guestphone").val().length != 10){
+		alert("請輸入正確的手機號碼(10碼)")
+	}else{
 	orderdetailstr.phone = $(".guestphone").val();
-
-	alert(JSON.stringify(orderdetailstr))
-
 	$.ajax({ 
 		type: "Post",
 		url: "getlastcheckorderlist",
@@ -113,7 +110,7 @@ $(".addphone").click(function (e) {
 		  
 		}
 	});
-
+	}
 });
 
 

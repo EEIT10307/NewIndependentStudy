@@ -1,6 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<style>
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+	<img src="Image/ffcd6ad4debd6583e6dda9a5c26d7b8d.jpg">
+	<input type="button" id="submit1">
+	<input type="text" id="text">
+
+	<form id="myForm">
+		<input type="text" name="te"> 
+		<input type="file" name="file"	id="file" multiple="multiple" />
+		<button type="submit">上傳檔案</button>
+	</form>
+	<label class="btn btn-info">
+<i class="fa fa-facebook-official"></i> 上傳圖片
+</label>
+<input id="upload_img" style="display:none;" type="file">
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+<!--   <i class="fab fa-facebook-square"></i> 上傳圖片 -->
+ <i class="fas fa-motorcycle"></i>上傳圖片
+</button>
+
+</body>
+<script>
+// 	$("#myForm").on('submit', (function(e) {
+// 		e.preventDefault(); // 停止觸發submit
+// 		alert("upload");
+// 		var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
+	
+// 		$.ajax({
+// 			type : "POST",
+// 			url : "uploadmutipart",
+// 			data : formData,
+// 			cache : false, // 不需要cache
+// 			processData : false, // jQuery預設會把data轉為query String, 所以要停用
+// 			contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+// 			dataType : 'text',
+// 			success : function(data) {
+// 				alert("upload sucess");
+// 			}
+
+// 		});
+// 	}));
+
+// 	$("#submit1").click(function() {
+// 		// 	alert(55456)
+// 		$.ajax({
+// 			type : "post",
+// 			url : "test",
+// 			data : {
+// 				"lice" : "AAA-04"
+// 			},
+// 			success : function(response) {
+
+// 			}
+// 		});
+
+
+// 	});
+// 	var  a=[]
+// 	var b={}
+// 		b["name"]="robin"
+// 		b["cba"]="zzz"
+// 	var d={}
+// 		d["x"]="year"
+// 		d["z"]="button"
+		
+// 	a.push(b)
+// 	a.push(d)
+// 	alert(a)
+// 	var c=JSON.stringify(a)
+// 	alert(c)
+
+// 	});
+
+
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

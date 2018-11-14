@@ -1,10 +1,11 @@
-package orderdao;
+package cleanbean;
 
 public class OrderListToGson {
 	
 	private String orderSerialNum;
 	private String phone ; 
 	private String bikeModel;
+	private String licensePlate ;  // 多對一
 	private String pickupDate ; 
 	private String dropoffDate ; 
 	private Double totalDiscount ; 
@@ -30,6 +31,55 @@ public class OrderListToGson {
 	public OrderListToGson() {
 	
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+	/**
+	 * @param orderSerialNum
+	 * @param phone
+	 * @param bikeModel
+	 * @param licensePlate
+	 * @param pickupDate
+	 * @param dropoffDate
+	 * @param totalDiscount
+	 * @param bikePrice
+	 * @param accessoriesAmount
+	 * @param accessoriesTotalPrice
+	 * @param orderTotalPrice
+	 * @param orderTime
+	 * @param pickupStore
+	 * @param dropoffStore
+	 * @param discountName
+	 * @param orderStatus
+	 * @param is_member
+	 * @param payOrNot
+	 */
+	public OrderListToGson(String orderSerialNum, String phone, String bikeModel, String licensePlate,
+			String pickupDate, String dropoffDate, Double totalDiscount, Integer bikePrice, String accessoriesAmount,
+			Integer accessoriesTotalPrice, Integer orderTotalPrice, String orderTime, String pickupStore,
+			String dropoffStore, String discountName, String orderStatus, boolean is_member, boolean payOrNot) {
+		super();
+		this.orderSerialNum = orderSerialNum;
+		this.phone = phone;
+		this.bikeModel = bikeModel;
+		this.setLicensePlate(licensePlate);
+		this.pickupDate = pickupDate;
+		this.dropoffDate = dropoffDate;
+		this.totalDiscount = totalDiscount;
+		this.bikePrice = bikePrice;
+		this.accessoriesAmount = accessoriesAmount;
+		this.accessoriesTotalPrice = accessoriesTotalPrice;
+		this.orderTotalPrice = orderTotalPrice;
+		this.orderTime = orderTime;
+		this.pickupStore = pickupStore;
+		this.dropoffStore = dropoffStore;
+		this.discountName = discountName;
+		this.orderStatus = orderStatus;
+		this.is_member = is_member;
+		this.payOrNot = payOrNot;
 	}
 
 
@@ -349,6 +399,22 @@ public class OrderListToGson {
 
 	public void setPayOrNot(boolean payOrNot) {
 		this.payOrNot = payOrNot;
+	}
+
+
+
+
+
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+
+
+
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
 	}
 	
 	

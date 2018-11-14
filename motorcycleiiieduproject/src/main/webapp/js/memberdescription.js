@@ -97,16 +97,23 @@ $(document).ready(function () {
              var memdata =JSON.stringify(jsonback);
             //  alert(memdata);
              //回傳的memdata為json格式的字串，parse轉換成物件即可呼叫其內的value來使用
-            var bdate= JSON.parse(memdata).birthday;
-             
-                var myDate = new Date(bdate);
-       
-                var month = myDate.getMonth() + 1;
-				var day = myDate.getDate();
-				month = (month.toString().length == 1) ? ("0" + month) : month;
-				day = (day.toString().length == 1) ? ("0" + day) : day;
- 
-				var result = myDate.getFullYear() + '-' + month + '-' + day; //更改格式後的日期
+
+                var bdate = JSON.parse(memdata).birthday;
+                // alert("bdate=" + bdate);
+                if (bdate == null || bdate == "") {
+                    // var result = "請輸入生日";
+                } else {
+
+                    var myDate = new Date(bdate);
+            
+                     var month = myDate.getMonth() + 1;
+                     var day = myDate.getDate();
+                     month = (month.toString().length == 1) ? ("0" + month) : month;
+                     day = (day.toString().length == 1) ? ("0" + day) : day;
+      
+                     var result = myDate.getFullYear() + '-' + month + '-' + day; //更改格式後的日期
+                     $("#desbirthday").attr("value",result);
+             }
 
                
         //    var memmail =memdata.replace("{","").replace("}","").replace("\"").split(",")[1].split(":")[0];
@@ -119,10 +126,9 @@ $(document).ready(function () {
                 $("#desname").attr("value",JSON.parse(memdata).name);
                 $("#desphone").attr("value",JSON.parse(memdata).phone);
                 // $("#desbirthday").attr("value",JSON.parse(memdata).birthday);
-                $("#desbirthday").attr("value",result);
                 $("#desgender").attr("value",JSON.parse(memdata).gender);
                 $("#desaddress").attr("value",JSON.parse(memdata).address);
-            
+            //    alert("生日:"+result);
             }
     
         });
@@ -136,6 +142,7 @@ $(document).ready(function () {
             success:function (drop) {
             //  alert("ajax success in PhotoString ");
             //  alert(email);
+            // alert("drop"+drop);
              if(drop){
                 var cookie = document.cookie; 
                 var email= cookie.split("email=")[1].split(";")[0];
@@ -212,6 +219,7 @@ $(document).ready(function () {
           success: function (data){
             //   alert("upload sucess") ; 
             //   $("#wwwwimg").attr("src","Images\\Front"+email+".jpg");
+           
           }      
     
          
@@ -238,7 +246,7 @@ $(document).ready(function () {
             if(portfolio != null || portfolio != "")
             {
                 $("#wwwwimg").attr("src", "Images\\"+portfolio);
-
+                window.location.reload();
             }
         }
         });

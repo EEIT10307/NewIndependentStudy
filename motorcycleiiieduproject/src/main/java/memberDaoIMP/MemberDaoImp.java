@@ -330,8 +330,8 @@ public class MemberDaoImp implements MemberIdao {
 			             .getSingleResult();
 			
 			String profilePhoto = mb.getProfilePhoto();
-			
-			if(profilePhoto != null || profilePhoto !="") {
+			System.out.println("profilePhoto為"+profilePhoto);
+			if(profilePhoto != null) {
 				System.out.println("profilePhoto有資料");
 				drop=true;
 				

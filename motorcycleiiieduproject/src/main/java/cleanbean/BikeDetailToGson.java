@@ -23,12 +23,13 @@ public class BikeDetailToGson {
     private String torque ;
     private String frontBrake;
     private String rearBrake;
+    private String description;
     
     
 	public BikeDetailToGson(String bikeModel, String modelYear, String bikeBrand, String engineType, String bikeType,
 			String plateType, Double fuelTankCapacity, Double seatHeight, Double dryWeight, Double fuelConsumption,
 			String tire, String fuelType, Boolean aBS, Integer hourPrice, String frontSuspension, String rearSuspension,
-			String rearTire, String horsePower, String torque, String frontBrake, String rearBrake) {
+			String rearTire, String horsePower, String torque, String frontBrake, String rearBrake,String description) {
 		super();
 		this.bikeModel = bikeModel;
 		this.modelYear = modelYear;
@@ -51,6 +52,8 @@ public class BikeDetailToGson {
 		this.torque = torque;
 		this.frontBrake = frontBrake;
 		this.rearBrake = rearBrake;
+		this.setDescription(description);
+		
 	}
 
 
@@ -249,5 +252,19 @@ public class BikeDetailToGson {
 		return "BikeDetailToGson [bikeModel=" + bikeModel +",modelYear="+modelYear+",bikeBrand="+bikeBrand+",engineType="+engineType+",bikeType="+bikeType+""
 				+ ",plateType="+plateType+",fuelTankCapacity="+fuelTankCapacity+",seatHeight="+seatHeight+",dryWeight="+dryWeight+""
 				+ ",fuelConsumption="+fuelConsumption+",tire="+tire+",fuelType="+fuelType+",abs="+aBS+",hourPrice="+hourPrice+"]";
+	}
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

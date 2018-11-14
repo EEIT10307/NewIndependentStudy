@@ -164,7 +164,7 @@ $("#pwd").blur(function (e) {
 
         }
         if (flag1 && flag2 && flag3){
-        //   theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
+          theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
         
         }
         else 

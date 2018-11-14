@@ -31,13 +31,14 @@ public class BikeDetailAndEveryBikeInfo implements Serializable{
     private String torque ;
     private String frontBrake;
     private String rearBrake;
+    private String description;
     
     
 	public BikeDetailAndEveryBikeInfo(String licensePlate, Integer branchName, String bikeModel, String modelYear,
 			String bikeBrand, String engineType, String bikeType, String plateType, Double fuelTankCapacity,
 			Double seatHeight, Double dryWeight, Double fuelConsumption, String tire, String fuelType, Boolean aBS,
 			Integer hourPrice, String frontSuspension, String rearSuspension, String rearTire, String horsePower,
-			String torque, String frontBrake, String rearBrake) {
+			String torque, String frontBrake, String rearBrake,String description) {
 		super();
 		this.licensePlate = licensePlate;
 		this.branchName = branchName;
@@ -62,6 +63,7 @@ public class BikeDetailAndEveryBikeInfo implements Serializable{
 		this.torque = torque;
 		this.frontBrake = frontBrake;
 		this.rearBrake = rearBrake;
+		this.description = description;
 	}
 
 	public String getFrontSuspension() {
@@ -246,6 +248,14 @@ public class BikeDetailAndEveryBikeInfo implements Serializable{
 
 	public void setHourPrice(Integer hourPrice) {
 		this.hourPrice = hourPrice;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
