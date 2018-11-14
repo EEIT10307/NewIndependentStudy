@@ -23,7 +23,7 @@ public class EmailTest {
 		String host = "smtp.gmail.com";
 		  int port = 587;
 		  final String username = "madohomuhomu@gmail.com";//帳號
-		  final String password = "ALOHA";//your password
+		  final String password = "phoenixgod2016";//your password
 
 		  Properties props = new Properties();
 		  props.put("mail.smtp.host", host);
@@ -40,9 +40,9 @@ public class EmailTest {
 
 		   Message message = new MimeMessage(session);
 		   message.setFrom(new InternetAddress("madohomuhomu@gmail.com"));
-		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("gn01046295@gmail.com"));
-		   message.setSubject("hahaha");
-		   message.setText("U cant't see me");
+		   message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));
+		   message.setSubject("ROBIN出BUG抓蟲囉");//
+		   message.setText("GGGGGGGGGGGGGGGGGGGGGGGGG");//
 		   Transport transport = session.getTransport("smtp");
 		   transport.connect(host, port, username, password);
 

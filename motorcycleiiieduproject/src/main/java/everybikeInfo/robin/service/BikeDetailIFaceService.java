@@ -26,7 +26,8 @@ public interface BikeDetailIFaceService {
 	
 	int updateBikeDetai(BikeDetailToGson bikeDetailToGson);
 	int insertQA(QaBean qaBean);
-	List<QAndA> selectQA(String BikeModel,String ModelYear);
+	List<QAndA> selectQA();
+	List<QAndA> selectQAwhere(String BikeModel,String ModelYear);
 	List<QaBeanToJson> QaBeanToJson(List<QAndA> QAndA);
 	int updateQA(int qAndASerialNum,String ans,String ansquction);
 }

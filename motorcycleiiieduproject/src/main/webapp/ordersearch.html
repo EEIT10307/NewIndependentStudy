@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
       <a class="navbar-brand mr-1" href="index.html">後台管理</a>
-
+ 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
@@ -181,7 +181,7 @@
                           <th>電話</th>
                           <th>車牌</th>
                           <th>折扣名稱</th>
-                          <th>折扣</th>
+                          <th>折扣數</th>
                           <th>機車折扣價</th>
                           <th>附加配件與數量</th>
                           <th>配件總價</th>
@@ -193,34 +193,37 @@
                           <th>更改</th>                       
                         </tr>
                       </tfoot>
-                      <tbody id="mamnagerorderdetail">
-                       
-                      </tbody>
+                      <!-- <tbody id="mamnagerorderdetail">
+                      </tbody> -->
                     </table>
               </div>
             </div>
     <script>
-      var table = ""
+     
       $(document).ready(function() {
-	       table =  $('#dataTable').DataTable( {
-	            "footerCallback": function ( row, data, start, end, display ) {
-	                var api = this.api(), data;
-	     
-	                // Remove the formatting to get integer data for summation
-	                var intVal = function ( i ) {
-	                    return typeof i === 'string' ?
-	                        i.replace(/[\$,]/g, '')*1 :
-	                        typeof i === 'number' ?
-	                            i : 0;
-	                };
-	            }
-	        } );
+       $('#dataTable').DataTable()
+               
+  
+	      //  table =  $('#dataTable').DataTable( {
+	      //       "footerCallback": function ( row, data, start, end, display ) {
+	      //           var api = this.api(), data;
+	      //           // Remove the formatting to get integer data for summation
+	      //           var intVal = function ( i ) {
+	      //               return typeof i === 'string' ?
+	      //                   i.replace(/[\$,]/g, '')*1 :
+	      //                   typeof i === 'number' ?
+	      //                       i : 0;
+	      //           };
+	      //       }
+        //   } );
+        
 	    } );
     </script>
             <div class="card-footer small text-muted" >更新時間 <span id="dateshow"></span></div>
           </div>
  <script>
         var today = new Date();
+        alert(today.getMonth)
     if ((today.getMonth() + 1) < 10) {
         var minMonth = "0" + (today.getMonth() + 1)
     } else {

@@ -40,7 +40,7 @@ public class TestEmailDao implements TestEmailIFaceDao{
 			message.setFrom(new InternetAddress("bookwater168@gmail.com"));// 從上面打的帳號傳
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));
 			message.setSubject("感謝您的惠顧");
-			message.setText("http://localhost:8080/motorcycleiiieduproject/robinBikeReviewTset.html?email=4&order=2018030101001");
+			message.setText("http://localhost:8080/motorcycleiiieduproject/robinStar.html?email="+em+"&order="+or+"");
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, port, username, password);

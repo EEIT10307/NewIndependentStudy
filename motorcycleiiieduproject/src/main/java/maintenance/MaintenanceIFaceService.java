@@ -5,9 +5,11 @@ import java.util.List;
 
 import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
+import cleanbean.MaintenanceHistoryToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 import projectbean.MaintenanceDetail;
+import projectbean.MaintenanceHistory;
 
 public interface MaintenanceIFaceService {
 	List<String> showAllBikePlate();
@@ -22,4 +24,7 @@ public interface MaintenanceIFaceService {
 	String updateBikeMileage(String licensePlate,Double increasedMileage);
 	int sendMaintenance(String licensePlate);
 	int completeMaintenance(String licensePlate) throws ParseException;
+	List<MaintenanceHistory>showAllMaintenanceHistory();
+	List<MaintenanceHistoryToGson> maintenanceHistoryforGsonConvert(List<MaintenanceHistory> finalMaintenanceHistory) throws Exception;
+
 }

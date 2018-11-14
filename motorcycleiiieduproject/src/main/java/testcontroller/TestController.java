@@ -1,10 +1,7 @@
 package testcontroller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
-
-import javax.servlet.ServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,6 +88,28 @@ public class TestController {
 		}
 		return "OK";
 	}
-	
+	//新增EveryBikeMileage假資料
+		@RequestMapping(value = "/insertFakeEveryBikeMileage", produces = "text/html; charset = UTF-8")
+		public @ResponseBody String makeFakeEveryBikeMileage() throws IOException, ParseException {
 
+			try {
+				testService.insertEveryBikeMileage();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "Fail";
+			}
+			return "OK";
+		}
+		//新增MemberDetail假資料
+		@RequestMapping(value = "/insertFakeMemberDetail", produces = "text/html; charset = UTF-8")
+		public @ResponseBody String makeFakeMemberDetail() throws IOException, ParseException {
+
+			try {
+				testService.insertMemberDetail();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "Fail";
+			}
+			return "OK";
+		}
 }

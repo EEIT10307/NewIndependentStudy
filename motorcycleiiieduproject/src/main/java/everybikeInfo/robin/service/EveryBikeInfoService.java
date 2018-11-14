@@ -40,10 +40,9 @@ public class EveryBikeInfoService implements EveryBikeInfoIFaceService {
 
 	@Override
 	public boolean getMemberOne(String LicensePlate) {
-		
-		
+
 		return everyBikeInfoIFaceDao.getMemberOne(LicensePlate);
-	} 
+	}
 
 	@Override
 	public BikeDetail selectbikeModelmodelYear(String bikeModel, String modelYear) {
@@ -53,25 +52,24 @@ public class EveryBikeInfoService implements EveryBikeInfoIFaceService {
 
 	@Override
 	public boolean checkbikeModelmodelYear(String bikeModel, String modelYear) {
-	
+
 		return everyBikeInfoIFaceDao.checkbikeModelmodelYear(bikeModel, modelYear);
 	}
 
 	@Override
-	public int  save(String licensePlate, int branchName, String bikeModel, String modelYear) {
-	
-	int count=0;
-	count++;
-			Session session = factory.getCurrentSession();
-			//同步新增 車牌和保養項目(EveryBikeMileage )
-				BranchDetail branchDetail=session.get(BranchDetail.class, branchName);//分店 需要分店的流水號 加入機車 建構子
-				EveryBikeInfo	everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false,branchDetail);
-			IdClassBikeDetail idClassBikeDetail = new IdClassBikeDetail(bikeModel, modelYear);// 型號跟年份 複合主鍵
-			BikeDetail bikeDetail=new BikeDetail();
-			bikeDetail.setIdClassBikeDetail(idClassBikeDetail);
-			everyBikeInfo.setBikeDetail(bikeDetail);
-	
-		
+	public int save(String licensePlate, int branchName, String bikeModel, String modelYear) {
+
+		int count = 0;
+		count++;
+		Session session = factory.getCurrentSession();
+		// 同步新增 車牌和保養項目(EveryBikeMileage )
+		BranchDetail branchDetail = session.get(BranchDetail.class, branchName);// 分店 需要分店的流水號 加入機車 建構子
+		EveryBikeInfo everyBikeInfo = new EveryBikeInfo(licensePlate, 0.0, false, branchDetail);
+		IdClassBikeDetail idClassBikeDetail = new IdClassBikeDetail(bikeModel, modelYear);// 型號跟年份 複合主鍵
+		BikeDetail bikeDetail = new BikeDetail();
+		bikeDetail.setIdClassBikeDetail(idClassBikeDetail);
+		everyBikeInfo.setBikeDetail(bikeDetail);
+
 		return everyBikeInfoIFaceDao.save(everyBikeInfo);
 	}
 
@@ -89,12 +87,9 @@ public class EveryBikeInfoService implements EveryBikeInfoIFaceService {
 
 	@Override
 	public List<BikeDetailToGson> forGsonConvertBikeDetail(BikeDetail loop) {
-		
+
 		return everyBikeInfoIFaceDao.forGsonConvertBikeDetail(loop);
 
 	}
-
-
-
 
 }
