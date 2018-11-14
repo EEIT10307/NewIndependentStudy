@@ -1,5 +1,7 @@
 package allconfig;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import testcontroller.InterceptorUse;
 import timercontroll.AutoBug;
 import timercontroll.TimerPicker;
+import timercontroll.UpdateForecastData;
 
 @Configuration
 @EnableWebMvc
@@ -20,6 +23,8 @@ import timercontroll.TimerPicker;
 		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll"})
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
+	@Autowired
+	SessionFactory factory   ; 
 	
 //註冊interceptor使用
 	@Override
@@ -52,4 +57,12 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 		AutoBug autoBug = new AutoBug();
 		return autoBug ;
 	}
+	
+	@Bean
+	public UpdateForecastData  updateForecastData() {
+		UpdateForecastData updateForecastData = new UpdateForecastData(factory);
+		return updateForecastData ;
+	}
+	
+	
 }

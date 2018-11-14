@@ -18,6 +18,15 @@ public class WebCrawlerService implements WebCrawlerIFaceService {
 	@Autowired
 	WebCrawlerIFaceDAO testWebCrawlerDAO;
 
+	
+	
+	
+
+	public WebCrawlerService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	@Override
 	public int crawlWeatherData() throws Exception {

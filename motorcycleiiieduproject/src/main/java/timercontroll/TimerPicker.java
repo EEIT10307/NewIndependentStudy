@@ -9,7 +9,7 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import webcrawler.WebCrawlerIFaceService;
+import webcrawler.WebCrawlerDAO;
 
 
 @Component
@@ -19,7 +19,9 @@ public class TimerPicker extends TimerTask  {
 	@Autowired
 	AutoBug autoBug;
 	@Autowired
-	WebCrawlerIFaceService webCrawlerIFaceService;
+	UpdateForecastData updateForecastData;
+	
+	
 	static  Timer timer = new Timer();
 	@PostConstruct
 	public void init(){
@@ -38,8 +40,8 @@ public class TimerPicker extends TimerTask  {
 	public void run() {
 		System.out.println("Hi Im Spring AI ");
 		   try {
-//			   autoBug.Parsingkeelung();
-			   webCrawlerIFaceService.updateForecastData();
+			   autoBug.Parsingkeelung();
+	//		   updateForecastData.updateForecastData();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
