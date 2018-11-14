@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>機車保養</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	
+	<style type="text/css">
+		td input, td select { margin-bottom: 1%;}
+	</style>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+<!-- 	<script src="js/effect.js"></script> -->
+	<script src="js/include.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin@5.0.2/js/sb-admin.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!-- 	折線圖 -->
+	<script>
+	window.onload = function () {
+	
+		var ppq=[];//
+		$.ajax({
+			type : "post",
+			url : "selectBranchDetail",
+			async: false,
+			success : function(response) {
+				// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {//for(頭)
+					//指定分店的欄位
+					var zx = shop[i].branchName;
+// 				{ x: new Date(2008, 0), y: 10 }, //參考用
+// 				{ x: new Date(2008, 1), y: 92.7 },
+// 				{ x: new Date(2008, 2), y: 64.9 },
+// 				{ x: new Date(2008, 3), y: 58.0 },
+// 				{ x: new Date(2008, 4), y: 63.4 },
+// 				{ x: new Date(2008, 5), y: 69.9 },
+// 				{ x: new Date(2008, 6), y: 88.9 },
+// 				{ x: new Date(2008, 7), y: 66.3 },
+// 				{ x: new Date(2008, 8), y: 82.7 },
+// 				{ x: new Date(2008, 9), y: 60.2 },
+// 				{ x: new Date(2008, 10), y: 87.3 },
+// 				{ x: new Date(2008, 11), y: 98.5 }
+					//一次查詢 一個分店月營收
+					var inside=[]
+					$.ajax({
+						type : "post",
+						url : "selecOrderTotal",
+						data:{"branchName":zx},
+						async: false,
+						success : function(response) {
+// 							alert(response)
+						var branchName = JSON.parse(response);
+// 							alert(branchName.one)
+						
+						
+						var jan={}
+						jan["x"]=new Date(2008, 0)
+						jan["y"]=branchName.one
+						var feb={}
+						feb["x"]=new Date(2008, 1)
+						feb["y"]=branchName.two
+						var mar={}
+						mar["x"]=new Date(2008, 2)
+						mar["y"]=branchName.three
+						var apr={}
+						apr["x"]=new Date(2008, 3)
+						apr["y"]=branchName.four
+						var may={}
+						may["x"]=new Date(2008, 4)
+						may["y"]=branchName.five
+						var jun={}
+						jun["x"]=new Date(2008, 5)
+						jun["y"]=branchName.six
+						var jul={}
+						jul["x"]=new Date(2008, 6)
+						jul["y"]=branchName.seven
+						var agu={}
+						agu["x"]=new Date(2008, 7)
+						agu["y"]=branchName.eight
+						var sep={}
+						sep["x"]=new Date(2008, 8)
+						sep["y"]=branchName.nine
+						var oct={}
+						oct["x"]=new Date(2008, 9)
+						oct["y"]=branchName.ten
+						var nov={}
+						nov["x"]=new Date(2008, 10)
+						nov["y"]=branchName.eleven
+						var dec={}
+						dec["x"]=new Date(2008, 11)
+						dec["y"]=branchName.twelve
+					
+						inside.push(jan)
+						inside.push(feb)
+						inside.push(mar)
+						inside.push(apr)
+						inside.push(may)
+						inside.push(jun)
+						inside.push(jul)
+						inside.push(agu)
+						inside.push(sep)
+						inside.push(oct)
+						inside.push(nov)
+						inside.push(dec)
+						
+				
+							}
+						})
+// 		-----------------------------------------------------------------------		"#369EAD"
+					var cd="#369EAD"
+					if(zx=='迴龍'){
+						cd="#7F6084"
+					}
+					if(zx=='木柵'){
+						cd='#C24642'
+					}
+					if(zx=='大安'){
+						cd='#2200AA'
+					}
+							var testshop={}
+					testshop["type"]="line"
+					testshop["name"]=zx
+					testshop["color"]=cd
+					testshop["showInLegend"]=true
+					testshop["axisYIndex"]=1
+					testshop["dataPoints"]=inside
+					
+					ppq.push(testshop)//最後推出去
+				}//for尾巴
+				
+				
+				
+			}
+		});
+		
+		
+		var chart1 = new CanvasJS.Chart("chartContainer1", {//上面的流線圖
+		//↓　valueFormatString　是控制只顯示月
+		axisX:{valueFormatString: "MMM"},
+		axisY:[{
+			title: "",
+			lineColor: "#C24642",
+			tickColor: "#C24642",
+			labelFontFamily: "微軟正黑體",
+			labelFontColor: "#C24642",
+			titleFontColor: "#C24642",
+			suffix: ""
+		}],
+		toolTip: {
+			shared: true
+		},
+		legend: {
+			fontFamily: "微軟正黑體",
+			cursor: "pointer",
+			itemclick: toggleDataSeries
+		},
+		data: ppq//讀取的地點
+	});
+	chart1.render();
+// ----------------------------------------------------------------------------------	
+		var second=[]
+		$.ajax({
+			type : "post",
+			url : "selectBranchDetail",
+			async: false,
+			success : function(response) {
+				// 				alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {//for(頭)
+					//指定分店的欄位
+					var zx = shop[i].branchName;
+// 					{ x: new Date(2009,0), y: 64.9 },//參考用
+// 					{ x: new Date(2010,0), y: 58.0 },
+// 					{ x: new Date(2011,0), y: 63.4 },
+// 					{ x: new Date(2012,0), y: 69.9 },
+// 					{ x: new Date(2013,0), y: 88.9 },
+// 					{ x: new Date(2014,0), y: 66.3 },
+// 					{ x: new Date(2015,0), y: 82.7 },
+// 					{ x: new Date(2016,0), y: 60.2 },
+// 					{ x: new Date(2017,0), y: 87.3 },
+// 					{ x: new Date(2018,0), y: 98.5 }
+					//一次查詢 一個分店月營收
+					var inside=[]
+					$.ajax({
+						type : "post",
+						url : "selecOrderTotalYear",
+						data:{"branchName":zx},
+						async: false,
+						success : function(response) {
+// 							alert(response)
+						var branchName = JSON.parse(response);
+// 							alert(branchName.one)
+						
+						
+						var jan={}
+						jan["x"]=new Date(2009, 0)
+						jan["y"]=branchName.one
+						var feb={}
+						feb["x"]=new Date(2010, 1)
+						feb["y"]=branchName.two
+						var mar={}
+						mar["x"]=new Date(2011, 2)
+						mar["y"]=branchName.three
+						var apr={}
+						apr["x"]=new Date(2012, 3)
+						apr["y"]=branchName.four
+						var may={}
+						may["x"]=new Date(2013, 4)
+						may["y"]=branchName.five
+						var jun={}
+						jun["x"]=new Date(2014, 5)
+						jun["y"]=branchName.six
+						var jul={}
+						jul["x"]=new Date(2015, 6)
+						jul["y"]=branchName.seven
+						var agu={}
+						agu["x"]=new Date(2016, 7)
+						agu["y"]=branchName.eight
+						var sep={}
+						sep["x"]=new Date(2017, 8)
+						sep["y"]=branchName.nine
+// 						var oct={}
+// 						oct["x"]=new Date(2018, 9)
+// 						oct["y"]=branchName.ten
+					
+					
+						inside.push(jan)
+						inside.push(feb)
+						inside.push(mar)
+						inside.push(apr)
+						inside.push(may)
+						inside.push(jun)
+						inside.push(jul)
+						inside.push(agu)
+						inside.push(sep)
+// 						inside.push(oct)
+
+						
+				
+							}
+						})
+// 		-----------------------------------------------------------------------		"#369EAD"
+						var cd="#369EAD"
+							if(zx=='迴龍'){
+								cd="#7F6084"
+							}
+							if(zx=='木柵'){
+								cd='#C24642'
+							}
+							if(zx=='大安'){
+								cd='#2200AA'
+							}
+					var secondshop={}
+					secondshop["type"]="line"
+					secondshop["name"]=zx
+					secondshop["color"]=cd
+					secondshop["showInLegend"]=true
+					secondshop["axisYIndex"]=1
+					secondshop["dataPoints"]=inside
+					
+					second.push(secondshop)//最後推出去
+				}//for尾巴
+				
+				
+				
+			}
+		});
+	
+		var chart2 = new CanvasJS.Chart("chartContainer2", {
+		axisY:[
+		{
+			title: "",
+			lineColor: "#369EAD",
+			tickColor: "#369EAD",
+			labelFontFamily: "微軟正黑體",
+			labelFontColor: "#369EAD",
+			titleFontColor: "#369EAD",
+			suffix: ""
+		}],
+		toolTip: {
+			shared: true
+		},
+		legend: {
+			fontFamily: "微軟正黑體",
+			cursor: "pointer",
+			itemclick: toggleDataSeries
+		},
+		data: second//讀取地方二
+	});
+	chart2.render();
+	
+	function toggleDataSeries(e) {
+		if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+			e.dataSeries.visible = false;
+		} else {
+			e.dataSeries.visible = true;
+		}
+		e.chart.render();
+	}
+	
+	}
+	</script>
+	
+</head>
+<body id="page-top">
+<!-- //分店產生的地方 -->
+<div  id='dan'></div>
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  	
+	  	
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="replymsg" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+            <script type="text/javascript">
+	            $("#replymsg").on("click",function(){
+	    	  		$("#chatbox").removeClass("d-none");
+	    	  	});
+            </script>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+		<!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+
+      <div id="content-wrapper">
+      	<div class="container-fluid form-group col-lg-10 offset-lg-1 my-auto">
+      		<br/><br/>
+      		<h4 class="text-center my-2">各分店月營業額分析</h4>
+					<!-- 折線圖 -->
+					<!-- //robin 點選分店勾勾  -->
+					<div id='branchName1' class='branchName1'></div>
+					
+      		<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+      		<br/><br/>
+      		<h4 class="text-center my-2">各分店年營業額分析</h4>
+      		<div id="chartContainer2" style="height: 400px; width: 100%;"></div>
+      		<br/><br/>
+      	</div>
+      	<!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">確定要登出?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2">登出前<br/>請確認儲存了所有修改資料<br/>否則將會發生不可預期的錯誤!!!!</div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+            <a class="btn btn-outline-secondary" href="index.html">登出</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+	<script>includeHTML();</script>
+  </body>
+</html>

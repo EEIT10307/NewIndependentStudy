@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>管理頁面</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+	<script src="js/effect.js"></script>
+	<script src="js/include.js"></script>
+	
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
+	
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  	
+	  	
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="replymsg" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+            <script type="text/javascript">
+            $("#replymsg").on("click",function(){
+    	  		$("#chatbox").removeClass("d-none");
+    	  	});
+            </script>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+        
+        <!-- Doughtnut Chart -->
+        <div class='row'>
+	        <div class='col-lg-6 col-md-12 col-sm-12 my-4 mb-2 ' id="chartAge" style="height: 300px; width: 100%;"></div>
+	        <div class='col-lg-6 col-md-12 col-sm-12 my-4 mb-2' id="chartGender" style="height: 300px; width: 100%;"></div>
+        </div>
+        
+        <script type="text/javascript">
+        window.onload = function () {
+        
+        	$.ajax({
+				type : "post",
+				url : "selectMemberDetailyear",
+				success : function(response) {
+					var all=JSON.parse(response)
+					
+					var one=all.one
+					var two=all.two
+					var three=all.three
+					var four=all.four
+					var five=all.five
+					var six=all.six
+					var girl=all.girl
+					var boy=all.boy
+					
+					var chart1 = new CanvasJS.Chart("chartAge", {
+						animationEnabled: true,
+						title:{
+							text: "年齡分布",
+							horizontalAlign: "center",
+							fontFamily: "微軟正黑體"
+						},
+						legend:{
+					        verticalAlign: "center",
+					        horizontalAlign: "center"
+					    },
+						data: [{
+							type: "doughnut",
+							startAngle: 60,
+							//innerRadius: 60,
+							indexLabelFontSize: 17,
+							indexLabel: "{label} - #percent%",
+							toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+							dataPoints: [
+								{ y: one, label: "20歲以下"},
+								{ y: two, label: "20-30歲" },
+								{ y: three, label: "31-40歲" },
+								{ y: four, label: "41-50歲" },
+								{ y: five, label: "51-60歲"},
+								{ y: six, label: "60歲以上"}
+							]
+						}]
+					});
+					chart1.render();
+					
+					var chart2 = new CanvasJS.Chart("chartGender", {
+						animationEnabled: true,
+						title:{
+							text: "性別比例",
+							horizontalAlign: "center",
+							fontFamily: "微軟正黑體"
+						},
+						legend:{
+					        verticalAlign: "center",
+					        horizontalAlign: "center"
+					    },
+						data: [{
+							type: "doughnut",
+							startAngle: 60,
+							//innerRadius: 60,
+							indexLabelFontSize: 17,
+							indexLabel: "{label} - #percent%",
+							toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+							dataPoints: [
+								{ y: boy, label: "男"},
+								{ y: girl, label: "女"},
+								
+							]
+						}]
+					});
+					
+					chart2.render();
+					}
+				})
+	
+	
+	
+
+		}
+        </script>
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header"><i class="fas fa-table mx-2"></i>會員資料統計</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th style="width: 30% !important;">會員信箱</th>
+                      <th style="width: 10% !important;">生日</th>
+                      <th style="width: 35% !important;">地區</th>
+                      <th style="width: 12% !important;">性別</th>
+                      <th style="width: 12% !important;">註冊日期</th>
+                      <th>年消費金額</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>會員信箱</th>
+                      <th>生日</th>
+                      <th>地區</th>
+                      <th>性別</th>
+                      <th>註冊日期</th>
+                      <th>年消費金額</th>
+                    </tr>
+                  </tfoot>
+                  <tbody id='member'>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">更新時間  昨天  11:59 PM</div>
+          </div>
+	<script type="text/javascript">
+
+		$.ajax({
+			type : "post",
+			url : "selectMemberDetail",
+			async: false,
+			success : function(response) {
+				var op=JSON.parse(response)
+				for(i in op){
+					var year=op[i].yeartotal;
+					if(year==null){
+						year=0;
+					}
+					
+					$("#member").append("<tr>"+
+										"<td>"+op[i].email+"</td>"+
+										"<td>"+op[i].birthday+"</td>"+
+										"<td>"+op[i].address+"</td>"+
+										"<td>"+op[i].gender+"</td>"+
+										"<td>"+op[i].signinDate+"</td>"+
+										"<td>"+year+"</td>"+
+										"</tr>"
+										)
+									
+					}
+			}
+		})
+	</script>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">確定要登出?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2">登出前<br/>請確認儲存了所有修改資料<br/>否則將會發生不可預期的錯誤!!!!</div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+            <a class="btn btn-outline-secondary" href="index.html">登出</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Demo scripts for this page-->
+    <script>
+	    $(document).ready(function() {
+	        $('#dataTable').DataTable( {
+	            "footerCallback": function ( row, data, start, end, display ) {
+	                var api = this.api(), data;
+	     
+	                // Remove the formatting to get integer data for summation
+	                var intVal = function ( i ) {
+	                    return typeof i === 'string' ?
+	                        i.replace(/[\$,]/g, '')*1 :
+	                        typeof i === 'number' ?
+	                            i : 0;
+	                };
+	     
+	                // Total over all pages
+	                total = api
+	                    .column( 5 )
+	                    .data()
+	                    .reduce( function (a, b) {
+	                        return intVal(a) + intVal(b);
+	                    }, 0 );
+	     
+	                // Total over this page
+	                pageTotal = api
+	                    .column( 5, { page: 'current'} )
+	                    .data()
+	                    .reduce( function (a, b) {
+	                        return intVal(a) + intVal(b);
+	                    }, 0 );
+	     
+	                // Update footer
+	                $( api.column( 5 ).footer() ).html(
+	                    '$'+pageTotal +' ( $'+ total +' total)'
+	                );
+	            }
+	        } );
+	    } );
+    </script>
+    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+	<script>includeHTML();</script>
+  </body>
+</html>

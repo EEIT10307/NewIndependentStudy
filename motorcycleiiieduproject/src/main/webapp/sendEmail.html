@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<body>
+	<a href="robinStar.html?信箱=1&訂單流水號=2018030101001">送出</a>
+	訂單流水號:<input type="text" id="or" value="2018030101011">
+	信箱:<input type="text" id="em" value="4">
+	<input type="submit" id="submit">
+</body>
+<script type="text/javascript">
+	$("#submit").click(function() {
+		var or=$("#or").val();
+		var em=$("#em").val();
+		$.ajax({
+			
+			type : "POST",
+			url : "testmail",
+			data : {"or" : or,"em":em},
+			success : function(data) {
+				//				alert("upload sucess");
+			}
+
+		});
+	});
+</script>
+</html>
