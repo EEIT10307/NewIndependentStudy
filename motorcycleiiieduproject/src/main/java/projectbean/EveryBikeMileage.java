@@ -1,6 +1,4 @@
 package projectbean;
-
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -33,6 +31,7 @@ public class EveryBikeMileage implements Serializable{
 		this.maintenanceItem = maintenanceItem;
 		this.currentMileage = currentMileage;
 	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getEveryBikeMileageSerialNum() {

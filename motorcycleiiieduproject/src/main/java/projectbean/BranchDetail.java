@@ -13,6 +13,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"branchName"} ) })
 public class BranchDetail implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -23,6 +24,7 @@ public class BranchDetail implements Serializable {
 	private String branchCounty; 
 	private String branchAddress; 
 	private String branchPhone; 
+
 	private java.util.Date openingDay;
 	
 	@Id

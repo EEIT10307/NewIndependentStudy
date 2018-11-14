@@ -1,6 +1,7 @@
 package projectbean;
 
 
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -268,6 +269,7 @@ public class OrderList implements Serializable{
 				+ orderTotalPrice + ", orderTime=" + orderTime + ", pickupStore=" + pickupStore + ", dropoffStore="
 				+ dropoffStore + ", discountName=" + discountName + ", orderStatus=" + orderStatus + ", is_member="
 				+ is_member + ", payOrNot=" + payOrNot + "]";
+
 
 	} 
 	

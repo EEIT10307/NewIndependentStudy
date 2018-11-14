@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List; 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -138,6 +139,7 @@ public class MaintenanceController {
 		
 //		return selectBikePlate;
 	
+
 //		return "成功新增保養項目!!!";
 	}
 	@RequestMapping(value = "/sendMaintenance", method = RequestMethod.POST,produces = "application/JSON; charset = UTF-8") // 送保養
@@ -154,6 +156,7 @@ public class MaintenanceController {
 //		testMaintenanceIFaceService.sendMaintenance(maintenancequery.getLicensePlate()); 
 		testMaintenanceIFaceService.completeMaintenance(maintenancequery.getLicensePlate());
 		return gson.toJson(maintenancequery.getLicensePlate()+"完成保養!!!");
+
 	}
 	
 	@GetMapping(value = "/showAllMaintenanceHistory", produces = "text/html; charset = UTF-8")
@@ -170,4 +173,5 @@ public class MaintenanceController {
 	
 
 	
+
 }

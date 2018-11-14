@@ -9,6 +9,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<script src="js/register.js"></script>
+	<link rel="shortcut icon" href="#" />
 </head>
 <body>
 	<video autoplay muted loop id="myVideo"><source src="vedio/motor.mp4" type="video/mp4"></video>
@@ -28,11 +30,12 @@
 	    	
 	      <div class="col-sm-4 offset-sm-2 text">
 	        <h2 style="text-align:center">一般註冊</h2><br/>
-			<input type="text" placeholder="請輸入信箱" name="email"><br/><br/>
-			<input type="text" placeholder="請輸入手機" name="id"><br/><br/>
-	    	<input type="password" placeholder="請輸入密碼" name="password"><br/><br/>
+			<input type="text" placeholder="請輸入信箱" id="email" name="email"><br/><br/>
+			<input type="text" placeholder="請輸入手機" id="phone" name="phone"><br/><br/>
+	    	<input type="password" placeholder="請輸入密碼" id="pwd" name="password"><br/><br/>
+	    	<span id="idsp"></span>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary">註冊</button>
+					<button  id = "register" type="button" class="btn btn-secondary">註冊</button>
 					<a href="index.html" class="btn btn-secondary" role="button" aria-disabled="true">返回首頁</a>
 				</div>
 	      </div>
@@ -40,4 +43,5 @@
     </form>
 </div>
 </body>
+
 

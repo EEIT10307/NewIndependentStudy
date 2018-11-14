@@ -2,6 +2,7 @@ package projectbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -357,5 +358,6 @@ public BikeDetail() {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	
 }

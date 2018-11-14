@@ -1,6 +1,7 @@
 package projectbean;
 
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -41,6 +42,7 @@ public class MaintenanceDetail implements Serializable{
 	}
 	public void setRequiredHourTodo(Double requiredHourTodo) {
 		this.requiredHourTodo = requiredHourTodo;
+
 	} 
 	
 	

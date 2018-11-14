@@ -44,6 +44,7 @@ public class WebCrawlerController {
 			e.printStackTrace();
 			return new String("{fail:fail}");
 		}	
+
 	}
 //	@Scheduled(fixedDelay = 15000)
 	@RequestMapping(value = "/updateForecastData", method = RequestMethod.GET,produces="text/html;charset=UTF-8") // 爬氣象局資料
