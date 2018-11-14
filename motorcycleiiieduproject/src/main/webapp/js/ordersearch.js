@@ -7,6 +7,7 @@ $(document).ready(function () {
         document.getElementById("conditiontocheckorder").reset();
     });
 
+    
    $("#ordercheckmaner").click(function (e) {
 
     var t = $('#dataTable').DataTable();

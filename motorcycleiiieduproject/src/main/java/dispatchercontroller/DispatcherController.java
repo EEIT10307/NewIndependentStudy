@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.DispacherHistoryBean;
 import dispatcherservice.DispatcherIFaceService;
 import orderservice.OrderIFaceService;
 import projectbean.BikeDetail;
@@ -81,7 +82,17 @@ public class DispatcherController {
 			}
 			
 		
-		}}
+		}
+		// 管理者選擇時間後傳入
+				@PostMapping(value = "/checkDispatcherHistory", produces = "application/JSON; charset = UTF-8")
+				public @ResponseBody String checkDispatcherHistory(@RequestBody DispacherHistoryBean dispacherHistoryBean) throws ParseException {
+	
+					return	gson.toJson(tesOrderIFaceService.convertOrderListToGsonWithPlate(dispatcherIFaceService.checkDispatcherHistory(dispacherHistoryBean))) ; 
+		
+				}
+
+
+}
 		
 		
 		

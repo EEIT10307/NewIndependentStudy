@@ -24,6 +24,7 @@ import org.springframework.stereotype.Repository;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.DispacherHistoryBean;
 import orderdao.OrderIFaceDAO;
 import projectbean.BikeDetail;
 import projectbean.EveryBikeInfo;
@@ -308,6 +309,37 @@ public class DispatcherDao implements DispatcherIFaceDao {
 	public List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail) {
 		
 		return orderIFaceDAO.forGsonConvert(finalBikeDetail);
+	}
+
+	@Override
+	public List<OrderList> checkDispatcherHistory(DispacherHistoryBean dispacherHistoryBean) {
+		
+		
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<OrderList> createQuery = buider.createQuery(OrderList.class);
+		Root<OrderList> fromClass = createQuery.from(OrderList.class);
+		// 封裝主查詢條件
+		List<Predicate> predicatesList = new ArrayList<Predicate>();
+
+		if (dispacherHistoryBean.getDropoffstore() != "") {
+			predicatesList.add( buider.equal(fromClass.get("dropoffStore"), dispacherHistoryBean.getDropoffstore())); 
+		}
+		if (dispacherHistoryBean.getOrderstatus() != "") {
+			predicatesList.add( buider.equal(fromClass.get("orderStatus"), dispacherHistoryBean.getOrderstatus()));
+		}
+		if (dispacherHistoryBean.getPickupstore() != "") {
+			predicatesList.add( buider.equal(fromClass.get("pickupStore"), dispacherHistoryBean.getPickupstore()));
+		}
+
+		createQuery.select(fromClass).where(buider.and(predicatesList.toArray(new Predicate[predicatesList.size()])));
+		List<OrderList> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+
+		
+		
+		
+		return branchlist;
+		
+	
 	}
 
 }

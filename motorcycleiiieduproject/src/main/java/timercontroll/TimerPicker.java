@@ -26,7 +26,7 @@ public class TimerPicker extends TimerTask  {
 	@PostConstruct
 	public void init(){
 		System.out.println("TimeMachine init method called");	
-		   timer.schedule(new TimerPicker(), 0 , 5000);  //參數毫秒
+		   timer.schedule(new TimerPicker(), 0 , 10000);  //參數毫秒
 	}
 	@PreDestroy
 	public void destory(){
@@ -40,8 +40,7 @@ public class TimerPicker extends TimerTask  {
 	public void run() {
 		System.out.println("Hi Im Spring AI ");
 		   try {
-			   autoBug.Parsingkeelung();
-	//		   updateForecastData.updateForecastData();
+	//		   autoBug.Parsingkeelung();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
