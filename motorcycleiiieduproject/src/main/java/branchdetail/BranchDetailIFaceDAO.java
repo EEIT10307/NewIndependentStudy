@@ -1,6 +1,5 @@
 package branchdetail;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -23,6 +22,7 @@ public interface BranchDetailIFaceDAO {
 
 	int saveBranchDetail(BranchDetailBean branchDetail) throws  Exception;
 	
-	List<BranchDetail> showBranchDetail(String branchName);
+	List<String> showBranchDetail();
+	List<BranchDetail> showAllBranchDetail();
 	List<BranchDetailToGson> forGsonConvert(List<BranchDetail> finalBranchDetail);
 }

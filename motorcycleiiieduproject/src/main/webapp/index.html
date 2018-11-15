@@ -139,6 +139,22 @@
 		var num = $('.edit').length;
 
 		$(document).ready(function(){
+			
+			$.ajax({
+				type: "get",
+				url: "showAllBranchDetail",
+				data: "data",
+				contentType: "application/json; charset=utf-8",
+				success: function (response) {
+					var strinres = JSON.stringify(response);
+                    var json = JSON.parse(strinres);
+	                for (var x = 0; x < json.length; x++) {
+	                	$("#mapdetail").append($("<div class='rounded row justify-content-center'><div class='d-flex my-1 align-self-center'><div class='col-4'><img src='https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no' class='img-responsive' ></div><div class='col-8 row' id='content'><div class='col-10'><h5 >"+json[x].branchName+"</h5><h6 >"+json[x].branchPhone+"</h6><h6>"+json[x].branchCounty+json[x].branchAddress+"</h6></div><div class='col-2'><a class='text-primary' href='spot.html'><button type='button' class='btn btn-outline-secondary' id='spot'>周圍景點</button></a></div></div></div></div>"))
+	                }
+					
+				}
+			});
+
 	    	$.ajax({
 	            type: "get",
 	            url: "queryAllWebContent",
@@ -158,7 +174,9 @@
 				   $('#editor7 img').unwrap().addClass("featurette-image").css({ "object-fit": "cover", "margin-left": "-25%", "height":"500px"}).next().remove();
 				   }
 				}
-	        });	
+			});	
+			
+
 		});
 		</script>
 		
@@ -199,54 +217,23 @@
 	<br/>
 	<div class="row" id="maptitle">
 		<div class="col-lg-5 col-md-12 col-sm-12" id="mapdetail">
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            	<h5 >逍遙遊租機車</h5>
-		            	<h6 >台中</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipNsa_GBKvxilvxecezIymSfl49aLcSbuz49PKMX=w314-h168-p-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            		<h5 >全好車業</h5>
-		            		<h6 >台北市</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipOd5wBFOAusqnCxmAn9sM3qEI5Kkrecu6sL3vej=w203-h152-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            	<h5 >好好騎機車出租</h5>
-		            	<h6 >台南市</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
+
+<!-- 			<div class="rounded row justify-content-center"> -->
+<!-- 				<div class="d-flex my-1 align-self-center"> -->
+<!-- 					<div class="col-4"> -->
+<!-- 						<img src="https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no" class="img-responsive" > -->
+<!-- 		            </div> -->
+<!-- 		            <div class="col-8 row" id="content"> -->
+<!-- 		            	<div class="col-10"> -->
+<!-- 		            	<h5 >逍遙遊租機車</h5> -->
+<!-- 		            	<h6 >台中</h6> -->
+<!-- 		            	</div> -->
+<!-- 		            	<div class="col-2"> -->
+<!-- 		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a> -->
+<!-- 		            	</div> -->
+<!-- 		            </div> -->
+<!-- 	            </div> -->
+<!-- 			</div> -->
 		</div>
 		<div class="col-lg-7 col-md-12 col-sm-12" id="map" style="width: 100%; height: 300px;"></div>
 	</div>

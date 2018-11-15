@@ -51,19 +51,23 @@ public class KuanBranchDetailService implements BranchDetailIFaceService{
 
 	@Override
 	public int saveBranchDetail(BranchDetailBean branchDetail) throws Exception {
-		System.out.println("sss");
 		return branchDetailIFaceDAO.saveBranchDetail(branchDetail);		
 }
 
 	@Override
-	public List<BranchDetail> showBranchDetail(String branchName) {
+	public List<String> showBranchDetail() {
 		// TODO Auto-generated method stub
-		return branchDetailIFaceDAO.showBranchDetail(branchName);
+		return branchDetailIFaceDAO.showBranchDetail();
 	}
 
 	@Override
 	public List<BranchDetailToGson> forGsonConvert(List<BranchDetail> finalBranchDetail) {
 		// TODO Auto-generated method stub
 		return branchDetailIFaceDAO.forGsonConvert(finalBranchDetail);
+	}
+
+	@Override
+	public List<BranchDetail> showAllBranchDetail() {
+		return branchDetailIFaceDAO.showAllBranchDetail();
 	}
 }
