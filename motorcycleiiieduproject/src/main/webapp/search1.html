@@ -73,29 +73,40 @@
 					</div>
 					<form id="serchdateform">
 						<div class="form-group select2 row text-center">
-							<label>PickUpdate</label>
-							<div> DATE:<input type="date" name="pDate" id="pDate"></div>
-							<div> TIME:<select name="Ptime" class="makePoption"></select></div>
+							<table>
+							<tr><td><label>PickUpdate</label></td><td></td></tr>
+							<tr><td> <label>DATE:</label></td><td><input type="date" class='form-control' name="pDate" id="pDate" ></td></tr>
+							<tr><td> <label>TIME:</label></td><td><select name="Ptime" class="makePoption form-control"></select></td></tr>
+							<tr><td><label>PickUpStore</label></td><td></td></tr>
+							<tr><td></td><td><select name="pickupbranchName" class="pickupbranchName form-control"></select></td></tr>
+							<tr><td><label>DropOffDate</label></td><td></td></tr>
+							<tr><td><label>DATE:</label></td><td><input type="date" name="dDate" id="dDate" class="form-control"></td></tr>
+							<tr><td><label>TIME:</label></td><td><select name="Dtime" class="makeDoption form-control"></select></td></tr>
+							<tr><td><label>DropOffStore</label></td><td></td></tr>
+							<tr><td></td><td><select name="dropoffbranchName" class="dropoffbranchName form-control" id="dropoffbranchName"></select></td></tr>
+							</table>
 						</div>
-						<div class="form-group select2 row text-center">
-							<label>PickUpStore</label>
-							<select name="pickupbranchName" class="pickupbranchName"></select>
-						</div>
-						<div class="form-group select2 row">
-							<label>DropOffDate</label>
+					
+<!-- 						<div class="form-group select2 row text-center"> -->
+<!-- 							<label>PickUpStore</label> -->
+<!-- 							<select name="pickupbranchName" class="pickupbranchName form-control"></select> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group select2 row"> -->
+<!-- 							<label>DropOffDate</label> -->
 
-							<div> DATE:<input type="date" name="dDate" id="dDate"></div>
-							<div> TIME:<select name="Dtime" class="makeDoption"></select></div>
-						</div>
-						<div class="form-group select2 row">
-							<label>DropOffStore</label>
-							<select name="dropoffbranchName" class="dropoffbranchName" id="dropoffbranchName"></select>
-						</div>
+<!-- 							<div> DATE:<input type="date" name="dDate" id="dDate"></div> -->
+<!-- 							<div> TIME:<select name="Dtime" class="makeDoption"></select></div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group select2 row"> -->
+<!-- 							<label>DropOffStore</label> -->
+<!-- 							<select name="dropoffbranchName" class="dropoffbranchName" id="dropoffbranchName"></select> -->
+<!-- 						</div> -->
 						<hr class="bg-light" />
 						<div class="row justify-content-around">
 							<button type="reset" class="btn btn-outline-light col-md-4" id="motorserchdo">查詢</button>
 							<button type="reset" class="btn btn-outline-light col-md-4" id="resetserchdate">重設</button>
 						</div>
+					</form>
 				</div>
 
 

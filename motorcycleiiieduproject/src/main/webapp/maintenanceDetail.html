@@ -108,7 +108,7 @@
       	$('.sidebar').load("sidebarAdmin.html");
       </script>
       <div id="content-wrapper">
-      	<div class="container-fluid form-group col-lg-6 offset-lg-3">
+      	<div class="container-fluid form-group col-lg-8 offset-lg-2">
 				<h4 class="text-center">新增保養項目</h4>
 				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="機油" class="form-control">
 				<!--//訂單流水 -->
@@ -120,6 +120,13 @@
 				<input type="submit" id="submitinsert" value="提交新增" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
+<<<<<<< HEAD
+<div class='row d-flex justify-content-around'>
+<div >		
+	<h4 class='text-center my-3'>查詢保養中的機車</h4>
+	<div class="from-control col-12" id="radioset"></div>
+</div>
+=======
 				<h4 class='text-center my-3'>查詢保養中的機車</h4>
 				<div class="from-control col-6 offset-3" id="radioset">
 				查詢分店:
@@ -136,13 +143,61 @@
 <!-- 	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店 -->
 	</div>
 	<div id="resultofselectedstoretoshow1"></div>
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 <!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
-	<h1>顯示有任意項目超過該規定里程數的車</h1>
-	<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
-	<div id="resultofeveryovermileage"></div>
+<div >
+	<h4 class='text-center my-3'>顯示全部超過保養里程數的車</h4>
+	<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-6 offset-lg-3 col-md-12">
+<!-- 	<div id="resultofeveryovermileage"></div> -->
+</div>
+<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
+<div >
+	<h4 class='text-center my-3'>各車保養項目里程數</h4>
+	<div class="from-control col-12" id="radioset1">
+	</div>
+<!-- 	<div id="resultofselectedstoretoshow1"></div> -->
+</div>
+</div>
+	<div id="resultofselectedstoretoshow"></div>
+<!-- 	--------------------------------------Robin---------------------------- -->
+     <div id="content-wrapper">
 
+        <div class="container-fluid form-group">
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">調度紀錄</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>車牌</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                     	<th>車牌</th>
+                    </tr>
+                  </tfoot>
+                  <tbody id='show'>
+<!--                     <tr> -->
+<!--                       <td>南崁店</td> -->
+<!--                       <td>Nix123</td> -->
+<!--                       <td>AB-0234</td> -->
+<!--                       <td>2011/04/25 12:00</td> -->
+<!--                     </tr> -->
+                 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card-footer small text-muted">更新時間  昨天  11:59 PM</div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
 <!-- 	//------------------------------------保養通知Modal--------------------------------->
-
 			<!-- Modal -->
 			<div class="modal fade" id="maintenance-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
@@ -164,10 +219,6 @@
 			  </div>
 			</div>
 <!-- //---------------------------------------------------------------------------- -->
-				
-				
-				
-				
 	<script>
 		$(document).ready(function(){
 			
@@ -216,7 +267,11 @@
               url:"insertNEWMaintenanceDetail",
               data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
               success : function(response) {
+<<<<<<< HEAD
+//                     alert("success");
+=======
                     alert("success");
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 // 	 				alert(response);
 		      }
               });
@@ -284,11 +339,16 @@
 			  })//end of ajax(1)
 			 }
 		   })
+<<<<<<< HEAD
+//---------------------各車保養項目里程數---------------------------1
+=======
 //---------------------各車保養項目里程數---------------------------
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 	      $("#radioset1").on("click","input[name='storetoshow1']",function(){	  
           	var radioValue = $("input[name='storetoshow1']:checked").val()
               if(radioValue){
                   $.ajax({
+                	  async:false,
                       type:"post",
                       url:"showEveryBikeMileagebyStore",
                       contentType: "application/json; charset=utf-8",
@@ -311,18 +371,21 @@
 		            					}
                                   if(x>=1){
                                       if(json3[x].licensePlate==json3[x-1].licensePlate){
-                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                          txt += 
+                                          		"<div class='row container'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3>"+
+                                          		"<div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'>"+
+                                          		"</div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div>" ; 
                                       }else{
-                                      	txt+="<div><h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"</h3></div>"; 
-                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                      	txt+="<h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"</h3>"; 
+                                          txt += "<div class='row container'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div>" ; 
                                       }                     
                                   }else{//x=0,第一個顯示的 
                                       txt+="<h3>車牌:"+json3[x].licensePlate+"  總里程數:"+json3[x].totalMileage+"</h3>"; 
-                                          txt += "<div class='container'><div class='row'><div class='col-md-6'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div></div></div>" ; 
+                                          txt += "<div class='row container'><h3 class='progress-title'>保養項目:"+json3[x].maintenanceItem+"</h3><div class='progress'><div class='progress-bar progress-bar-striped "+progresscolor+"' style='width:"+percentage_now+"%'></div><div class='progress-value'><span>"+json3[x].currentMileage+"</span>/"+json3[x].requiredMileage+"</div></div></div>" ; 
                                   }
                               	  
                               }
-                              $("#resultofselectedstoretoshow1").html(txt);
+                              $("#show").html("<tr><td>"+txt+"</td></tr>");
                               $('.progress-value > span').each(function(){
                   		        $(this).prop('Counter',0).animate({
                   		            Counter: $(this).text()
@@ -390,7 +453,7 @@
 				}
 						
 				}//end of for
-					$("#resultofeveryovermileage").html(txt);
+					$("#resultofselectedstoretoshow").html(txt);
 				
 // ---------------------送保養---------------------------
 					$("#resultofeveryovermileage").on("click","#sendmaintenance",function(){
@@ -434,6 +497,28 @@
 
 		});			
 		</script>
+		
+		    <script>
+	    $(document).ready(function() {
+	        $('#dataTable').DataTable( {
+	        	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+	            "footerCallback": function ( row, data, start, end, display ) {
+	                var api = this.api(), data;
+	     
+	                // Remove the formatting to get integer data for summation
+	                var intVal = function ( i ) {
+	                    return typeof i === 'string' ?
+	                        i.replace(/[\$,]/g, '')*1 :
+	                        typeof i === 'number' ?
+	                            i : 0;
+	                };
+	            }
+	        } );
+	    } );
+    </script>
+		
+		
+		
       	</div>
       	<!-- Sticky Footer -->
         <footer class="sticky-footer">

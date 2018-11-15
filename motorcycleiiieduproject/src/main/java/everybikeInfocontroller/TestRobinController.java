@@ -38,6 +38,7 @@ import cleanbean.MemberDetailSelectYearForJson;
 import cleanbean.OrderListRobinYear;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
+import everybikeInfo.robin.BackIFaceService;
 import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.BikeReviewIFaceService;
@@ -77,6 +78,8 @@ public class TestRobinController {
 	MemberDetailIFaceService memberDetailIFaceService;
 	@Autowired
 	OrderIFaceService orderIFaceService;
+	@Autowired
+	BackIFaceService backIFaceService;
 	@Autowired
 	Gson gson;
 
@@ -335,6 +338,11 @@ public class TestRobinController {
 	@PostMapping(value = "/getAllOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
 	public @ResponseBody String getAllOrderList() throws IOException {
 			return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
+	}
+	@PostMapping(value = "/back", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String back() throws IOException {
+			
+			return "";
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 
