@@ -828,6 +828,7 @@ public class OrderDAO implements OrderIFaceDAO {
 	public void showManagerChangeOrderStatus(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
            OrderList oldorder = factory.getCurrentSession().get(OrderList.class, showManagerChangeOrderStatus.getOrdersernum()); 
            oldorder.setOrderStatus(showManagerChangeOrderStatus.getOrderstatus());
+           oldorder.setPayOrNot(true);
 		factory.getCurrentSession().update(oldorder);	
 		
 		   
