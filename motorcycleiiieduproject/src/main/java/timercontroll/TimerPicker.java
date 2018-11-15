@@ -38,7 +38,7 @@ public class TimerPicker extends TimerTask  {
 	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
-		System.out.println("Hi Im Spring AI ");
+//		System.out.println("Hi Im Spring AI ");
 		   try {
 	//		   autoBug.Parsingkeelung();
 		} catch (Exception e) {

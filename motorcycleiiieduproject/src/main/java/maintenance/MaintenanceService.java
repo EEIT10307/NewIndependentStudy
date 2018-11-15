@@ -43,7 +43,18 @@ public class MaintenanceService implements MaintenanceIFaceService {
 	public List<EveryBikeMileage> showEveryBikeMileagebyStore(String shopName) {
 		return testMaintenanceDAO.showEveryBikeMileagebyStore(shopName);
 	}
+	
+	@Override
+	public List<EveryBikeInfo> showEveryBikeBasicInfobyStore(String shopName) {
 
+		return testMaintenanceDAO.showEveryBikeBasicInfobyStore(shopName);
+	}
+	
+	@Override
+	public List<EveryBikeMileage> showEveryMaintenanceItembyPlate(String licensePlate) {
+		return testMaintenanceDAO.showEveryMaintenanceItembyPlate(licensePlate);
+	}
+	
 	@Override
 	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {
 		return testMaintenanceDAO.everyBikeMileageforGsonConvert(finalEveryBikeMileage);
@@ -94,5 +105,9 @@ public class MaintenanceService implements MaintenanceIFaceService {
 
 		return testMaintenanceDAO.maintenanceHistoryforGsonConvert(finalMaintenanceHistory);
 	}
+
+
+
+
 
 }
