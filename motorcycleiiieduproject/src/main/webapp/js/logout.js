@@ -32,6 +32,8 @@ var cookies = document.cookie;
 				$("a#login").show();
 				$("a#registerNav").show();
 				$("a#memberlogoutstatus").hide();
+				alert("感謝您你使用!!!")
+				window.location.href="index.html";
 	};
 		}else{
 			// alert("沒有Cookies紀錄存在");

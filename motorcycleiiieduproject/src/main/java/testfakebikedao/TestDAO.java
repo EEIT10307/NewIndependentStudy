@@ -19,7 +19,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
+import projectbean.AcceSerialNum;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
@@ -35,6 +37,8 @@ public class TestDAO {
 	SessionFactory factory;
 	@Autowired
 	EveryBikeMileageIFaceService everyBikeMileageIFaceService;
+	@Autowired
+	AcceStockIFaceService acceStockIFaceService;
 
 	public TestDAO() {
 		System.out.println("test DAO startUP");
@@ -198,8 +202,11 @@ public class TestDAO {
 
 	public void makeFakeBikeDescription() throws IOException, NumberFormatException, ParseException {
 
+//		BufferedReader bf = new BufferedReader(
+//				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\description.txt")));//ROBIN
+		
 		String lines = "";
 		String line;
 		BikeDetail bikedetail = null;
@@ -289,6 +296,20 @@ public class TestDAO {
 			factory.getCurrentSession().persist(member);
 			System.out.println(154546456);
 			System.out.println("地區" + lines[0]);
+		}
+
+	}
+	public void insertFakeAcceSerialNum() throws IOException, ParseException {
+		@SuppressWarnings("resource")
+		BufferedReader Member = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\AcceSerialNum.txt")));
+		String line;
+		while ((line = Member.readLine()) != null) {
+			String[] lines = line.split(",");
+			AcceSerialNum acceSerialNum=new AcceSerialNum();
+			acceSerialNum.setAcceSerialNum(lines[0]);
+			acceSerialNum.setAcceType(lines[1]);
+			acceStockIFaceService.insertAcceSerialNum(acceSerialNum);
 		}
 
 	}

@@ -120,13 +120,7 @@
 				<input type="submit" id="submitinsert" value="提交新增" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
-<<<<<<< HEAD
-<div class='row d-flex justify-content-around'>
-<div >		
-	<h4 class='text-center my-3'>查詢保養中的機車</h4>
-	<div class="from-control col-12" id="radioset"></div>
-</div>
-=======
+
 				<h4 class='text-center my-3'>查詢保養中的機車</h4>
 				<div class="from-control col-6 offset-3" id="radioset">
 				查詢分店:
@@ -143,7 +137,6 @@
 <!-- 	<input type="radio" class="xxx" name="storetoshow1" value="新店" /> 新店 -->
 	</div>
 	<div id="resultofselectedstoretoshow1"></div>
->>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
 <!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
 <div >
 	<h4 class='text-center my-3'>顯示全部超過保養里程數的車</h4>
@@ -267,11 +260,7 @@
               url:"insertNEWMaintenanceDetail",
               data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
               success : function(response) {
-<<<<<<< HEAD
-//                     alert("success");
-=======
-                    alert("success");
->>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+
 // 	 				alert(response);
 		      }
               });
@@ -339,11 +328,8 @@
 			  })//end of ajax(1)
 			 }
 		   })
-<<<<<<< HEAD
 //---------------------各車保養項目里程數---------------------------1
-=======
-//---------------------各車保養項目里程數---------------------------
->>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
+
 	      $("#radioset1").on("click","input[name='storetoshow1']",function(){	  
           	var radioValue = $("input[name='storetoshow1']:checked").val()
               if(radioValue){

@@ -104,5 +104,14 @@ public class AcceStockDao implements AcceStockIFaceDao {
 		return count;
 	}
 
+	@Override
+	public int insertAcceSerialNum(AcceSerialNum acceSerialNum) {
+		Session session = Factory.getCurrentSession();
+		int  count=0;
+		session.save(acceSerialNum);
+		count++;
+		return count;
+	}
+
 
 }

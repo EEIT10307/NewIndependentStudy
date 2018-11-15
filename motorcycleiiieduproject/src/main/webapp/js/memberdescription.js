@@ -157,7 +157,8 @@ $(document).ready(function () {
 
 
         $("#change").click(function () { 
-                   
+        	var res = confirm("確認送出?");
+	        if(res == true){
 
         var password =$("#despassword").val();
         var name = $("#desname").val() ; 
@@ -183,6 +184,11 @@ $(document).ready(function () {
             //  alert(jsonback);
             }
         });
+        window.location.href="memberdescription.html";
+
+        }else{
+        	
+        }
     });
 
     
