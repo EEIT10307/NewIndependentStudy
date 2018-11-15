@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,7 +19,10 @@ import com.google.gson.Gson;
 
 @Configuration
 @ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","branchdetail",
-		"everybikeInfo","testfakebikedao","webinfomanagerservice","webcrawler","webinfomanagerdao","dispatcherdao" ,"dispatcherservice"})
+
+		"everybikeInfo","testfakebikedao","webinfomanagerservice","webcrawler","webinfomanagerdao","dispatcherdao" ,"dispatcherservice","branchdetaildao","branchdetailservice","branchscenedao","branchsceneservice","memberservice","memberDaoIMP"})
+
+
 @EnableTransactionManagement
 public class SpringConfig {
 
@@ -83,6 +87,7 @@ public class SpringConfig {
 		   return gson ; 
 	   }
 	      
+
 	   @Bean
 	   public PlatformTransactionManager transactionManager() {		   
 		   JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

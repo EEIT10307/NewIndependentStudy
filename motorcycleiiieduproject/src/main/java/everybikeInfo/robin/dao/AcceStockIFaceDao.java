@@ -15,5 +15,5 @@ public interface AcceStockIFaceDao {
 	List<AcceSerialNum> allAcceSerialNum();
 	BranchDetail selectBranchBranchSerialNum(int branchSerialNum);
 	Long   countAcceStockx();
-
+	int insertAcceSerialNum(AcceSerialNum acceSerialNum);
 }

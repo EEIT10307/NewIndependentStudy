@@ -19,7 +19,7 @@ public interface BranchDetailIFaceService {
 	int updateDetail(BranchDetail bd);
 
 	int saveBranchDetail(BranchDetailBean branchDetail) throws  Exception;
-	
+
 	List<String> showBranchDetail();
 	List<BranchDetail> showAllBranchDetail();
 	List<BranchDetailToGson> forGsonConvert(List<BranchDetail> finalBranchDetail);

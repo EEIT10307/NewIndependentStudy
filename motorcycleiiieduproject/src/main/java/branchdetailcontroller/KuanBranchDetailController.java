@@ -1,6 +1,7 @@
 package branchdetailcontroller;
 
 import java.io.IOException;
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class KuanBranchDetailController{
 				return new String("{fail:fail}");
 			}	
 		}
+
 	@PostMapping(value = "/saveBranchDetail", produces = "text/html;charset=utf-8")
 	public @ResponseBody String saveBranchDetail(@RequestBody BranchDetailBean branchDetail)throws IOException{
 		System.out.println("分店"+branchDetail);

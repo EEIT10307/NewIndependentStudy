@@ -11,7 +11,7 @@ public interface AcceStockIFaceService {
 	BranchDetail selectoneBikeDetail(String BranchName);
 	AcceSerialNum selectAcceSerialNum(String AcceType);
 	List<AcceSerialNum> allAcceSerialNum();
-
+	int insertAcceSerialNum(AcceSerialNum acceSerialNum);
 	BranchDetail selectBranchBranchSerialNum(int branchSerialNum);
 	Long countAcceStockx();
 

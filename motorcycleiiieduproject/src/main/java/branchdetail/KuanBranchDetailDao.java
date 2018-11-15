@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import branchdetail.BranchDetailIFaceDAO;
 import cleanbean.BranchDetailBean;
 import projectbean.BranchDetail;
+
 import projectbean.EveryBikeMileage;
 
 @Repository
@@ -145,5 +146,6 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 //		queryword.setParameter(branchName, shopName);
 		List<BranchDetail> list = queryword.getResultList();
 		return list;
+
 	}
 }

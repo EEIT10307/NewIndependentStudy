@@ -1,5 +1,6 @@
 package branchdetail;
 
+
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -24,5 +25,6 @@ public interface BranchDetailIFaceDAO {
 	
 	List<String> showBranchDetail();
 	List<BranchDetail> showAllBranchDetail();
+
 	List<BranchDetailToGson> forGsonConvert(List<BranchDetail> finalBranchDetail);
 }

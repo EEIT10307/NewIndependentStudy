@@ -51,6 +51,7 @@ public class KuanBranchDetailService implements BranchDetailIFaceService{
 
 	@Override
 	public int saveBranchDetail(BranchDetailBean branchDetail) throws Exception {
+
 		return branchDetailIFaceDAO.saveBranchDetail(branchDetail);		
 }
 
@@ -69,5 +70,6 @@ public class KuanBranchDetailService implements BranchDetailIFaceService{
 	@Override
 	public List<BranchDetail> showAllBranchDetail() {
 		return branchDetailIFaceDAO.showAllBranchDetail();
+
 	}
 }

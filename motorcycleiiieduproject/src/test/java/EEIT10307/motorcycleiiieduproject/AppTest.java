@@ -1,4 +1,4 @@
-package eeit10307.motorcycleiiieduproject;
+package EEIT10307.motorcycleiiieduproject;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
