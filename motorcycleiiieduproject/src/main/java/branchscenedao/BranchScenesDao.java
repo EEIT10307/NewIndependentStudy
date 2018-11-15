@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,6 +22,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
 
@@ -50,23 +53,27 @@ public class BranchScenesDao implements BranchScenesIFaceDao{
 	}
 
 	@Override
-	public List<String> getBranchScenes() {
-		
+	public List<BranchScenesForJson> getBranchScenes() {
 		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<BranchScenes> createQuery = buider.createQuery(BranchScenes.class);
 		Root<BranchScenes> fromClass = createQuery.from(BranchScenes.class);
 		createQuery.select(fromClass);
 		List<BranchScenes> sceneslist = factory.getCurrentSession().createQuery(createQuery).getResultList();
-		List<String> spotnamelist = new ArrayList<String>();
+		Map<String,String> spotlist = null;
+		List<BranchScenesForJson> branchScenesForJson=new ArrayList<BranchScenesForJson>();
 		for (BranchScenes loop : sceneslist) {
-			spotnamelist.add(loop.getSpotName());
-			spotnamelist.add(loop.getSpotAddress());
-			spotnamelist.add(loop.getSpotArea());
-			spotnamelist.add(loop.getSpotDetail());
-			spotnamelist.add(loop.getSpotPhoto());
-			spotnamelist.add(loop.getBranchName().getBranchName());	
+			BranchScenesForJson branchScenes=new BranchScenesForJson();
+			branchScenes.setSpotName(loop.getSpotName());
+			branchScenes.setSpotAddress(loop.getSpotAddress());
+			branchScenes.setSpotArea(loop.getSpotArea());
+			branchScenes.setSpotDetail(loop.getSpotDetail());
+			branchScenes.setSpotPhoto(loop.getSpotPhoto());
+			branchScenes.setBranchName(loop.getBranchName().getBranchName());
+			
+			branchScenesForJson.add(branchScenes);
+
 		}
-		return spotnamelist;
+		return branchScenesForJson;
 	}
 
 	@Override
@@ -106,12 +113,12 @@ public class BranchScenesDao implements BranchScenesIFaceDao{
 			       for(int i=0; i<stitle.size(); i++) {
 			    	   BranchScenes branchScenes = new BranchScenes();
 			    	   Session session=factory.getCurrentSession();
-			    	   int jpgPosition = file.get(i).text().replaceAll("JPG", "jpg").replaceAll("png", "jpg").indexOf("jpg");//抓第一次遇到jpg的位子
+			    	   int jpgPosition = file.get(i).text().replaceAll("JPG", "jpg").replaceAll("png", "jpg").indexOf("jpg");//抓第一次遇到jpg或png的位子
 			    	   branchScenes.setSpotName(stitle.get(i).text());
 			    	   branchScenes.setSpotArea(address.get(i).text().substring(4,7));//ex:中山區
 			    	   branchScenes.setSpotAddress(address.get(i).text());
 			    	   branchScenes.setSpotDetail(xbody.get(i).text());
-			    	   branchScenes.setSpotPhoto(file.get(i).text().replace("JPG", "jpg").replaceAll("png", "jpg").substring(0,jpgPosition+3));//取第一張jpg網址
+			    	   branchScenes.setSpotPhoto(file.get(i).text().replace("JPG", "jpg").substring(0,jpgPosition+3));//取第一張圖片網址，png不能取代為jpg會破圖
 			    	   session.saveOrUpdate(branchScenes);
 			    	   updateCount += 1;
 			       }
