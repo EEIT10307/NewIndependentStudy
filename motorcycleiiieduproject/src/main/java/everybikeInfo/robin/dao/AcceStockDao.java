@@ -17,6 +17,7 @@ import projectbean.BranchDetail;
 
 @Repository
 public class AcceStockDao implements AcceStockIFaceDao {
+	
 	@Autowired
 	SessionFactory Factory;
 	@Autowired

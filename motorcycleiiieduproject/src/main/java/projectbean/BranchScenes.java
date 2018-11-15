@@ -3,6 +3,7 @@ package projectbean;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,6 +53,7 @@ public class BranchScenes implements Serializable{
 	public void setSpotAddress(String spotAddress) {
 		this.spotAddress = spotAddress;
 	}
+	@Column(columnDefinition="varchar(max)")
 	public String getSpotPhoto() {
 		return spotPhoto;
 	}
