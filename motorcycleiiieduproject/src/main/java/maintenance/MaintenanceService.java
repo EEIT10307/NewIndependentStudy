@@ -5,14 +5,16 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
+import cleanbean.MaintenanceHistoryToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
-import projectbean.MaintenanceDetail;
+import projectbean.MaintenanceHistory;
 
 @Service
 @Transactional
@@ -32,9 +34,6 @@ public class MaintenanceService implements MaintenanceIFaceService {
 	public List<EveryBikeInfo> showAllisReadyMaintenanceBike(String shopName) {
 		return testMaintenanceDAO.showAllisReadyMaintenanceBike(shopName);
 	}
-
-	
-
 
 	@Override
 	public int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage,Double requiredHourTodo) {
@@ -86,8 +85,16 @@ public class MaintenanceService implements MaintenanceIFaceService {
 		return testMaintenanceDAO.completeMaintenance(licensePlate);
 	}
 
+	@Override
+	public List<MaintenanceHistory> showAllMaintenanceHistory() {
+		return testMaintenanceDAO.showAllMaintenanceHistory();
+	}
 
+	@Override
+	public List<MaintenanceHistoryToGson> maintenanceHistoryforGsonConvert(List<MaintenanceHistory> finalMaintenanceHistory) throws Exception {
 
+		return testMaintenanceDAO.maintenanceHistoryforGsonConvert(finalMaintenanceHistory);
+	}
 
 
 }

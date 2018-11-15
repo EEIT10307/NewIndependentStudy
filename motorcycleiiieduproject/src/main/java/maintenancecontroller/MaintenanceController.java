@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List; 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,11 @@ import com.google.gson.Gson;
 import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
 import cleanbean.MaintenanceBean;
+import cleanbean.MaintenanceHistoryToGson;
 import maintenance.MaintenanceIFaceService;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
+import projectbean.MaintenanceHistory;
 
  
 @Controller
@@ -136,6 +139,7 @@ public class MaintenanceController {
 		
 //		return selectBikePlate;
 	
+
 //		return "成功新增保養項目!!!";
 	}
 	@RequestMapping(value = "/sendMaintenance", method = RequestMethod.POST,produces = "application/JSON; charset = UTF-8") // 送保養
@@ -152,5 +156,22 @@ public class MaintenanceController {
 //		testMaintenanceIFaceService.sendMaintenance(maintenancequery.getLicensePlate()); 
 		testMaintenanceIFaceService.completeMaintenance(maintenancequery.getLicensePlate());
 		return gson.toJson(maintenancequery.getLicensePlate()+"完成保養!!!");
+
 	}
+	
+	@GetMapping(value = "/showAllMaintenanceHistory", produces = "text/html; charset = UTF-8")
+	public @ResponseBody String showAllMaintenanceHistory() {
+		try {		
+			List<MaintenanceHistory> showAllMaintenanceHistory =testMaintenanceIFaceService.showAllMaintenanceHistory();	
+			List<MaintenanceHistoryToGson> forGsonConvert=testMaintenanceIFaceService.maintenanceHistoryforGsonConvert(showAllMaintenanceHistory);
+			return gson.toJson(forGsonConvert);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String("{fail:fail}");
+		}	
+	}
+	
+
+	
+
 }

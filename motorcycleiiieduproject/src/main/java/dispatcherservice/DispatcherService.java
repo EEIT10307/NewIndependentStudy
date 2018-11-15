@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.DispacherHistoryBean;
 import dispatcherdao.DispatcherIFaceDao;
 import projectbean.BikeDetail;
 import projectbean.OrderList;
@@ -67,6 +68,12 @@ public class DispatcherService implements DispatcherIFaceService {
 	public List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail) {
 		// TODO Auto-generated method stub
 		return dispatcherIFaceDao.forGsonConvert(finalBikeDetail);
+	}
+
+	@Override
+	public List<OrderList> checkDispatcherHistory(DispacherHistoryBean dispacherHistoryBean) {
+		// TODO Auto-generated method stub
+		return dispatcherIFaceDao.checkDispatcherHistory(dispacherHistoryBean);
 	}
 	
 	

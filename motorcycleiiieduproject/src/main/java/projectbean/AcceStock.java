@@ -1,6 +1,7 @@
 package projectbean;
 
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -99,6 +100,7 @@ public class AcceStock implements Serializable {
 	public void setAcceePrice(Integer acceePrice) {
 		this.acceePrice = acceePrice;
 	}
+
 
 
 }

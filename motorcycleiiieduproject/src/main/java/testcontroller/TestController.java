@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import testfakebikedao.TestService;
 
 @Controller
@@ -92,6 +93,7 @@ public class TestController {
 		@RequestMapping(value = "/insertFakeEveryBikeMileage", produces = "text/html; charset = UTF-8")
 		public @ResponseBody String makeFakeEveryBikeMileage() throws IOException, ParseException {
 
+
 			try {
 				testService.insertEveryBikeMileage();
 			} catch (Exception e) {
@@ -112,4 +114,5 @@ public class TestController {
 			}
 			return "OK";
 		}
+
 }

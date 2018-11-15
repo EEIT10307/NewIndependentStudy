@@ -1,0 +1,125 @@
+package branchscenedao;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import projectbean.BranchDetail;
+import projectbean.BranchScenes;
+
+@Repository
+public class BranchScenesDao implements BranchScenesIFaceDao{
+
+	@Autowired
+	SessionFactory factory;
+//	@Autowired
+//	BranchScenes spotName;
+	
+	@Override
+	public List<BranchScenes> selectBranchScenes(String spotName) {
+		
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchScenes> createQuery = buider.createQuery(BranchScenes.class);
+		Root<BranchScenes> fromClass = createQuery.from(BranchScenes.class);
+		ParameterExpression<String> branchName = buider.parameter(String.class);
+		createQuery.select(fromClass).where(buider.equal(fromClass.get("branchName"), branchName));
+		Query<BranchScenes> queryword = factory.getCurrentSession().createQuery(createQuery);
+		queryword.setParameter(branchName, spotName);
+		List<BranchScenes> list = queryword.getResultList();
+
+//		for (OrderList loop : list) {
+//			System.out.println("showAllOrderFromShop ="+loop.getBikeModel()+":"+loop.getPickupDate()+"=>"+loop.getDropoffDate());
+//		}
+		return list;
+	}
+
+	@Override
+	public List<String> getBranchScenes() {
+		
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchScenes> createQuery = buider.createQuery(BranchScenes.class);
+		Root<BranchScenes> fromClass = createQuery.from(BranchScenes.class);
+		createQuery.select(fromClass);
+		List<BranchScenes> sceneslist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+		List<String> spotnamelist = new ArrayList<String>();
+		for (BranchScenes loop : sceneslist) {
+			spotnamelist.add(loop.getSpotName());
+			spotnamelist.add(loop.getSpotAddress());
+			spotnamelist.add(loop.getSpotArea());
+			spotnamelist.add(loop.getSpotDetail());
+			spotnamelist.add(loop.getSpotPhoto());
+			spotnamelist.add(loop.getBranchName().getBranchName());	
+		}
+		return spotnamelist;
+	}
+
+	@Override
+	public List<BranchScenes> getScenes() {
+		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchScenes> createQuery = builder.createQuery(BranchScenes.class);
+		Root<BranchScenes> fromClass = createQuery.from(BranchScenes.class);
+		createQuery.select(fromClass);
+		List<BranchScenes> scenes = factory.getCurrentSession().createQuery(createQuery).getResultList();
+		return scenes;
+	}
+
+	@Override
+	public int deleteScenes(String spotAddress, String spotPhoto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateScenes(BranchScenes bs) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int saveBranchScenes() throws MalformedURLException, IOException {
+		 URL url = new URL("https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=36847f3f-deff-4183-a5bb-800737591de5&format=xml");
+		  //  URL url = new URL("https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=35aa3c53-28fb-423c-91b6-2c22432d0d70&format=xml");
+			        Document xmlDoc =  Jsoup.parse(url, 50000);//使用Jsoup jar 去解析網頁
+			        Elements stitle = xmlDoc.select("stitle");
+			        Elements xbody = xmlDoc.select("xbody");
+			        Elements address = xmlDoc.select("address");
+			        Elements file = xmlDoc.select("file");
+			       //(要解析的文件,timeout)
+//			       System.out.println(xmlDoc.toString());
+			       int updateCount = 0;
+			       for(int i=0; i<stitle.size(); i++) {
+			    	   BranchScenes branchScenes = new BranchScenes();
+			    	   Session session=factory.getCurrentSession();
+			    	   int jpgPosition = file.get(i).text().replaceAll("JPG", "jpg").replaceAll("png", "jpg").indexOf("jpg");//抓第一次遇到jpg的位子
+			    	   branchScenes.setSpotName(stitle.get(i).text());
+			    	   branchScenes.setSpotArea(address.get(i).text().substring(4,7));//ex:中山區
+			    	   branchScenes.setSpotAddress(address.get(i).text());
+			    	   branchScenes.setSpotDetail(xbody.get(i).text());
+			    	   branchScenes.setSpotPhoto(file.get(i).text().replace("JPG", "jpg").replaceAll("png", "jpg").substring(0,jpgPosition+3));//取第一張jpg網址
+			    	   session.saveOrUpdate(branchScenes);
+			    	   updateCount += 1;
+			       }
+		return updateCount;
+	}
+
+	@Override
+	public List<BranchScenes> showBranchScenes(BranchDetail branchName) {
+		return null;
+	}
+}

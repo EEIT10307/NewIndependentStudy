@@ -1,6 +1,7 @@
 package projectbean;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class BikeReview implements Serializable{
 	}
 	
 	
+
 	
 	@Column(nullable = false)
 	public String getBikeModel() {

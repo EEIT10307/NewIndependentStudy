@@ -1,6 +1,7 @@
 package projectbean;
 
 
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -54,6 +55,7 @@ public class QAndA implements Serializable{
 	}
 	public void setQAndASerialNum(Integer qAndASerialNum) {
 		this.qAndASerialNum = qAndASerialNum;
+
 
 	}
 	@Column(nullable = false)

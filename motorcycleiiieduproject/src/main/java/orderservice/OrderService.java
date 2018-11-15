@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
 import cleanbean.FinOrderBean;
@@ -107,6 +106,7 @@ public class OrderService implements OrderIFaceService {
 	public List<OrderList> showAllOrderFromAnotherShop(String shopname , String pickupdate) throws ParseException {
 		// TODO Auto-generated method stub
 		return testOrderDAO.showAllOrderFromAnotherShop(shopname , pickupdate);
+
 	}
 
 

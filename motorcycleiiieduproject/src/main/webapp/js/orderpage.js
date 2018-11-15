@@ -102,7 +102,75 @@ $(document).ready(function () {
     $("#pDate").attr("value", todayformat);
     $("#dDate").attr("value", todayformat);
 
-    /* 有空補個日期判別式 超過22點*/
+  /* 有空補個日期判別式 換日*/
+  $("#dDate").change(function (e) {
+    e.preventDefault();
+    if ($("#dDate").val() > mindate) {
+        $(".makeDoption").html("")
+        for (var otime = 10; otime < 23; otime++) {
+            var otimeformate = otime + ":00"
+            $(".makeDoption").append($("<option value='" + otimeformate + "'></option>")
+                .text(otimeformate))
+        }
+    } else {
+        $(".makeDoption").html("")
+        for (var time = 10; time < 23; time++) {
+            if (time <= (today.getHours() + 1)) {
+                continue;
+            }
+            var timeformate = time + ":00"
+            $(".makeDoption").append($("<option value='" + timeformate + "'></option>")
+                .text(timeformate))
+        }
+    } 
+});
+$("#pDate").change(function (e) {
+    e.preventDefault();
+    if ($("#pDate").val() > mindate){
+        $(".makePoption").html("")
+        $(".makeDoption").html("")
+        for (var otime = 10; otime < 23; otime++) {
+            var otimeformate = otime + ":00"
+            $(".makeDoption").append($("<option value='" + otimeformate + "'></option>")
+                .text(otimeformate))
+                $(".makePoption").append($("<option value='" + otimeformate + "'></option>")
+                .text(otimeformate))
+        }
+        $("#dDate").attr("value", $("#pDate").val());
+    }else{
+        $(".makePoption").html("")
+        for (var time = 10; time < 23; time++) {
+            if (time <= today.getHours()) {
+                continue;
+            }
+            var timeformate = time + ":00"
+            $(".makePoption").append($("<option value='" + timeformate + "'></option>")
+                .text(timeformate))
+        }
+    }
+})
+/* 有空補個日期判別式 超過22點*/
+var overday = new Date();
+if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 10)) {
+    $(".makePoption").html("")
+    $(".makeDoption").html("")
+    overday.setDate(overday.getDate() + 1)
+    var odd = overday.getDate();
+    var omm = overday.getMonth() + 1; //January is 0!
+    var oyyyy = overday.getFullYear();
+    var midnightformat = oyyyy + '-' + omm + '-' + odd;
+    for (var otime = 10; otime < 23; otime++) {
+        var otimeformate = otime + ":00"
+        $(".makePoption").append($("<option value='" + otimeformate + "'></option>")
+            .text(otimeformate))
+        $(".makeDoption").append($("<option value='" + otimeformate + "'></option>")
+            .text(otimeformate))
+    }
+    $("#pDate").attr("value", midnightformat);
+    $("#dDate").attr("value", midnightformat);
+    $("#pDate").attr("min", midnightformat);
+    $("#dDate").attr("min", midnightformat);
+}
 
     //顧客訂單查詢車子
     $("#takeserch").click(function (e) {
@@ -358,6 +426,7 @@ if(acceItemString == "{}"){
         
 
     });
+
 
 
 

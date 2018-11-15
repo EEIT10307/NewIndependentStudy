@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="css/map.css">
 	<link rel="stylesheet" href="css/timeline.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="#" />
+	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -16,10 +18,16 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/register.js"></script>
+	<script src="js/logout.js"></script>
+	
+
+
 
 </head>
 <body>
-			<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<!-- <div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content loadtest111">	
 			</div>
@@ -27,9 +35,10 @@
 	        $(".loadtest111").load("serchMotor.html");
 	       </script>
 		</div>
-	</div>
+	</div> -->
 	<div w3-include-html="nav.html"></div>
-	
+
+
 <div id="demo" class="carousel slide" data-ride="carousel">
 	<ul class="carousel-indicators">
 		<li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -295,15 +304,26 @@
 	<br/>
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div w3-include-html="login.html"></div>
-				
+			<div class="modal-content loadtest222">
 			</div>
+			<script>
+				$(".loadtest222").load("login.html");
+			   </script>
 		</div>
 	</div>
 
 	<br/>
 	<br/>
+
+	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">	
+			</div>
+			<script>
+	        $(".loadtest111").load("serchMotor.html");
+	       </script>
+		</div>
+	</div>
 
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
@@ -311,4 +331,28 @@
 
 </body>
 
+
+
+
+
+<!-- <a href="login.html"><button  > 登入 </button></a> <br> -->
+<!-- <a href="register.html"><button  > 註冊 </button></a> <br> -->
+<!-- <button  id = "checkall" > 查詢全部 </button><br>  -->
+
+
+<!-- <form id="myForm"> -->
+<!--     <input type="text" name="te"> -->
+<!--     <input type="file" name="file" id="file" multiple="multiple"/> -->
+<!--     <button type="submit">上傳檔案</button> -->
+<!--  </form> -->
+<!-- <div> -->
+<!--     <img src="C:\Maven\eclipse-workspace\motorcycleiiieduproject\src\main\webapp\Images\Front.jpg"><br/> -->
+<!-- </div> -->
+
+<!-- 	<script src="js/index.js"></script> -->
+
+
+
+<!-- </body> -->
+<!-- ======= -->
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import cleanbean.BasicOrderBean;
 import cleanbean.BikeDetailToGsonHaoUse;
+import cleanbean.DispacherHistoryBean;
 import projectbean.BikeDetail;
 import projectbean.OrderList;
 
@@ -24,6 +25,10 @@ public interface DispatcherIFaceService {
 			List<OrderList> orderFromAnotherbranch );
 
 	List<BikeDetailToGsonHaoUse> forGsonConvert(List<BikeDetail> finalBikeDetail);
+	
+	
+	
+	List<OrderList>       checkDispatcherHistory(DispacherHistoryBean dispacherHistoryBean);
 
 
 

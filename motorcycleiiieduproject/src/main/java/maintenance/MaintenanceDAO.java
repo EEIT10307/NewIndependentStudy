@@ -1,5 +1,6 @@
 package maintenance;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,8 +19,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
+import cleanbean.MaintenanceHistoryToGson;
 import projectbean.EveryBikeInfo;
 import projectbean.EveryBikeMileage;
 import projectbean.MaintenanceDetail;
@@ -244,17 +247,17 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		 Query qw2 = session.createSQLQuery(hql2).setParameter("licensePlate", car);
 		 qw2.executeUpdate();
 		 
-		 System.out.println("執行新增MaintenanceHistory 234 ALL CLEAR!!!!!!");
+		 System.out.println("執行新增MaintenanceHistory!!!!!!");
 
 		 Date now=new Date();
-		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd hh:mm");
 		 System.out.println("現在時間:"+sdf.format(now));
 		 for(EveryBikeMileage loop : maintenanceItemList) {
 			 System.out.println("靠杯喔");
 			 MaintenanceHistory maintenanceHistory=new MaintenanceHistory();
 			 maintenanceHistory.setLicensePlate(car);
-//			 maintenanceHistory.setMaintenanceDate(sdf.parse(sdf.format(now)));
-			 maintenanceHistory.setMaintenanceDate(now);			 
+			 maintenanceHistory.setMaintenanceDate(sdf.parse(sdf.format(now)));
+//			 maintenanceHistory.setMaintenanceDate(now);			 
 			 maintenanceHistory.setHistoryMaintenanceItem(loop.getMaintenanceItem().getMaintenanceItem());
 			 maintenanceHistory.setTotalMileage(car.getTotalMileage());
 			 session.save(maintenanceHistory);
@@ -263,8 +266,43 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 
 		 return 0;
 	}
+	@Override
+	public List<MaintenanceHistory> showAllMaintenanceHistory() {
+		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<MaintenanceHistory> createQuery = builder.createQuery(MaintenanceHistory.class);
+		Root<MaintenanceHistory> fromClass = createQuery.from(MaintenanceHistory.class);
+//		createQuery.orderBy(builder.asc(fromClass.get("licensePlate").get("licensePlate")));
+		createQuery.select(fromClass);
+//		.where(builder.greaterThanOrEqualTo(fromClass.get("currentMileage"), fromClass.get("maintenanceItem").get("requiredMileage")));
+		List<MaintenanceHistory> list = factory.getCurrentSession().createQuery(createQuery).getResultList();
+		return list;
+
+		
+		
+	}
+	@Override
+	public List<MaintenanceHistoryToGson> maintenanceHistoryforGsonConvert(List<MaintenanceHistory> finalMaintenanceHistory) throws Exception {		
+			ArrayList<MaintenanceHistoryToGson> maintenanceHistoryToGson=new ArrayList<MaintenanceHistoryToGson>();
+//			SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			DateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//			sdf.parse(sdf.format(now));
+			for(MaintenanceHistory loop:finalMaintenanceHistory) {
+				maintenanceHistoryToGson.add(new MaintenanceHistoryToGson(
+//						SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd hh:mm");
+//						loop.getEveryBikeMileageSerialNum(),
+						loop.getMaintenanceHistorySerialNum(),
+						loop.getLicensePlate().getLicensePlate(),
+						loop.getHistoryMaintenanceItem(),
+//						sdf.parse(sdf.format(loop.getMaintenanceDate())),//?????????????
+						df.format(loop.getMaintenanceDate()),//?????????????
+						loop.getTotalMileage()));
+			}
+			return maintenanceHistoryToGson;
+			
+	}
 
 	
 }
+
 
 

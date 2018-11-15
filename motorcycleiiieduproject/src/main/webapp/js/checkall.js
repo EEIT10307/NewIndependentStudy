@@ -4,6 +4,7 @@ $(document).ready(function () {
 //將網頁傳過來的資料作成ＪＳＯＮ物件
   var  json  = JSON.parse(window.sessionStorage.myjson); 
 
+
 var txt = "" ; 
 //取出ＪＳＯＮ物件
 for(var x = 0 ; x< json.length ; x++) {
@@ -107,6 +108,7 @@ var combie =  {"pk":PK , "name":name , "id":id , "password":password  } ;
     $.ajax({
       type: "post",
       url: "http://localhost:8082/homehiber/ChangeServlet",
+
       data: json,
       success: function (response) {
         alert("恭喜更新成功") ; 

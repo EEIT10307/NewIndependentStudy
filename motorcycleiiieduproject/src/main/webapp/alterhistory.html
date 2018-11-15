@@ -19,7 +19,7 @@
 	<script src="js/chat.js"></script>
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
-	
+	<script src="js/alterhistory.js"></script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
 	
 	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
@@ -109,13 +109,40 @@
         <div class="container-fluid form-group">
           <!-- DataTables Example -->
           <div class="card mb-3">
-            <div class="card-header">調度紀錄</div>
+              <div class="card-header">調度記錄<div class="card-header row">
+                  條件查詢
+                  <form class="col-12 row"  id="conditiontocheckorder">
+                   <select class='form-conoltr form-control-sm col-1 mx-2'>
+                      <optgroup id="pickupbranchName" label="起店">
+                          <option value="">無限制</option>
+                        </optgroup>
+                        </select>
+                          <select class='form-control form-control-sm col-1 mx-2'>
+                      <optgroup id="dropoffbranchName" label="訖店">
+                          <option value="">無限制</option>
+                        </optgroup>
+                        </select>
+                        <select class='form-control form-control-sm col-1 mx-2'>
+                           
+                              <optgroup label="調度狀態">
+                                  <option value="已完成調度">已完成調度</option>
+                                </optgroup>
+                         </select>
+                      
+                         <button type="button" class="btn btn-info btn-sm mx-2" id="ordercheckmaner">查詢</button>
+                         <button type="button" class="btn btn-secondary btn-sm mx-2" id="buttontoreset">重置查詢</button>
+                        </form>
+                  </div>
+                
+                </div>
+            
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>分店</th>
+                      <th>起店</th>
+                      <th>訖店</th>
                       <th>車型</th>
                       <th>車牌</th>
                       <th>調度日期</th>
@@ -123,7 +150,8 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>分店</th>
+                        <th>起店</th>
+                        <th>訖店</th>
                       <th>車型</th>
                       <th>車牌</th>
                       <th>調度日期</th>
@@ -131,12 +159,51 @@
                   </tfoot>
                   <tbody>
                     <tr>
+                        <td>南崁店</td>
                       <td>南崁店</td>
                       <td>Nix123</td>
                       <td>AB-0234</td>
                       <td>2011/04/25 12:00</td>
                     </tr>
+<<<<<<< HEAD
                  
+=======
+                    <tr>
+                        <td>南崁店</td>
+                      <td>中興店</td>
+                      <td>ATX-500</td>
+                      <td>EW-9603</td>
+                      <td>2012/07/25 10:23</td>
+                    </tr>
+                    <tr>
+                        <td>南崁店</td>
+                      <td>大直店</td>
+                      <td>JTSW200</td>
+                      <td>9M-8866</td>
+                      <td>2009/01/12</td>
+                    </tr>
+                    <tr>
+                        <td>南崁店</td>
+                      <td>南崁店</td>
+                      <td>Nix123</td>
+                      <td>AB-0234</td>
+                      <td>2011/04/25 12:00</td>
+                    </tr>
+                    <tr>
+                        <td>南崁店</td>
+                      <td>中興店</td>
+                      <td>ATX-500</td>
+                      <td>EW-9603</td>
+                      <td>2012/07/25 10:23</td>
+                    </tr>
+                    <tr>
+                        <td>南崁店</td>
+                      <td>大直店</td>
+                      <td>JTSW200</td>
+                      <td>9M-8866</td>
+                      <td>2009/01/12</td>
+                    </tr>
+>>>>>>> branch 'master' of https://github.com/EEIT10307/NewIndependentStudy.git
                   </tbody>
                 </table>
               </div>
