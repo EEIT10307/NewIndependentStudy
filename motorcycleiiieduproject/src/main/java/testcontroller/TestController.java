@@ -114,5 +114,17 @@ public class TestController {
 			}
 			return "OK";
 		}
+		//新增AcceSerialNum假資料
+		@RequestMapping(value = "/insertFakeAcceSerialNum", produces = "text/html; charset = UTF-8")
+		public @ResponseBody String insertFakeAcceSerialNum() throws IOException, ParseException {
+
+			try {
+				testService.insertFakeAcceSerialNum();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "Fail";
+			}
+			return "OK";
+		}
 
 }

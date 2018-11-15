@@ -118,7 +118,7 @@ $(document).ready(function () {
                
         //    var memmail =memdata.replace("{","").replace("}","").replace("\"").split(",")[1].split(":")[0];
         //    alert(memmail)
-        // alert(JSON.parse(memdata).email);
+        // `alert(JSON.parse(memdata).email);
             //    $("#desmail").text(JSON.parse(memdata).email); 錯誤用法
                 $("#desmail").attr("value",JSON.parse(memdata).email);
                 $("#hiddenemail").attr("value",JSON.parse(memdata).email);            
@@ -157,7 +157,8 @@ $(document).ready(function () {
 
 
         $("#change").click(function () { 
-                   
+        	var res = confirm("確認送出?");
+	        if(res == true){
 
         var password =$("#despassword").val();
         var name = $("#desname").val() ; 
@@ -183,6 +184,11 @@ $(document).ready(function () {
             //  alert(jsonback);
             }
         });
+        window.location.href="memberdescription.html";
+
+        }else{
+        	
+        }
     });
 
     
@@ -245,8 +251,15 @@ $(document).ready(function () {
             // alert("portfolio==> "+portfolio)
             if(portfolio != null || portfolio != "")
             {
-                $("#wwwwimg").attr("src", "Images\\"+portfolio);
-                window.location.reload();
+
+                setTimeout(function(){
+                    console.log('A');
+                    $("#wwwwimg").attr("src", "Images\\"+portfolio);
+                    window.location.reload();
+                },5000);
+                setTimeout(function(){
+                    console.log('B');
+                },5000);
             }
         }
         });

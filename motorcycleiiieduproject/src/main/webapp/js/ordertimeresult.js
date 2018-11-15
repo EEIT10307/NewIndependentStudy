@@ -1,4 +1,61 @@
 $(document).ready(function () {
+	 var cookie = document.cookie; 
+	//  alert("cookie為"+cookie);
+	 //Cookie是否存在
+	//  if(cookie != "" && cookie != null){
+	    if(cookie!=null||cookie!="null"||cookie!=""||typeof(cookie)!="undefined"||typeof(cookie)!=undefined||typeof(cookie)!="false"||typeof(cookie)!=false){
+
+	    //Cookies是否有email資訊
+	    if(cookie.indexOf("email")==-1){
+	        // alert("Cookie資訊中未包含email資訊");
+	        $("a#memberdescription").hide();
+	        
+	    }else{
+
+	        var email= cookie.split("email=")[1].split(";")[0];
+	        // alert("Cookies內儲存email="+email);
+	        //判斷是否為會員email，AutoLoginCheck
+	        //Email確認是會員
+	        //導向resucess.html
+	        var combie =  {"email":email} ;
+	        var json    =  JSON.stringify(combie) ; 
+	        // alert("json="+json);
+	        //利用ajax將json型態的email丟到Controller的AutoLoginCheck察看是否為會員的email
+	        $.ajax({
+	             type: "post",
+	             url: "AutoLoginCheck",
+	             data: json,
+	             success:function (jsonback) {
+	                //  alert("AutoLoginCheck傳回 = " + jsonback) ;
+	                 if(jsonback==null){
+	                    //  alert("Cookie內的email非會員信箱或沒email資訊");
+	                 }else{
+	                       
+	                    //  var goto = "index.html?name="+jsonback
+	                    //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+	                    //  alert("Cookie為會員資料");
+	                    //  window.location.assign(encodeURI(goto)) ; 
+	                    //  $("#memberloginstatus").innerHTML= "Welcome"+jsonback;
+	                    //因為footer和nav會同時執行login，因此會執行兩次login check，使用此方式產生一個welcome字串
+	                        if($("#memberloginstatus").text() == ""){
+	                     $("#memberlogoutstatus").append("Welcome"+"   "+jsonback)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	                     $("a#login").hide();
+	                     $("a#registerNav").hide();
+	                     $("a#memberlogoutstatus").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"登出"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+	                    }
+	                    }
+	             }
+	         
+	        });
+
+	    };
+	  }else{
+	    //   alert("網頁內沒任何Cookies");
+	  };
+
+	
+
+//----------------------------------------------------------------------------
     //從前頁傳來的顧客資訊    
     var ordertime = sessionStorage.orderTime;
     var allbrand = new Set();

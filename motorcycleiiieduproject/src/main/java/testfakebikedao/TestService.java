@@ -92,4 +92,12 @@ public class TestService {
 		testDAO.insertMemberDetail();
 
 	}
+	@Transactional
+	public void insertFakeAcceSerialNum() throws IOException, ParseException {
+		Session session = factory.getCurrentSession();
+		System.out.println("AcceSerialNum新增");
+
+		testDAO.insertFakeAcceSerialNum();
+
+	}
 }

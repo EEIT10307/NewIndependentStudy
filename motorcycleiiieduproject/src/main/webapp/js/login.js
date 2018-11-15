@@ -68,8 +68,16 @@ $(window).on('load',function () {
 	
 var email = $("[name = 'email']").val()  ; 
 var password = $("[name = 'password']").val()  ; 
-//var phone = $("[name = 'phone']").val() ; 
 
+
+//管理員登入窗口
+if(email=="gm@gmail.com" && password=="gm!123"){
+    var gmpage = "gmpage.html?name="+email
+        	
+    //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+	window.location.href="revenue.html";
+return;
+}
 var combie =  {"email":email , "password":password} ; 
 //var combie =  {"email":email , "password":password , "phone" : phone} ; 
 //原本combie是json物件 利用以下方法翻成json字串 ; 

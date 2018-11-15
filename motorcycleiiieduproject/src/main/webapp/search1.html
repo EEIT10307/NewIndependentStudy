@@ -11,6 +11,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/include.js"></script>
 	<script src="js/search.js"></script>
+	<script src="js/logout.js"></script>
 	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 	<!-- <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script> -->
 	<!-- <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css"/> -->
@@ -27,9 +28,12 @@
 		<input class="form-control form-control-dark w-50 " type="text" placeholder="搜尋" aria-label="Search" id="myInput">
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap row mx-3">
-				<a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">登入</a>
-				<a class="nav-link mx-3" href="register.html">註冊</a>
-				<a class="nav-link" href="index.html">回首頁</a>
+<!-- 			//robin 更改地方 -->
+				<a class="nav-link"  id="login" data-toggle="modal" data-target="#exampleModalCenter">登入</a>
+				<a class="nav-link mx-3" id="registerNav" href="register.html">註冊</a>
+				<a class="nav-link" id="memberlogoutstatus" ></a>
+				<a class="here nav-link" href="index.html">回首頁</a>
+				
 			</li>
 		</ul>
 	</nav>
@@ -73,29 +77,40 @@
 					</div>
 					<form id="serchdateform">
 						<div class="form-group select2 row text-center">
-							<label>PickUpdate</label>
-							<div> DATE:<input type="date" name="pDate" id="pDate"></div>
-							<div> TIME:<select name="Ptime" class="makePoption"></select></div>
+							<table>
+							<tr><td><label>PickUpdate</label></td><td></td></tr>
+							<tr><td> <label>DATE:</label></td><td><input type="date" class='form-control' name="pDate" id="pDate" style='width: 150px'></td></tr>
+							<tr><td> <label>TIME:</label></td><td><select name="Ptime" class="makePoption form-control" style='width: 150px'></select></td></tr>
+							<tr><td><label>PickUpStore</label></td><td></td></tr>
+							<tr><td></td><td><select name="pickupbranchName" class="pickupbranchName form-control" style='width: 150px'></select></td></tr>
+							<tr><td><label>DropOffDate</label></td><td></td></tr>
+							<tr><td><label>DATE:</label></td><td><input type="date" name="dDate" id="dDate" class="form-control" style='width: 150px'></td></tr>
+							<tr><td><label>TIME:</label></td><td><select name="Dtime" class="makeDoption form-control" style='width: 150px'></select></td></tr>
+							<tr><td><label>DropOffStore</label></td><td></td></tr>
+							<tr><td></td><td><select name="dropoffbranchName" class="dropoffbranchName form-control" id="dropoffbranchName" style='width: 150px'></select></td></tr>
+							</table>
 						</div>
-						<div class="form-group select2 row text-center">
-							<label>PickUpStore</label>
-							<select name="pickupbranchName" class="pickupbranchName"></select>
-						</div>
-						<div class="form-group select2 row">
-							<label>DropOffDate</label>
+					
+<!-- 						<div class="form-group select2 row text-center"> -->
+<!-- 							<label>PickUpStore</label> -->
+<!-- 							<select name="pickupbranchName" class="pickupbranchName form-control"></select> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group select2 row"> -->
+<!-- 							<label>DropOffDate</label> -->
 
-							<div> DATE:<input type="date" name="dDate" id="dDate"></div>
-							<div> TIME:<select name="Dtime" class="makeDoption"></select></div>
-						</div>
-						<div class="form-group select2 row">
-							<label>DropOffStore</label>
-							<select name="dropoffbranchName" class="dropoffbranchName" id="dropoffbranchName"></select>
-						</div>
+<!-- 							<div> DATE:<input type="date" name="dDate" id="dDate"></div> -->
+<!-- 							<div> TIME:<select name="Dtime" class="makeDoption"></select></div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group select2 row"> -->
+<!-- 							<label>DropOffStore</label> -->
+<!-- 							<select name="dropoffbranchName" class="dropoffbranchName" id="dropoffbranchName"></select> -->
+<!-- 						</div> -->
 						<hr class="bg-light" />
 						<div class="row justify-content-around">
 							<button type="reset" class="btn btn-outline-light col-md-4" id="motorserchdo">查詢</button>
 							<button type="reset" class="btn btn-outline-light col-md-4" id="resetserchdate">重設</button>
 						</div>
+					</form>
 				</div>
 
 
