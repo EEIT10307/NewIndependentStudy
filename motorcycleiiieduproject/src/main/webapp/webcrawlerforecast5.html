@@ -98,7 +98,7 @@
 			            	  }
 			
 			
-			$("#forecast-body").append(
+			$(".modal").append(
 			"<section class='card anim-flip"+flipanim+"' style='display: inline-block'>"+
 			    "<header>"+
 			        "<h1 class='card-header' id='city1'>"+city+"</h1>"+
@@ -127,33 +127,12 @@
 <!--          <input type="button" id="four" value="點我點我"/> -->
  
     <div class="costumModal">
-        <a href="#costumModal15" role="button" class="btn btn-default" data-toggle="modal" id="four">
+        <a href="#costumModal15" role="button" class="btn btn-default" data-toggle="modal" >
             bounceRightIn
         </a>
         <div id="costumModal15" class="modal" data-easein="bounceRightIn"  tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-<!--                     <div class="modal-header"> -->
-<!--                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> -->
-<!--                             × -->
-<!--                         </button> -->
-<!--                         <h4 class="modal-title"> -->
-<!--                             Modal Header -->
-<!--                         </h4> -->
-<!--                     </div> -->
-                    <div class="modal-body">
-							 <main class='container' id='container'>					
-							    <div class='card-wrapper' >    
-									<p id="forecast-body"></p>
-								 </div>
-							</main>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                            OK
-                        </button>
-                    </div>
-                </div>
+            <div class="modal-dialog modal-lg">
+
             </div>
         </div>
     </div>

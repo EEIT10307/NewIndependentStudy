@@ -101,4 +101,11 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return memberDaoImp.checkPhotoString(email);
 	}
+	
+	public List<MemberDetail> getMemberPhone(String email) {
+		// TODO Auto-generated method stub
+		return memberDaoImp.getMemberPhone(email);
+	}
+	
+	
 }

@@ -34,7 +34,7 @@ public interface MemberIdao {
 
 	boolean checkPhotoString(String email);
 
-	
+	public List<MemberDetail> getMemberPhone(String email); 
 
 
 }

@@ -14,11 +14,15 @@
 ::selection{
     background-color: transparent;
 }
-.container{
-    width: 100vw;
-    height: 100vh;
-    display:flex;
-}
+/* .container{ */
+/*     width: 100vw; */
+/*     height: 100vh; */
+/*     display:flex; */
+/*     margin-left: -625px; */
+/*     margin-top: -30px; */
+   
+/* } */
+
 .card-wrapper{
     position: relative;
     margin: auto;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import branchscenedao.BranchScenesIFaceDao;
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
 
@@ -29,8 +30,7 @@ public class BranchScenesService implements BranchScenesIFaceService{
 	}
 
 	@Override
-	public List<String> getBranchScenes() {
-		// TODO Auto-generated method stub
+	public List<BranchScenesForJson> getBranchScenes() {
 		return branchScenesIFaceDao.getBranchScenes();
 	}
 

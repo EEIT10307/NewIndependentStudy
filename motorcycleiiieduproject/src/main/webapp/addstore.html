@@ -115,44 +115,45 @@
 			    <label for="addr" class="col-sm-2 col-form-label">地址</label>
 				<div class="f3 mx-1 form-group" data-role="county"></div>
 				<div class="f4 mx-1 form-group" data-role="district"></div>
-				<input name="addr" type="text" class="f13 address form-control col-6 mx-1">
+				<input name="addr" type="text" class="f13 address form-control col-6 mx-1" id="branchAddress">
 			  </div>
 			  <div class="form-row form-group justify-content-center">
 			    <label class="col-sm-2 col-form-label">電話</label>
 			    <div class="col-sm-9">
-			      <input type="text" class="form-control" id="tel"/>
+			      <input type="text" class="form-control" id="branchPhone"/>
 			    </div>
 			  </div>
 			  <div class="form-row form-group row justify-content-center">
 				    <label class="col-sm-2 col-form-label" for="brandName">店名</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="brandName"/>
+				      <input type="text" class="form-control" id="branchName"/>
 				    </div>
 				    <label class="col-sm-2 col-form-label text-center" for="inputState">地區</label>
 				    <div class="col-sm-3">
 				      <select id="inputState" class="form-control">
-				        <option selected>北區-1</option>
-				        <option>北區-2</option>
-				        <option>北區-3</option>
-				        <option>北區-4</option>
-				        <option>中區-1</option>
-				        <option>中區-2</option>
-				        <option>南區-1</option>
-				        <option>南區-2</option>
-				        <option>南區-3</option>
+				        <option selected id="branchArea">北區-1</option>
+				        <option id="branchArea">北區-2</option>
+				        <option id="branchArea">北區-3</option>
+				        <option id="branchArea">北區-4</option>
+				        <option id="branchArea">中區-1</option>
+				        <option id="branchArea">中區-2</option>
+				        <option id="branchArea">南區-1</option>
+				        <option id="branchArea">南區-2</option>
+				        <option id="branchArea">南區-3</option>
 				      </select>
 				    </div>
 			</div>
 			    <div class="form-group row justify-content-center">
 			    	<label class="col-sm-2 col-form-label">開幕日</label>
 			    	<div class="col-sm-9">
-			    		<input class='form-control' data-toggle="datepicker">
+			    		<input class='form-control' data-toggle="datepicker" id="openingDay">
 			    	</div>
 			    </div>
-			    <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-12 row  justify-content-center"><button class="btn btn-secondary mb-5" type='submit'>確定新增</button></div>
+			    <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-12 row  justify-content-center"><button class="btn btn-secondary mb-5" type="submit" id="submitinsert">確定新增</button></div>
 			</form>
 			<script>
-			$("#zipcode").twzipcode({
+			$(document).ready(function(){
+				$("#zipcode").twzipcode({
 				"zipcodeIntoDistrict": true,
 				"css": ["city form-control", "town form-control"],
 				"countyName": "city", // 指定城市 select name
@@ -166,6 +167,41 @@
 				endDate: new Date(),
 				autoPick: true
 			});
+
+			$("#submitinsert").click(function(){
+				var city="", town="";
+				//選擇城市
+				var $selectC = $('select[name="city"]');
+				for (var i = 0; i < $selectC.length; i++) {
+					city = $("option:selected", $selectC[i]);
+				}
+				//選擇城鎮
+				var $selectT = $('select[name="town"]');
+				for (var i = 0; i < $selectT.length; i++) {
+					town = $("option:selected", $selectT[i]);
+					
+				} 
+				alert("val"+i+"="+city.val()+"val"+i+"="+town.val());
+				var branchCounty=city.val()+town.val();
+				var branchAddress=$("#branchAddress").val();
+				var branchPhone=$("#branchPhone").val();
+				var branchName=$("#branchName").val();
+	      var branchArea=$("#branchArea").val();				
+          alert("新增分店:"+"\n店名:"+branchName+"\n地區:"+branchArea+"\n縣市:"+branchCounty+"\n地址:"+branchAddress+"\n電話:"+branchPhone);
+      	  var cd= {"branchName":branchName,"branchArea":branchArea,"branchCounty":branchCounty,"branchAddress":branchAddress,"branchPhone":branchPhone}
+          var zx=JSON.stringify(cd)
+      $.ajax({
+		          type:"post",
+		          url:"saveBranchDetail",
+		          data:zx,
+				  contentType:"application/json;charset=utf-8",
+		          success : function(response) {
+		                alert("success");
+		 				alert("response="+response);
+			      }//success
+          });//ajax
+      });//click
+	});//document.ready
 			</script>
         </div>
         <!-- Sticky Footer -->

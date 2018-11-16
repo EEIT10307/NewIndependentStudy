@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
 
@@ -14,7 +15,7 @@ public interface BranchScenesIFaceDao {
 	
 	List<BranchScenes> selectBranchScenes(String spotName);
 	
-	List<String> getBranchScenes();
+	List<BranchScenesForJson> getBranchScenes();
 	
 	List<BranchScenes> getScenes();
 	

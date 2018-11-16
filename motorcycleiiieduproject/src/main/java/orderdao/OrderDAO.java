@@ -31,12 +31,14 @@ import cleanbean.FinOrderBean;
 import cleanbean.ManagerOrderCondition;
 import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
+import everybikeInfo.robin.dao.TestEmailIFaceDao;
 import maintenance.MaintenanceDAO;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.Discount;
 import projectbean.EveryBikeInfo;
+import projectbean.MemberDetail;
 import projectbean.OrderList;
 
 @Repository
@@ -46,6 +48,9 @@ public class OrderDAO implements OrderIFaceDAO {
 	SessionFactory factory;
 	@Autowired
 	MaintenanceDAO maintenanceDAO ; 
+	@Autowired
+	TestEmailIFaceDao testEmailIFaceDao ; 
+	
 	
 	// 查詢該店未完成的訂單總數
 	@Override
@@ -571,6 +576,24 @@ public class OrderDAO implements OrderIFaceDAO {
 
 		convertOrder.setOrderSerialNum(serialString);
 		convertOrder.setLicensePlate(OrderlistPlate.get(0));
+		
+		//如果是會員
+		if(convertOrder.isIs_member() ) {
+			
+		
+			CriteriaQuery<MemberDetail> createQuery1 = buider.createQuery(MemberDetail.class);
+			Root<MemberDetail> fromClass1 = createQuery1.from(MemberDetail.class);
+			createQuery1.select(fromClass1).where(buider.equal(fromClass1.get("phone"), convertOrder.getPhone() ));
+			List<MemberDetail> Member = factory.getCurrentSession().createQuery(createQuery1).getResultList();
+			
+			Member.get(0).getMemberSerialNum() ; 
+			
+			testEmailIFaceDao.sendemail(serialString, String.valueOf(Member.get(0).getMemberSerialNum())) ; 
+			
+			
+		}
+		
+		
 
 		factory.getCurrentSession().persist(convertOrder);
 

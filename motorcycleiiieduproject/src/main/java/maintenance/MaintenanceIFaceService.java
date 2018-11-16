@@ -19,6 +19,8 @@ public interface MaintenanceIFaceService {
 	List<EveryBikeInfoToGson> everyBikeInfoforGsonConvert(List<EveryBikeInfo> finalEveryBikeInfo);
 	int insertNEWMaintenanceDetail(String maintenanceItem, Double requiredMileage,Double requiredHourTodo);
 	List<EveryBikeMileage>showEveryBikeMileagebyStore(String shopName);
+	List<EveryBikeInfo>showEveryBikeBasicInfobyStore(String shopName);
+	List<EveryBikeMileage> showEveryMaintenanceItembyPlate(String licensePlate);
 	List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage);
 
 	List<EveryBikeMileage>showMessageIfMileageIsOver();
