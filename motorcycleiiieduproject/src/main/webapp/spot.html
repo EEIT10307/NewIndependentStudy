@@ -59,15 +59,21 @@
 // 		$(window).scroll(function() {
 // 		    if($(window).scrollTop() == $(document).height() - $(window).height()) {
 		           // ajax call get data from server and append to the div
+		        var spotArea = decodeURI(location.search).split('=')[1];//?spotArea=北投區 抓北投區
+// 		        var spotAreaJson = "{\"spotArea\":\""+spotArea+"\"}";//!!!!!!!!!!!!!!不能用自己串的會抓不到值
+// 		        alert(spotAreaJson);
+// 		        var spotArea = document.URL.split("?")[1].split("=")[1];
+// 		           alert(spotArea);
 		    	$.ajax({
 		            type: "post",
-		            url: "getAllBranchScenes",
-		        	async: false,
-		            contentType: "application/json; charset=utf-8",
+		            url:  "showBranchScenes",
+		            data: {"spotArea":spotArea},//要這樣傳值
+// 		        	async: false,
+// 		            contentType: "application/json; charset=utf-8",
 		            success: function (response) {
-// 		            	alert(json)
-	// 	            	var json = JSON.stringify(response);
+// 		            	alert(response);
 		            	var json = JSON.parse(response);
+// 		            	alert(json);
 // 		            	for(i in json){
 						var permax=6;
 						for(i=0; i<6; i++){

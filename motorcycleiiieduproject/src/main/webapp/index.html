@@ -146,8 +146,8 @@
 	            url: "queryAllWebContent",
 	            contentType: "application/json; charset=utf-8",
 	            success: function (response) {
-		               alert(response[6].webElements+ +response[6].webContent);
-		               alert(num)
+// 		               alert(response[6].webElements+ +response[6].webContent);
+// 		               alert(num)
 				   for(i=0; i<num; i++){ 
 					   $('#'+response[i].webElements).empty().append(response[i].webContent);
 				   $('#editor4 h3').addClass("featurette-heading");
@@ -209,10 +209,10 @@
 		            <div class="col-8 row" id="content">
 		            	<div class="col-10">
 		            	<h5 >逍遙遊租機車</h5>
-		            	<h6 >台中</h6>
+		            	<h6 id='area'>臺北市松山區民權東路三段106巷3弄</h6>
 		            	</div>
 		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
+		            	<button type="button" class="btn btn-outline-secondary spot" id="spot0">周圍景點</button>
 		            	</div>
 		            </div>
 	            </div>
@@ -223,12 +223,12 @@
 						<img src="https://lh5.googleusercontent.com/p/AF1QipNsa_GBKvxilvxecezIymSfl49aLcSbuz49PKMX=w314-h168-p-k-no" class="img-responsive" >
 		            </div>
 		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
+		            	<div class="col-10" id='info'>
 		            		<h5 >全好車業</h5>
-		            		<h6 >台北市</h6>
+		            		<h6 id='area'>臺北市中山區中山北路四段一號</h6>
 		            	</div>
 		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
+		            		<button type="button" class="btn btn-outline-secondary spot" id="spot1">周圍景點</button>
 		            	</div>
 		            </div>
 	            </div>
@@ -241,10 +241,10 @@
 		            <div class="col-8 row" id="content">
 		            	<div class="col-10">
 		            	<h5 >好好騎機車出租</h5>
-		            	<h6 >台南市</h6>
+		            	<h6 id='area'>臺北市北投區中山路、光明路沿線</h6>
 		            	</div>
 		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
+		            	<button type="button" class="btn btn-outline-secondary spot" id="spot2">周圍景點</button>
 		            	</div>
 		            </div>
 	            </div>
@@ -256,6 +256,28 @@
 		<button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-secondary animated bounce delay-1s"><i class="fas fa-caret-up fa-lg"></i>Top</button>
 	</div>
 	<script type="text/javascript">
+	//抓景點
+	$('.spot').on('click',function(){
+		var spotid = "#"+this.id;
+// 		alert($(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3));//台北市北投區中山路 substr抓'北投區'
+		var spotArea = $(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3);
+		var url='spot.html?spotArea='+spotArea;
+		window.location.assign(encodeURI(url));
+// 	    	$.ajax({
+// 	            type: "post",
+// 	            url: "showBranchScenes",
+// 	            data: spotArea,
+// 	            contentType: "application/json; charset=utf-8",
+// 	            success: function (response) {
+// 	            	//window.location.assign('spot.html');
+// 				}
+// 	    	});
+	});
+	
+	
+	
+	
+	
 	var locations = [
 		[ "全好車業", 25.0517208, 121.5148625, 1, "0926-664-076", "103台北市大同區長安西路145巷12號", "一~日 9:00~20:00", "https://zh-tw.facebook.com/d9350910/"],
 		["好好騎機車出租", 22.9648553, 120.2108129, 2, "06-222-2816", "704台南市北區北門路二段69號", "一~日 8:00~22:00", "https://www.google.com.tw/"] ,
