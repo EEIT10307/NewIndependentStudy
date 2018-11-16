@@ -1,6 +1,5 @@
 package branchdetail;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;

@@ -14,7 +14,7 @@ public class TTTTTTTTT {
 	        Document xmlDoc;
 			xmlDoc = Jsoup.parse(url, 3000);//使用Jsoup jar 去解析網頁
 	        //(要解析的文件,timeout)
-	        Elements title = xmlDoc.select("span"); //要解析的tag元素為title
+	        Elements title = xmlDoc.select("div"); //要解析的tag元素為title
 	        Elements happy = xmlDoc.select("description");  //要解析的tag元素為description
 	        System.out.println(title); //得到title tag的內容，"中央氣象局:XX市今明天氣預報"
 //	        System.out.println("縣市名:"+title.get(0).text().split(":")[1].substring(0, 3));

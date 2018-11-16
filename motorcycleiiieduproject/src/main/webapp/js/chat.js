@@ -25,7 +25,7 @@ $(document).ready(function () {
 	var websocket = null;
 	//判斷瀏覽器是否支持WebSocket
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://172.20.10.14:8080/motorcycleiiieduproject/websocket/同學");
+		websocket = new WebSocket("ws://192.168.27.44:8080/motorcycleiiieduproject/websocket/同學");
 
 
 
