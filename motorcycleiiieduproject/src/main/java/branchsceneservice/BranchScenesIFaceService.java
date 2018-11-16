@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
 
 public interface BranchScenesIFaceService {
 	List<BranchScenes> selectBranchScenes(String spotName);
 	
-	List<String> getBranchScenes();
+	List<BranchScenesForJson> getBranchScenes();
 	
 	BranchScenes getScenes(int branchDetailSerialNum);
 	

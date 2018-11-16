@@ -86,16 +86,39 @@ public class MaintenanceController {
 //		System.out.println("網頁傳入="+maintenancequery);
 		try {
 		List<EveryBikeMileage> selectMaintenancebranch = testMaintenanceIFaceService.showEveryBikeMileagebyStore(maintenancequery.getMaintenanceStore());
-		
 		List<EveryBikeMileageToGson> forGsonConvert=testMaintenanceIFaceService.everyBikeMileageforGsonConvert(selectMaintenancebranch);
 		System.out.println(maintenancequery.getMaintenanceStore()+"店裡有的車的各項保養里程資料JSON="+gson.toJson(forGsonConvert));
-		
 		return gson.toJson(forGsonConvert);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new String("{fail:fail}");
 		}
-		
+	}
+	@PostMapping(value = "/showEveryBikeBasicInfobyStore", produces = "application/JSON; charset = UTF-8")
+	public @ResponseBody String showEveryBikeBasicInfobyStore(@RequestBody MaintenanceBean maintenancequery) {
+		try {
+			List<EveryBikeInfo> selectMaintenancebranch = testMaintenanceIFaceService.showEveryBikeBasicInfobyStore(maintenancequery.getMaintenanceStore());
+			List<EveryBikeInfoToGson> forGsonConvert=testMaintenanceIFaceService.everyBikeInfoforGsonConvert(selectMaintenancebranch);
+	//		System.out.println(maintenancequery.getMaintenanceStore()+"店裡有的車的各項保養里程資料JSON="+gson.toJson(forGsonConvert));	
+			return gson.toJson(forGsonConvert);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String("{fail:fail}");
+		}
+	}
+
+	@PostMapping(value = "/showEveryMaintenanceItembyPlate", produces = "application/JSON; charset = UTF-8")
+	public @ResponseBody String showEveryMaintenanceItembyPlate(@RequestBody MaintenanceBean maintenancequery) {
+		try {
+			System.out.println("網頁傳入="+maintenancequery);
+			List<EveryBikeMileage> selectLicensePlate = testMaintenanceIFaceService.showEveryMaintenanceItembyPlate(maintenancequery.getLicensePlate());
+			List<EveryBikeMileageToGson> forGsonConvert=testMaintenanceIFaceService.everyBikeMileageforGsonConvert(selectLicensePlate);
+			System.out.println(maintenancequery.getLicensePlate()+"的各項保養里程資料JSON="+gson.toJson(forGsonConvert));
+			return gson.toJson(forGsonConvert);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String("{fail:fail}");
+		}
 	}
 	@GetMapping(value = "/showMessageIfMileageIsOver", produces = "application/JSON; charset = UTF-8")
 	public @ResponseBody String showMessageIfMileageIsOver() {
