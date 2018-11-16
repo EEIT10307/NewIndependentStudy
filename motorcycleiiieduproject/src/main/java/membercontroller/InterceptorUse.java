@@ -1,16 +1,10 @@
 package membercontroller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import memberservice.MemberService;
 
 public class InterceptorUse implements HandlerInterceptor {
 
@@ -79,7 +73,8 @@ public class InterceptorUse implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+		
+		System.out.println("spring Iter :"+ response.getContentType() + "::" + response.getHeader("contentType") );
 	}
 	
 	

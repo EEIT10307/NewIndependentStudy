@@ -3,6 +3,43 @@ $(document).ready(function () {
 
 
     var cookie = document.cookie; 
+
+   if(cookie.indexOf("memberphone") != -1){
+    var t = $('#dataTable').DataTable();
+    t.clear()
+var t =$('#dataTable').DataTable() ;
+    var memphone= cookie.split("memberphone=")[1].split(";")[0];
+    var nonmemberphone = JSON.stringify({ "nonmemberinputphone": memphone })
+    $.ajax({
+        type: "POST",
+        url: "showMemberAndNonMemberDetail",
+        data: nonmemberphone,
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            for (let sobj in response) {
+                var buildacce = ""
+                if (response[sobj].accessoriesAmount != "") {
+
+                    var accesss = JSON.parse(response[sobj].accessoriesAmount)
+                    var accesssobjs = Object.keys(accesss)
+                    for (var k in accesssobjs) {
+                        buildacce +=  accesssobjs[k] + "x" + accesss[accesssobjs[k]] + "<br>"
+                    }
+                }
+                t.row.add([
+                    response[sobj].orderSerialNum ,
+                    "取車:"+response[sobj].pickupStore+" "+response[sobj].pickupDate+
+                    "<br>還車:"+response[sobj].dropoffStore+" "+response[sobj].dropoffDate+
+                    "<br>車名:"+response[sobj].bikeModel +"<br>" +buildacce,
+                    response[sobj].orderTotalPrice  ,
+                    response[sobj].orderTime    ,
+                           "滿意度"
+                ]).draw(false)
+            }
+        }
+    });
+   }
+
     //  alert("cookie為"+cookie);
      //Cookie是否存在
     //  if(cookie != "" && cookie != null){
@@ -157,6 +194,9 @@ $(document).ready(function () {
 
 
         $("#change").click(function () { 
+    var gen =  $("input[name='gender']:checked").val();
+
+    //   $("#desgender").val()
         	var res = confirm("確認送出?");
 	        if(res == true){
 
@@ -166,7 +206,7 @@ $(document).ready(function () {
         var birthday = $("#desbirthday").val()  ; 
         // var from = $("#desbirthday").val().split("-")
         // var f = new Date(from[2], from[1] - 1, from[0])
-        var gender = $("#desgender").val()  ; 
+        var gender = gen.toString();
         var address = $("#desaddress").val()  ; 
                     var combie =  {"email":email,"password":password,"name":name,"phone":phone,"birthday":birthday,"gender":gender,"address":address} ; 
         //原本combie是json物件 利用以下方法翻成json字串 ; 
@@ -182,9 +222,11 @@ $(document).ready(function () {
             //  alert("ajax success");
             //  var memdata =JSON.stringify(jsonback);
             //  alert(jsonback);
+  alert(jsonback)
+            window.location.href="member.html";
             }
         });
-        window.location.href="memberdescription.html";
+    //    window.location.href="memberdescription.html";
 
         }else{
         	

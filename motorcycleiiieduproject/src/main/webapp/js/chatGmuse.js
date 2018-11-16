@@ -25,10 +25,7 @@ $(document).ready(function () {
 	var websocket = null;
 	 //判斷瀏覽器是否支持WebSocket
 	 if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8080/motorcycleiiieduproject/websocket/GM");
-
-        
-        
+        websocket = new WebSocket("ws://localhost:8080/motorcycleiiieduproject/websocket/GM");   
     }
     else {
         alert('Not support websocket')

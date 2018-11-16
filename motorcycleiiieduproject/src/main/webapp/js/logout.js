@@ -19,9 +19,10 @@ var cookies = document.cookie;
 				// alert("Cookies內儲存email="+email);
 				var password= cookies.split("password=")[1].split(";")[0];
 				// alert("Cookies內儲存password="+password);
-
+				var phone= cookies.split("memberphone=")[1].split(";")[0];
 				DelEmailCookie(email);
 				DelPasswordCookie(password);
+				DelPhoneCookie(phone);
 				// document.cookie = "email" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 				// document.cookie = "password" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 				// $.cookie(cookie, { expires: -1 });
@@ -80,5 +81,17 @@ function  DelPasswordCookie(name){
 }
 
 
+
+//删除phoneCookie
+function  DelPhoneCookie(name){
+    // alert("移除cookie ="+name)
+    expire_days = -1; // 過期日期(天)
+    var day = new Date();
+    day.setTime(day.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + day.toGMTString();
+	document.cookie = "memberphone="+ "" + "; " + expires + "; path=/";	
+    location.reload()
+    // documents.cookie  =  name  +  "="  +  cval  +  ";  expires="+  exp.toGMTString();
+}
 
 });
