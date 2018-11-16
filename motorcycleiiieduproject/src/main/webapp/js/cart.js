@@ -51,35 +51,63 @@ $("#takedropoffstore").text(orderdetailstr.dropoffStore);
 $("#gobacke").on("click",function(){
 history.go(-1)
 })
+
+
+
+
 //按鈕做toggle 	判斷會員
-if(orderdetailstr.phone != ""){
-$("#checkout").click(function (e) { 
+
+$("#checkoutee").click(function (e) { 
 	e.preventDefault();
 	
-	alert(JSON.stringify(orderdetailstr))
+	// alert(JSON.stringify(orderdetailstr))
 
-	$.ajax({ 
-		type: "Post",
-		url: "getlastcheckorderlist",
-		data: JSON.stringify(orderdetailstr),
-		contentType: "application/json; charset=utf-8",
-		success: function (response) {
-			alert(response)
-			window.location.assign ("index.html");
-		},
-		error:function(responseerror){
-	   
-			alert(responseerror.responseText)
-	  
-		  
-		}
-	});
+
+	// $.ajax({ 
+	// 	type: "Post",
+	// 	url: "getlastcheckorderlist",
+	// 	data: orderdetailstr,
+	// 	contentType: "application/json; charset=utf-8",
+	// 	success: function (response) {
+	// 		alert(response)
+	// 		window.location.assign ("index.html"); 
+	// 	},
+	// 	error:function(responseerror){
+	// 		alert(responseerror.responseText)
+	// 	}
+	// });
 
 });
+
+
+
+
+
+if(orderdetailstr.phone != ""){
+	$("#checkoutee").click(function (e) { 
+		e.preventDefault();
+		$.ajax({ 
+			type: "Post",
+			url: "getlastcheckorderlist",
+			data: JSON.stringify(orderdetailstr),
+			contentType: "application/json; charset=utf-8",
+			success: function (response) {
+				alert(response)
+				window.location.assign ("index.html"); 
+	
+			},
+			error:function(responseerror){
+		   
+				alert(responseerror.responseText)
+		  
+			  
+			}
+		})
+	})
 }else{
 
-$("#checkout").attr("data-toggle","modal");
-$("#checkout").attr("data-target","#exampleEnterPhone");
+$("#checkoutee").attr("data-toggle","modal");
+$("#checkoutee").attr("data-target","#exampleEnterPhone");
 
 }
 
@@ -100,6 +128,8 @@ $(".addphone").click(function (e) {
 		contentType: "application/json; charset=utf-8",
 		success: function (response) {
 			alert(response)
+
+
 			window.location.assign ("index.html"); 
 
 		},
@@ -112,6 +142,7 @@ $(".addphone").click(function (e) {
 	});
 	}
 });
+
 
 
 

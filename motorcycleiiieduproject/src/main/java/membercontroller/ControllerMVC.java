@@ -93,10 +93,12 @@ public class ControllerMVC  {
 				//email確認為會員,傳回email資料
 				if (mb != null) {
 					System.out.println("Email為會員:"+mb.getEmail());
+				
 					return mb.getEmail();
 				}else {
 					//如果不是會員的email
 					System.out.println("不是會員的email");
+		
 					return null;
 				}
 		
@@ -142,9 +144,12 @@ public class ControllerMVC  {
 				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
 //			model.addAttribute(name, attributeValue)
 				
+			 
+				
 				//設定Cookie
 				Cookie cookieEmail = null;
 				Cookie cookiePassword = null;
+				Cookie cookiePhone = null;
 				String cookiePath = "/";
 				
 				cookieEmail = new Cookie("email", email);
@@ -153,11 +158,17 @@ public class ControllerMVC  {
 				cookiePassword = new Cookie("password", password);
 				cookiePassword.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
 				cookiePassword.setPath(cookiePath);
-	            
+				cookiePhone = new Cookie("memberphone", ms.getMemberPhone(email).get(0).getPhone());
+				cookiePhone.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
+				cookiePhone.setPath(cookiePath);
+				
+				
 				response.addCookie(cookieEmail);
 				response.addCookie(cookiePassword);
+				response.addCookie(cookiePhone);
 				
-		
+				
+				System.out.println("response"+response.getContentType());
 				return mb.getEmail();
 			} else {
 				System.out.println("NG, 登入失敗");
@@ -355,7 +366,9 @@ public class ControllerMVC  {
 	    if (!file.getOriginalFilename().isEmpty()) {
 	      BufferedOutputStream outputStream = new BufferedOutputStream(
 	            new FileOutputStream(
-	                  new File("C:\\Users\\User\\git\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Images", "Front"+email+".jpg"))); // 上傳檔案位置為D:\
+	            		//===/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Images
+	            		//===C:\\Maven\\eclipse-workspace\\motorcycleiiieduproject\\src\\main\\webapp\\Images
+	                  new File("/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Images", "Front"+email+".jpg"))); // 上傳檔案位置為D:\
 	      outputStream.write(file.getBytes());
 	      outputStream.flush();
 	      
@@ -403,7 +416,9 @@ public class ControllerMVC  {
 	    if (!file.getOriginalFilename().isEmpty()) {
 	      BufferedOutputStream outputStream = new BufferedOutputStream(
 	            new FileOutputStream(
-	                  new File("C:\\Maven\\eclipse-workspace\\motorcycleiiieduproject\\src\\main\\webapp\\Images", file.getOriginalFilename()))); // 上傳檔案位置為D:\
+	            		//===/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Images
+	            		//===C:\\Maven\\eclipse-workspace\\motorcycleiiieduproject\\src\\main\\webapp\\Images
+	                  new File("/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Images", file.getOriginalFilename()))); // 上傳檔案位置為D:\
 	      outputStream.write(file.getBytes());
 	      outputStream.flush();      
 	      outputStream.close();
@@ -416,4 +431,10 @@ public class ControllerMVC  {
 	return "success";
 	
 	}
+	
+	
+	
+	
+	
+	
 }
