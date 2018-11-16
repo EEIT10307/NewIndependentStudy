@@ -1,6 +1,7 @@
 package projectbean;
 
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ public class ChatRoom implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 
 	private Integer chatRoomSerialNum ; 
 	private MemberDetail chatSender; 

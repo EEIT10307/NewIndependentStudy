@@ -9,8 +9,6 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import webcrawler.WebCrawlerDAO;
-
 
 @Component
 public class TimerPicker extends TimerTask  {

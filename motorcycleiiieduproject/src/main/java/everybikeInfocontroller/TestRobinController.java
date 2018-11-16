@@ -38,16 +38,18 @@ import cleanbean.MemberDetailSelectYearForJson;
 import cleanbean.OrderListRobinYear;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
+import everybikeInfo.robin.BackIFaceService;
 import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.BikeReviewIFaceService;
 import everybikeInfo.robin.service.BranchDetailIFaceService;
 import everybikeInfo.robin.service.EveryBikeInfoIFaceService;
 import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
+
 import everybikeInfo.robin.service.MemberDetailIFaceService;
 import everybikeInfo.robin.service.OrderListIFaceService;
-import everybikeInfo.robin.service.TestEmailIFaceService;
 import orderservice.OrderIFaceService;
+
 import projectbean.AcceSerialNum;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
@@ -69,14 +71,15 @@ public class TestRobinController {
 	EveryBikeMileageIFaceService everyBikeMileageIFaceService;
 	@Autowired
 	AcceStockIFaceService acceStockIFaceService;
-	@Autowired
-	TestEmailIFaceService testEmailIFaceService;
+
 	@Autowired
 	OrderListIFaceService orderListIFaceService;
 	@Autowired
 	MemberDetailIFaceService memberDetailIFaceService;
 	@Autowired
 	OrderIFaceService orderIFaceService;
+	@Autowired
+	BackIFaceService backIFaceService;
 	@Autowired
 	Gson gson;
 
@@ -267,11 +270,9 @@ public class TestRobinController {
 		return "";
 	}
 
-	@PostMapping(value = "/testmail", produces = "text/html; charset = UTF-8") // emil
-	public @ResponseBody String test_mail(String or, String em) throws IOException {
-		testEmailIFaceService.sendemail(or, em);
-		return "";
-	}
+
+
+
 
 	@PostMapping(value = "/insertQA", produces = "text/html; charset = UTF-8") // 商品評價 新增
 	public @ResponseBody String insertQA(@RequestBody QaBean qaBean) throws IOException {
@@ -337,6 +338,11 @@ public class TestRobinController {
 	@PostMapping(value = "/getAllOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
 	public @ResponseBody String getAllOrderList() throws IOException {
 			return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
+	}
+	@PostMapping(value = "/back", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String back() throws IOException {
+			
+			return "";
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 

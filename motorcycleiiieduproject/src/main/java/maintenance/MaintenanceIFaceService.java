@@ -3,6 +3,7 @@ package maintenance;
 import java.text.ParseException;
 import java.util.List;
 
+
 import cleanbean.EveryBikeInfoToGson;
 import cleanbean.EveryBikeMileageToGson;
 import cleanbean.MaintenanceHistoryToGson;
@@ -21,12 +22,15 @@ public interface MaintenanceIFaceService {
 	List<EveryBikeInfo>showEveryBikeBasicInfobyStore(String shopName);
 	List<EveryBikeMileage> showEveryMaintenanceItembyPlate(String licensePlate);
 	List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage);
+
 	List<EveryBikeMileage>showMessageIfMileageIsOver();
 	List<EveryBikeMileage>showMessageIfMileageIsOverAfterComplete(String licensePlate);
 	String updateBikeMileage(String licensePlate,Double increasedMileage);
 	int sendMaintenance(String licensePlate);
 	int completeMaintenance(String licensePlate) throws ParseException;
+
 	List<MaintenanceHistory>showAllMaintenanceHistory();
 	List<MaintenanceHistoryToGson> maintenanceHistoryforGsonConvert(List<MaintenanceHistory> finalMaintenanceHistory) throws Exception;
+
 
 }

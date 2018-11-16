@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import projectbean.EveryBikeMileage;
 import projectbean.WebCrawlerForecast;
 import webcrawler.WebCrawlerIFaceService;
 
@@ -46,6 +45,7 @@ public class WebCrawlerController {
 			e.printStackTrace();
 			return new String("{fail:fail}");
 		}	
+
 	}
 //	@Scheduled(fixedDelay=86400000)
 	@RequestMapping(value = "/updateForecastData", method = RequestMethod.GET,produces="text/html;charset=UTF-8") // 爬氣象局資料

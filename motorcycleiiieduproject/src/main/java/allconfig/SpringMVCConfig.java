@@ -12,17 +12,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import testcontroller.InterceptorUse;
-import timercontroll.AutoBug;
-import timercontroll.TimerPicker;
-import timercontroll.UpdateForecastData;
 
 @Configuration
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = {"testcontroller","ordercontroller","maintenancecontroller","webcrawlercontroller",
-		"everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller" , "timercontroll"})
+
+		"branchdetailcontroller","everybikeInfocontroller","webinfomanagercontroller","dispatchercontroller","branchdetailcontroller","branchscenecontroller", "timercontroll","membercontroller"})
+
 public class SpringMVCConfig implements WebMvcConfigurer {
 	
 	@Autowired
@@ -33,10 +31,11 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {   
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
 
-	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate","/insertBikeDetail") ; 		   
+	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate","/insertBikeDetail","/LoginServlet", "/CheckAllServlet", "/DeleteServlet",
+				"/RegisterServlet","/AutoLoginCheck","/CheckSingleServlet","/ProfilePhotoServlet","/PhotoStringCheckServlet") ; 		   
 	WebMvcConfigurer.super.addInterceptors(registry);
 
-		 
+
 	}
 	//靜態資源使用預設servlet
 	@Override
@@ -49,22 +48,5 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 	    resolver.setDefaultEncoding("utf-8");
 	    return resolver;
 	}
-	@Bean 
-	public TimerPicker timerPicker() {
-		   TimerPicker time = new TimerPicker();
-		   return time ;   
-	}
-	@Bean
-	public AutoBug  autoBug() {
-		AutoBug autoBug = new AutoBug();
-		return autoBug ;
-	}
-	
-	@Bean
-	public UpdateForecastData  updateForecastData() {
-		UpdateForecastData updateForecastData = new UpdateForecastData(factory);
-		return updateForecastData ;
-	}
-	
-	
+
 }

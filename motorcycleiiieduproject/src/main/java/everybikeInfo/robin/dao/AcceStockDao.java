@@ -17,6 +17,7 @@ import projectbean.BranchDetail;
 
 @Repository
 public class AcceStockDao implements AcceStockIFaceDao {
+	
 	@Autowired
 	SessionFactory Factory;
 	@Autowired
@@ -100,6 +101,15 @@ public class AcceStockDao implements AcceStockIFaceDao {
 		 Query Qoo = session.createQuery(hgl);
 		 Long count = (Long)Qoo.uniqueResult();
 		 
+		return count;
+	}
+
+	@Override
+	public int insertAcceSerialNum(AcceSerialNum acceSerialNum) {
+		Session session = Factory.getCurrentSession();
+		int  count=0;
+		session.save(acceSerialNum);
+		count++;
 		return count;
 	}
 

@@ -1,4 +1,7 @@
 <footer id="myFooter">
+<!--     加入自動login判斷 -->
+<!-- 	<script src="js/footer.js"></script> -->
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-sm-12">
@@ -7,8 +10,9 @@
 			<div class="col-lg-2 col-sm-4">
 				<h5>帳號<br/>Account</h5>
 				<ul>
-					<li><a data-toggle="modal" data-target="#exampleModalCenter">登入</a></li>
-					<li><a href="register.html">註冊</a></li>
+					<li><a id="login" data-toggle="modal" data-target="#exampleModalCenter">登入</a></li>
+					<li><a id="registerNav" href="register.html">註冊</a></li>
+					<li class="nav-item"><a id="memberlogoutstatus"  ></a></li>
 				</ul>
 			</div>
 			<div class="col-lg-2 col-sm-4">

@@ -44,6 +44,7 @@ public interface OrderIFaceDAO {
 	
 	List<AcceStock> afterCompareAccAndABshopAndAnother (List<AcceStock> afterCompareAcc , List<OrderList> acceUseOrderABbranch , List<OrderList>  acceUseOrderFromAnotherbranch) ; 
 
+
 	List<OrderList>    showMemberAndNonMemberDetail(String showMemberAndNonMemberphnoe);
 
 	
@@ -58,5 +59,6 @@ public interface OrderIFaceDAO {
 	  void   showManagerFinishedOrder(FinOrderBean finOrderBean)  ; 
 	  
 	  void   showManagerFinishedDiapatcher( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
+
 
 }
