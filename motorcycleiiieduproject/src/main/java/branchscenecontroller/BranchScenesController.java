@@ -2,7 +2,6 @@ package branchscenecontroller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import com.google.gson.Gson;
 
 import branchsceneservice.BranchScenesIFaceService;
 import cleanbean.BranchScenesForJson;
-import projectbean.BranchScenes;
 
 @Controller
 public class BranchScenesController {

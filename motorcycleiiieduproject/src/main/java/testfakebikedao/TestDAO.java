@@ -111,11 +111,11 @@ public class TestDAO {
 //C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail1.txt")));
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo1.txt")));
 
 		String line;
 		String line2;
@@ -124,7 +124,7 @@ public class TestDAO {
 		roop: while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
 			System.out.println(lines.toString());
-			System.out.println("test" + lines[0]);
+			System.out.println("test:=" + lines[21]);
 			/* ====new 上架新商品 ==== */
 			BikeDetail bikeD = new BikeDetail();
 			// 複合主鍵 設定主鍵值
@@ -144,6 +144,7 @@ public class TestDAO {
 			bikeD.setHourPrice(Integer.valueOf(lines[13]));
 			Date dar = sim1.parse(lines[14]);
 			bikeD.setOnSheftTime(dar);
+			
 			bikeD.setFrontSuspension(lines[15]);
 			bikeD.setRearSuspension(lines[16]);
 			bikeD.setRearTire(lines[17]);
@@ -205,7 +206,7 @@ public class TestDAO {
 //		BufferedReader bf = new BufferedReader(
 //				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\description.txt")));//ROBIN
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\description1.txt")));//ROBIN
 		
 		String lines = "";
 		String line;
