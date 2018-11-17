@@ -8,6 +8,16 @@ public class BranchScenesForJson {
 	private String spotPhoto;
 	private String spotDetail;
 	
+	public BranchScenesForJson(String branchName, String spotArea, String spotName, String spotAddress,
+			String spotPhoto, String spotDetail) {
+		super();
+		this.branchName = branchName;
+		this.spotArea = spotArea;
+		this.spotName = spotName;
+		this.spotAddress = spotAddress;
+		this.spotPhoto = spotPhoto;
+		this.spotDetail = spotDetail;
+	}
 	public String getBranchName() {
 		return branchName;
 	}

@@ -49,7 +49,7 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList3.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList2.txt")));
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
