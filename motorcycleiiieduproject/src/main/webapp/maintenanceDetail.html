@@ -182,7 +182,9 @@
                         if(json3!=null){
 							$("#maintenance-modal").modal('show');
 						}
-                }				      
+                },error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }				      
             });
 //---------------------長出各分店的radio---------------------------
             $.ajax({
@@ -199,7 +201,9 @@
 //                         $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
                         $("#radioset2").append($("<input type='radio' class='xxx' name='storetoshow2' value='" + json[x] + "'>"),json[x])
                     }
-                }
+                },error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
             });
 //---------------------保養項目MaintenanceDetail新增測試---------------------------
           $("#func0").on("click",function(){
@@ -214,15 +218,19 @@
               var maintenanceItem=$("#maintenanceItem").val();
               var requiredMileage=$("#requiredMileage").val();
               var requiredHourTodo=$("#requiredHourTodo").val();
-//               alert("項目:"+maintenanceItem+"\n所需到達里程數:"+requiredMileage+"\n保養所需工時:"+requiredHourTodo);
+              $("#maintenance-modal-title").html("新增保養項目");
+              $("#maintenance-modal-body").html(maintenanceItem+"新增成功");
+              $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+			  $("#maintenance-modal").modal('show');
               $.ajax({
               type:"post",
               url:"insertNEWMaintenanceDetail",
               data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
               success : function(response) {
-                    alert("success");
-// 	 				alert(response);
-		      }
+
+		      },error:function(responseerror){
+			        alert(responseerror.responseText)
+			     }
               });
           });
 //---------------------查詢保養中的機車---------------------------
@@ -242,11 +250,18 @@
 			  contentType: "application/json; charset=utf-8",
 			  data:JSON.stringify({"maintenanceStore":radioValue}),
 			  success : function(response) {
-			  var json3  = JSON.parse(JSON.stringify(response)); 
-			  var txt = "" ; 
-			  for(var x = 0 ; x< json3.length ; x++) {
-			       txt += "<button id = 'showBikeMaintenancingItem' class=' form-control btn btn-secondary  col-md-4  my-4'>"+json3[x].licensePlate+"</button>\n"  ;     
-			    }
+				  if(response==""){
+		              $("#maintenance-modal-title").html("保養訊息");
+		              $("#maintenance-modal-body").html("<div style='text-align:center'>本分店沒有保養中的機車</div>");
+		              $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+					  $("#maintenance-modal").modal('show');
+					
+				  }	
+			      var json3  = JSON.parse(JSON.stringify(response)); 
+				  var txt = "" ; 
+				  for(var x = 0 ; x< json3.length ; x++) {
+				       txt += "<button id = 'showBikeMaintenancingItem' class=' form-control btn btn-secondary  col-md-4  my-4'>"+json3[x].licensePlate+"</button>\n"  ;     
+				    }
 			      $("#resultoffunction").html(txt);
 						$("#resultoffunction").on("click","#showBikeMaintenancingItem",function(){
 							var bikeplate=	$(this).text();
@@ -290,6 +305,9 @@
 						})//end of $("#resultofeveryovermileage").on("click
 						
 			  }//end of success(1)
+			    ,error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
 			  })//end of ajax(1)
 			 }
 		   })
@@ -485,7 +503,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							contentType:"application/JSON; charset = UTF-8" , 
 							success : function(response) {
 								alert("送保養成功囉!!!");
-							}
+							},error:function(responseerror){
+						         alert(responseerror.responseText)
+						     }
 						});
 					});
 				
@@ -502,6 +522,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 						});
 					});
 					}//end of success
+			    	 ,error:function(responseerror){
+			          alert(responseerror.responseText)
+			     	 }
 				});
 			});
 
