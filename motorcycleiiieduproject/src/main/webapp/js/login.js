@@ -86,7 +86,7 @@ var json    =  JSON.stringify(combie) ;
 // alert("password:"+password)
 $.ajax({
     type: "post",
-    url: "http://localhost:8080/motorcycleiiieduproject/LoginServlet",
+    url: "LoginServlet",
     data: json,
     success: function (jsonback) {
         // alert("server傳回 = " + jsonback) ;  
@@ -94,20 +94,26 @@ $.ajax({
 //          if(jsonback.length==8){
         if(jsonback=="nullpage"){
         	  
-        	var nullpage = "nullpage.html?name="+jsonback
-        	
+        //	var nullpage = "nullpage.html?name="+jsonback
+            $("#errormap").html(
+                "帳號密碼都要輸入喔"
+            );
+            
+
         	//重要！！ 轉傳時要編碼一次編成ＵＲＩ
-        	window.location.assign(encodeURI(nullpage)) ;
+       // 	window.location.assign(encodeURI(nullpage)) ;
         }else{
         	
         	if(jsonback.length==0){
         		
-        		var errorpage = "errorpage.html?name="+jsonback
-        		
+        //		var errorpage = "errorpage.html?name="+jsonback
+                $("#errormap").html(
+                "帳號或密碼錯誤喔"
+                );
         		//重要！！ 轉傳時要編碼一次編成ＵＲＩ
-        		window.location.assign(encodeURI(errorpage)) ; 
+        //		window.location.assign(encodeURI(errorpage)) ; 
         	}else{
-        		
+        		$("#errormap").html();
         		var goto = "index.html?name="+jsonback
         		//重要！！ 轉傳時要編碼一次編成ＵＲＩ
                 window.location.assign(encodeURI(goto)) ; 
@@ -172,11 +178,12 @@ $("#pwd").blur(function (e) {
 
         }
         if (flag1 && flag2 && flag3){
-          theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
+        //  theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
         
         }
-        else 
-        theResult.innerHTML ="<i><img src='Images/error.png'>密碼錯誤</i>";
+        else {
+       // theResult.innerHTML ="<i><img src='Images/error.png'>密碼錯誤</i>";
+    }
 
 
     }

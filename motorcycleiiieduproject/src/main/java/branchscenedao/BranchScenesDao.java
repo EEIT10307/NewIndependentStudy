@@ -23,8 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cleanbean.BranchScenesForJson;
+import cleanbean.EveryBikeInfoToGson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
+import projectbean.EveryBikeInfo;
 
 @Repository
 public class BranchScenesDao implements BranchScenesIFaceDao{
@@ -62,15 +64,15 @@ public class BranchScenesDao implements BranchScenesIFaceDao{
 		Map<String,String> spotlist = null;
 		List<BranchScenesForJson> branchScenesForJson=new ArrayList<BranchScenesForJson>();
 		for (BranchScenes loop : sceneslist) {
-			BranchScenesForJson branchScenes=new BranchScenesForJson();
-			branchScenes.setSpotName(loop.getSpotName());
-			branchScenes.setSpotAddress(loop.getSpotAddress());
-			branchScenes.setSpotArea(loop.getSpotArea());
-			branchScenes.setSpotDetail(loop.getSpotDetail());
-			branchScenes.setSpotPhoto(loop.getSpotPhoto());
-			branchScenes.setBranchName(loop.getBranchName().getBranchName());
-			
-			branchScenesForJson.add(branchScenes);
+//			BranchScenesForJson branchScenes=new BranchScenesForJson();
+//			branchScenes.setSpotName(loop.getSpotName());
+//			branchScenes.setSpotAddress(loop.getSpotAddress());
+//			branchScenes.setSpotArea(loop.getSpotArea());
+//			branchScenes.setSpotDetail(loop.getSpotDetail());
+//			branchScenes.setSpotPhoto(loop.getSpotPhoto());
+//			branchScenes.setBranchName(loop.getBranchName().getBranchName());
+//			
+//			branchScenesForJson.add(branchScenes);
 
 		}
 		return branchScenesForJson;
@@ -84,18 +86,6 @@ public class BranchScenesDao implements BranchScenesIFaceDao{
 		createQuery.select(fromClass);
 		List<BranchScenes> scenes = factory.getCurrentSession().createQuery(createQuery).getResultList();
 		return scenes;
-	}
-
-	@Override
-	public int deleteScenes(String spotAddress, String spotPhoto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateScenes(BranchScenes bs) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -126,7 +116,30 @@ public class BranchScenesDao implements BranchScenesIFaceDao{
 	}
 
 	@Override
-	public List<BranchScenes> showBranchScenes(BranchDetail branchName) {
-		return null;
+	public List<BranchScenes> showBranchScenes(String spotArea) {
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchScenes> createQuery = buider.createQuery(BranchScenes.class);
+		Root<BranchScenes> fromClass = createQuery.from(BranchScenes.class);
+		System.out.println("select before");
+		createQuery.select(fromClass).where(buider.equal(fromClass.get("spotArea"), spotArea));
+		System.out.println("select after");
+		Query<BranchScenes> querySpot = factory.getCurrentSession().createQuery(createQuery);
+		List<BranchScenes> list = querySpot.getResultList();
+		System.out.println("showBranchScenes");
+		return list;
+	}
+
+	@Override
+	public List<BranchScenesForJson> showBranchScenesGson(List<BranchScenes> finalShowAreaSpot) {
+		ArrayList<BranchScenesForJson> showBranchScenesGson=new ArrayList<BranchScenesForJson>();
+		System.out.println("gson before");
+		for(BranchScenes loop:finalShowAreaSpot) {
+			System.out.println("66666666 ="+loop.getBranchName().getBranchName());
+			showBranchScenesGson.add(new BranchScenesForJson(loop.getBranchName().getBranchName(),loop.getSpotArea(),
+			loop.getSpotName(),loop.getSpotAddress(),loop.getSpotPhoto(),loop.getSpotDetail()));
+		}
+		System.out.println("gson after");
+		System.out.println("showBranchScenesGson");
+		return showBranchScenesGson;
 	}
 }

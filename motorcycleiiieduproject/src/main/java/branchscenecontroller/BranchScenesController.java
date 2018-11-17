@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +38,34 @@ public class BranchScenesController {
 		return gson.toJson(all);
 	}
 	
+	@PostMapping(value = "/showBranchScenes", produces = "text/html; charset = UTF-8")
+	public @ResponseBody String showBranchScenes(String spotArea) throws IOException, ParseException {
+		System.out.println("嘉綺"+spotArea);
+		try {
+			List<BranchScenes> selectBranch = branchScenesIFaceService.showBranchScenes(spotArea);
+			System.out.println("frfrr"+selectBranch.size());
+			String forGsonConverter = gson.toJson(branchScenesIFaceService.showBranchScenesGson(selectBranch));
+			System.out.println("forGsonConverter等於"+forGsonConverter);
+			return forGsonConverter;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String("{fail:fail}");
+		}
+	}
+	
+//	@PostMapping(value = "/showBranchScenes", produces = "application/JSON; charset = UTF-8")
+//	public @ResponseBody String showBranchScenes(String spotArea ) {
+//		System.out.println("網頁傳入="+maintenancequery);
+//		try {
+//			List<BranchScenes> selectLicensePlate = branchScenesIFaceService.showBranchScenes(spotArea);
+//			List<BranchScenesForJson> forGsonConvert=testMaintenanceIFaceService.everyBikeMileageforGsonConvert(selectLicensePlate);
+//			System.out.println("車牌"+maintenancequery.getLicensePlate()+"目前正在保養中的項目的JSON="+gson.toJson(forGsonConvert));
+//			return gson.toJson(forGsonConvert);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return new String("{fail:fail}");
+//		}
+//	}
 	@GetMapping(value = "/saveOrUpdateBranchScenes", produces = "text/html; charset = UTF-8")
 	public @ResponseBody String saveBranchScenes()throws IOException{
 		branchScenesIFaceService.saveBranchScenes();

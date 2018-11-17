@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import branchdetail.BranchDetailIFaceDAO;
 import cleanbean.BranchDetailBean;
 import projectbean.BranchDetail;
-
+import projectbean.BranchScenes;
 import projectbean.EveryBikeMileage;
 
 @Repository
@@ -81,6 +81,9 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 		
 		System.out.println("到底");
 		session.save(detail);
+		
+		BranchScenes savebranch = new BranchScenes();
+		savebranch.setSpotName(branchDetail.getBranchName());
 
 		updateCount = 1;
 

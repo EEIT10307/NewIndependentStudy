@@ -137,10 +137,15 @@ div3.scrollTop(div3[0].scrollHeight +83);
 $(document).on("click","#sentoserve" , function () {
 
 	send()
-
-
-
-});
-
+	$("#mymessage").val("") ;;
+		});
+	
+	
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				send()
+	$("#mymessage").val("") ;;
+			}
+		});
 
 });
