@@ -53,7 +53,10 @@
 				   for(i=0; i<3; i++){ 
 					   $('#'+response[i].webElements).empty().append(response[i].webContent);
 				   }
-				}
+				},
+			     error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
 	        });
 		
 // 		$(window).scroll(function() {
@@ -99,7 +102,10 @@
 								}
 								permax+=5;
 						});
-					}
+					},
+				     error:function(responseerror){
+				         alert(responseerror.responseText)
+				     }
 		       });
 // 		    }
 // 		});

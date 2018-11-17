@@ -168,6 +168,9 @@
                        	  var motorname = response[x].bikeModel
                            sessionStorage.setItem(motorname, JSON.stringify(response[x]))
                           }
+                   },
+                   error:function(responseerror){
+                       alert(responseerror.responseText)
                    }
                });
            //------------------------------------------------------------------------------------
@@ -195,7 +198,10 @@
            						
            				
            					}
-           				}
+           				},
+           		     error:function(responseerror){
+           		         alert(responseerror.responseText)
+           		     }
            			});
            	        var dt = new Date();
            	        var year=dt.getFullYear()
@@ -232,7 +238,10 @@
            					url : "updateQA",
            					data : ansupdate,
            					success : function(response) {
-           					}
+           					},
+           			     error:function(responseerror){
+           			         alert(responseerror.responseText)
+           			     }
            				});				   
            								   
            								   

@@ -178,7 +178,10 @@
                         if(json3!=null){
 							$("#maintenance-modal").modal('show');
 						}
-                }				      
+                },
+                error:function(responseerror){
+                    alert(responseerror.responseText)
+                }			      
             });
 //---------------------長出各分店的radio---------------------------
             $.ajax({
@@ -195,6 +198,9 @@
 //                         $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
                         $("#radioset2").append($("<input type='radio' class='xxx' name='storetoshow2' value='" + json[x] + "'>"),json[x])
                     }
+                },
+                error:function(responseerror){
+                    alert(responseerror.responseText)
                 }
             });
 //---------------------保養項目MaintenanceDetail新增測試---------------------------
@@ -273,7 +279,10 @@
 
 						})//end of $("#resultofeveryovermileage").on("click
 						
-			  }//end of success(1)
+			  },
+			     error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }//end of success(1)
 			  })//end of ajax(1)
 			 }
 		   })
@@ -391,6 +400,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 								}//end of success(2)
 								});//end of ajax(2)
 							});//end of $("#resultofselectedstoretoshow2").on("click","#platetoshowmaintenance"
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }//end of success
         })//end of ajax
    }//end of  if(radioValue){
@@ -475,7 +487,10 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							}	
 						});
 					});
-					}//end of success
+					},
+				     error:function(responseerror){
+				         alert(responseerror.responseText)
+				     }//end of success
 				});
 			});
 

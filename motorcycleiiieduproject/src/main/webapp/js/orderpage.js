@@ -206,6 +206,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                     $(".orderlistbody").append(element);
 
                 }
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
 
         });
@@ -219,6 +222,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                     var discountName = response[x].discountName
                     sessionStorage.setItem(discountName, JSON.stringify(response[x]));
                 }
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
     });
@@ -291,6 +297,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                 }
 
 
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
 

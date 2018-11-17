@@ -480,9 +480,15 @@ var godate   =   JSON.stringify({"orderstatus":$(this).parent().prev().children(
         
            
 
+           },
+           error:function(responseerror){
+               alert(responseerror.responseText)
            }
        });
 
+     },
+     error:function(responseerror){
+         alert(responseerror.responseText)
      }
  });
 //======================================

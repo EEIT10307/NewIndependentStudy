@@ -361,7 +361,10 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 			data : too,
 			contentType:"application/json; charset=utf-8",
 			success : function(response) {
-			}
+			},
+		     error:function(responseerror){
+		         alert(responseerror.responseText)
+		     }
 		});
 		
 		
