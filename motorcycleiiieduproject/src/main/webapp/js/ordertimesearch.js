@@ -3,7 +3,7 @@ $(window).on('load', function () {
     var orderdetail = {};
     //做時間選項
     var today = new Date();
-    //   $("#pDate").attr("value", today);
+      //   $("#pDate").attr("value", today);
     var futureday = new Date();
     //    alert(today.getHours())
 
@@ -180,3 +180,4 @@ $(window).on('load', function () {
     });
 
 });
+

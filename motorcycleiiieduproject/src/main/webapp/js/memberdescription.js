@@ -76,7 +76,7 @@ var t =$('#dataTable').DataTable() ;
                      }else{
                            
             
-                            if($("#memberloginstatus").text() == ""){
+                         if($("#memberloginstatus").text() == ""){
                          $("#memberloginstatus").append("Welcome"+"   "+jsonback);
                          $("a#login").hide();
                          $("a#registerNav").hide();

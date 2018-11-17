@@ -1,8 +1,8 @@
-// $(document).ready(function () {
-    
 $(window).on('load',function () {
 
 var cookies = document.cookie; 
+//alert(cookies)
+
 
     $("a#memberlogoutstatus").click(function () { 
 		

@@ -230,7 +230,7 @@
 	//抓景點
 	$('#mapdetail').on('click','.spot',function(){
 		var spotid = "#"+this.id;
-		alert($(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3));//台北市北投區中山路 substr抓'北投區'
+// 		alert($(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3));//台北市北投區中山路 substr抓'北投區'
 		var spotArea = $(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3);
 		var url='spot.html?spotArea='+spotArea;
 		window.location.assign(encodeURI(url));
