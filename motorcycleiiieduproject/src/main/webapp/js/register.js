@@ -14,7 +14,7 @@ var json    =  JSON.stringify(combie) ;
 
 $.ajax({
     type: "post",
-    url: "http://localhost:8080/motorcycleiiieduproject/RegisterServlet",
+    url: "RegisterServlet",
     data: json,
     success: function (registerdata) {
 //        alert("server傳回 = " + jsonback) ;  

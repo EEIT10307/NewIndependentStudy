@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/chat.js"></script>
+	<script src="js/memberchat.js"></script>
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
 	<script src="js/memberSearch.js"></script>
@@ -102,45 +103,7 @@
 		
     	</section>
 	</div>
-	<div class="container mx-auto" id='orderMember'>
-		<div class="input-group my-5 col-6 mx-auto">
-			<input type="text" class="form-control" id='searchOrd' placeholder="查詢訂單"/>
-		</div>
-		
-		<div class="table-responsive" id="outDIV">
-				<table id="dataTable" class="table table-bordered table-striped"  width="100%" cellspacing="0">
-					<thead>
-						<tr>
-							<th>訂單編號</th>
-							<th>交易明細</th>
-							<th>金額</th>
-							<th>下單時間</th>
-							<th>評價內容</th>
 	
-						</tr>
-					</thead>
-					<!-- <tbody id="serchresultbody">            
-						</tbody> -->
-					<tfoot>
-						<tr>
-							<th>訂單編號</th>
-							<th>交易明細</th>
-							<th>金額</th>
-							<th>下單時間</th>
-							<th>評價內容</th>
-	
-						</tr>
-					</tfoot>
-				</table>
-			</div>
-			<script type="text/javascript">
-				$(document).ready(function () {
-	
-					$('#dataTable').DataTable();
-	
-				});
-			</script>
-	</div>
  	
 	<div w3-include-html="chatboxMember.html"></div>
 	<div w3-include-html="footerBackAdmin.html"></div>

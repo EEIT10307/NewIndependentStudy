@@ -449,7 +449,13 @@
       </div>
     </div>
     
-    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+   	<!-- w3-include-html=chatbox.html -->
+		<div  class="d-none" id="chatbox">
+
+		</div>
+		<script>
+		$("#chatbox").load("chatbox.html");
+		</script>
 	<script>includeHTML();</script>
   </body>
 </html>
