@@ -172,12 +172,7 @@ div3.scrollTop(div3[0].scrollHeight +83);
 
 	    //發訊息
 	    function send(sendname , message) {
-			alert($(sendname).attr("name"))
-           
-	 
 		//	var jsonmessage = {mem.toString() :document.getElementById('mymessage').value }
-			
-			alert("message"+message)
              var sendTouse = (message+"-"+$(sendname).attr("name")) 
 			 var mymessage = sendTouse.split("-")[0]
 			 var today =  new Date() ; 
