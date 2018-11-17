@@ -38,7 +38,10 @@ $(document).ready(function () {
 							"滿意度"
 				 ]).draw(false)
 			 }
-		 }
+		 },
+	     error:function(responseerror){
+	         alert(responseerror.responseText)
+	     }
 	 });
 	}
 
@@ -99,7 +102,10 @@ $(document).ready(function () {
 
 					}
 
-				}
+				},
+			     error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
 			});
 
 		}

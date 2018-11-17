@@ -72,6 +72,9 @@ $(document).ready(function(){
                 $(".dropoffbranchName").append($("<option value='" + json[x] + "'></option>")
                     .text(json[x]))
             }
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
     });
     //日期預設今日

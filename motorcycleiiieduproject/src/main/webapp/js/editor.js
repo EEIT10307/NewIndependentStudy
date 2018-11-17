@@ -11,7 +11,10 @@ $(document).ready(function(){
 		success: function (response) {
 // 			alert(response[0].webElements+ +response[0].webContent);
 			for(i=0; i<num; i++){ $('#'+response[i].webElements).empty().append(response[i].webContent); }
-		}
+		},
+	     error:function(responseerror){
+	         alert(responseerror.responseText)
+	     }
 	});
 });	
 

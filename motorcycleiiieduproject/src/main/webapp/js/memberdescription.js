@@ -36,6 +36,9 @@ var t =$('#dataTable').DataTable() ;
                            "滿意度"
                 ]).draw(false)
             }
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
     });
    }
@@ -88,6 +91,9 @@ var t =$('#dataTable').DataTable() ;
 
 
                         }
+                 },
+                 error:function(responseerror){
+                     alert(responseerror.responseText)
                  }
              
             });
@@ -166,6 +172,9 @@ var t =$('#dataTable').DataTable() ;
                 $("#desgender").attr("value",JSON.parse(memdata).gender);
                 $("#desaddress").attr("value",JSON.parse(memdata).address);
             //    alert("生日:"+result);
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
     
         });
@@ -189,6 +198,9 @@ var t =$('#dataTable').DataTable() ;
              }
             //  http://localhost:8080/motorcycleiiieduproject/Images/Frontqw@gmail.com.jpg
            //                                                 Images/Frontqw@gmail.com.jpg
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
             });
 
@@ -224,6 +236,9 @@ var t =$('#dataTable').DataTable() ;
             //  alert(jsonback);
   alert(jsonback)
             window.location.href="member.html";
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
     //    window.location.href="memberdescription.html";
@@ -268,7 +283,10 @@ var t =$('#dataTable').DataTable() ;
             //   alert("upload sucess") ; 
             //   $("#wwwwimg").attr("src","Images\\Front"+email+".jpg");
            
-          }      
+          },
+          error:function(responseerror){
+              alert(responseerror.responseText)
+          }    
     
          
     
@@ -303,6 +321,9 @@ var t =$('#dataTable').DataTable() ;
                     console.log('B');
                 },5000);
             }
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
         });
 
