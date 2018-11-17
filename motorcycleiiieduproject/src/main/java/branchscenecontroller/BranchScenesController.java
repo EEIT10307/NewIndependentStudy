@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 import branchsceneservice.BranchScenesIFaceService;
 import cleanbean.BranchScenesForJson;
-import projectbean.BranchScenes;
 
 @Controller
 public class BranchScenesController {

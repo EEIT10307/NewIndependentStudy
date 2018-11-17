@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
+	<script src="js/logout.js"></script>
 	
   <link rel="stylesheet" type="text/css" href="css/forecast.css">
 
@@ -146,6 +147,7 @@
 	            url: "queryAllWebContent",
 	            contentType: "application/json; charset=utf-8",
 	            success: function (response) {
+
 // 		               alert(response[6].webElements+ +response[6].webContent);
 // 		               alert(num)
 				   for(i=0; i<num; i++){ 
@@ -393,10 +395,14 @@
 	</div>
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div w3-include-html="login.html"></div>
+			<div class="modal-content loadtest222">
+			<!--	<div w3-include-html="login.html"></div>-->
 				
 			</div>
+  <script>
+    $(".loadtest222").load("login.html")
+  </script>
+
 		</div>
 	</div>
 
