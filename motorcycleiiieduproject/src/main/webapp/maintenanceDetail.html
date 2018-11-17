@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="css/progressbar.css"><!-- 	進度條用 -->
 	<style type="text/css">
 		td input, td select { margin-bottom: 1%;}
+		.divshadow{
+			box-shadow: 0px 0px 50px #888888;
+		}		
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,6 +112,7 @@
       </script>
       <div id="content-wrapper">
       	<div class="container-fluid form-group col-lg-8 offset-lg-2">
+			<div id="func0">	
 				<h4 class="text-center">新增保養項目</h4>
 				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="機油" class="form-control">
 				所需到達里程
@@ -117,27 +121,28 @@
 				<input type="text" name="requiredHourTodo" id="requiredHourTodo" value="2" class="form-control">
 
 				<input type="submit" id="submitinsert" value="提交新增" class="form-control btn btn-secondary col-lg-4 offset-lg-4 col-md-12 my-4">
+			</div>
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
 				<div class='d-flex justify-content-around'>
-				<div class='mx-2'>
+				<div class='mx-2' id="func1">
 					<h4 class='text-center my-3'>查詢保養中的機車</h4>
 					<div class="from-control col-12 text-center" id="radioset"></div>
 				</div>
 			<!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
-				<div class='mx-2'>
+				<div class='mx-2' id="func2">
 					<h4 class='text-center my-3'>顯示超過規定里程數的車</h4>
 					<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-6 offset-lg-3 col-md-12 my-4">
 				</div>
 			<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
-				<div class='mx-2'>
+				<div class='mx-2' id="func3">
 					<h4 class='text-center my-3'>各車保養項目里程數</h4>
 					<div class="from-control col-12 text-center" id="radioset2"></div>
 				</div>
 				</div>
+			<br>
 	<div id=resultoffunction></div>
 <!-- 	//------------------------------------保養通知Modal--------------------------------->
-
 			<!-- Modal -->
 			<div class="modal fade" id="maintenance-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
@@ -149,7 +154,6 @@
 			        </button>
 			      </div>
 			      <div class="modal-body" id="maintenance-modal-body">
-
 			      </div>
 			      <div class="modal-footer" id="maintenance-modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -198,6 +202,14 @@
                 }
             });
 //---------------------保養項目MaintenanceDetail新增測試---------------------------
+          $("#func0").on("click",function(){
+        	  $("#func0").addClass("divshadow")
+        	  $("#func1").removeClass("divshadow")
+        	  $("#func2").removeClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+        	  $("#resultoffunction").html("");
+          })
+          
           $("#submitinsert").click(function(){
               var maintenanceItem=$("#maintenanceItem").val();
               var requiredMileage=$("#requiredMileage").val();
@@ -215,7 +227,11 @@
           });
 //---------------------查詢保養中的機車---------------------------
 	      $("#radioset").on("click","input[name='storetoshow']",function(){	  
-			  var radioValue = $("input[name='storetoshow']:checked").val()
+        	  $("#func0").removeClass("divshadow")
+        	  $("#func1").addClass("divshadow")
+        	  $("#func2").removeClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+	    	  var radioValue = $("input[name='storetoshow']:checked").val()
               if(radioValue){
 //			                     alert("選擇了" + radioValue+"店");
 //			                     var json =  ; 
@@ -331,6 +347,10 @@
 //           });
 //---------------------各車保養項目里程數ver2---------------------------
 $("#radioset2").on("click","input[name='storetoshow2']",function(){	  
+	  $("#func0").removeClass("divshadow")
+	  $("#func1").removeClass("divshadow")
+	  $("#func2").removeClass("divshadow")
+	  $("#func3").addClass("divshadow")
 	var radioValue = $("input[name='storetoshow2']:checked").val()
     if(radioValue){
         $.ajax({
@@ -397,6 +417,12 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 });//end of $("#radioset2").on("click" 
 		
 // ---------------------顯示有任意項目超過該規定里程數的車---------------------------
+          $("#func2").on("click",function(){
+        	  $("#func0").removeClass("divshadow")
+        	  $("#func1").removeClass("divshadow")
+        	  $("#func2").addClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+          })
 			$("#showEveryMileageIsOver").click(function(){
 				$.ajax({
 					type:"get",
