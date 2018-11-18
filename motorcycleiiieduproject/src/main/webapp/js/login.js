@@ -29,7 +29,7 @@ $(window).on('load',function () {
         //導向resucess.html
         var combie =  {"email":email} ;
         var json    =  JSON.stringify(combie) ; 
-        // alert("json="+json);
+//         alert("json="+json);
         //利用ajax將json型態的email丟到Controller的AutoLoginCheck察看是否為會員的email
         $.ajax({
              type: "post",

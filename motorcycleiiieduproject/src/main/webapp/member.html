@@ -21,18 +21,30 @@
 	<script src="js/memberSearch.js"></script>
 	<script src="js/memberEdit.js"></script>
 	<script src="js/memberdescription.js"></script>
-	<script src="js/login.js"></script>
-	<script src="js/logout.js"></script>
+	
+<!-- 	<script src="js/login.js"></script> -->
+	<script src="js/logout1.js"></script>
 </head>
 <body>
+	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">	
+			</div>
+			<script>
+	        $(".loadtest111").load("serchMotor.html");
+	       </script>
+		</div>
+	</div>
+	  <script src="js/orderTest.js"></script>
 <!--	<div w3-include-html="navMember.html"></div> -->
 	<div w3-include-html="navProd.html"></div>
 <!-- 	<div w3-include-html="carousel.html"></div> -->
-	<div class="container">
-			<div class='row'><h4 class='my-3 mx-auto' id='editMember'>修改會員資料</h4></div>
-		<section>
-              <form class="row" role="form">
-              <div class='col-7'>
+	<div class="container row col-12">
+			<div class='row col-12'><h4 class='my-3 mx-auto' id='editMember'>會員中心</h4></div>
+<!-- 		<section> -->
+
+              <form class="row col-8" role="form">
+              <div class='col-12'>
                 <div class="row">
                   <div class="col-sm-8">
                     <label for="inputName" class="control-label">姓名:</label>
@@ -49,7 +61,7 @@
                  <div class="row">
                   <div class="col-sm-4">
                     <label for="inputBirth" class="control-label">生日:</label>
-                      <input type="text" class="form-control" id="desbirthday">
+                      <input type="text" class="form-control" id="desbirthday" placeholder ="yyyy-mm-dd">
                   </div>               
                   <div class="col-sm-8">
                     <label for="inputTel" class="control-label">電話號碼:</label>
@@ -80,11 +92,11 @@
 	              <div class="col-12"><button  id='change'  class="btn btn-secondary mx-auto my-3">更新資料</button></div>
                 </div>
 								</div>
-							</form> 
-                <div class="col-5">
-										<form id="myForm">
-				    <h7>上傳照片<span>預覽</span></h7>
-				    <div class="avatar-upload">
+				</form> 
+                <div class="col-4">
+						<form id="myForm" class="col-12">
+				    <!-- <h7>上傳照片<span>預覽</span></h7> -->
+				    <div class="avatar-upload col-12">
 				        <div class="avatar-edit">
 								<!--	<input type="file" id="file" accept=".png, .jpg, .jpeg" />-->	
 										<input style="margin-left: 140px" type="file" name="file" id="file" multiple="multiple"/>
@@ -97,12 +109,15 @@
 				            </div>
 								</div>
 								<button style="margin:auto" type="submit" class="btn btn-outline-secondary">上傳檔案</button>
-				    </div>
+				    
+				
+					</form> 
+					
 				</div>
-			</form> 
+		</div>
 		
-    	</section>
-	</div>
+<!--     	</section> -->
+	
 	
  	
 	<div w3-include-html="chatboxMember.html"></div>

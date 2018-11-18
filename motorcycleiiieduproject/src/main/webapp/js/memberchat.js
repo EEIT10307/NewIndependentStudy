@@ -24,12 +24,12 @@ $(document).ready(function () {
 	//==========
 	//連線發生錯誤回傳方法
 	websocket.onerror = function () {
-		setMessageInnerHTML("WebSocket連線錯誤");
+		setMessageInnerHTML("連線錯誤");
 	};
 
 	//連線成功
 	websocket.onopen = function () {
-		setMessageInnerHTML("WebSocket連線成功");
+		setMessageInnerHTML("連線成功");
 	}
 
 	//接收到消息的回傳方法
@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 	//關閉連線的方法
 	websocket.onclose = function () {
-		setMessageInnerHTML("WebSocket連線關閉");
+		setMessageInnerHTML("連線關閉");
 	}
 
 

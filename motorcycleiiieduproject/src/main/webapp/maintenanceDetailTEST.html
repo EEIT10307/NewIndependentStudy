@@ -186,6 +186,9 @@
                         $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
                         $("#radioset2").append($("<input type='radio' class='xxx' name='storetoshow2' value='" + json[x] + "'>"),json[x])
                     }
+                },
+                error:function(responseerror){
+                    alert(responseerror.responseText)
                 }
             });
 
@@ -250,6 +253,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
         		      });  
             
                   }//end of for
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }//end of success
         })//end of ajax
    }//end of  if(radioValue){

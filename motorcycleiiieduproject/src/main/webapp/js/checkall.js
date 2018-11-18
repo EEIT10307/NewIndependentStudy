@@ -39,6 +39,9 @@ var json    =  JSON.stringify(combie) ;
     success: function (response) {
      //伺服器刪除成功後要把該元素移除掉
       moth.remove(); 
+    },
+    error:function(responseerror){
+        alert(responseerror.responseText)
     }
   });
 
@@ -120,6 +123,9 @@ var combie =  {"pk":PK , "name":name , "id":id , "password":password  } ;
         mother.empty() ; 
         mother.append("<button id = 'change'>修改</button><button id = 'delete'>刪除</button>");
         
+      },
+      error:function(responseerror){
+          alert(responseerror.responseText)
       }
   
     });
