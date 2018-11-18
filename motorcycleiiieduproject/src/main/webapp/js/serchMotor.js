@@ -219,7 +219,7 @@ acceItemString=""
 
 
     sessionStorage.orderdetailsession = JSON.stringify(orderdetail) ; 
-     alert(JSON.stringify(orderdetail))
+ //    alert(JSON.stringify(orderdetail))
     window.location.assign ("cart.html"); 
 
 });
@@ -363,7 +363,7 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 			success : function(response) {
 			},
 		     error:function(responseerror){
-		         alert(responseerror.responseText)
+		 //        alert(responseerror.responseText)
 		     }
 		});
 		

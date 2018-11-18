@@ -1,0 +1,136 @@
+.registerdiv{
+   width: 100%; 
+   height: 49em; 
+
+  }
+  
+ .motorserchdiv{
+  width: 52%; 
+   height: 49em; 
+ overflow:auto  ;
+ 
+ } 
+  
+ .registerdiv2{
+  width: 100%; 
+   height: 58em; 
+   
+ }
+  
+ .setlaunchbody {
+ width: 50%; 
+   height: 45em; 
+    line-height: 1em;
+   margin: auto ; 
+ } 
+  
+body{
+      background-color: rgb(167, 145, 113)
+    }
+    
+    
+  .errormessage{color:red}
+
+.rightside{  float: right;}
+
+
+.simple-subscription-form {
+    background: #0c3e5f;
+    color: #fefefe;
+    padding: 2rem;
+    border-radius: 0;
+  }
+  
+  .simple-subscription-form .button {
+    margin-bottom: 0;
+    border-radius: 0 0 0 0;
+  }
+  
+
+  .hero-full-screen {
+    height: 100vh;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  
+    background-size: cover;
+  }
+  
+  .hero-full-screen .middle-content-section {
+    text-align: center;
+    color: #fefefe;
+  }
+  
+  .hero-full-screen .top-content-section {
+    width: 100%;
+  }
+  
+  .hero-full-screen .bottom-content-section {
+    padding: 1rem;
+  }
+  
+  .hero-full-screen .bottom-content-section svg {
+    height: 3.75rem;
+    width: 3.75rem;
+    fill: #fefefe;
+  }
+  
+  .hero-full-screen .top-bar {
+    background: transparent;
+  }
+  
+  .hero-full-screen .top-bar .menu {
+    background: transparent;
+  }
+  
+  .hero-full-screen .top-bar .menu-text {
+    color: #fefefe;
+  }
+  
+  .hero-full-screen .top-bar .menu li {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  .hero-full-screen .top-bar .menu a {
+    color: #fefefe;
+    font-weight: bold;
+  }
+  
+   
+  .runwall{
+
+    width: 120em ; height:  55em;
+  }
+
+  .runwalldetail{
+
+    width: 40em ; height:  25em;
+  }
+
+  .mywalldetail {
+    width: 40em ; height:  35em;  
+
+  }
+  .cartlist {
+    float:right ; 
+    z-index:3 ; 
+    position:absolute ;
+    top:7em ; 
+    left:50em  ; 
+    
+      
+    }
