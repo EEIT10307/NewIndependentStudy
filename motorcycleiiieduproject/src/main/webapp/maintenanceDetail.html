@@ -13,6 +13,10 @@
 	<link rel="stylesheet" href="css/progressbar.css"><!-- 	進度條用 -->
 	<style type="text/css">
 		td input, td select { margin-bottom: 1%;}
+		.divshadow{
+			box-shadow: 0px 0px 50px #888888;
+			border-radius: 25px;
+		}		
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,35 +113,37 @@
       </script>
       <div id="content-wrapper">
       	<div class="container-fluid form-group col-lg-8 offset-lg-2">
+			<div id="func0">	
 				<h4 class="text-center">新增保養項目</h4>
-				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="機油" class="form-control">
+				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="" class="form-control">
 				所需到達里程
-				<input type="text" name="requiredMileage" id="requiredMileage" value="20000" class="form-control">
+				<input type="text" name="requiredMileage" id="requiredMileage" value="" class="form-control">
 				保養所需工時
-				<input type="text" name="requiredHourTodo" id="requiredHourTodo" value="2" class="form-control">
+				<input type="text" name="requiredHourTodo" id="requiredHourTodo" value="" class="form-control">
 
 				<input type="submit" id="submitinsert" value="提交新增" class="form-control btn btn-secondary col-lg-4 offset-lg-4 col-md-12 my-4">
+			</div>
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
 				<div class='d-flex justify-content-around'>
-				<div class='mx-2'>
+				<div class='mx-2' id="func1">
 					<h4 class='text-center my-3'>查詢保養中的機車</h4>
 					<div class="from-control col-12 text-center" id="radioset"></div>
 				</div>
 			<!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
-				<div class='mx-2'>
+				<div class='mx-2' id="func2">
 					<h4 class='text-center my-3'>顯示超過規定里程數的車</h4>
 					<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-6 offset-lg-3 col-md-12 my-4">
 				</div>
 			<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
-				<div class='mx-2'>
+				<div class='mx-2' id="func3">
 					<h4 class='text-center my-3'>各車保養項目里程數</h4>
 					<div class="from-control col-12 text-center" id="radioset2"></div>
 				</div>
 				</div>
+			<br>
 	<div id=resultoffunction></div>
 <!-- 	//------------------------------------保養通知Modal--------------------------------->
-
 			<!-- Modal -->
 			<div class="modal fade" id="maintenance-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
@@ -149,7 +155,6 @@
 			        </button>
 			      </div>
 			      <div class="modal-body" id="maintenance-modal-body">
-
 			      </div>
 			      <div class="modal-footer" id="maintenance-modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -175,9 +180,12 @@
                         	  txt += "規定的"+json3[x].requiredMileage+", "+(json3[x].currentMileage-json3[x].requiredMileage)+"公里了!!<br>"  ; 
                         }
                         	$("#maintenance-modal-body").html(txt);
-                        if(json3!=null){
-							$("#maintenance-modal").modal('show');
+//                         	alert("response before if:"+response)
+                        if(response!=""){
+// 							alert("response in if:"+response)
+                        	$("#maintenance-modal").modal('show');
 						}
+
                 },
                 error:function(responseerror){
                     alert(responseerror.responseText)
@@ -198,30 +206,47 @@
 //                         $("#radioset1").append($("<input type='radio' class='xxx' name='storetoshow1' value='" + json[x] + "'>"),json[x])
                         $("#radioset2").append($("<input type='radio' class='xxx' name='storetoshow2' value='" + json[x] + "'>"),json[x])
                     }
+
                 },
                 error:function(responseerror){
                     alert(responseerror.responseText)
                 }
             });
 //---------------------保養項目MaintenanceDetail新增測試---------------------------
+          $("#func0").on("click",function(){
+        	  $("#func0").addClass("divshadow")
+        	  $("#func1").removeClass("divshadow")
+        	  $("#func2").removeClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+        	  $("#resultoffunction").html("");
+          })
+          
           $("#submitinsert").click(function(){
               var maintenanceItem=$("#maintenanceItem").val();
               var requiredMileage=$("#requiredMileage").val();
               var requiredHourTodo=$("#requiredHourTodo").val();
-//               alert("項目:"+maintenanceItem+"\n所需到達里程數:"+requiredMileage+"\n保養所需工時:"+requiredHourTodo);
+              $("#maintenance-modal-title").html("新增保養項目");
+              $("#maintenance-modal-body").html(maintenanceItem+"新增成功");
+              $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+			  $("#maintenance-modal").modal('show');
               $.ajax({
               type:"post",
               url:"insertNEWMaintenanceDetail",
               data:{"maintenanceItem":maintenanceItem,"requiredMileage":requiredMileage,"requiredHourTodo":requiredHourTodo},
               success : function(response) {
-                    alert("success");
-// 	 				alert(response);
-		      }
+
+		      },error:function(responseerror){
+			        alert(responseerror.responseText)
+			     }
               });
           });
 //---------------------查詢保養中的機車---------------------------
 	      $("#radioset").on("click","input[name='storetoshow']",function(){	  
-			  var radioValue = $("input[name='storetoshow']:checked").val()
+        	  $("#func0").removeClass("divshadow")
+        	  $("#func1").addClass("divshadow")
+        	  $("#func2").removeClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+	    	  var radioValue = $("input[name='storetoshow']:checked").val()
               if(radioValue){
 //			                     alert("選擇了" + radioValue+"店");
 //			                     var json =  ; 
@@ -232,11 +257,18 @@
 			  contentType: "application/json; charset=utf-8",
 			  data:JSON.stringify({"maintenanceStore":radioValue}),
 			  success : function(response) {
-			  var json3  = JSON.parse(JSON.stringify(response)); 
-			  var txt = "" ; 
-			  for(var x = 0 ; x< json3.length ; x++) {
-			       txt += "<button id = 'showBikeMaintenancingItem' class=' form-control btn btn-secondary  col-md-4  my-4'>"+json3[x].licensePlate+"</button>\n"  ;     
-			    }
+				  if(response==""){
+		              $("#maintenance-modal-title").html("保養訊息");
+		              $("#maintenance-modal-body").html("<div style='text-align:center'>本分店沒有保養中的機車</div>");
+		              $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+					  $("#maintenance-modal").modal('show');
+					
+				  }	
+			      var json3  = JSON.parse(JSON.stringify(response)); 
+				  var txt = "" ; 
+				  for(var x = 0 ; x< json3.length ; x++) {
+				       txt += "<button id = 'showBikeMaintenancingItem' class=' form-control btn btn-secondary  col-md-4  my-4'>"+json3[x].licensePlate+"</button>\n"  ;     
+				    }
 			      $("#resultoffunction").html(txt);
 						$("#resultoffunction").on("click","#showBikeMaintenancingItem",function(){
 							var bikeplate=	$(this).text();
@@ -279,10 +311,11 @@
 
 						})//end of $("#resultofeveryovermileage").on("click
 						
-			  },
-			     error:function(responseerror){
+			  }//end of success(1)
+			    ,error:function(responseerror){
 			         alert(responseerror.responseText)
-			     }//end of success(1)
+			     }
+
 			  })//end of ajax(1)
 			 }
 		   })
@@ -340,6 +373,10 @@
 //           });
 //---------------------各車保養項目里程數ver2---------------------------
 $("#radioset2").on("click","input[name='storetoshow2']",function(){	  
+	  $("#func0").removeClass("divshadow")
+	  $("#func1").removeClass("divshadow")
+	  $("#func2").removeClass("divshadow")
+	  $("#func3").addClass("divshadow")
 	var radioValue = $("input[name='storetoshow2']:checked").val()
     if(radioValue){
         $.ajax({
@@ -365,7 +402,8 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
  // ---------------------秀保養項目---------------------------
 						$("#resultoffunction").on("click","#platetoshowmaintenance",function(){
 							var plate=$(this).val();
-							var c=$(this).attr("class").charAt(5)
+
+							var c=$(this).attr("class").substring(5,7);
 							$(this).attr("id","platetohidemaintenance")
 						 	$(this).val("隱藏"+plate)
 							$.ajax({
@@ -409,11 +447,26 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 });//end of $("#radioset2").on("click" 
 		
 // ---------------------顯示有任意項目超過該規定里程數的車---------------------------
+          $("#func2").on("click",function(){
+        	  $("#func0").removeClass("divshadow")
+        	  $("#func1").removeClass("divshadow")
+        	  $("#func2").addClass("divshadow")
+        	  $("#func3").removeClass("divshadow")
+          })
 			$("#showEveryMileageIsOver").click(function(){
 				$.ajax({
 					type:"get",
 					url:"showMessageIfMileageIsOver",
 					success : function(response) {
+
+			if(response==""){
+			    $("#maintenance-modal-title").html("保養訊息");
+			    $("#maintenance-modal-body").html("<div style='text-align:center'>目前沒有機車有保養項目超過規定的里程數</div>");
+			    $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+				  $("#maintenance-modal").modal('show');
+				
+			}	
+					
 //			alert("success");
 //			var  json2  = JSON.stringify(response); 
 //			alert("response stringify後="+json2)
@@ -471,7 +524,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							contentType:"application/JSON; charset = UTF-8" , 
 							success : function(response) {
 								alert("送保養成功囉!!!");
-							}
+							},error:function(responseerror){
+						         alert(responseerror.responseText)
+						     }
 						});
 					});
 				
@@ -487,10 +542,11 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							}	
 						});
 					});
-					},
-				     error:function(responseerror){
-				         alert(responseerror.responseText)
-				     }//end of success
+					}//end of success
+			    	 ,error:function(responseerror){
+			          alert(responseerror.responseText)
+			     	 }
+
 				});
 			});
 
