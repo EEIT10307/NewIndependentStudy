@@ -307,7 +307,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 		data: JSON.stringify(dispadetail),
 		contentType: "application/json; charset=utf-8",
 		success: function (response) {
-            alert(response)
+//            alert(response)
             
             //========================
             var dispadetailend = {};
@@ -336,7 +336,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 		data: JSON.stringify(dispadetailend),
 		contentType: "application/json; charset=utf-8",
 		success: function (response) {
-			alert(response)
+//			alert(response)
           
  //=========== (parseInt(thisis.parent().prev().text())* resulttime * discountpar);
  var dispadetailend = {};
@@ -365,7 +365,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
      data: JSON.stringify(dispadetailend),
      contentType: "application/json; charset=utf-8",
      success: function (response) {
-         alert(response)
+//         alert(response)
          window.location.assign ("altermotor.html");
      },
      error:function(responseerror){

@@ -365,8 +365,8 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
  // ---------------------秀保養項目---------------------------
 						$("#resultoffunction").on("click","#platetoshowmaintenance",function(){
 							var plate=$(this).val();
-							var c=$(this).attr("class").charAt(5)
-							$(this).attr("id","platetohidemaintenance")
+							var c=$(this).attr("class").substring(5,7)
+0							$(this).attr("id","platetohidemaintenance")
 						 	$(this).val("隱藏"+plate)
 							$.ajax({
 								type:"post",
