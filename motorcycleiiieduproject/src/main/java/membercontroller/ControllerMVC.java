@@ -247,6 +247,34 @@ public class ControllerMVC  {
 	   return "" ; 
 	}
 	
+	
+	@RequestMapping(value = "/FbRegisterServlet"  , method = RequestMethod.POST , produces = "application/json;charset=utf-8")
+	private @ResponseBody String fbRegister(@RequestAttribute("reader")  BufferedReader reader ) throws JsonSyntaxException, JsonIOException, IOException  {	
+		System.out.println("進入FbRegisterServlet");
+		MemberDetail mem = gson.fromJson(reader, MemberDetail.class) ;
+	
+		Date signinDate = new java.util.Date();
+		  
+//		  Blob test = new Blob(url);
+		  mem.setSigninDate(signinDate); 
+		  mem.setLastLoginDate(signinDate);
+//		  mem.setProfilePhoto(test); 暫時將bean的 	@Column(nullable = false) 註解起來
+		  System.out.println("最後登入日:"+mem.getLastLoginDate());
+		  
+		  //登出日目前和登入日相同，等待修改
+		  System.out.println("最後登出日:"+mem.getSigninDate());
+		  
+		  //裝入使用者登入資料
+          long defaultPhone = System.currentTimeMillis();
+           String defaultPhoneString=Long.toString(defaultPhone);
+		  mem.setPhone(defaultPhoneString);
+		  mem.setPassword("");
+		  ms.save(mem) ; 
+		  String registerdata = gson.toJson(mem);
+			 System.out.println("FB registerdata="+registerdata);
+//		   return mem.getEmail() ; 
+			 return registerdata;
+	}
 	@RequestMapping(value = "/RegisterServlet"  , method = RequestMethod.POST , produces = "text/html  ; charset=utf-8")
 	private @ResponseBody String doMVCRegister(@RequestAttribute("reader")  BufferedReader reader ) throws JsonSyntaxException, JsonIOException, IOException  {	
 		

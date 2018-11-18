@@ -14,7 +14,7 @@ var json    =  JSON.stringify(combie) ;
 
 $.ajax({
     type: "post",
-    url: "http://localhost:8080/motorcycleiiieduproject/RegisterServlet",
+    url: "RegisterServlet",
     data: json,
     success: function (registerdata) {
 //        alert("server傳回 = " + jsonback) ;  
@@ -96,10 +96,7 @@ $("#pwd").blur(function (e) {
 
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-    //	document.getElementById("email").addEventListener("blur", checkName);
-        // document.getElementById("pwd").addEventListener("blur", chkPassword);  //事件繫結，焦點離開 ，採用W3CDOM處理程序，取得password的ID:idPwd之後，binding chkPassword
-// });
+
 
 function chkPassword() {
     //取得元素值
@@ -144,3 +141,203 @@ function chkPassword() {
 
 
 
+
+ // FB登入
+// 檢查是否已登入，沒，do nothing
+//AutoLogin檢查是否是會員by Email， 不是==> 直接註冊資料並且記錄cookies然後登入
+//是，直接紀錄Cookies並登入
+
+
+ 
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '1066792026823320',
+        cookie: false,
+        xfbml: true,
+        version: 'v3.2'
+    });
+
+    // FB.AppEvents.logPageView();   
+    //判斷使用者是否已登入FB     
+    // Check whether the user already logged in
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            //display user data
+            alert("Register getLoginStatus CHECK!!!!")
+            //判斷是否是會員，如果不是
+            getFbUserData();
+        }
+    });
+};
+
+// Load the JavaScript SDK asynchronously
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+
+// Facebook login with JavaScript SDK
+
+// $("#fbloginbutton").click(function (e) {  
+// });   
+
+function fbLogin() {
+//    alert("FB登入確認");
+    FB.login(function (response) {
+        if (response.authResponse) {
+            // Get and display the user profile data
+            getFbUserData();
+
+
+        }
+    }, { scope: 'email' });
+};
+
+// Fetch the user profile data from facebook
+function getFbUserData() {
+    FB.api('/me?fields=name,first_name,last_name,email',
+        function (response) {
+            console.log('Register臉書登入');
+            alert("FB登入者=> " + response.email);
+
+            var email = response.email
+            //判斷是否為會員email，AutoLoginCheck
+            //Email確認是會員
+            var combie = { "email": email };
+            var json = JSON.stringify(combie);
+            //利用ajax將json型態的email丟到Controller的AutoLoginCheck察看是否為會員的email
+            $.ajax({
+                type: "post",
+                url: "AutoLoginCheck",
+                data: json,
+                success: function (jsonback) {
+
+                    alert("AutoLoginCheck傳回 = " + jsonback);
+
+                    if (jsonback == null || jsonback == "") {
+
+                        alert("您的FB email非會員信箱");
+                        
+                        //判斷是否為會員email，AutoLoginCheck
+                        // Email確認是會員
+                        // var combie = { "email": email };
+                        // var json = JSON.stringify(combie);
+
+                        $.ajax({
+                            type: "post",
+                            url: "FbRegisterServlet",
+                            data: json,
+                            success: function (registerdata) {
+
+
+                                // JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
+                                 alert("註冊資料正確，registerdata為"+registerdata);
+
+                                var mailmember = registerdata.replace("{", "").replace("}", "").replace("\"").split(",")[1].split(":")[1];
+                                // // var goto = "resucess.html?name="+mailmember
+                                // var goto = "index.html?name=" + mailmember
+                                // //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                                // window.location.assign(encodeURI(goto)); 
+                                 //    window.location.assign(encodeURI(goto)) ; 
+                                 
+                                 //設定fbcookie
+                                 var expire_days = 1; // 過期日期(天)
+                                 var day = new Date();
+                                 day.setTime(day.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+                            // day.setTime(day.getTime() + (60 * 1000));
+                            var expires = "expires=" + day.toGMTString();
+                            // document.cookie = "name=test" + "; " + expires + '; domain=localhost:8080; path=/';
+                            document.cookie = "email=" + reply + "; " + expires + '; path=/';
+                            alert("document.cookie=" + cookie)
+                            //FB登入
+                            alert("FB登入成功")
+                            window.location.assign(encodeURI(index.html));
+                            // $("a#memberdescription").show();
+                            alert("煩請到會員資料新增電話才可啟動租賃服務")
+                            
+                            if ($("#memberloginstatus").text() == "") {
+                                $("#memberloginstatus").append("Welcome" + "   " + mailmember);
+                                $("a#login").hide();
+                                $("a#registerNav").hide();
+                                $("a#memberlogoutstatus").append("登出");
+                                $("a#memberdescription").show();
+
+                            // if ($('#modeltt').is(':hidden')) {
+                            // } else {
+                            //     $('#modeltt').hide();
+                            //     window.location.href="/motorcycleiiieduproject/index.html";
+                            //     //window.location.reload(true);
+                            // }
+                            
+                        }
+
+                            }
+                            });
+
+                    } else {
+
+
+
+
+                        //  var goto = "index.html?name="+jsonback
+                        //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                        alert("Email為會員資料");
+                        
+                        var goto = "index.html?name="+jsonback
+                        //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                        window.location.assign(encodeURI(goto));
+                        // // var cookies = document.cookie;
+                        
+                        // //  window.location.assign(encodeURI(goto)) ; 
+                        // //  $("#memberloginstatus").innerHTML= "Welcome"+jsonback;
+                        // //因為footer和nav會同時執行login，因此會執行兩次login check，使用此方式產生一個welcome字串
+                        // //    var goto = "index.html?name="+jsonback
+                        // //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                        // //    window.location.assign(encodeURI(goto)) ; 
+                        // if ($("#memberloginstatus").text() == "") {
+                        //     $("#memberloginstatus").append("Welcome" + "   " + jsonback);
+                        //     $("a#login").hide();
+                        //     $("a#registerNav").hide();
+                        //     $("a#memberlogoutstatus").append("登出");
+                        //     $("a#memberdescription").show();
+
+                            //設定fbcookie
+                            var expire_days = 1; // 過期日期(天)
+                            var day = new Date();
+                            day.setTime(day.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+                            // day.setTime(day.getTime() + (60 * 1000));
+                            var expires = "expires=" + day.toGMTString();
+                            // document.cookie = "name=test" + "; " + expires + '; domain=localhost:8080; path=/';
+                            // cookies = "email=" + jsonback + "; " + expires + '; path=/';
+                            document.cookie = "email=" + jsonback + "; " + expires + '; path=/';
+                        
+                            alert("註冊後document.cookie=" + document.cookie)
+                        //     //FB登入
+                        //     alert("FB登入成功")
+                        //     $("a#memberdescription").show();
+                        //     alert("煩請到會員資料新增電話才可啟動租賃服務")
+                        //     if ($('#modeltt').is(':hidden')) {
+                        //     } else {
+                        //         $('#modeltt').hide();                              
+                        //          window.location.reload(true);
+                        //     }
+                           
+                        // }
+                    }
+                }
+
+            });
+
+
+
+        });
+
+
+
+        
+}
