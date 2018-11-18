@@ -219,7 +219,7 @@ acceItemString=""
 
 
     sessionStorage.orderdetailsession = JSON.stringify(orderdetail) ; 
-     alert(JSON.stringify(orderdetail))
+//     alert(JSON.stringify(orderdetail))
     window.location.assign ("cart.html"); 
 
 });
