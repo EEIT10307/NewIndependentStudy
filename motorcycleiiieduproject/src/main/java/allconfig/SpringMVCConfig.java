@@ -32,7 +32,7 @@ public class SpringMVCConfig implements WebMvcConfigurer {
 		InterceptorRegistration myinter = registry.addInterceptor(new InterceptorUse()) ; 
 
 	    myinter.addPathPatterns("/BikeReviewInsert","/insertAllLicensePlate","/insertBikeDetail","/LoginServlet", "/CheckAllServlet", "/DeleteServlet",
-				"/RegisterServlet","/AutoLoginCheck","/CheckSingleServlet","/ProfilePhotoServlet","/PhotoStringCheckServlet") ; 		   
+				"/RegisterServlet","/AutoLoginCheck","/CheckSingleServlet","/ProfilePhotoServlet","/PhotoStringCheckServlet","/FbRegisterServlet") ; 		   
 	WebMvcConfigurer.super.addInterceptors(registry);
 
 

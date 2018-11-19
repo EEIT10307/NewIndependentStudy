@@ -8,37 +8,36 @@
 	 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
-<div>
+<div style="list-style: none;">
 	<br />
-	<div class="text-center">
-		<h3 class="col-xs-6 offset-xs-3 modal-title">查詢 Search</h3>
+	<div class="text-center mb-2">
+		<h3 class="col-xs-6 offset-xs-3 modal-title">去租車</h3>
 	</div>
 	<div class="col-xs-12">
-		<hr>
 		<div class="col-xs-12 col-sm-12">
-			<br><br>
-			<h3>Pick-Up</h3>
-				DATE:
-				<input type="date" name="pDate" id="pDate">
-				TIME:
-				<select name="Ptime" class="makePoption"></select>
-				<h3>Pickup-Store</h3>
-				<select name="pickupbranchName" class="pickupbranchName"></select>
-				<br><br>
+			<h5 class='text-center'>取車 Pick-Up</h5>
+			<div class='form-inline d-flex justify-content-between'>
+				日期:
+				<input type="date" name="pDate" id="pDate" class='form-control col-4'>
+				時間:
+				<select name="Ptime" class="makePoption form-control col-4"></select>
+			</div>
+				<h5 class='text-center mt-3'>取車店 Pickup-Store</h5>
+				<select name="pickupbranchName" class="pickupbranchName form-control"></select>
 		</div>
 	</div>
 	<hr>
-	<br />
 	<div class="col-xs-12">
 		<div class="col-xs-12 col-sm-12">
-			<br><br>
-			<h3>Drop-Off</h3>
-			DATE:
-			<input type="date" name="dDate" id="dDate">
-			TIME:
-			<select name="Dtime" class="makeDoption"></select>
-			<h3>Dropoff-Store</h3>
-			<select name="dropoffbranchName" class="dropoffbranchName"></select>
+			<h5 class='text-center'>還車 Drop-Off</h5>
+			<div class='form-inline d-flex justify-content-between'>
+			日期:
+			<input type="date" name="dDate" id="dDate" class='form-control col-4'>
+			時間:
+			<select name="Dtime" class="makeDoption form-control col-4"></select>
+			</div>
+			<h5 class='text-center mt-3'>還車店 Dropoff-Store</h5>
+			<select name="dropoffbranchName" class="dropoffbranchName form-control"></select>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="motorserchdo">查詢</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>

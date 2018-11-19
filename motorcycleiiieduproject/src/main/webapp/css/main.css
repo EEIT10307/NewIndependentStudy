@@ -8,8 +8,8 @@
 #carousel_3 { background: url(https://images.pexels.com/photos/1191146/pexels-photo-1191146.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); background-repeat: no-repeat; background-size:cover; background-position:center;}
 .container { width: 100%; padding: 0 15px; margin: 0 auto;}
 .marketing .col-lg-4 { margin:5% 0; text-align: center; padding: 3em 0;}
-.thirdLogin :first-child :first-child :before{color:navy !important;}
-.thirdLogin :last-child :last-child :before{color:salmon !important;}
+/* .thirdLogin :first-child :first-child :before{color:salmon !important;} */
+.thirdLogin :last-child :last-child :before{color:navy !important;}
 .select2 label{color:white; text-align: left; margin: 3% 5%;}
 #news{transition-timing-function: ease-in-out}
 #myFooter {background-color: #3c3d41; color: white; padding-top: 30px; -webkit-flex: 0 0 auto;}
