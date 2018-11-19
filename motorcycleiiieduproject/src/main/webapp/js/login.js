@@ -48,6 +48,7 @@ $(window).on('load', function () {
                         //  alert("Cookie內的email非會員信箱或沒email資訊");
                     } else {
 
+
                         //  var goto = "index.html?name="+jsonback
                         //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
                         //  alert("Cookie為會員資料");
@@ -81,58 +82,59 @@ $(window).on('load', function () {
         var password = $("[name = 'password']").val();
         //var phone = $("[name = 'phone']").val() ; 
 
-        //管理員登入窗口
-        if (email == "gm@gmail.com" && password == "gm!123") {
-            var gmpage = "gmpage.html?name=" + email
+//管理員登入窗口
+if(email=="gm@gmail.com" && password=="gm!123"){
+    var gmpage = "gmpage.html?name="+email
+        	
+    //重要！！ 轉傳時要編碼一次編成ＵＲＩ
+	window.location.href="revenue.html";
+return;
+}
+var combie =  {"email":email , "password":password} ; 
+//var combie =  {"email":email , "password":password , "phone" : phone} ; 
+//原本combie是json物件 利用以下方法翻成json字串 ; 
+var json    =  JSON.stringify(combie) ; 
+// alert("email:"+email)
+// alert("password:"+password)
+$.ajax({
+    type: "post",
+    url: "LoginServlet",
+    data: json,
+    success: function (jsonback) {
+        // alert("server傳回 = " + jsonback) ;  
+//        if(jsonback.length!=0){
+//          if(jsonback.length==8){
+        if(jsonback=="nullpage"){
+        	  
+        //	var nullpage = "nullpage.html?name="+jsonback
+            $("#errormap").html(
+                "帳號密碼都要輸入喔"
+            );
+            
 
-            //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-            window.location.assign(encodeURI(gmpage));
+        	//重要！！ 轉傳時要編碼一次編成ＵＲＩ
+       // 	window.location.assign(encodeURI(nullpage)) ;
+        }else{
+        	
+        	if(jsonback.length==0){
+        		
+        //		var errorpage = "errorpage.html?name="+jsonback
+                $("#errormap").html(
+                "帳號或密碼錯誤喔"
+                );
+        		//重要！！ 轉傳時要編碼一次編成ＵＲＩ
+        //		window.location.assign(encodeURI(errorpage)) ; 
+        	}else{
+        		$("#errormap").html();
+        		var goto = "index.html?name="+jsonback
+        		//重要！！ 轉傳時要編碼一次編成ＵＲＩ
+                window.location.assign(encodeURI(goto)) ; 
+                $("#memberloginstatus").innerHTML = "Welcome"+jsonback;
+        	}
+
         }
-        var combie = { "email": email, "password": password };
-        //var combie =  {"email":email , "password":password , "phone" : phone} ; 
-        //原本combie是json物件 利用以下方法翻成json字串 ; 
-        var json = JSON.stringify(combie);
-        // alert("email:"+email)
-        // alert("password:"+password)
-        $.ajax({
-            type: "post",
-            url: "LoginServlet",
-            data: json,
-            success: function (jsonback) {
-                // alert("server傳回 = " + jsonback) ;  
-                //        if(jsonback.length!=0){
-                //          if(jsonback.length==8){
-                if (jsonback == "nullpage") {
-
-                    var nullpage = "nullpage.html?name=" + jsonback
-
-                    //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                    window.location.assign(encodeURI(nullpage));
-                } else {
-
-                    if (jsonback.length == 0) {
-
-                        var errorpage = "errorpage.html?name=" + jsonback
-
-                        //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                        window.location.assign(encodeURI(errorpage));
-                    } else {
-
-                        var goto = "index.html?name=" + jsonback
-                        //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                        window.location.assign(encodeURI(goto));
-                        $("#memberloginstatus").innerHTML = "Welcome" + jsonback;
-                    }
-                }
-
-
-            }
-            //    error: function(jsonback){};
-        });
-
-
-
-
+    }
+    });
 
 
 
@@ -190,6 +192,7 @@ $(window).on('load', function () {
             // 		}
             // 		}
             // }
+
         }
 
     });
@@ -428,12 +431,17 @@ function chkPassword() {
             if (flag1 && flag2 && flag3) break;
 
         }
-        if (flag1 && flag2 && flag3) {
-            theResult.innerHTML = "<img src='Images/correct.png'>密碼正確";
+
+        if (flag1 && flag2 && flag3){
+        //  theResult.innerHTML ="<img src='Images/correct.png'>密碼正確" ;  
+        
 
         }
-        else
-            theResult.innerHTML = "<i><img src='Images/error.png'>密碼錯誤</i>";
+
+        else {
+       // theResult.innerHTML ="<i><img src='Images/error.png'>密碼錯誤</i>";
+    }
+
 
 
     }
