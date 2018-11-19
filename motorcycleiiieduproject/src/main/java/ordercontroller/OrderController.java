@@ -178,6 +178,12 @@ public class OrderController {
 				motorFinallCheck = true;
 			}
 		}
+//		//如果是二次調度
+//		if(customorder.getPhone().equals("2222222222")) {
+//			motorFinallCheck = true;
+//		}
+		
+		
 		System.out.println("hi" + motorFinallCheck);
 		// 訂單取出配件資訊....
 		String acceAmount = customorder.getAccessoriesAmount();
