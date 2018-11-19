@@ -71,6 +71,9 @@ $.ajax({
        }
         
         
+    },
+    error:function(responseerror){
+        // alert(responseerror.responseText)
     }
         
     
@@ -163,7 +166,7 @@ window.fbAsyncInit = function () {
     FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
             //display user data
-            alert("Register getLoginStatus CHECK!!!!")
+            // alert("Register getLoginStatus CHECK!!!!")
             //判斷是否是會員，如果不是
             getFbUserData();
         }
@@ -203,7 +206,7 @@ function getFbUserData() {
     FB.api('/me?fields=name,first_name,last_name,email',
         function (response) {
             console.log('Register臉書登入');
-            alert("FB登入者=> " + response.email);
+            // alert("FB登入者=> " + response.email);
 
             var email = response.email
             //判斷是否為會員email，AutoLoginCheck
@@ -217,11 +220,11 @@ function getFbUserData() {
                 data: json,
                 success: function (jsonback) {
 
-                    alert("AutoLoginCheck傳回 = " + jsonback);
+                    // alert("AutoLoginCheck傳回 = " + jsonback);
 
                     if (jsonback == null || jsonback == "") {
 
-                        alert("您的FB email非會員信箱");
+                        // alert("您的FB email非會員信箱");
                         
                         //判斷是否為會員email，AutoLoginCheck
                         // Email確認是會員
@@ -236,7 +239,7 @@ function getFbUserData() {
 
 
                                 // JSON.parse()將JSON字串剖析為JavaScript物件供操作使用。
-                                 alert("註冊資料正確，registerdata為"+registerdata);
+                                //  alert("註冊資料正確，registerdata為"+registerdata);
 
                                 var mailmember = registerdata.replace("{", "").replace("}", "").replace("\"").split(",")[1].split(":")[1];
                                 // // var goto = "resucess.html?name="+mailmember
@@ -253,9 +256,9 @@ function getFbUserData() {
                             var expires = "expires=" + day.toGMTString();
                             // document.cookie = "name=test" + "; " + expires + '; domain=localhost:8080; path=/';
                             document.cookie = "email=" + reply + "; " + expires + '; path=/';
-                            alert("document.cookie=" + cookie)
+                            // alert("document.cookie=" + cookie)
                             //FB登入
-                            alert("FB登入成功")
+                            // alert("FB登入成功")
                             window.location.assign(encodeURI(index.html));
                             // $("a#memberdescription").show();
                             alert("煩請到會員資料新增電話才可啟動租賃服務")
@@ -286,7 +289,7 @@ function getFbUserData() {
 
                         //  var goto = "index.html?name="+jsonback
                         //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                        alert("Email為會員資料");
+                        // alert("Email為會員資料");
                         
                         var goto = "index.html?name="+jsonback
                         //重要！！ 轉傳時要編碼一次編成ＵＲＩ
@@ -316,7 +319,7 @@ function getFbUserData() {
                             // cookies = "email=" + jsonback + "; " + expires + '; path=/';
                             document.cookie = "email=" + jsonback + "; " + expires + '; path=/';
                         
-                            alert("註冊後document.cookie=" + document.cookie)
+                            // alert("註冊後document.cookie=" + document.cookie)
                         //     //FB登入
                         //     alert("FB登入成功")
                         //     $("a#memberdescription").show();
@@ -329,6 +332,9 @@ function getFbUserData() {
                            
                         // }
                     }
+                },
+                error:function(responseerror){
+                    // alert(responseerror.responseText)
                 }
 
             });

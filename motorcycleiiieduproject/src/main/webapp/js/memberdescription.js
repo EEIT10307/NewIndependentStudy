@@ -47,7 +47,7 @@ var t =$('#dataTable').DataTable() ;
             }
         },
         error:function(responseerror){
-            alert(responseerror.responseText)
+            // alert(responseerror.responseText)
         }
     });
    }
@@ -59,7 +59,7 @@ var t =$('#dataTable').DataTable() ;
     
         //Cookies是否有email資訊
         if(cookie.indexOf("email")==-1){
-            alert("Cookie資訊中未包含email資訊");
+            // alert("Cookie資訊中未包含email資訊");
             var goto1 = "index.html"
             //重要！！ 轉傳時要編碼一次編成ＵＲＩ
             window.location.assign(encodeURI(goto1)) ; 
@@ -104,7 +104,7 @@ var t =$('#dataTable').DataTable() ;
                         }
                  },
                  error:function(responseerror){
-                     alert(responseerror.responseText)
+                    //  alert(responseerror.responseText)
                  }
              
             });
@@ -185,7 +185,7 @@ var t =$('#dataTable').DataTable() ;
             //    alert("生日:"+result);
             },
             error:function(responseerror){
-                alert(responseerror.responseText)
+                // alert(responseerror.responseText)
             }
     
         });
@@ -211,7 +211,7 @@ var t =$('#dataTable').DataTable() ;
            //                                                 Images/Frontqw@gmail.com.jpg
             },
             error:function(responseerror){
-                alert(responseerror.responseText)
+                // alert(responseerror.responseText)
             }
             });
 
@@ -245,11 +245,11 @@ var t =$('#dataTable').DataTable() ;
             //  alert("ajax success");
             //  var memdata =JSON.stringify(jsonback);
             //  alert(jsonback);
-  alert(jsonback)
+//   alert(jsonback)
             window.location.href="member.html";
             },
             error:function(responseerror){
-                alert(responseerror.responseText)
+                // alert(responseerror.responseText)
             }
         });
     //    window.location.href="memberdescription.html";
@@ -281,7 +281,7 @@ var t =$('#dataTable').DataTable() ;
         // alert("Cookies內儲存email=" + email);
         // alert("upload") ; 
         var formData = new FormData($("#myForm")[0]); // 使用FormData包裝form表單來傳輸資料
-        alert(formData.getAll)
+        // alert(formData.getAll)
         $.ajax({
           type: "POST",
           url: "upload",
@@ -291,12 +291,12 @@ var t =$('#dataTable').DataTable() ;
           contentType: false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
           dataType: 'text',
           success: function (data){
-              alert("upload sucess") ; 
+            //   alert("upload sucess") ; 
             //   $("#wwwwimg").attr("src","Images\\Front"+email+".jpg");
            
           },
           error:function(responseerror){
-              alert(responseerror.responseText)
+            //   alert(responseerror.responseText)
           }    
     
          
@@ -332,7 +332,7 @@ var t =$('#dataTable').DataTable() ;
             }
         },
         error:function(responseerror){
-            alert(responseerror.responseText)
+            // alert(responseerror.responseText)
         }
         });
 
@@ -392,14 +392,14 @@ var t =$('#dataTable').DataTable() ;
             // function fbLogout() {
             FB.logout(function () {
                 clearAllCookie();
-                alert("FB  Logout!!!");
+                // alert("FB  Logout!!!");
                 console.log('臉書登出登出登出登出登出登出登出登出');
             });
             // }
     
             //清除cookie
             function clearAllCookie() {
-                alert("清除所有Cookies!!!!!!!")
+                // alert("清除所有Cookies!!!!!!!")
                 var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
                 if (keys) {
                     for (var i = keys.length; i--;)
@@ -449,7 +449,7 @@ var t =$('#dataTable').DataTable() ;
     FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
             //display user data
-            alert("getLoginStatus CHECK!!!!")
+            // alert("getLoginStatus CHECK!!!!")
             //判斷是否是會員，如果不是
             getFbUserData();
         }else{
@@ -494,7 +494,7 @@ function getFbUserData() {
     FB.api('/me?fields=name,first_name,last_name,email',
         function (response) {
             console.log('臉書登入登入登入登入登入登入登入');
-            alert("FB登入者=> " + response.email);
+            // alert("FB登入者=> " + response.email);
 
             var email = response.email
             //判斷是否為會員email，AutoLoginCheck
@@ -508,11 +508,11 @@ function getFbUserData() {
                 data: json,
                 success: function (jsonback) {
 
-                    alert("AutoLoginCheck傳回 = " + jsonback);
+                    // alert("AutoLoginCheck傳回 = " + jsonback);
 
                     if (jsonback == null || jsonback == "") {
 
-                        alert("您的FB email非會員信箱");
+                        // alert("您的FB email非會員信箱");
                         
                         //判斷是否為會員email，AutoLoginCheck
                         // Email確認是會員
@@ -550,9 +550,9 @@ function getFbUserData() {
                             var expires = "expires=" + day.toGMTString();
                             // document.cookie = "name=test" + "; " + expires + '; domain=localhost:8080; path=/';
                             cookie = "email=" + reply + "; " + expires + '; path=/';
-                            alert("document.cookie=" + cookie)
+                            // alert("document.cookie=" + cookie)
                             //FB登入
-                            alert("FB登入成功")
+                            // alert("FB登入成功")
                             $("a#memberdescription").show();
                             alert("煩請到會員資料新增電話才可啟動租賃服務")
                             if ($('#modeltt').is(':hidden')) {
@@ -573,7 +573,7 @@ function getFbUserData() {
 
                         //  var goto = "index.html?name="+jsonback
                         //  //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-                        alert("Email為會員資料");
+                        // alert("Email為會員資料");
                         var cookie = document.cookie;
                         //  window.location.assign(encodeURI(goto)) ; 
                         //  $("#memberloginstatus").innerHTML= "Welcome"+jsonback;
@@ -596,9 +596,9 @@ function getFbUserData() {
                             var expires = "expires=" + day.toGMTString();
                             // document.cookie = "name=test" + "; " + expires + '; domain=localhost:8080; path=/';
                             cookie = "email=" + jsonback + "; " + expires + '; path=/';
-                            alert("document.cookie=" + cookie)
+                            // alert("document.cookie=" + cookie)
                             //FB登入
-                            alert("FB登入成功")
+                            // alert("FB登入成功")
                             $("a#memberdescription").show();
                             alert("煩請到會員資料新增電話才可啟動租賃服務")
                             if ($('#modeltt').is(':hidden')) {
