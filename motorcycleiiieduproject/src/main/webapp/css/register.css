@@ -49,10 +49,10 @@ input:hover,
   color: white !important;
 }
 
-.google {
+/* .google {
   background-color: #dd4b39;
   color: white !important;
-}
+} */
 
 /* style the submit button */
 input[type=submit] {
