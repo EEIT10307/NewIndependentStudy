@@ -177,7 +177,7 @@
 					var strinres = JSON.stringify(response);
 	                var json = JSON.parse(strinres);
 	                for (var x = 0; x < json.length; x++) {
-	                	$("#mapdetail").append($("<div class='rounded row justify-content-center'><div class='d-flex my-1 align-self-center'><div class='col-4'><img src='https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no' class='img-responsive' ></div><div class='col-8 row' id='content'><div class='col-10'><h5 >"+json[x].branchName+"</h5><h6 >"+json[x].branchPhone+"</h6><p id='area' style='font-size: 80%;'>"+json[x].branchCounty+json[x].branchAddress+"</p></div><div class='col-2'><button type='button' class='btn btn-outline-secondary spot' id='spot"+x+"'>周圍景點</button></div></div></div></div>"))
+	                	$("#mapdetail").append($("<div class='rounded row justify-content-center'><div class='d-flex my-1 align-self-center'><div class='col-4'><img src='Image/branch_"+json[x].branchName+"1.jpg' class='img-responsive' ></div><div class='col-8 row' id='content'><div class='col-10'><h5 >"+json[x].branchName+"</h5><h6 >"+json[x].branchPhone+"</h6><h6 id='area'>"+json[x].branchCounty+json[x].branchAddress+"</h6></div><div class='col-2'><button type='button' class='btn btn-outline-secondary spot' id='spot"+x+"'>周圍景點</button></div></div></div></div>"));
 	                }
 					
 				},

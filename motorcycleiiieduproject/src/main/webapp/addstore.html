@@ -110,11 +110,11 @@
       <div id="content-wrapper">
 		<div class="container">
 		<h4 class="text-center my-4">新增分店</h4>
-			<form class="col-lg-10 offset-lg-1 justify-content-center">
+			<form class="col-lg-10 offset-lg-1 justify-content-center" id="multiform">
 			  <div class="form-row form-group row justify-content-center">
 				    <label class="col-sm-2 col-form-label" for="brandName">店名</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="branchName"/>
+				      <input type="text" class="form-control" id="branchName" name='bName'/>
 				      </div>
 			  </div>
 			  <div id="zipcode" class="form-row justify-content-center">
@@ -145,14 +145,19 @@
 				      </select>
 				    </div>
 			</div>
-			    <div class="form-group row justify-content-center">
+			    <div class="form-row form-group row justify-content-center">
 			    	<label class="col-sm-2 col-form-label">開幕日</label>
-			    	<div class="col-sm-9">
+			    	<div class="col-sm-4">
 			    		<input class='form-control' data-toggle="datepicker" id="openingDay">
 			    	</div>
+			    	<label class="col-sm-2 col-form-label text-center">分店照</label>
+			    	<div class="custom-file col-sm-3 ">
+						<input type="file" class="custom-file-input on" id="file" multiple="multiple" name='file'> 
+						<label class="custom-file-label" for="inputGroupFile01">選擇照片</label>
+					</div>
 			    </div>
-			    <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-12 row  justify-content-center"><button class="btn btn-secondary mb-5" type="submit" id="submitinsert">確定新增</button></div>
 			</form>
+			    <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-12 row  justify-content-center"><input class="btn btn-secondary mb-5" type="submit" id="submitinsert" value="確定新增"/></div>
 			<script>
 			$(document).ready(function(){
 				$("#zipcode").twzipcode({
@@ -160,49 +165,69 @@
 				"css": ["city form-control", "town form-control"],
 				"countyName": "city", // 指定城市 select name
 				"districtName": "town" // 指定地區 select name
-			});
+				});
 			
-			$('[data-toggle="datepicker"]').datepicker({
-				language:'zh-CN',
-				format:'yyyy/mm/dd',
-				startDate: null,
-				endDate: new Date(),
-				autoPick: true
-			});
-
-			$("#submitinsert").click(function(){
-				var city="", town="";
-				//選擇城市
-				var $selectC = $('select[name="city"]');
-				for (var i = 0; i < $selectC.length; i++) {
-					city = $("option:selected", $selectC[i]);
-				}
-				//選擇城鎮
-				var $selectT = $('select[name="town"]');
-				for (var i = 0; i < $selectT.length; i++) {
-					town = $("option:selected", $selectT[i]);
-					
-				} 
-				alert("val"+i+"="+city.val()+"val"+i+"="+town.val());
-				var branchCounty=city.val()+town.val();
-				var branchAddress=$("#branchAddress").val();
-				var branchPhone=$("#branchPhone").val();
-				var branchName=$("#branchName").val();
-		      var branchArea=$("#branchArea").val();				
-	          alert("新增分店:"+"\n店名:"+branchName+"\n地區:"+branchArea+"\n縣市:"+branchCounty+"\n地址:"+branchAddress+"\n電話:"+branchPhone);
-	      	  var cd= {"branchName":branchName,"branchArea":branchArea,"branchCounty":branchCounty,"branchAddress":branchAddress,"branchPhone":branchPhone}
-	          var zx=JSON.stringify(cd)
-      $.ajax({
-		          type:"post",
-		          url:"saveBranchDetail",
-		          data:zx,
-				  contentType:"application/json;charset=utf-8",
-		          success : function(response) {
-		                alert("success");
-		 				alert("response="+response);
-			      }//success
-          });//ajax
-      });//click
+				$('[data-toggle="datepicker"]').datepicker({
+					language:'zh-CN',
+					format:'yyyy/mm/dd',
+					startDate: null,
+					endDate: new Date(),
+					autoPick: true
+				});
+	
+				$("#submitinsert").click(function(){
+					var city="", town="";
+					//選擇城市
+					var $selectC = $('select[name="city"]');
+					for (var i = 0; i < $selectC.length; i++) {
+						city = $("option:selected", $selectC[i]);
+					}
+					//選擇城鎮
+					var $selectT = $('select[name="town"]');
+					for (var i = 0; i < $selectT.length; i++) {
+						town = $("option:selected", $selectT[i]);
+						
+					} 
+// 					alert("val"+i+"="+city.val()+"val"+i+"="+town.val());
+					var branchCounty=city.val()+town.val();
+					var branchAddress=$("#branchAddress").val();
+					var branchPhone=$("#branchPhone").val();
+					var branchName=$("#branchName").val();
+			        var branchArea=$("#branchArea").val();
+// 		            alert("新增分店:"+"\n店名:"+branchName+"\n地區:"+branchArea+"\n縣市:"+branchCounty+"\n地址:"+branchAddress+"\n電話:"+branchPhone);
+		      	    var cd= {"branchName":branchName,"branchArea":branchArea,"branchCounty":branchCounty,"branchAddress":branchAddress,"branchPhone":branchPhone}
+				    var zx=JSON.stringify(cd)
+				    $.ajax({
+				    	type:"post",
+				    	url:"saveBranchDetail",
+				    	data:zx,
+				    	contentType:"application/json;charset=utf-8",
+						success : function(response) {
+							alert("success");
+							alert("response="+response);
+				    
+							alert("上傳照片開始");
+							var formData = new FormData($("#multiform")[0]);
+							alert(formData);
+						    $.ajax({
+						    	type : "post",
+						    	url : "uploadBranchImg",
+						    	data : formData,// 使用FormData包裝form表單來傳輸資料
+								cache : false, // 不需要cache
+								processData : false, // jQuery預設會把data轉為query String, 所以要停用
+								contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+								dataType : 'text',
+								success : function(data) {
+									alert("上傳照片="+data);
+								},
+								error : function() {
+									alert("上傳照片失敗");
+								}
+							});//ajax upload branch image
+						    alert("上傳照片結束");
+						}//success
+				    });//ajax
+	      		});//click
 	});//document.ready
 			</script>
         </div>
