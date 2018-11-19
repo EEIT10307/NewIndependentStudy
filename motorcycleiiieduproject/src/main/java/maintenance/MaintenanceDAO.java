@@ -150,6 +150,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {
 		ArrayList<EveryBikeMileageToGson> everyBikeMileageToGson=new ArrayList<EveryBikeMileageToGson>();
 		for(EveryBikeMileage loop:finalEveryBikeMileage) {
+			System.out.println("我需要修理"+loop.getLicensePlate().getIsReadyMaintenance());
 			System.out.println(loop.getEveryBikeMileageSerialNum());
 			System.out.println(loop.getLicensePlate().getLicensePlate());
 			System.out.println(loop.getMaintenanceItem().getMaintenanceItem());
@@ -159,6 +160,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 			System.out.println(loop.getMaintenanceItem().getRequiredHourTodo());
 			System.out.println(loop.getLicensePlate().getTotalMileage());
 			everyBikeMileageToGson.add(new EveryBikeMileageToGson(
+					loop.getLicensePlate().getIsReadyMaintenance(),
 					loop.getEveryBikeMileageSerialNum(),
 					loop.getLicensePlate().getLicensePlate(),
 					loop.getMaintenanceItem().getMaintenanceItem(),
@@ -331,6 +333,18 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 			}
 			return maintenanceHistoryToGson;
 			
+	}
+	@Override
+	public boolean selectEveryBikeInfo(String licensePlate) {
+		Session session=factory.getCurrentSession();
+		String hql="From EveryBikeInfo where isReadyMaintenance=:isReadyMaintenance and licensePlate=:licensePlate";
+		List<EveryBikeInfo> cx =  session.createQuery(hql).setParameter("isReadyMaintenance", true).setParameter("licensePlate", licensePlate).getResultList();
+		if(cx.size()>0) {
+			System.out.println("有東西!!!12");
+			return true;
+		}
+		System.out.println("沒東西");
+		return false;
 	}
 
 

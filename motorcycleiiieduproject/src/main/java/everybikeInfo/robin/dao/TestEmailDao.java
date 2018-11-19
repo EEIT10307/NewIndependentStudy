@@ -38,7 +38,8 @@ public class TestEmailDao implements TestEmailIFaceDao{
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("bookwater168@gmail.com"));// 從上面打的帳號傳
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));
+//			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bookwater168@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("shuuuuuuuuuuzo@gmail.com"));
 			message.setSubject("感謝您的惠顧");
 			message.setText("http://localhost:8080/motorcycleiiieduproject/robinStar.html?email="+em+"&order="+or+"");
 

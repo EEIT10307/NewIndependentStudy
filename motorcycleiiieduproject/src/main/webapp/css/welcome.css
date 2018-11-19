@@ -1,0 +1,19 @@
+
+
+
+.welcomediv{animation: opaci ; animation-duration: 6.0s ; position: absolute; z-index: -1; width: 100%; height: 100%;
+     background-color: black ;  opacity: 0; text-align: center}
+@keyframes opaci {
+    0%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+.slogan1{  font-family: fantasy  ; font-size: 5em ;  letter-spacing: 0.5em ; position: relative ; left: 0.2em;}
+.slogan2{  font-family: fantasy  ; font-size: 1.5em ;  letter-spacing: 0.5em ; position: relative ; left: 0.2em;}

@@ -152,6 +152,9 @@
                                                        "<td>"+json3[i].maintenanceDate+"</td>"+
                                                        "</tr>"  )
           }
+          },
+          error:function(responseerror){
+              alert(responseerror.responseText)
           }
 	    });
 	    $(document).ready(function() {

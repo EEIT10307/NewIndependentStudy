@@ -172,12 +172,7 @@ div3.scrollTop(div3[0].scrollHeight +83);
 
 	    //發訊息
 	    function send(sendname , message) {
-			alert($(sendname).attr("name"))
-           
-	 
 		//	var jsonmessage = {mem.toString() :document.getElementById('mymessage').value }
-			
-			alert("message"+message)
              var sendTouse = (message+"-"+$(sendname).attr("name")) 
 			 var mymessage = sendTouse.split("-")[0]
 			 var today =  new Date() ; 
@@ -202,7 +197,7 @@ $(document).on("click","#sentoserve" , function () {
 
 //$(this).attr("name")
 var message = $("#"+$(this).attr("name")+'mymessage').val()
-$("#"+$(this).attr("name")+'mymessage').val("") ;
+$("#"+$(this).attr("name")+'mymessage').val("") 
 	send(this , message)
 
 
@@ -210,9 +205,19 @@ $("#"+$(this).attr("name")+'mymessage').val("") ;
 
 $(document).keypress(function(e) {
 	if(e.which == 13) {
-		send()
-$("#mymessage").val("") ;;
+	//	send()
+	var message =$("#"+$(".active_chat").attr("id")+"mymessage").val()
+var name = $("#"+$(".active_chat").attr("id")+"mymessage").next()
+
+$("#"+$(".active_chat").attr("id")+"mymessage").val("") ;
+
+    //  alert($(name).attr("name"))
+	// alert($("#"+$(".active_chat").attr("id")+"mymessage").val())
+
+	send(name , message)
 	}
+
+
 });
 
 

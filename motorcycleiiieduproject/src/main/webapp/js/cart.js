@@ -92,8 +92,7 @@ if(orderdetailstr.phone != ""){
 			data: JSON.stringify(orderdetailstr),
 			contentType: "application/json; charset=utf-8",
 			success: function (response) {
-				alert(response)
-				window.location.assign ("index.html"); 
+				
 	
 			},
 			error:function(responseerror){
@@ -102,8 +101,12 @@ if(orderdetailstr.phone != ""){
 		  
 			  
 			}
+			
 		})
+		alert("感謝您的預定 , 系統將會自動發送評價表至您的信箱")
+		window.location.assign ("index.html"); 
 	})
+	
 }else{
 
 $("#checkoutee").attr("data-toggle","modal");
@@ -127,10 +130,7 @@ $(".addphone").click(function (e) {
 		data: JSON.stringify(orderdetailstr),
 		contentType: "application/json; charset=utf-8",
 		success: function (response) {
-			alert(response)
-
-
-			window.location.assign ("index.html"); 
+			
 
 		},
 		error:function(responseerror){
@@ -140,6 +140,10 @@ $(".addphone").click(function (e) {
 		  
 		}
 	});
+	alert("感謝您的預定 , 系統將會自動發送評價表至您的信箱")
+
+
+	window.location.assign ("index.html"); 
 	}
 });
 

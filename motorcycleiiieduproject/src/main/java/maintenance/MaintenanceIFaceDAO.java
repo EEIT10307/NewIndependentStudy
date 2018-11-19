@@ -31,5 +31,5 @@ public interface MaintenanceIFaceDAO {
 
 	List<MaintenanceHistory>showAllMaintenanceHistory();
 	List<MaintenanceHistoryToGson> maintenanceHistoryforGsonConvert(List<MaintenanceHistory> finalMaintenanceHistory) throws Exception;
-
+	boolean selectEveryBikeInfo(String licensePlate);
 }

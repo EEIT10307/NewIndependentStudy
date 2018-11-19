@@ -147,6 +147,9 @@ $(document).ready(function () {
 
             }
 
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
 
     });
@@ -162,6 +165,9 @@ $(document).ready(function () {
                 sessionStorage.setItem(discountName, JSON.stringify(response[x]));
 
             }
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
     });
 
@@ -246,6 +252,9 @@ $(document).ready(function () {
                 $(this).attr("selected" , "selected")
               }
             }) 
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
     });
     //選項保留前頁資訊
