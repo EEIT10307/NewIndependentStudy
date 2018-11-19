@@ -918,4 +918,10 @@ public class OrderDAO implements OrderIFaceDAO {
 		
 	}
 
+	@Override
+	public List<BranchDetail> showAllBranchDetail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -125,7 +125,11 @@ $(document).ready(function () {
 	//========
 	$(document).on("click", "#sentoserve", function () {
 		send()
-$("#mymessage").val("") ;;
+$("#mymessage").val("") ;
+		
+		var div3 = $(".msg_history");
+		div3.scrollTop(div3[0].scrollHeight + 83);
+		
 	});
 
 
@@ -133,6 +137,8 @@ $("#mymessage").val("") ;;
 		if(e.which == 13) {
 			send()
 $("#mymessage").val("") ;;
+var div3 = $(".msg_history");
+div3.scrollTop(div3[0].scrollHeight + 83);
 		}
 	});
 	
