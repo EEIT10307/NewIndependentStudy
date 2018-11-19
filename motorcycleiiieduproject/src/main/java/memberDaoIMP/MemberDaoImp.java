@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +22,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import cleanbean.MemberDetailCleanBean;
 import memberIDAO.MemberIdao;
+import projectbean.BranchDetail;
 import projectbean.MemberDetail;
 
 
@@ -341,6 +345,26 @@ public class MemberDaoImp implements MemberIdao {
 			
 	}
 
+	@Override
+	public List<MemberDetail> getMemberPhone(String email) {
+		
+		
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<MemberDetail> createQuery = buider.createQuery(MemberDetail.class);
+		Root<MemberDetail> fromClass = createQuery.from(MemberDetail.class);
+		createQuery.select(fromClass).where(buider.equal(fromClass.get("email"), email));
+		List<MemberDetail> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+	
+		return branchlist;
+		
+		
+		
+	
+		
+	}
+	
+	
+	
 
 	}
 

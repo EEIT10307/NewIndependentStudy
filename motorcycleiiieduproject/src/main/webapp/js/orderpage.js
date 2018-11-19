@@ -206,6 +206,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                     $(".orderlistbody").append(element);
 
                 }
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
 
         });
@@ -219,6 +222,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                     var discountName = response[x].discountName
                     sessionStorage.setItem(discountName, JSON.stringify(response[x]));
                 }
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
     });
@@ -291,6 +297,9 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
                 }
 
 
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
 
@@ -301,7 +310,6 @@ if (overday.getHours() >= 22 || (overday.getHours() >= 0 & overday.getHours() < 
     $(".orderlistbody").on("click", ".orderDoubleCheck", function () {
         var ordertype = sessionStorage.orderTime;
         var orderjson = JSON.parse(ordertype)
-
         alert(ordertype)
         var orderday = new Date();
         var mototrname = $(".orderone span").attr("class");

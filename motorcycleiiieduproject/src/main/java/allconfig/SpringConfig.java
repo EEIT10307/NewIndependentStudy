@@ -19,7 +19,9 @@ import com.google.gson.Gson;
 
 @Configuration
 @ComponentScan(basePackages={"testbean","orderdao","orderservice","maintenance","branchdetail",
+
 		"everybikeInfo","testfakebikedao","webinfomanagerservice","webcrawler","webinfomanagerdao","dispatcherdao" ,"dispatcherservice","branchdetaildao","branchdetailservice","branchscenedao","branchsceneservice","memberservice","memberDaoIMP"})
+
 
 @EnableTransactionManagement
 public class SpringConfig {

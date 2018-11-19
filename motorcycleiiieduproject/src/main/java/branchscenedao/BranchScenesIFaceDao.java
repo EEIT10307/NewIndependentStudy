@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchDetail;
 import projectbean.BranchScenes;
 
@@ -14,15 +15,13 @@ public interface BranchScenesIFaceDao {
 	
 	List<BranchScenes> selectBranchScenes(String spotName);
 	
-	List<String> getBranchScenes();
+	List<BranchScenesForJson> getBranchScenes();
 	
 	List<BranchScenes> getScenes();
-	
-	int deleteScenes(String spotAddress, String spotPhoto);
-
-	int updateScenes(BranchScenes bs);
 
 	int saveBranchScenes() throws MalformedURLException, IOException;
 	
-	List<BranchScenes> showBranchScenes(BranchDetail branchName);
+	List<BranchScenes> showBranchScenes(String spotArea);
+	
+	List<BranchScenesForJson> showBranchScenesGson(List<BranchScenes> finalShowAreaSpot);
 }

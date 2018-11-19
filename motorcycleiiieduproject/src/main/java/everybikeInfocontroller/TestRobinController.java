@@ -38,6 +38,7 @@ import cleanbean.MemberDetailSelectYearForJson;
 import cleanbean.OrderListRobinYear;
 import cleanbean.QaBean;
 import cleanbean.QaBeanToJson;
+import everybikeInfo.robin.BackIFaceService;
 import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.BikeDetailIFaceService;
 import everybikeInfo.robin.service.BikeReviewIFaceService;
@@ -77,6 +78,8 @@ public class TestRobinController {
 	MemberDetailIFaceService memberDetailIFaceService;
 	@Autowired
 	OrderIFaceService orderIFaceService;
+	@Autowired
+	BackIFaceService backIFaceService;
 	@Autowired
 	Gson gson;
 
@@ -150,8 +153,10 @@ public class TestRobinController {
 			MultipartFile file = files[i];
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
+			//=/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
+				//=C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
+						"/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
 						"R3_1990_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
@@ -336,6 +341,11 @@ public class TestRobinController {
 	public @ResponseBody String getAllOrderList() throws IOException {
 			return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
 	}
+	@PostMapping(value = "/back", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String back() throws IOException {
+			
+			return "";
+	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 
 	@RequestMapping(value = "/uploadmutipart", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE) // 測試上傳照片(多張)
@@ -352,8 +362,10 @@ public class TestRobinController {
 	
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
+				//=/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
+				//=C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image",
+						"/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
 						BikeModel + "_" + ModelYear + "_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());

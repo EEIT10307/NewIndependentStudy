@@ -17,6 +17,9 @@ $.ajax({
      sessionStorage.myjson = response ; 
      window.location.assign ("checkall.html");     
         
+    },
+    error:function(responseerror){
+        alert(responseerror.responseText)
     }
 });
 

@@ -183,12 +183,24 @@ $(".orderDoubleCheck").on("click", function () {
         mm = '0' + mm
     }
  var  acceItemString  = JSON.stringify(acceItem) ; 
+ var cookie = document.cookie;
+
+if(cookie.indexOf("memberphone")==-1){
+    var memphone = ""
+    var memcheck = "false"
+
+}else{
+    var memphone= cookie.split("memberphone=")[1].split(";")[0];
+  
+    var memcheck = "true" 
+}
+
 if(acceItemString == "{}"){
 acceItemString=""
 }
-
+    
     orderdetail.orderSerialNum = ""
-    orderdetail.phone = ""
+    orderdetail.phone = memphone.trim().toString()
     orderdetail.bikeModel = detailmotor.bikeModel
     orderdetail.pickupDate = orderjson.pickupDate
     orderdetail.dropoffDate = orderjson.dropoffDate
@@ -202,11 +214,13 @@ acceItemString=""
     orderdetail.dropoffStore = orderjson.dropoffStore
     orderdetail.discountName = $("#motordetailorderdiscount").text()
     orderdetail.orderStatus = "未來訂單"
-    orderdetail.is_member = "false"
+    orderdetail.is_member = memcheck
     orderdetail.payOrNot = "false"
 
 
     sessionStorage.orderdetailsession = JSON.stringify(orderdetail) ; 
+
+ //    alert(JSON.stringify(orderdetail))
 
     window.location.assign ("cart.html"); 
 
@@ -349,7 +363,10 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 			data : too,
 			contentType:"application/json; charset=utf-8",
 			success : function(response) {
-			}
+			},
+		     error:function(responseerror){
+		 //        alert(responseerror.responseText)
+		     }
 		});
 		
 		

@@ -59,8 +59,9 @@
 					<td>PickUpdate:   <span id="takepickup"></span>  PickUpstore:  <span id="takepickupstore"></span> <br>DropOffdate:  <span id="takedropoff"></span>Dropoffstore:  <span id="takedropoffstore"></span></td>
 					<td colspan="2"><button class="btn btn-secondary btn-block" type="submit" id="gobacke"><i class="fa fa-angle-left"></i>修改配件</button></td><!--空元素-->
 					<td class="d-none d-sm-block text-right"><strong>總金額 $<span id="totalamo">XXX</span></strong></td>
-					<td><button href="index.html" class="btn btn-success btn-block" type="submit" id="checkout" data-toggle="" data-target="">結帳<i class="fa fa-angle-right"></i></button></td>
+					<td><button  class="btn btn-success btn-block "  id="checkoutee" data-toggle="" data-target="">結帳</button></td>
 				</tr>
+			
 			</tfoot>
 		</table>
 	</div>
@@ -75,14 +76,25 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal fade" id="examplefinalcheck" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">	
+
+					<button class= 'addphone2'>確認送出</button>
+			</div>
+		</div>
+	</div>
+
+
+
+<!--	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div w3-include-html="login.html"></div>
 			</div>
 		</div>
 	</div>
-
+-->
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
 	<script src="js/cart.js"></script>

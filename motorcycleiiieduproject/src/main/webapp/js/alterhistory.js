@@ -17,6 +17,9 @@ $(document).ready(function () {
                 .text(json[x]))
         }
 
+    },
+    error:function(responseerror){
+        alert(responseerror.responseText)
     }
 });
 //=========
@@ -79,6 +82,9 @@ var t =$('#dataTable').DataTable() ;
 
 
 
+            },
+            error:function(responseerror){
+                alert(responseerror.responseText)
             }
         });
 

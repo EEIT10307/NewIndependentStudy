@@ -21,18 +21,18 @@ public class BikeDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private IdClassBikeDetail idClassBikeDetail ;
-	private String bikeBrand ; 
-	private String engineType ; 
-	private String bikeType;
-	private String plateType ; 
-	private Double fuelTankCapacity ; 
-	private Double seatHeight;
-	private Double dryWeight;
-	private Double fuelConsumption;
-	private String frontTire ; 
-    private String fuelType ;
-    private Boolean aBS ; 
+	private IdClassBikeDetail idClassBikeDetail ;//型號和年分
+	private String bikeBrand ; //廠牌
+	private String engineType ; //CC數
+	private String bikeType;//車種
+	private String plateType ; //紅黃白牌
+	private Double fuelTankCapacity ; //油箱容量
+	private Double seatHeight;//座高
+	private Double dryWeight;//車子乾重
+	private Double fuelConsumption;//油耗
+	private String frontTire ; //前輪
+    private String fuelType ;//使用燃料
+    private Boolean aBS ; //煞車
     private Integer hourPrice;
     private java.util.Date onSheftTime;
     

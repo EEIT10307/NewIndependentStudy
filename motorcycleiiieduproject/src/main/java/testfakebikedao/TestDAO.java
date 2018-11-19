@@ -19,7 +19,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import everybikeInfo.robin.service.AcceStockIFaceService;
 import everybikeInfo.robin.service.EveryBikeMileageIFaceService;
+import projectbean.AcceSerialNum;
 import projectbean.BikeDetail;
 import projectbean.BranchDetail;
 import projectbean.EveryBikeInfo;
@@ -35,6 +37,8 @@ public class TestDAO {
 	SessionFactory factory;
 	@Autowired
 	EveryBikeMileageIFaceService everyBikeMileageIFaceService;
+	@Autowired
+	AcceStockIFaceService acceStockIFaceService;
 
 	public TestDAO() {
 		System.out.println("test DAO startUP");
@@ -45,7 +49,7 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList3.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\OrderList2.txt")));
 
 		String line;
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -107,11 +111,11 @@ public class TestDAO {
 //C:\\Users\\III\\Desktop\\fakedata\\EveryBikeInfo.txt
 		BufferedReader bf = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\BikeDetail1.txt")));
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo1.txt")));
 
 		String line;
 		String line2;
@@ -120,7 +124,7 @@ public class TestDAO {
 		roop: while ((line = bf.readLine()) != null) {
 			String[] lines = line.split(",");
 			System.out.println(lines.toString());
-			System.out.println("test" + lines[0]);
+			System.out.println("test:=" + lines[21]);
 			/* ====new 上架新商品 ==== */
 			BikeDetail bikeD = new BikeDetail();
 			// 複合主鍵 設定主鍵值
@@ -140,6 +144,7 @@ public class TestDAO {
 			bikeD.setHourPrice(Integer.valueOf(lines[13]));
 			Date dar = sim1.parse(lines[14]);
 			bikeD.setOnSheftTime(dar);
+			
 			bikeD.setFrontSuspension(lines[15]);
 			bikeD.setRearSuspension(lines[16]);
 			bikeD.setRearTire(lines[17]);
@@ -198,8 +203,11 @@ public class TestDAO {
 
 	public void makeFakeBikeDescription() throws IOException, NumberFormatException, ParseException {
 
+//		BufferedReader bf = new BufferedReader(
+//				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
 		BufferedReader bf = new BufferedReader(
-				new FileReader(new File("/Users/kuochiahao/TeamWork-workspace/fakedata/description.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\description1.txt")));//ROBIN
+		
 		String lines = "";
 		String line;
 		BikeDetail bikedetail = null;
@@ -236,7 +244,7 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo1.txt")));
 		String line2;
 		roop: while ((line2 = motorpl.readLine()) != null) {
 			if (line2.equals("=")) {
@@ -289,6 +297,20 @@ public class TestDAO {
 			factory.getCurrentSession().persist(member);
 			System.out.println(154546456);
 			System.out.println("地區" + lines[0]);
+		}
+
+	}
+	public void insertFakeAcceSerialNum() throws IOException, ParseException {
+		@SuppressWarnings("resource")
+		BufferedReader Member = new BufferedReader(
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\AcceSerialNum.txt")));
+		String line;
+		while ((line = Member.readLine()) != null) {
+			String[] lines = line.split(",");
+			AcceSerialNum acceSerialNum=new AcceSerialNum();
+			acceSerialNum.setAcceSerialNum(lines[0]);
+			acceSerialNum.setAcceType(lines[1]);
+			acceStockIFaceService.insertAcceSerialNum(acceSerialNum);
 		}
 
 	}

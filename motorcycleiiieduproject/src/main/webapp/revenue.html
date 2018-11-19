@@ -209,7 +209,7 @@
 						
 						
 						var jan={}
-						jan["x"]=new Date(2009, 0)
+						jan["x"]=new Date(2008, 0)
 						jan["y"]=branchName.one
 						var feb={}
 						feb["x"]=new Date(2010, 1)
@@ -449,7 +449,13 @@
       </div>
     </div>
     
-    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+   	<!-- w3-include-html=chatbox.html -->
+		<div  class="d-none" id="chatbox">
+
+		</div>
+		<script>
+		$("#chatbox").load("chatbox.html");
+		</script>
 	<script>includeHTML();</script>
   </body>
 </html>

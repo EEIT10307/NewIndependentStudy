@@ -54,5 +54,11 @@ public class AcceStockService implements AcceStockIFaceService {
 		return acceStockIFaceDao.countAcceStockx();
 	}
 
+	@Override
+	public int insertAcceSerialNum(AcceSerialNum acceSerialNum) {
+		// TODO Auto-generated method stub
+		return acceStockIFaceDao.insertAcceSerialNum(acceSerialNum);
+	}
+
 
 }

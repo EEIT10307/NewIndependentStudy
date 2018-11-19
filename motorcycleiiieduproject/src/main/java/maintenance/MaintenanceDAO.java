@@ -120,12 +120,44 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		return list;
 	}
 	
-
+	@Override
+	public List<EveryBikeInfo> showEveryBikeBasicInfobyStore(String shopName) {
+		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<EveryBikeInfo> createQuery = builder.createQuery(EveryBikeInfo.class);
+		Root<EveryBikeInfo> fromClass = createQuery.from(EveryBikeInfo.class);
+		createQuery.orderBy(builder.asc(fromClass.get("licensePlate")));
+		createQuery.select(fromClass).where(builder.equal(fromClass.get("branchName").get("branchName"), shopName));
+		Query<EveryBikeInfo> queryword = factory.getCurrentSession().createQuery(createQuery);	
+		List<EveryBikeInfo> list = queryword.getResultList();
+		System.out.println("List的值為"+list);
+		return list;
+	}
+	
+	@Override
+	public List<EveryBikeMileage> showEveryMaintenanceItembyPlate(String licensePlate) {
+		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<EveryBikeMileage> createQuery = builder.createQuery(EveryBikeMileage.class);
+		Root<EveryBikeMileage> fromClass = createQuery.from(EveryBikeMileage.class);
+		createQuery.orderBy(builder.asc(fromClass.get("maintenanceItem")));
+		createQuery.select(fromClass).where(builder.equal(fromClass.get("licensePlate").get("licensePlate"), licensePlate));
+		Query<EveryBikeMileage> queryword = factory.getCurrentSession().createQuery(createQuery);	
+		List<EveryBikeMileage> list = queryword.getResultList();
+		System.out.println("List的值為"+list);
+		return list;
+	}
 
 	@Override
 	public List<EveryBikeMileageToGson> everyBikeMileageforGsonConvert(List<EveryBikeMileage> finalEveryBikeMileage) {
 		ArrayList<EveryBikeMileageToGson> everyBikeMileageToGson=new ArrayList<EveryBikeMileageToGson>();
 		for(EveryBikeMileage loop:finalEveryBikeMileage) {
+			System.out.println(loop.getEveryBikeMileageSerialNum());
+			System.out.println(loop.getLicensePlate().getLicensePlate());
+			System.out.println(loop.getMaintenanceItem().getMaintenanceItem());
+			System.out.println(loop.getCurrentMileage());
+			System.out.println(loop.getMaintenanceItem().getRequiredMileage());
+			System.out.println(loop.getLicensePlate().getBranchName().getBranchName());
+			System.out.println(loop.getMaintenanceItem().getRequiredHourTodo());
+			System.out.println(loop.getLicensePlate().getTotalMileage());
 			everyBikeMileageToGson.add(new EveryBikeMileageToGson(
 					loop.getEveryBikeMileageSerialNum(),
 					loop.getLicensePlate().getLicensePlate(),
@@ -300,6 +332,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 			return maintenanceHistoryToGson;
 			
 	}
+
 
 	
 }

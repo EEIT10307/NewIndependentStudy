@@ -59,17 +59,17 @@ var t =$('#dataTable').DataTable() ;
                     if( response[k].orderStatus == "未來訂單"){
                         orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" + "<optgroup label='訂單狀態'>"+ "<option value='進行中訂單'>取車完成</option>" +
                         "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
-                        orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
+                        orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認訂單</button></td>"
                     }else if( response[k].orderStatus == "進行中訂單"){
                         orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
-                        orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
+                        orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                     }else if (response[k].orderStatus == "未來調度"){ 
                         orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
                         "<option value='已取消調度'>取消調度</option>" +"</optgroup>"+"</select>"
-                        orderoptionbutton =    "<td><button type='button' class='btn btn-warning btn-sm checkOrder'>確認調度</button></td>"
+                        orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認調度</button></td>"
                     }else if (response[k].orderStatus == "進行中調度"){ 
                         orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" + "<option value='已完成調度'>完成調度</option>" +"</optgroup>"+"</select>"
-                        orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
+                        orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finDisp'>完成調度</button></td>"
                     }
             
    var x = response[k].totalDiscount
@@ -183,17 +183,17 @@ var t =$('#dataTable').DataTable() ;
                         if( response[k].orderStatus == "未來訂單"){
                             orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" + "<optgroup label='訂單狀態'>"+ "<option value='進行中訂單'>取車完成</option>" +
                             "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
-                            orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
+                            orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認訂單</button></td>"
                         }else if( response[k].orderStatus == "進行中訂單"){
                             orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
-                            orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
+                            orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                         }else if (response[k].orderStatus == "未來調度"){ 
                             orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
                             "<option value='已取消調度'>取消調度</option>" +"</optgroup>"+"</select>"
-                            orderoptionbutton =    "<td><button type='button' class='btn btn-warning btn-sm checkOrder'>確認調度</button></td>"
+                            orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認調度</button></td>"
                         }else if (response[k].orderStatus == "進行中調度"){ 
                             orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" + "<option value='已完成調度'>完成調度</option>" +"</optgroup>"+"</select>"
-                            orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
+                            orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finDisp'>完成調度</button></td>"
                         }
     
                         t.row.add([
@@ -293,17 +293,17 @@ $.ajax({
                 if( response[k].orderStatus == "未來訂單"){
                     orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" + "<optgroup label='訂單狀態'>"+ "<option value='進行中訂單'>取車完成</option>" +
                     "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
-                    orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
+                    orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認訂單</button></td>"
                 }else if( response[k].orderStatus == "進行中訂單"){
                     orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
-                    orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
+                    orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                 }else if (response[k].orderStatus == "未來調度"){ 
                     orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
                     "<option value='已取消調度'>取消調度</option>" +"</optgroup>"+"</select>"
-                    orderoptionbutton =    "<td><button type='button' class='btn btn-warning btn-sm checkOrder'>確認調度</button></td>"
+                    orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認調度</button></td>"
                 }else if (response[k].orderStatus == "進行中調度"){ 
                     orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" + "<option value='已完成調度'>完成調度</option>" +"</optgroup>"+"</select>"
-                    orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp'>完成調度</button></td>"
+                    orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finDisp'>完成調度</button></td>"
                 }
 
                 t.row.add([
@@ -437,17 +437,17 @@ var godate   =   JSON.stringify({"orderstatus":$(this).parent().prev().children(
                    if( response[k].orderStatus == "未來訂單"){
                        orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" + "<optgroup label='訂單狀態'>"+ "<option value='進行中訂單'>取車完成</option>" +
                        "<option value='已取消訂單'>取消訂單</option>" +"</optgroup>"+"</select>" 
-                       orderoptionbutton =    "<td><button type='button' class='btn btn-primary btn-sm checkOrder'>確認訂單</button></td>"
+                       orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認訂單</button></td>"
                    }else if( response[k].orderStatus == "進行中訂單"){
                        orderoption ="<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='訂單狀態'>"+"<option value='已完成訂單'>還車完成</option>" +"</optgroup>"+"</select>"
-                       orderoptionbutton =    "<td><button type='button' class='btn btn-success btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
+                       orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finOrder' data-toggle = 'modal'  data-target = '#exampleEnterDis'>完成訂單</button></td>"
                    }else if (response[k].orderStatus == "未來調度"){ 
                        orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" +  "<option value='進行中調度'>進行調度</option>" +
                        "<option value='已取消調度'>取消調度</option>" +"</optgroup>"+"</select>"
-                       orderoptionbutton =    "<td><button type='button' class='btn btn-warning btn-sm checkOrder'>確認調度</button></td>"
+                       orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm checkOrder'>確認調度</button></td>"
                    }else if (response[k].orderStatus == "進行中調度"){ 
                        orderoption = "<select class='form-control form-control-sm' id ='selectresault'>" +  "<optgroup label='調度狀態'>" + "<option value='已完成調度'>完成調度</option>" +"</optgroup>"+"</select>"
-                       orderoptionbutton =    "<td><button type='button' class='btn btn-info btn-sm finDisp' >完成調度</button></td>"
+                       orderoptionbutton =    "<td><button type='button' class='btn btn-secondary btn-sm finDisp' >完成調度</button></td>"
                    }
 
                 t.row.add([
@@ -480,9 +480,15 @@ var godate   =   JSON.stringify({"orderstatus":$(this).parent().prev().children(
         
            
 
+           },
+           error:function(responseerror){
+               alert(responseerror.responseText)
            }
        });
 
+     },
+     error:function(responseerror){
+         alert(responseerror.responseText)
      }
  });
 //======================================

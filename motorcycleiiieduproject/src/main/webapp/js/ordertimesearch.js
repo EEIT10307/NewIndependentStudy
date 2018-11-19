@@ -3,7 +3,7 @@ $(window).on('load', function () {
     var orderdetail = {};
     //做時間選項
     var today = new Date();
-    //   $("#pDate").attr("value", today);
+      //   $("#pDate").attr("value", today);
     var futureday = new Date();
     //    alert(today.getHours())
 
@@ -72,6 +72,9 @@ $(window).on('load', function () {
                 $(".dropoffbranchName").append($("<option value='" + json[x] + "'></option>")
                     .text(json[x]))
             }
+        },
+        error:function(responseerror){
+            alert(responseerror.responseText)
         }
     });
     //日期預設今日
@@ -180,3 +183,4 @@ $(window).on('load', function () {
     });
 
 });
+

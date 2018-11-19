@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/chat.css">
+<script src="js/chatGmusemuti.js"></script>
 <div class="container-fluid chatcollapse fixed-bottom justify-content-end col-lg-5 offset-lg-7 col-md-6 offset-md-6 col-sm-12 offset-sm-0">
 <div>
 	<div class="col-md-12 col-xs-12 d-flex justify-content-end pt-2 rounded-top border border-secondary border-bottom-0" data-toggle="collapse" href="#chat" id="chatWindow" style="background-color: #343a40;">
@@ -20,65 +21,31 @@
             </div>
           </div>
           <div class="inbox_chat" id="getmsg">
-            <div class="chat_list active_chat">
+            <div class="chat_list active_chat" id = "艾捷克斯">
               <div class="chat_people">
                 <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png"> </div>
                 <div class="chat_ib">
-                  <h5 id='inname'>艾捷克斯<span class="chat_date">2018/01/01</span></h5>
+                  <h5 id='inname' class = 'chaterroom'>艾捷克斯<span class="chat_date">:2018/01/01</span></h5>
                   <p id='msgin'>我的英文名字叫Ajax</p>
                 </div>
               </div>
             </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png"> </div>
-                <div class="chat_ib">
-                  <h5 id='inname'>杰法斯庫柏客<span class="chat_date">2018/06/25</span></h5>
-                  <p id='msgin'>I'm Javascript.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
+
+            <!-- <div class="chat_list" id = "史蒲玲">
               <div class="chat_people">
                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"> </div>
                 <div class="chat_ib">
-                  <h5 id='inname'>魯斯特佛<span class="chat_date">2002/09/12</span></h5>
-                  <p id='msgin'>我叫Restful!</p>
-                </div>
-              </div>
-            </div>
-          <div class="inbox_chat">
-            <div class="chat_list active_chat">
-              <div class="chat_people">
-                <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png"> </div>
-                <div class="chat_ib">
-                  <h5 id='inname'>屎光<span class="chat_date">2018/11/11</span></h5>
-                  <p id='msgin'>Hey, I'm Scrum.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png"> </div>
-                <div class="chat_ib">
-                  <h5 id='inname'>斯弗雷特<span class="chat_date">2018/04/05</span></h5>
-                  <p id='msgin'>my name is Servlet.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png"> </div>
-                <div class="chat_ib">
-                  <h5 id='inname'>史蒲玲<span class="chat_date">1998/02/13</span></h5>
+                  <h5 id='inname' class = 'chaterroom'>史蒲玲<span class="chat_date">:1998/02/13</span></h5>
                   <p id='msgin'>我叫Spring</p>
                 </div>
               </div>
-            </div>
-            </div>
+            </div> -->
+         
           </div>
         </div>
-        <div class="mesgs bg-light">
+        <div class="chatroom">
+
+        <div class="mesgs bg-light" id="艾捷克斯chatroom">
           <div class="msg_history">
             <div class="incoming_msg">
               <div class="incoming_msg_name"></div>
@@ -95,37 +62,47 @@
                   solutions</p>
                 <span class="time_date"> 11:01 AM    |    June 9</span> </div>
             </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_name"></div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test, which is a new approach to have</p>
-                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-              </div>
-            </div>
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span> </div>
-            </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_name"></div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>We work directly with our designers and suppliers,
-                    and sell direct to you, which means quality, exclusive
-                    products, at a price anyone can afford.</p>
-                  <span class="time_date"> 11:01 AM    |    Today</span></div>
-              </div>
-            </div>
           </div>
           <div class="type_msg">
             <div class="input_msg_write">
-              <input type="text" class="write_msg" placeholder="Type a message" />
-              <button class="msg_send_btn mr-2 my-auto" type="button"><i class="fas fa-paper-plane pt-2 pr-2"></i></button>
+              <input type="text"  id="艾捷克斯mymessage" class="write_msg" placeholder="Type a message" />
+              <button class="msg_send_btn mr-2 my-auto" id="sentoserve" name='艾捷克斯'  type="button"><i class="fas fa-paper-plane pt-2 pr-2"></i></button>
             </div>
           </div>
         </div>
+
+<!-- ==================================================================== -->
+        <!-- <div class="mesgs bg-light" id="史蒲玲chatroom"  hidden="hidden">
+            <div class="msg_history">
+              <div class="incoming_msg">
+                <div class="incoming_msg_name"></div>
+                <div class="received_msg">
+                  <div class="received_withd_msg">
+                    <p>側是側是
+                      solutions</p>
+                    <span class="time_date"> 11:01 AM    |    June 9</span></div>
+                </div>
+              </div>
+              <div class="outgoing_msg">
+                <div class="sent_msg">
+                  <p>Test whi好 to have all
+                    solutions</p>
+                  <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+              </div>
+              
+            </div>
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <input type="text"  id="mymessage" class="write_msg" placeholder="Type a message" />
+                <button class="msg_send_btn mr-2 my-auto" id="sentoserve" name="史蒲玲"  type="button"><i class="fas fa-paper-plane pt-2 pr-2"></i></button>
+              </div>
+            </div>
+          </div> -->
+          <!-- ==================================================================== -->
+</div>
+
+
+
       </div>
     </div>
 </div>

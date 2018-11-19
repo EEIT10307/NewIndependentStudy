@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -229,6 +231,9 @@ public class OrderController {
 			if(motorFinallCheck && motorAcceFinallCheck) {	
 				tesOrderIFaceService.addOrderToDatabase(tesOrderIFaceService.convertToOrderList(customorder) ,customorder.getOrderTime().split(" ")[0] , 
 						compareOrderlist, customerquery ,   orderABbranch  , orderFromAnotherbranch);
+				    
+		  
+				
 				System.out.println("成功");
 				return  ResponseEntity.accepted().body(gson.toJson("ok"));
 			}else {
@@ -322,7 +327,119 @@ public class OrderController {
 			}
 		}
 	
-	
-	
+		
+		// 會員訂單傳入特別方法
+		@PostMapping(value = "/getlastcheckorderlistSpecialMethod", produces = "text/html; charset = UTF-8")
+		public @ResponseBody String getlastcheckorderlistSpecialMethod( HttpServletRequest request ) throws IOException, ParseException {
+			
+				  System.out.println("FxxU");
+				  
+				     OrderListToGson customorder = gson.fromJson(request.getReader(), OrderListToGson.class);
+				   //錯誤訊息庫
+					    Map<String, String> errormessage = new HashMap<String,String>();
+					// 最終比對車子訂單
+					boolean motorFinallCheck = false;
+					// 最終比對配件訂單
+					boolean motorAcceFinallCheck = false;
+					/// 訂單取出日期比對
+					BasicOrderBean customerquery = new BasicOrderBean(customorder.getPickupDate(), customorder.getDropoffDate(),
+							customorder.getPickupStore(), customorder.getDropoffStore());
+					// 此方法接收使用者入的店名 將該店所有訂單取出來
+					List<OrderList> orderbranch = tesOrderIFaceService.showAllOrderFromShop(customerquery.getPickupStore());
+					System.out.println("取出所有訂單二次"+orderbranch.toString());
+					// 此方法將甲地乙還的訂單選出來
+					  List<OrderList> orderABbranch = tesOrderIFaceService.checkAllOrderFromABShop(orderbranch , customerquery.getPickupDate());
+					  // 此方法將乙地甲環的訂單選出來
+					  List<OrderList> orderFromAnotherbranch = tesOrderIFaceService.showAllOrderFromAnotherShop(customerquery.getPickupStore() , customerquery.getDropoffDate()) ;
+					// 此方法比較所有已存在訂單並且回傳重複的車名
+					  System.out.println("此方法比較所有已存在訂單並且回傳重複的車名進入之前" + orderbranch.toString());
+					List<OrderList> compareOrderlist = tesOrderIFaceService.compareOrderlist(customerquery, orderbranch);
+					List<String> comPareOrderListMotorModel = new ArrayList<String>();
+					for(    OrderList loop :compareOrderlist) {
+						comPareOrderListMotorModel.add(loop.getBikeModel());
+						System.out.println("傳重複的車名"+loop.getBikeModel());
+					}		
+					
+					// 此方法比對店內庫存並回傳可租車輛的資訊
+					List<BikeDetail> finalBikeDetail = tesOrderIFaceService.returnMotorDetailAndShowView(comPareOrderListMotorModel,
+							customerquery.getPickupStore() , orderABbranch , orderFromAnotherbranch);
+					for(  BikeDetail root:finalBikeDetail) {
+						System.out.println("二次判斷"+root.getIdClassBikeDetail().getBikeModel());
+					}
+					for (BikeDetail root : finalBikeDetail) {
+						if (root.getIdClassBikeDetail().getBikeModel().equals(customorder.getBikeModel())) {
+							motorFinallCheck = true;
+						}
+					}
+					System.out.println("hi" + motorFinallCheck);
+					// 訂單取出配件資訊....
+					String acceAmount = customorder.getAccessoriesAmount();
+					System.out.println("======顧客下訂的配件======="+acceAmount);
+					String[] acceListSplit = acceAmount.toString().replace("{", "").replace("}", "").replace("[", "").
+							replace("]", "").replace("\"", "").trim().split(",");
+					HashMap<String, Integer> acceMap = new HashMap<String, Integer>();
+					System.out.println(acceListSplit.toString()+"==="+acceListSplit.length);
+					if(acceListSplit.length >= 1 &&  !acceListSplit[0].isEmpty()) {
+						for (String root : acceListSplit) {
+							acceMap.put(root.split(":")[0].replaceAll("\"", ""),
+									Integer.valueOf(root.split(":")[1].replaceAll("\"", "")));
+						}
+					}
+					System.out.println("=======acceMap=="+acceMap.toString());
+					Iterator<Entry<String, Integer>> acceMapIter = acceMap.entrySet().iterator();
+					// 比對訂單庫存
+					List<AcceStock> compareAcceStock = tesOrderIFaceService.compareAcceStock(customerquery , orderABbranch , orderFromAnotherbranch);
+					int accecheck = 0 ; 
+					while (acceMapIter.hasNext()) {
+						Entry<String, Integer> mapIter = acceMapIter.next();
+						System.out.println("+====="+compareAcceStock.toString());
+						for (AcceStock root : compareAcceStock) {
+							System.out.println("+==客戶訂單比對==="+mapIter.getKey()+"===="+mapIter.getValue());	
+							System.out.println("+==比對庫存傳回的結果==="+root.getAcceName()+"======="+root.getAcceNum());	
+							if (mapIter.getKey().equals(root.getAcceName())) {
+								System.out.println("+==mapIter.getValue()=="+mapIter.getValue()+"====root.getAcceNum()="+root.getAcceNum());
+								if (mapIter.getValue() <= root.getAcceNum()) {
+									System.out.println("+==mapIter.getValue()=="+mapIter.getValue()+"====root.getAcceNum()="+root.getAcceNum());
+									motorAcceFinallCheck = true;
+								} else {
+									accecheck++;
+									errormessage.put(root.getAcceName(), "配件"+root.getAcceName()+"該時段已經沒有庫存囉");
+								}
+							}
+						}
+					}
+					if(acceMap.size() == 0 ) {
+						motorAcceFinallCheck = true;
+					}
+			  if(accecheck>0) {
+				  motorAcceFinallCheck = false ; 
+			  }
+			  if(!motorFinallCheck) {
+				  errormessage.put("motorfull", customorder.getBikeModel()+"已經被人預定囉 , 請搜尋其他時段或者選擇其他車型");
+			  }
+			  
+					System.out.println("acce result   ============="+motorAcceFinallCheck);
+					try {
+						//二次判斷是否有人中途攔截租走
+						if(motorFinallCheck && motorAcceFinallCheck) {	
+							tesOrderIFaceService.addOrderToDatabase(tesOrderIFaceService.convertToOrderList(customorder) ,customorder.getOrderTime().split(" ")[0] , 
+									compareOrderlist, customerquery ,   orderABbranch  , orderFromAnotherbranch);
+							    
+					  
+							
+							System.out.println("感謝您的預定 , 系統將會自動發送評價表至您的信箱 ");
+							return  "感謝您的預定 , 系統將會自動發送評價表至您的信箱 ";
+						}else {
+							System.out.println("NG");
+							return  "NG";
+						}
+							
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("NG2");
+						return "NG2";
+					}
+			
+			}
 
 }

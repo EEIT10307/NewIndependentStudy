@@ -10,49 +10,76 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/chat.js"></script>
+	<script src="js/memberchat.js"></script>
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
 	<script src="js/memberSearch.js"></script>
 	<script src="js/memberEdit.js"></script>
+	<script src="js/memberdescription.js"></script>
+	
+<!-- 	<script src="js/login.js"></script> -->
+	<script src="js/logout.js"></script>
+	<!-- new adding 如果沒加入FB登出(從login JS控制)，FB會自動重新登入-->
+	<script src="js/login.js"></script>
 </head>
 <body>
-	<div w3-include-html="navMember.html"></div>
+	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content loadtest111">	
+			</div>
+			<script>
+	        $(".loadtest111").load("serchMotor.html");
+	       </script>
+		</div>
+	</div>
+	  <script src="js/orderTest.js"></script>
+<!--	<div w3-include-html="navMember.html"></div> -->
+	<div w3-include-html="navProd.html"></div>
 <!-- 	<div w3-include-html="carousel.html"></div> -->
-	<div class="container">
-			<div class='row'><h4 class='my-3 mx-auto' id='editMember'>修改會員資料</h4></div>
-		<section>
-              <form class="row" role="form">
-              <div class='col-7'>
+	<div class="container row col-12">
+			<div class='row col-12'><h4 class='my-3 mx-auto' id='editMember'>會員中心</h4></div>
+<!-- 		<section> -->
+
+              <form class="row col-8" role="form">
+              <div class='col-12'>
                 <div class="row">
                   <div class="col-sm-8">
                     <label for="inputName" class="control-label">姓名:</label>
-                      <input type="text" class="form-control" id="inputName">
+                      <input type="text" class="form-control" id="desname">
                   </div>               
                   <div class="col-sm-4">
                     <label for="inputBirth" class="control-label">性別:</label></br>
                     <div class="form-check form-check-inline">
-					  	<div class='col-6 mx-1 pt-1'><input type="radio" class="form-check-input" name="gender" value="1">男</div>
-					  	<div class='col-6 mx-1 pt-1'><input type="radio" class="form-check-input" name="gender" value="2">女</div>
+					  	<div class='col-6 mx-1 pt-1'><input checked type="radio" class="form-check-input" name="gender" value="男">男</div>
+					  	<div class='col-6 mx-1 pt-1'><input type="radio" class="form-check-input" name="gender" value="女">女</div>
 					</div>
                   </div>
                  </div>
                  <div class="row">
                   <div class="col-sm-4">
                     <label for="inputBirth" class="control-label">生日:</label>
-                      <input type="text" class="form-control" id="inputName">
+                      <input type="text" class="form-control" id="desbirthday" placeholder ="yyyy-mm-dd">
                   </div>               
                   <div class="col-sm-8">
                     <label for="inputTel" class="control-label">電話號碼:</label>
-                    <input type="text" class="form-control" id="inputPassword3">
+                    <input type="text" class="form-control" id="desphone">
                   </div>          
                 </div>
                 <div class="row">
                   <div class="col-sm-12">
                     <label for="inputEmail" class="control-label">信箱:</label>
-                    <input type="email" class="form-control" id="inputEmail3">
+                    <input type="email" class="form-control" id="desmail">
+                  </div>
+								 </div>
+								 <div class="row">
+                  <div class="col-sm-12">
+                    <label for="inputEmail" class="control-label">地址:</label>
+                    <input type="text" class="form-control" id="desaddress">
                   </div>
                  </div>
                  <div class='row'>
@@ -61,81 +88,39 @@
                     <input type="text" class="form-control" id="inputPassword3">
                   </div> 
                   <div class="col-sm-6">
-                    <label for="inputNewPwd" class="control-label">新密碼:</label>
-                    <input type="text" class="form-control" id="inputPassword3">
+                    <label for="inputNewPwd" class="control-label">密碼:</label>
+                    <input type="text" class="form-control" id="despassword">
                   </div>
-	              <div class="col-12"><button class="btn btn-secondary mx-auto my-3">更新資料</button></div>
+	              <div class="col-12"><button  id='change'  class="btn btn-secondary mx-auto my-3">更新資料</button></div>
                 </div>
-                </div>
-                <div class="col-5">
-				    <h7>上傳照片<span>預覽</span></h7>
-				    <div class="avatar-upload">
+								</div>
+				</form> 
+                <div class="col-4">
+						<form id="myForm" class="col-12">
+				    <!-- <h7>上傳照片<span>預覽</span></h7> -->
+				    <div class="avatar-upload col-12">
 				        <div class="avatar-edit">
-				            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+								<!--	<input type="file" id="file" accept=".png, .jpg, .jpeg" />-->	
+										<input style="margin-left: 0px" type="file" name="file" id="file" multiple="multiple"/>
 				            <label for="imageUpload"></label>
 				        </div>
 				        <div class="avatar-preview">
-				            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+										<input style="margin-left: 0px"  type="hidden" name="email" id="hiddenemail">
+										<img  style="margin-left: 0px" id="wwwwimg"  src="Images\Front.jpg"><br/>
+				       <!--     <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">-->
 				            </div>
-				        </div>
-				    </div>
+								</div>
+								<button style="margin:14px" type="submit" class="btn btn-outline-secondary">上傳檔案</button>
+				    
+				
+					</form> 
+					
 				</div>
-			</form>   
-    	</section>
-	</div>
-	<div class="container mx-auto" id='orderMember'>
-		<div class="input-group my-5 col-6 mx-auto">
-			<input type="text" class="form-control" id='searchOrd' placeholder="查詢訂單"/>
 		</div>
 		
-		<table id="cart" class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th style="width: 10%">訂單編號</th>
-					<th style="width: 30%">交易明細</th>
-					<th style="width: 10%">金額</th>
-					<th style="width: 20%" class="text-center">下單時間</th>
-					<th style="width: 30%">評價內容</th>
-				</tr>
-			</thead>
-			<tbody id='allord'>
-				<tr class="item">
-					<td>
-						<p id="ordSerialNum">12345678</p>
-					</td>
-					<td>
-						<h6>取車  <span class='ml-5' id='brStore'>大安店</span><span class='ml-1' id='brTime'>2018/03/22 11:00</span></h6>
-						<h6>還車  <span class='ml-5' id='rtStore'>中壢店</span><span class='ml-1' id='rtTime'>2018/03/22 14:00</span></h6>
-						<h6 id="model">車型  <span class='ml-5'>CB1100RS</span></h6>
-                		<h6 id="accessory">配件  <span class='ml-5' id='acc'>安全帽</span><span id='accNum'>x1</span></h6>
-					</td>
-					<td id="price">$2000</td>
-					<td class="text-center">2018/03/20 13:23</td>
-					<td class="actions">
-						<p class='text-right' id='rate'>滿意度<span class='ml-5'>4</span></p>
-						<p id='reviews' style="height: 120px; overflow-y:hidden;">I think I started out at under $3 per month 5 or 6 years ago. The price has steadily increased and my latest renewal offer was $16.99 per month. Additionally last year my wife started having spam problems and it seems like someone gained access to all her email correspondence. The only place that we could pin it down to was the justhost SMTP server. Support was very evasive when I tried to explain what I thought happened.</p>
-					</td>
-				</tr>
-				<tr class="item">
-					<td>
-						<p id="ordSerialNum">22222222</p>
-					</td>
-					<td>
-						<h6>取車  <span class='ml-5' id='brStore'>高雄店</span><span class='ml-1' id='brTime'>2018/12/22 11:00</span></h6>
-						<h6>還車  <span class='ml-5' id='rtStore'>台南店</span><span class='ml-1' id='rtTime'>2018/12/25 14:00</span></h6>
-						<h6 id="model">車型  <span class='ml-5'>lalaalal</span></h6>
-                		<h6 id="accessory">配件  <span class='ml-5' id='acc'>安全帽</span><span id='accNum'>x1</span></h6>
-					</td>
-					<td id="price">$500</td>
-					<td class="text-center">2018/11/20 10:23</td>
-					<td class="actions">
-						<p class='text-right' id='rate'>滿意度<span class='ml-5'>5</span></p>
-						<p id='reviews' style="height: 120px; overflow-y:hidden;">Additionally last year my wife started having spam problems and it seems like someone gained access to all her email correspondence. The only place that we could pin it down to was the justhost SMTP server. Support was very evasive when I tried to explain what I thought happened.</p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<!--     	</section> -->
+	
+	
  	
 	<div w3-include-html="chatboxMember.html"></div>
 	<div w3-include-html="footerBackAdmin.html"></div>

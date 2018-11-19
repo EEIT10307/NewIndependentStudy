@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import branchscenedao.BranchScenesIFaceDao;
-import projectbean.BranchDetail;
+import cleanbean.BranchScenesForJson;
 import projectbean.BranchScenes;
 
 @Service
@@ -29,27 +29,8 @@ public class BranchScenesService implements BranchScenesIFaceService{
 	}
 
 	@Override
-	public List<String> getBranchScenes() {
-		// TODO Auto-generated method stub
+	public List<BranchScenesForJson> getBranchScenes() {
 		return branchScenesIFaceDao.getBranchScenes();
-	}
-
-	@Override
-	public BranchScenes getScenes(int branchDetailSerialNum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int deleteScenes(String spotAddress, String spotPhoto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateScenes(BranchScenes bs) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -59,9 +40,15 @@ public class BranchScenesService implements BranchScenesIFaceService{
 	}
 
 	@Override
-	public List<BranchScenes> showBranchScenes(BranchDetail branchName) {
-		// TODO Auto-generated method stub
-		return branchScenesIFaceDao.showBranchScenes(branchName);
+	public List<BranchScenes> showBranchScenes(String spotArea) {
+		System.out.println("showBranchScenes");
+		return branchScenesIFaceDao.showBranchScenes(spotArea);
+	}
+
+	@Override
+	public List<BranchScenesForJson> showBranchScenesGson(List<BranchScenes> finalShowAreaSpot) {
+		System.out.println("showBranchScenesGson11111");
+		return branchScenesIFaceDao.showBranchScenesGson(finalShowAreaSpot);
 	}
 
 }

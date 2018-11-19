@@ -20,6 +20,8 @@ import org.springframework.stereotype.Repository;
 import branchdetail.BranchDetailIFaceDAO;
 import cleanbean.BranchDetailBean;
 import projectbean.BranchDetail;
+import projectbean.BranchScenes;
+import projectbean.EveryBikeMileage;
 
 @Repository
 public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
@@ -68,7 +70,7 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 		int updateCount = 0;
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println("?��?��????="+sdf.format(date));
+		System.out.println("現在時間="+sdf.format(date));
 		BranchDetail detail = new BranchDetail();
 		detail.setBranchName(branchDetail.getBranchName());
 		detail.setBranchArea(branchDetail.getBranchArea());
@@ -77,8 +79,11 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 		detail.setBranchPhone(branchDetail.getBranchPhone());
 		detail.setOpeningDay(sdf.parse(sdf.format(date)));
 		
-		System.out.println("?��?");
+		System.out.println("到底");
 		session.save(detail);
+		
+		BranchScenes savebranch = new BranchScenes();
+		savebranch.setSpotName(branchDetail.getBranchName());
 
 		updateCount = 1;
 
@@ -86,25 +91,39 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 	}
 
 	@Override
-	public List<BranchDetail> showBranchDetail(String branchName) {
-		// 建�??�詢?�件
-		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
-		// ?�詢�?????????
-		CriteriaQuery<BranchDetail> createQuery = builder.createQuery(BranchDetail.class);
-		// ?�詢?��?
+	public List<String> showBranchDetail() {
+//		// 建立查詢物件
+//		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+//		// 查詢結果的型態
+//		CriteriaQuery<BranchDetail> createQuery = builder.createQuery(BranchDetail.class);
+//		// 查詢目標
+//		Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+//		// 定義查詢型態
+//		ParameterExpression<String> branchArea = builder.parameter(String.class);
+//		//
+//		createQuery.select(fromClass).where(builder.equal(fromClass.get("branchArea"), branchArea));
+//		// 查詢物件
+//		Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery);
+//		// 定義參數
+//		queryword.setParameter(branchArea, branchName);
+//		// 取出結果
+//		List<BranchDetail> list = queryword.getResultList();
+//		
+//		return list;
+		CriteriaBuilder buider = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchDetail> createQuery = buider.createQuery(BranchDetail.class);
 		Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
-		// �?義�?�詢????
-		ParameterExpression<String> branchArea = builder.parameter(String.class);
-		//
-		createQuery.select(fromClass).where(builder.equal(fromClass.get("branchArea"), branchArea));
-		// ?�詢?�件
-		Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery);
-		// �?義�????
-		queryword.setParameter(branchArea, branchName);
-		// ???��???
-		List<BranchDetail> list = queryword.getResultList();
-		
-		return list;
+		createQuery.select(fromClass);
+		List<BranchDetail> branchlist = factory.getCurrentSession().createQuery(createQuery).getResultList();
+		List<String> branchdetaillist = new ArrayList<String>();
+		for (BranchDetail loop : branchlist) {
+			branchdetaillist.add(loop.getBranchName());
+			branchdetaillist.add(loop.getBranchArea());
+			branchdetaillist.add(loop.getBranchPhone());
+			branchdetaillist.add(loop.getBranchCounty());
+			branchdetaillist.add(loop.getBranchAddress());
+		}
+		return branchdetaillist;
 	}
 
 	@Override
@@ -116,5 +135,20 @@ public class KuanBranchDetailDao implements BranchDetailIFaceDAO{
 					loop.getOpeningDay()));
 		}
 		return branchDetailToGson;
+	}
+
+	@Override
+	public List<BranchDetail> showAllBranchDetail() {
+		CriteriaBuilder builder = factory.getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<BranchDetail> createQuery = builder.createQuery(BranchDetail.class);
+		Root<BranchDetail> fromClass = createQuery.from(BranchDetail.class);
+		createQuery.orderBy(builder.asc(fromClass.get("branchSerialNum")));
+		createQuery.select(fromClass);
+//		.where(builder.greaterThanOrEqualTo(fromClass.get("currentMileage"), fromClass.get("maintenanceItem").get("requiredMileage")));
+		Query<BranchDetail> queryword = factory.getCurrentSession().createQuery(createQuery);	
+//		queryword.setParameter(branchName, shopName);
+		List<BranchDetail> list = queryword.getResultList();
+		return list;
+
 	}
 }

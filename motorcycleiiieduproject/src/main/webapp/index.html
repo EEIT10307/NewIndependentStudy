@@ -7,8 +7,6 @@
 	<link rel="stylesheet" href="css/map.css">
 	<link rel="stylesheet" href="css/timeline.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<link rel="shortcut icon" href="#" />
-	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -18,16 +16,13 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 	<script src="js/effect.js"></script>
 	<script src="js/include.js"></script>
-	<script src="js/login.js"></script>
-	<script src="js/register.js"></script>
 	<script src="js/logout.js"></script>
 	
-
-
+  <link rel="stylesheet" type="text/css" href="css/forecast.css">
 
 </head>
 <body>
-			<!-- <div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content loadtest111">	
 			</div>
@@ -35,10 +30,9 @@
 	        $(".loadtest111").load("serchMotor.html");
 	       </script>
 		</div>
-	</div> -->
+	</div>
 	<div w3-include-html="nav.html"></div>
-
-
+	
 <div id="demo" class="carousel slide" data-ride="carousel">
 	<ul class="carousel-indicators">
 		<li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -153,8 +147,9 @@
 	            url: "queryAllWebContent",
 	            contentType: "application/json; charset=utf-8",
 	            success: function (response) {
-		               alert(response[6].webElements+ +response[6].webContent);
-		               alert(num)
+
+// 		               alert(response[6].webElements+ +response[6].webContent);
+// 		               alert(num)
 				   for(i=0; i<num; i++){ 
 					   $('#'+response[i].webElements).empty().append(response[i].webContent);
 				   $('#editor4 h3').addClass("featurette-heading");
@@ -166,9 +161,31 @@
 				   $('#editor5 img').addClass("featurette-image").css({ "object-fit": "cover", "margin-left": "-45%", "height":"500px"}).next().remove();
 				   $('#editor7 img').unwrap().addClass("featurette-image").css({ "object-fit": "cover", "margin-left": "-25%", "height":"500px"}).next().remove();
 				   }
-				}
+				},
+			     error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
 	        });	
 		});
+		
+			$.ajax({
+				type: "get",
+				url: "showAllBranchDetail",
+				data: "data",
+				contentType: "application/json; charset=utf-8",
+				success: function (response) {
+					var strinres = JSON.stringify(response);
+	                var json = JSON.parse(strinres);
+	                for (var x = 0; x < json.length; x++) {
+	                	$("#mapdetail").append($("<div class='rounded row justify-content-center'><div class='d-flex my-1 align-self-center'><div class='col-4'><img src='https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no' class='img-responsive' ></div><div class='col-8 row' id='content'><div class='col-10'><h5 >"+json[x].branchName+"</h5><h6 >"+json[x].branchPhone+"</h6><p id='area' style='font-size: 80%;'>"+json[x].branchCounty+json[x].branchAddress+"</p></div><div class='col-2'><button type='button' class='btn btn-outline-secondary spot' id='spot"+x+"'>周圍景點</button></div></div></div></div>"))
+	                }
+					
+				},
+			     error:function(responseerror){
+			         alert(responseerror.responseText)
+			     }
+			});
+		
 		</script>
 		
 		
@@ -208,54 +225,7 @@
 	<br/>
 	<div class="row" id="maptitle">
 		<div class="col-lg-5 col-md-12 col-sm-12" id="mapdetail">
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipMO27KROsAjIPo7s7d7_jnY1ozYgPrsCQcv02uW=w203-h152-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            	<h5 >逍遙遊租機車</h5>
-		            	<h6 >台中</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipNsa_GBKvxilvxecezIymSfl49aLcSbuz49PKMX=w314-h168-p-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            		<h5 >全好車業</h5>
-		            		<h6 >台北市</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
-			<div class="rounded row justify-content-center">
-				<div class="d-flex my-1 align-self-center">
-					<div class="col-4">
-						<img src="https://lh5.googleusercontent.com/p/AF1QipOd5wBFOAusqnCxmAn9sM3qEI5Kkrecu6sL3vej=w203-h152-k-no" class="img-responsive" >
-		            </div>
-		            <div class="col-8 row" id="content">
-		            	<div class="col-10">
-		            	<h5 >好好騎機車出租</h5>
-		            	<h6 >台南市</h6>
-		            	</div>
-		            	<div class="col-2">
-		            	<a class='text-primary' href="spot.html"><button type="button" class="btn btn-outline-secondary" id="spot">周圍景點</button></a>
-		            	</div>
-		            </div>
-	            </div>
-			</div>
+<!-- 		↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑塞分店資料用↑↑↑↑↑↑↑↑↑↑↑ -->
 		</div>
 		<div class="col-lg-7 col-md-12 col-sm-12" id="map" style="width: 100%; height: 300px;"></div>
 	</div>
@@ -263,6 +233,28 @@
 		<button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-secondary animated bounce delay-1s"><i class="fas fa-caret-up fa-lg"></i>Top</button>
 	</div>
 	<script type="text/javascript">
+	//抓景點
+	$('#mapdetail').on('click','.spot',function(){
+		var spotid = "#"+this.id;
+// 		alert($(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3));//台北市北投區中山路 substr抓'北投區'
+		var spotArea = $(spotid).parent('.col-2').siblings('.col-10').children('#area').text().substr(3,3);
+		var url='spot.html?spotArea='+spotArea;
+		window.location.assign(encodeURI(url));
+// 	    	$.ajax({
+// 	            type: "post",
+// 	            url: "showBranchScenes",
+// 	            data: spotArea,
+// 	            contentType: "application/json; charset=utf-8",
+// 	            success: function (response) {
+// 	            	//window.location.assign('spot.html');
+// 				}
+// 	    	});
+	});
+	
+	
+	
+	
+	
 	var locations = [
 		[ "全好車業", 25.0517208, 121.5148625, 1, "0926-664-076", "103台北市大同區長安西路145巷12號", "一~日 9:00~20:00", "https://zh-tw.facebook.com/d9350910/"],
 		["好好騎機車出租", 22.9648553, 120.2108129, 2, "06-222-2816", "704台南市北區北門路二段69號", "一~日 8:00~22:00", "https://www.google.com.tw/"] ,
@@ -302,57 +294,134 @@
 </div>
 	<br/>
 	<br/>
+	<div class="modal fade "  id="weather" tabindex="-1" style='text-align:center; top:100px;' role="dialog" data-easein="bounceRightIn"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	
+			<div class="modal-dialog modal-md" role="document" >
+	
+	
+<!-- 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
+<!-- 		<div class="modal-dialog modal-dialog-centered" role="document"> -->
+			
+			<script>
+		$(document).ready(function(){
+			
+			$.ajax({
+			    type:"get",
+			    url:"showForecast",
+			    success : function(response) {
+			    		var json3  = JSON.parse(JSON.stringify(response));
+			            var flipanim=""
+						var city = "" ; 
+						var timeInterval = "" ; 
+						var weatherCondition = "" ; 
+						var temperatureInterval = "" ; 
+						var rainfallProbability = "" ;
+						var timeInterval1 = "" ; 
+						var weatherCondition1 = "" ; 
+						var temperatureInterval1 = "" ; 
+						var rainfallProbability1 = "" ;
+						var weathericon = "" ;
+						var weathericon1 = "" ;
+			            for(var x = 0 ; x< json3.length ; x++) {
+			            	  if(x%2==1){
+			            		  continue;
+			            		}
+			            	  
+			            	  city= json3[x].city; 
+			            	  timeInterval = json3[x].timeInterval;
+							  temperatureInterval=json3[x].temperatureInterval; 
+			            	  weatherCondition = json3[x].weatherCondition; 
+			            	  rainfallProbability = json3[x].rainfallProbability;
+			            	  timeInterval1 = json3[x+1].timeInterval;
+							  temperatureInterval1 =json3[x+1].temperatureInterval; 
+			            	  weatherCondition1 = json3[x+1].weatherCondition; 
+			            	  rainfallProbability1 = json3[x+1].rainfallProbability;
+			            	  if(x==0){
+			            		  flipanim="";
+			            	  }else if(x==2){ 
+			            		  flipanim=" anim-flip-card-2";
+			            	  }else if(x==4){ 
+			            		  flipanim=" anim-flip-card-3";
+			            	  }else if(x==6){ 
+			            		  flipanim=" anim-flip-card-4";
+			            	  }else if(x==8){ 
+			            		  flipanim=" anim-flip-card-5";
+			            	  }else if(x==10){ 
+			            		  flipanim=" anim-flip-card-6";
+			            	  }
+			            	  if(weatherCondition=="陰天" || weatherCondition=="陰時多雲" || weatherCondition=="多雲" || weatherCondition=="多雲時陰"){
+			            		  weathericon="<div class='cloud-group'><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span></div>";
+			            	  }else if(weatherCondition=="多雲短暫雨" || weatherCondition=="陰有雨" || weatherCondition=="陰短暫雨" || weatherCondition=="陰時多雲短暫雨" || weatherCondition=="多雲時陰短暫雨"){
+			            	      weathericon="<div class='cloud-group'><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span><div class='rain-group'><span class='icon-cloud rain'></span></div></div>"
+			            	  }else if(weatherCondition=="多雲時晴" || weatherCondition=="晴時多雲" ){
+			            		  weathericon="<div class='cloud-group'><div class='sun-group'><span class='icon-cloud sun'></span><span class='icon-cloud sunshine'></span></div><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span></div>";
+			            	  }else{
+			            		  weathericon="<div class='sun-group'><span class='icon-cloud sun'></span></span></div><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span>";
+			            	  }
+			            		  
+			            	  if(weatherCondition1=="陰天" || weatherCondition1=="陰時多雲" || weatherCondition1=="多雲" || weatherCondition1=="多雲時陰"){
+			            		  weathericon1="<div class='cloud-group'><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span></div>";
+			            	  }else if(weatherCondition1=="多雲短暫雨" || weatherCondition1=="陰有雨" || weatherCondition1=="陰短暫雨" || weatherCondition1=="陰時多雲短暫雨" || weatherCondition1=="多雲時陰短暫雨"){
+			            	      weathericon1="<div class='cloud-group'><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span><div class='rain-group'><span class='icon-cloud rain'></span></div></div>"
+			            	  }else if(weatherCondition1=="多雲時晴" || weatherCondition1=="晴時多雲" ){
+			            		  weathericon1="<div class='cloud-group'><div class='sun-group'><span class='icon-cloud sun'></span><span class='icon-cloud sunshine'></span></div><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span></div>";
+			            	  }else{
+			            		  weathericon1="<div class='sun-group'><span class='icon-cloud sun'></span></span></div><span class='icon-cloud cloud-circle shadow-cloud-clip'></span><span class='icon-cloud cloud-base shadow-cloud-clip'></span>";
+			            	  }
+			
+			
+			$("#weather").append(
+			"<section class='card anim-flip"+flipanim+"' style='display: inline-block'>"+
+			    "<header>"+
+			        "<h1 class='card-header' id='city1'>"+city+"</h1>"+
+			    "</header>"+
+			//晚上到明晨
+			    "<p class='card-temp box-highlight' id='temperatureInterval1'>"+temperatureInterval+"</p>"+
+			    "<div class='icon'>"+weathericon+
+				"</div>"+
+			    "<p class='card-info' style='display: inline-block''>"+weatherCondition+"<i class='fas fa-umbrella'></i>"+rainfallProbability+"</p>"+
+			//明天白天
+			    "<p class='card-temp box-highlight' id='temperatureInterval'>"+temperatureInterval1+"</p>"+
+				"<div class='icon'>"+weathericon1+
+				"</div>"+
+				"<p class='card-info' style='display: inline-block''>"+weatherCondition1+"<i class='fas fa-umbrella'></i>"+rainfallProbability1+"</p>"+
+			"</section>")
+					        }//end of for
+			            },
+			            error:function(responseerror){
+			                alert(responseerror.responseText)
+			            }//end of success
+			    })//end of ajax				            
+			
+			            
+		})     
+        </script>
+			
+			
+			
+			
+			</div>
+	</div>
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content loadtest222">
+			<!--	<div w3-include-html="login.html"></div>-->
+				
 			</div>
-			<script>
-				$(".loadtest222").load("login.html");
-			   </script>
+  <script>
+    $(".loadtest222").load("login.html")
+  </script>
+
 		</div>
 	</div>
 
 	<br/>
 	<br/>
-
-	<div class="modal fade" id="exampleSerchMotor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content loadtest111">	
-			</div>
-			<script>
-	        $(".loadtest111").load("serchMotor.html");
-	       </script>
-		</div>
-	</div>
 
 	<div w3-include-html="footer.html"></div>
 	<script>includeHTML();</script>
 	
-	
+
 </body>
 
-
-
-
-
-<!-- <a href="login.html"><button  > 登入 </button></a> <br> -->
-<!-- <a href="register.html"><button  > 註冊 </button></a> <br> -->
-<!-- <button  id = "checkall" > 查詢全部 </button><br>  -->
-
-
-<!-- <form id="myForm"> -->
-<!--     <input type="text" name="te"> -->
-<!--     <input type="file" name="file" id="file" multiple="multiple"/> -->
-<!--     <button type="submit">上傳檔案</button> -->
-<!--  </form> -->
-<!-- <div> -->
-<!--     <img src="C:\Maven\eclipse-workspace\motorcycleiiieduproject\src\main\webapp\Images\Front.jpg"><br/> -->
-<!-- </div> -->
-
-<!-- 	<script src="js/index.js"></script> -->
-
-
-
-<!-- </body> -->
-<!-- ======= -->
 </html>
