@@ -233,6 +233,30 @@ $(".ordergobackCheck").click(function (e) {
     
 });
 //-------------------------------------------------------------------------------
+var detail2 = sessionStorage.getItem(mototrname);
+var detailmotor2 = JSON.parse(detail);
+$.ajax({
+	type : "post",
+	url : "selectbikerew",
+	data : {"bikeModel":detailmotor2.bikeModel,"modelYear":detailmotor2.modelYear},
+	success : function(response) {
+		alert(response)
+			var cd=JSON.parse(response)
+			alert(cd)
+		for(i in cd){
+			alert(cd[i].satisfacation)
+		$("#table").append("<tr>" +
+							"<td>"+cd[i].satisfacation+"顆星</td>" +
+							"<td>"+cd[i].reviewTime+"</td>" +
+							"</tr>"+
+							"<tr>" +
+							"<td>"+cd[i].reviewContent+"</td>" +
+							"<td></td>" +
+							"</tr>"
+							)
+		}
+	}
+});
 //這邊是ROBIN
 
 var detail1 = sessionStorage.getItem(mototrname);

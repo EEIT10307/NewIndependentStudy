@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cleanbean.BikeReviewForJson;
 import everybikeInfo.robin.dao.BikeReviewIFaceDao;
 import projectbean.BikeReview;
 @Service
@@ -48,10 +49,25 @@ public class BikeReviewService implements BikeReviewIFaceService {
 	}
 
 	@Override
-	public int save(String orderSerialNum, Integer member, String reviewContent, Double satisfacation, Date reviewTime,
-			String bikeModel) {
+	public int save(String orderSerialNum, Integer member, String reviewContent, Double satisfacation, Date reviewTime) {
 		// TODO Auto-generated method stub
-		return BikeReviewIFaceDao.save(orderSerialNum, member, reviewContent, satisfacation, reviewTime, bikeModel);
+		return BikeReviewIFaceDao.save(orderSerialNum, member, reviewContent, satisfacation, reviewTime);
+	}
+
+
+
+	@Override
+	public List<BikeReview> selectBikeReview(String bikeModel, String modelYear) {
+		// TODO Auto-generated method stub
+		return BikeReviewIFaceDao.selectBikeReview(bikeModel, modelYear);
+	}
+
+
+
+	@Override
+	public List<BikeReviewForJson> BikeReviewForJson(List<BikeReview> BikeReview) {
+		// TODO Auto-generated method stub
+		return BikeReviewIFaceDao.BikeReviewForJson(BikeReview);
 	}
 
 

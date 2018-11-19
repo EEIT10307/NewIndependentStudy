@@ -1,5 +1,7 @@
 package everybikeInfo.robin.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +10,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BikeReviewForJson;
 import projectbean.BikeReview;
+import projectbean.EveryBikeInfo;
 import projectbean.IdClassBikeDetail;
 import projectbean.MemberDetail;
 import projectbean.OrderList;
@@ -33,15 +37,30 @@ public class BikeReviewDao implements BikeReviewIFaceDao {
 	}
 
 	@Override
-	public int save(String orderSerialNum,Integer member,String reviewContent,Double satisfacation,Date reviewTime,String bikeModel) {
+	public int save(String orderSerialNum,Integer member,String reviewContent,Double satisfacation,Date reviewTime) {
+		Session session1 = Factory.getCurrentSession();
+		String hql="from OrderList where orderSerialNum=:orderSerialNum";
+		OrderList ck=(OrderList) session1.createQuery(hql).setParameter("orderSerialNum", orderSerialNum).getSingleResult();
+		 System.out.println(ck.getLicensePlate().getLicensePlate());//車牌
+		 System.out.println(123);
+		 Session session2 = Factory.getCurrentSession();
+			String hql2="from EveryBikeInfo where licensePlate=:licensePlate";
+			EveryBikeInfo ck2=(EveryBikeInfo) session2.createQuery(hql2).setParameter("licensePlate", ck.getLicensePlate().getLicensePlate()).getSingleResult();
+		System.out.println("型號"+ck2.getBikeDetail().getIdClassBikeDetail().getBikeModel());//型號
+		System.out.println("年分"+ck2.getBikeDetail().getIdClassBikeDetail().getModelYear());//年分
+		
 		Session session = Factory.getCurrentSession();
 		OrderList orderSerialNum0=session.get(OrderList.class, orderSerialNum);
 		MemberDetail email=session.get(MemberDetail.class, member);
-		BikeReview bikeReview=new BikeReview(orderSerialNum0,email,reviewContent,satisfacation,reviewTime,bikeModel);
+		
+		
+		
+		
+		BikeReview bikeReview=new BikeReview(orderSerialNum0,email,reviewContent,satisfacation,reviewTime,ck2.getBikeDetail().getIdClassBikeDetail().getBikeModel(),ck2.getBikeDetail().getIdClassBikeDetail().getModelYear());
 		int updateCount = 0;
-
+//
 		session.save(bikeReview);
-
+//
 		updateCount = 1;
 
 		return updateCount;
@@ -97,4 +116,30 @@ public class BikeReviewDao implements BikeReviewIFaceDao {
 		return updateCount;
 	}
 
+	@Override
+	public List<BikeReview> selectBikeReview(String bikeModel, String modelYear) {
+		Session session = Factory.getCurrentSession();
+		String hql="from BikeReview where bikeModel=:bikeModel and modelYear=:modelYear";
+		List<BikeReview> xx=session.createQuery(hql).setParameter("bikeModel", bikeModel).setParameter("modelYear", modelYear).getResultList();
+		
+		return xx;
+	}
+
+	@Override
+	public List<BikeReviewForJson> BikeReviewForJson(List<BikeReview> BikeReview) {
+		 List<BikeReviewForJson> pp=new ArrayList<BikeReviewForJson>();
+		 SimpleDateFormat cc=new SimpleDateFormat("yyyy/MM/dd");
+		for(BikeReview op:BikeReview) {
+			BikeReviewForJson bikeReviewForJson=new BikeReviewForJson();
+			String as = cc.format(op.getReviewTime());
+			bikeReviewForJson.setReviewContent(op.getReviewContent());//回復
+			bikeReviewForJson.setReviewTime(as);//時間
+			bikeReviewForJson.setSatisfacation(op.getSatisfacation());//分數
+			pp.add(bikeReviewForJson);
+		}
+		
+		
+		return pp;
+	}
+	
 }
