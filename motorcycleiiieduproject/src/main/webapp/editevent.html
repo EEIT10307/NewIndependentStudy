@@ -21,7 +21,8 @@
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
 	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/><!-- sidebar style -->
 	
-	<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/inline/ckeditor.js"></script>
+
+	<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/inline/ckeditor.js"></script> 
 </head>
 <body id="page-top">
 
@@ -179,77 +180,55 @@
       	</div>
       	
 			<script>
-				var num = $('.edit').length;
+			var editor1;
+			var editor2;
+			var editor3;
+			var editor4;
+			var editor5;
+			var editor6;
+			var editor7;
 
-// 				$(document).ready(function(){
-// 			    	$.ajax({
-// 			            type: "get",
-// 			            url: "queryAllWebContent",
-// 			            contentType: "application/json; charset=utf-8",
-// 			            success: function (response) {
-// // 			               alert(response[0].webElements+ +response[0].webContent);
-// 						   for(i=0; i<num; i++){ $('#'+response[i].webElements).empty().append(response[i].webContent);}
-// 			            }
-// 			        });	
-// 				});	
 				
-// 				for(i=1; i<=num; i++){
-// 					$("#editor"+i).on('click',function(){
-// 						alert(this.id);
-// 						InlineEditor
-// 				        .create( document.querySelector( '#editor'+i ) )
-// 				        .then( newEditor => {
-// 						   this.id = newEditor;
-// 						})
-// 						.catch( error => {
-// 						   console.error( error );
-// 						});
-// 					});
-// 				}
-				$('.edit').on('click',function(){
 					InlineEditor
 			        .create( document.querySelector('#editor1'))
-			        .then( newEditor => {
-			        	editor1 = newEditor;
+			        .then( editor => {
+			        	editor1 = editor;
 					})
 					.catch( error => {
 					   console.error( error );
 					});
-				});
+			
 				
-				$(".edit").on('click',function(){	
+			
 				    InlineEditor
 				        .create( document.querySelector( '#editor2' ) )
-				        .then( newEditor => {
-						   editor2 = newEditor;
+				        .then( editor => {
+						   editor2 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
+		
 				
-				$(".edit").on('click',function(){
+				
 				    InlineEditor
 				        .create( document.querySelector( '#editor3' ) )
-				        .then( newEditor => {
-						   editor3 = newEditor;
+				        .then( editor => {
+						   editor3 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
 				
-				$(".edit").on('click',function(){
 				    InlineEditor
 				        .create( document.querySelector( '#editor4' ) )
-				        .then( newEditor => {
-						   editor4 = newEditor;
+				        .then( editor => {
+						   editor4 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
-				$(".edit").on('click',function(){
+				
 				    InlineEditor
 				        .create( document.querySelector( '#editor5' ),{
 				        	cloudServices: {
@@ -257,24 +236,22 @@
 				                uploadUrl: 'https://35787.cke-cs.com/easyimage/upload/'
 				            }
 				        })
-				        .then( newEditor => {
-						   editor5 = newEditor;
+				        .then( editor => {
+						   editor5 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
-				$(".edit").on('click',function(){
+				
 				    InlineEditor
 				        .create( document.querySelector( '#editor6' ) )
-				        .then( newEditor => {
-						   editor6 = newEditor;
+				        .then( editor => {
+						   editor6 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
-				$(".edit").on('click',function(){
+				
 				    InlineEditor
 				        .create( document.querySelector( '#editor7' ),{
 				        	cloudServices: {
@@ -282,13 +259,13 @@
 				                uploadUrl: 'https://35787.cke-cs.com/easyimage/upload/'
 				            }
 				        })
-				        .then( newEditor => {
-						   editor7 = newEditor;
+				        .then( editor => {
+						   editor7 = editor;
 						})
 						.catch( error => {
 						   console.error( error );
 						});
-				});
+			
 			</script>
 			<script>		   
 // 				for(i=0; i<num; i++){
@@ -327,10 +304,12 @@
 								 {"webElements": $('.edit').get(5).id , "webContent":editorData6, "webSrc":""},
 								 {"webElements": $('.edit').get(6).id , "webContent":editorData7, "webSrc":""}]
 // 					alert(editor[0].webElements + editor[0].webContent);
+					//insertWebContent
+					//updateWebContent
 			    	alert(editor)
 					$.ajax({ 
 			    		type: "Post",
-			    		url: "insertWebContent",
+			    		url: "updateWebContent",
 			    		data: JSON.stringify(editor),
 			    		contentType: "application/json; charset=utf-8",
 			    		success: function (response) {
@@ -386,5 +365,6 @@
     
     <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
 	<script>includeHTML();</script>
+		
   </body>
 </html>
