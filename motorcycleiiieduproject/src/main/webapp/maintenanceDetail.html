@@ -166,7 +166,7 @@
 <!-- //---------------------------------------------------------------------------- -->
 	<script>
 		$(document).ready(function(){
-			
+		
             $.ajax({
                 type:"get",
                 url:"showMessageIfMileageIsOver",
@@ -174,20 +174,25 @@
                         var json3  = JSON.parse(JSON.stringify(response)); 
 						var txt = "" ; 
                         for(var x = 0 ; x< json3.length ; x++) {
-                        	  txt += "車牌"+json3[x].licensePlate ; 
-                        	  txt += "的"+json3[x].maintenanceItem+"項目"  ; 
-                        	  txt += "累積的里程"+json3[x].currentMileage+"公里已超過"  ; 
-                        	  txt += "規定的"+json3[x].requiredMileage+", "+(json3[x].currentMileage-json3[x].requiredMileage)+"公里了!!<br>"  ; 
+                   			if(json3[x].isReadyMaintenance==true){
+                   			
+                   			}else{txt += "車牌"+json3[x].licensePlate ; 
+                      		 	 txt += "的"+json3[x].maintenanceItem+"項目"  ; 
+                    	 		 txt += "累積的里程"+json3[x].currentMileage+"公里已超過"  ; 
+                    	  		 txt += "規定的"+json3[x].requiredMileage+", "+(json3[x].currentMileage-json3[x].requiredMileage)+"公里了!!<br>"  ; 
+                    	  		 if(response!=""){
+//          							alert("response in if:"+response)
+                                 	$("#maintenance-modal").modal('show');
+         						}
+                   			}
+                   			
+                        	 
                         }
                         	$("#maintenance-modal-body").html(txt);
 //                         	alert("response before if:"+response)
-                        if(response!=""){
-// 							alert("response in if:"+response)
-                        	$("#maintenance-modal").modal('show');
-						}
+                       
 
-                },
-                error:function(responseerror){
+                },error:function(responseerror){
                     alert(responseerror.responseText)
                 }			      
             });
@@ -514,6 +519,7 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							contentType:"application/JSON; charset = UTF-8" , 
 							success : function(response) {
 								alert("送保養成功囉!!!");
+								window.location.href("maintenanceDetail.html");
 							},error:function(responseerror){
 						         alert(responseerror.responseText)
 						     }
