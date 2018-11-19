@@ -244,7 +244,7 @@ public class TestDAO {
 		@SuppressWarnings("resource")
 		BufferedReader motorpl = new BufferedReader(
 
-				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo.txt")));
+				new FileReader(new File("C:\\Users\\III\\Desktop\\123\\fakedata\\EveryBikeInfo1.txt")));
 		String line2;
 		roop: while ((line2 = motorpl.readLine()) != null) {
 			if (line2.equals("=")) {

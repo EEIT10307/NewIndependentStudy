@@ -407,6 +407,7 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
  // ---------------------秀保養項目---------------------------
 						$("#resultoffunction").on("click","#platetoshowmaintenance",function(){
 							var plate=$(this).val();
+
 							var c=$(this).attr("class").substring(5,7);
 							$(this).attr("id","platetohidemaintenance")
 						 	$(this).val("隱藏"+plate)
@@ -462,6 +463,15 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 					type:"get",
 					url:"showMessageIfMileageIsOver",
 					success : function(response) {
+
+			if(response==""){
+			    $("#maintenance-modal-title").html("保養訊息");
+			    $("#maintenance-modal-body").html("<div style='text-align:center'>目前沒有機車有保養項目超過規定的里程數</div>");
+			    $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+				  $("#maintenance-modal").modal('show');
+				
+			}	
+					
 //			alert("success");
 //			var  json2  = JSON.stringify(response); 
 //			alert("response stringify後="+json2)
