@@ -250,7 +250,11 @@ if (resulttime >= 4 & resulttime < 8) {
 
 $("#outDIV").on("click", "#dispacher" ,  function () {
   var thisis  = $(this)
-  
+  if($("#cPhone").val().length <10){
+	   alert("請輸入正確的顧客電話")
+	  
+	   return
+  }
 
     var orderdayww = new Date();
 
@@ -285,7 +289,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
     dispadetail.bikeModel = $(this).parent().prev().prev().text()
     dispadetail.pickupDate = $("#pDate").val() + " " + ((parseInt($(".makePoption").val().split(":")[0])-1)+":"+"00")
     dispadetail.dropoffDate = $("#pDate").val() + " " + $(".makePoption").val()
-    dispadetail.totalDiscount = ""
+    dispadetail.totalDiscount = "0"
     dispadetail.bikePrice = "0";
     dispadetail.accessoriesAmount = ""
     dispadetail.accessoriesTotalPrice = "0"
@@ -308,27 +312,51 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 		contentType: "application/json; charset=utf-8",
 		success: function (response) {
 //            alert(response)
+			  //======================== 
             
-            //========================
-            var dispadetailend = {};
+			//===test====
+			var dispadetailend = {};
 
-    dispadetailend.orderSerialNum = ""
-    dispadetailend.phone = "2222222222"
-    dispadetailend.bikeModel = thisis.parent().prev().prev().text()
-    dispadetailend.pickupDate =  $("#dDate").val() + " " + $(".makeDoption").val()
-    dispadetailend.dropoffDate = $("#dDate").val() + " " + ((parseInt($(".makeDoption").val().split(":")[0])+1)+":"+"00")
-    dispadetailend.totalDiscount = ""
-    dispadetailend.bikePrice = "0"
-    dispadetailend.accessoriesAmount = ""
-    dispadetailend.accessoriesTotalPrice = "0"
-    dispadetailend.orderTotalPrice = "0"
-    dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
-    dispadetailend.pickupStore = $(".neededbranchName").val()
-    dispadetailend.dropoffStore = thisis.parent().prev().prev().prev().text()
-    dispadetailend.discountName = ""
-    dispadetailend.orderStatus = "未來調度"
-    dispadetailend.is_member = "false"
-    dispadetailend.payOrNot = "false"
+			 dispadetailend.orderSerialNum = ""
+			 dispadetailend.phone = $("#cPhone").val();
+			 dispadetailend.bikeModel = thisis.parent().prev().prev().text()
+			 dispadetailend.pickupDate =  $("#pDate").val() + " " + $(".makePoption").val()
+			 dispadetailend.dropoffDate = $("#dDate").val() + " " + $(".makeDoption").val()
+			 dispadetailend.totalDiscount = thisis.parent().prev().prev().prev().prev().prev().text()
+			 dispadetailend.bikePrice = thisis.parent().prev().text()
+			 dispadetailend.accessoriesAmount = ""
+			 dispadetailend.accessoriesTotalPrice = "0"
+			 dispadetailend.orderTotalPrice = thisis.parent().prev().text()
+			 dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
+			 dispadetailend.pickupStore = $(".neededstarbranchName").val()
+			 dispadetailend.dropoffStore = $(".neededbranchName").val()
+			 dispadetailend.discountName = thisis.parent().prev().prev().prev().prev().text()
+			 dispadetailend.orderStatus = "未來訂單"
+			 dispadetailend.is_member = "false"
+			 dispadetailend.payOrNot = "false"
+			//===test====
+			
+			
+			
+            
+//            var dispadetailend = {};
+//    dispadetailend.orderSerialNum = ""
+//    dispadetailend.phone = "2222222222"
+//    dispadetailend.bikeModel = thisis.parent().prev().prev().text()
+//    dispadetailend.pickupDate =  $("#dDate").val() + " " + $(".makeDoption").val()
+//    dispadetailend.dropoffDate = $("#dDate").val() + " " + ((parseInt($(".makeDoption").val().split(":")[0])+1)+":"+"00")
+//    dispadetailend.totalDiscount = "0"
+//    dispadetailend.bikePrice = "0"
+//    dispadetailend.accessoriesAmount = ""
+//    dispadetailend.accessoriesTotalPrice = "0"
+//    dispadetailend.orderTotalPrice = "0"
+//    dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
+//    dispadetailend.pickupStore = $(".neededbranchName").val()
+//    dispadetailend.dropoffStore = thisis.parent().prev().prev().prev().text()
+//    dispadetailend.discountName = ""
+//    dispadetailend.orderStatus = "未來調度"
+//    dispadetailend.is_member = "false"
+//    dispadetailend.payOrNot = "false"
 
     $.ajax({ 
 		type: "Post",
@@ -339,25 +367,48 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 //			alert(response)
           
  //=========== (parseInt(thisis.parent().prev().text())* resulttime * discountpar);
- var dispadetailend = {};
-
- dispadetailend.orderSerialNum = ""
- dispadetailend.phone = $("#cPhone").val();
- dispadetailend.bikeModel = thisis.parent().prev().prev().text()
- dispadetailend.pickupDate =  $("#pDate").val() + " " + $(".makePoption").val()
- dispadetailend.dropoffDate = $("#dDate").val() + " " + $(".makeDoption").val()
- dispadetailend.totalDiscount = thisis.parent().prev().prev().prev().prev().prev().text()
- dispadetailend.bikePrice = thisis.parent().prev().text()
- dispadetailend.accessoriesAmount = ""
- dispadetailend.accessoriesTotalPrice = "0"
- dispadetailend.orderTotalPrice = thisis.parent().prev().text()
- dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
- dispadetailend.pickupStore = $(".neededstarbranchName").val()
- dispadetailend.dropoffStore = $(".neededbranchName").val()
- dispadetailend.discountName = thisis.parent().prev().prev().prev().prev().text()
- dispadetailend.orderStatus = "未來訂單"
- dispadetailend.is_member = "false"
- dispadetailend.payOrNot = "false"
+			
+			//====test=====
+          var dispadetailend = {};
+		    dispadetailend.orderSerialNum = ""
+		    dispadetailend.phone = "2222222222"
+		    dispadetailend.bikeModel = thisis.parent().prev().prev().text()
+		    dispadetailend.pickupDate =  $("#dDate").val() + " " + $(".makeDoption").val()
+		    dispadetailend.dropoffDate = $("#dDate").val() + " " + ((parseInt($(".makeDoption").val().split(":")[0])+1)+":"+"00")
+		    dispadetailend.totalDiscount = "0"
+		    dispadetailend.bikePrice = "0"
+		    dispadetailend.accessoriesAmount = ""
+		    dispadetailend.accessoriesTotalPrice = "0"
+		    dispadetailend.orderTotalPrice = "0"
+		    dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
+		    dispadetailend.pickupStore = $(".neededbranchName").val()
+		    dispadetailend.dropoffStore = thisis.parent().prev().prev().prev().text()
+		    dispadetailend.discountName = ""
+		    dispadetailend.orderStatus = "未來調度"
+		    dispadetailend.is_member = "false"
+		    dispadetailend.payOrNot = "false"
+			//====tset====
+			
+			
+			
+// var dispadetailend = {};
+// dispadetailend.orderSerialNum = ""
+// dispadetailend.phone = $("#cPhone").val();
+// dispadetailend.bikeModel = thisis.parent().prev().prev().text()
+// dispadetailend.pickupDate =  $("#pDate").val() + " " + $(".makePoption").val()
+// dispadetailend.dropoffDate = $("#dDate").val() + " " + $(".makeDoption").val()
+// dispadetailend.totalDiscount = thisis.parent().prev().prev().prev().prev().prev().text()
+// dispadetailend.bikePrice = thisis.parent().prev().text()
+// dispadetailend.accessoriesAmount = ""
+// dispadetailend.accessoriesTotalPrice = "0"
+// dispadetailend.orderTotalPrice = thisis.parent().prev().text()
+// dispadetailend.orderTime = orderdayww.getFullYear() + "-" + month + "-" + date+" "+dd+":"+mm;
+// dispadetailend.pickupStore = $(".neededstarbranchName").val()
+// dispadetailend.dropoffStore = $(".neededbranchName").val()
+// dispadetailend.discountName = thisis.parent().prev().prev().prev().prev().text()
+// dispadetailend.orderStatus = "未來訂單"
+// dispadetailend.is_member = "false"
+// dispadetailend.payOrNot = "false"
 // alert("custorder"+ JSON.stringify(dispadetailend))
  $.ajax({ 
      type: "Post",
@@ -366,9 +417,11 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
      contentType: "application/json; charset=utf-8",
      success: function (response) {
 //         alert(response)
+    	 alert("調度成功")
          window.location.assign ("altermotor.html");
      },
      error:function(responseerror){
+    	 alert("第三層")
          alert(responseerror.responseText)
      }
  });
@@ -376,6 +429,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 
 		},
 		error:function(responseerror){
+			alert("第二層")
 			alert(responseerror.responseText)
         }
     });
@@ -383,6 +437,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 			
 		},
 		error:function(responseerror){
+			alert("第ㄧ層")
 			alert(responseerror.responseText)
         }
 
