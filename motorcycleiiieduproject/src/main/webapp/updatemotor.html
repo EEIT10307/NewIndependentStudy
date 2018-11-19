@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>管理頁面</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	
+	<style type="text/css">
+		td input, td select { margin-bottom: 1%;}
+	</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+	<script src="js/include.js"></script>
+	
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
+	
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  	
+	  	
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <a class="dropdown-item" id="replymsg">回覆訊息</a>
+            <script type="text/javascript">
+            $("#replymsg").on("click",function(){
+    	  		$("#chatbox").removeClass("d-none");
+    	  	});
+            </script>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="orderlist.html">查詢訂單</a>
+          </div>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+<!--             <a class="dropdown-item" href="#">帳號設定</a> -->
+<!--             <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+
+      <div id="content-wrapper">
+
+			<div class="container-fluid col-lg-4 offset-lg-4 form-group">
+<!-- 				// 資料起始位置-->
+				<select class="BikeModel1 form-control form-control-sm" style="width:80px;display: inline;"></select>
+				<select class="ModelYear1 form-control form-control-sm" style="width:80px;display: inline;"></select>
+				<input type="submit" id="submit1" class="btn btn-secondary"> 
+				<input type="submit" id="submit2" class="btn btn-secondary  " value="更新">
+				<table id="bike"></table>
+
+
+			</div>
+
+
+
+			<!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+  
+    
+    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+	<script>includeHTML();</script>
+  </body>
+  <script type="text/javascript">
+	$(document).ready(function() {
+		//型號跟年份的下拉式
+		$.ajax({
+			type : "post",
+			url : "selectEveryBikeInfoBikeModel",
+			success : function(response) {
+				// 								alert("sucess");
+				var shop = JSON.parse(response);
+				//迴圈
+				for (i in shop) {
+					//指定分店的欄位
+					var zx = shop[i];
+					// 												alert(zx);
+					//產生option
+					i++;
+					var opt = $("<option>").val(zx).text(zx);
+					//傳回id=showshop 產生 分店 下拉式選單
+					$(".BikeModel1").append(opt);
+				}
+				//型號出來時  第二個拉條同時讀取第一個拉條取出年份
+				var cd = {
+					"everyBikeInfoModel" : $(".BikeModel1").find("option:selected").text()
+				};
+			
+				var str = JSON.stringify(cd);
+				$.ajax({
+					type : "post",
+					url : "showAllshowAllEveryBikeInfo",
+					data : str,
+					contentType : "application/json; charset=utf-8",
+					success : function(response) {
+						var shop = JSON.parse(response);
+//	 					alert(shop)
+						//迴圈
+						for (i in shop) {
+							//指定型號的欄位
+							var zx = shop[i];
+							//產生option
+							i++;
+							var opt = $("<option>").val(zx).text(zx);
+							//傳回id=showshop 產生 型號 下拉式選單
+							$(".ModelYear1").append(opt);
+						}
+					}
+				});
+			}
+		});
+		//每拉一次換一個
+		$(".BikeModel1").change(function() {
+			$(".ModelYear1").html("");
+			var cd = {
+				"everyBikeInfoModel" : $(".BikeModel1").find("option:selected").text()
+			};
+			var str = JSON.stringify(cd);
+			$.ajax({
+				type : "post",
+				url : "showAllshowAllEveryBikeInfo",
+				data : str,
+				contentType : "application/json; charset=utf-8",
+				success : function(response) {
+					var shop = JSON.parse(response);
+					//迴圈
+					for (i in shop) {
+						//指定型號的欄位
+						var zx = shop[i];
+						//產生option
+						i++;
+						var opt = $("<option>").val(zx).text(zx);
+						//傳回id=showshop 產生 型號 下拉式選單
+						$(".ModelYear1").append(opt);
+					}
+				}
+			});
+		});
+	
+// 	------------------------------------------------------------------------------
+//送出後 回傳  機車詳細資料
+
+	$("#submit1").click(function() {
+		$("#bike").html("");
+		var BikeModel=$(".BikeModel1").val();
+		var ModelYear=$(".ModelYear1").val();
+
+		var too={"BikeModel":BikeModel,"ModelYear":ModelYear}
+		var txt="";
+		$.ajax({
+			type : "post",
+			url : "selectBikeDetial",
+			data : too,
+			success : function(response) {
+				var shop = JSON.parse(response);
+				for(i in shop){
+// 					alert(shop[i].aBS)
+					if(shop[i].aBS==true){
+						$("#zx").val(1);
+					}else{
+						$("#zx").val(0);
+					}
+					txt +="<tr><td>型號:</td><td class='bikeModel ' >"+shop[i].bikeModel+"</td></tr>";
+					txt +="<tr><td>年份:</td><td class='modelYear'>"+shop[i].modelYear+"</td></tr>";
+					txt +="<tr><td>廠牌:</td><td class='bikeBrand'>"+shop[i].bikeBrand+"</td></tr>";
+					txt +="<tr><td>CC數:</td><td ><input type='text'	  	class='engineType form-control form-control-sm ' name='you' value='"+shop[i].engineType+"'></td></tr>";
+					txt +="<tr><td>車種:</td><td><input type='text'		class='bikeType form-control form-control-sm ' name='you' value='"+shop[i].bikeType+"'></td></tr>";
+					txt +="<tr><td>紅白黃牌:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input type='text'		class='plateType form-control form-control-sm ' name='you' value='"+shop[i].plateType+"'></td></tr>";
+					txt +="<tr><td>油箱容量:</td><td><input type='text'  	class='fuelTankCapacity form-control form-control-sm ' name='you' value='"+shop[i].fuelTankCapacity+"'></td></tr>";
+					txt +="<tr><td>座高:</td><td><input type='text' 		class='seatHeight form-control form-control-sm ' name='you' value='"+shop[i].seatHeight+"'></td></tr>";
+					txt +="<tr><td>乾重:</td><td><input type='text' 		class='dryWeight form-control form-control-sm ' name='you' value='"+shop[i].dryWeight+"'></td></tr>";
+					txt +="<tr><td>油耗:</td><td><input type='text' 		class='fuelConsumption form-control form-control-sm ' name='you' value='"+shop[i].fuelConsumption+"'></td></tr>";
+					txt +="<tr><td>前輪尺寸:</td><td><input type='text' 		class='tire form-control form-control-sm ' name='you' value='"+shop[i].tire+"'></td></tr>";
+					txt +="<tr><td>使用燃料:</td><td><input type='text' 	class='fuelType form-control form-control-sm ' name='you' value='"+shop[i].fuelType+"'></td></tr>";
+					txt +="<tr><td>ABS:</td><td><select id='zx' class='abs form-control form-control-sm'><option value='1'>是</option><option value='0'>否</option></select></td></tr>";
+					txt +="<tr><td>每小時價格:</td><td><input type='text' class='hourPrice form-control form-control-sm' name='you' value='"+shop[i].hourPrice+"'></td></tr>";
+					txt +="<tr><td>前懸架:</td><td><input type='text' class='frontSuspension form-control form-control-sm' name='you' value='"+shop[i].frontSuspension+"'></td></tr>";
+					txt +="<tr><td>後懸掛:</td><td><input type='text' class='rearSuspension form-control form-control-sm' name='you' value='"+shop[i].rearSuspension+"'></td></tr>";
+					txt +="<tr><td>後輪尺寸:</td><td><input type='text' class='rearTire form-control form-control-sm' name='you' value='"+shop[i].rearTire+"'></td></tr>";
+					txt +="<tr><td>最大馬力:</td><td><input type='text' class='horsePower form-control form-control-sm' name='you' value='"+shop[i].horsePower+"'></td></tr>";
+					txt +="<tr><td>最大扭力:</td><td><input type='text' class='torque form-control form-control-sm' name='you' value='"+shop[i].torque+"'></td></tr>";
+					txt +="<tr><td>前煞車:</td><td><input type='text' class='frontBrake form-control form-control-sm' name='you' value='"+shop[i].frontBrake+"'></td></tr>";
+					txt +="<tr><td>後煞車:</td><td><input type='text' class='rearBrake form-control form-control-sm' name='you' value='"+shop[i].rearBrake+"'></td></tr>";
+					txt +="<tr><td>描述:</td><td><textarea  class='description form-control form-control-sm' name='you' style='width:400px;'>"+shop[i].description+"</textarea></td></tr>";
+					$("#bike").append(txt);
+				}
+				
+			
+				}
+			})
+		});
+// ------------------------------------------------------------------------------------------------------		
+//Update 機車詳細資料	
+		$("#submit2").click(function () {
+			 var res = confirm("確認送出?");
+	         if(res == true){
+			//抓取所有值
+			var bikeModel=$(".bikeModel").text()
+			var modelYear=$(".modelYear").text()
+			var bikeBrand=$(".bikeBrand").text()
+			var engineType=$(".engineType").val()
+			var bikeType=$(".bikeType").val()
+			var plateType=$(".plateType").val()
+			var fuelTankCapacity=$(".fuelTankCapacity").val()//數字
+			var seatHeight=$(".seatHeight").val()//數字
+			var dryWeight=$(".dryWeight").val()//數字
+			var fuelConsumption=$(".fuelConsumption").val()//數字
+			var tire=$(".tire").val()
+			var fuelType=$(".fuelType").val()
+			var abs=$(".abs").val()
+			var hourPrice=$(".hourPrice").val()//數字
+			var frontSuspension=$(".frontSuspension").val()//數字
+			var rearSuspension=$(".rearSuspension").val()//數字
+			var rearTire=$(".rearTire").val()//數字
+			var horsePower=$(".horsePower").val()//數字
+			var torque=$(".torque").val()//數字
+			var frontBrake=$(".frontBrake").val()//數字
+			var rearBrake=$(".rearBrake").val()//數字
+			var description=$(".description").val()//數字
+			//!isNaN(value) 判斷是否為數字 
+					if(isNaN(fuelTankCapacity)){
+						alert("油箱容量不可輸入中文")
+						return;
+					}else if(isNaN(seatHeight)){
+						alert("座高不可輸入中文")
+						return;
+					}else if(isNaN(dryWeight)){
+						alert("乾重不可輸入中文")
+						return;
+					}else if(isNaN(fuelConsumption)){
+						alert("油耗不可輸入中文")
+						return;
+					}else if(isNaN(hourPrice)){
+						alert("每小時價格不可輸入中文")
+						return;
+					}
+			if(abs==1){
+				abs=true;
+			}else{
+				abs=false;
+			}
+			var allvalue={"bikeModel":bikeModel
+					,"modelYear":modelYear
+					,"bikeBrand":bikeBrand
+					,"engineType":engineType
+					,"bikeType":bikeType
+					,"plateType":plateType
+					,"fuelTankCapacity":fuelTankCapacity
+					,"seatHeight":seatHeight
+					,"dryWeight":dryWeight
+					,"fuelConsumption":fuelConsumption
+					,"tire":tire
+					,"fuelType":fuelType
+					,"aBS":abs
+					,"hourPrice":hourPrice
+					,"frontSuspension":frontSuspension
+					,"rearSuspension":rearSuspension
+					,"rearTire":rearTire
+					,"horsePower":horsePower
+					,"torque":torque
+					,"frontBrake":frontBrake
+					,"rearBrake":rearBrake
+					,"description":description}
+			var all=JSON.stringify(allvalue)
+// 			alert(all)
+			$.ajax({
+			type : "post",
+			url : "updateBikeDetial",
+			data :all,
+			contentType:"application/json; charset=utf-8",
+			success : function(response) {
+				
+			
+				}
+			})
+			window.location.href="updatemotor.html";
+	         }else{
+	        	 
+	         }
+		});
+		
+		
+		
+		
+	});
+</script>
+</html>

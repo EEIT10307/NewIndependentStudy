@@ -1,0 +1,52 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/effect.js"></script>
+  <style type="text/css">
+    .glow {
+        -webkit-animation-duration: 0.5s;
+        -webkit-animation-name: glow;
+        -webkit-animation-direction: alternate;
+        -webkit-animation-iteration-count: infinite;
+        animation-duration: 0.5s;
+        animation-name: glow;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+    }
+    .scaling{ 
+    	-webkit-animation: scaling 5s infinite alternate;
+    	-webkit-animation-duration: 1s;
+    
+    }
+    @-webkit-keyframes glow {
+        from { text-shadow: 0 0 0px gold; }
+        to { text-shadow: 0 0 50px gold; }
+    }
+	@-webkit-keyframes scaling {
+		From { -webkit-transform: scale(1.0);}
+		To {-webkit-transform: scale(1.3);}
+
+  </style>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark stick-top">
+	<a class="navbar-brand" href="index.html">Motorcycle</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse az" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a id="login" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">登入</a></li>
+			<li class="nav-item"><a id="registerNav" class="nav-link" href="register.html">註冊</a></li>
+			<li class="nav-item"><a class="nav-link" href="#serv">關於服務</a></li>
+			<li class="nav-item"><a class="nav-link" href="#news">活動訊息</a></li>
+			<li class="nav-item"><a class="nav-link" href="#maptitle">全省分店</a></li>
+			<li class="nav-item"><a class="nav-link" href="notmember.html">查詢訂單</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#weather" style="cursor: pointer;"><img  class='fa-spin' src="Image/sun.png" width="25" style="cursor: pointer;">最近天氣</a></li>
+			<li class="nav-item" id="gotorental"><div class="scaling"><a class="nav-link glow" data-toggle="modal" data-target="#exampleSerchMotor" href="">去租車</a></div></li>
+			<li class="nav-item"><a id="memberdescription" class="nav-link" href="member.html">會員中心</a></li>
+			<li class="nav-item"><a id="memberloginstatus" class="nav-link" ></a></li>
+			<li class="" ><a id="memberlogoutstatus" class="nav-link"  ></a></li>
+
+		</ul>
+	</div>
+	
+	
+        
+</nav>

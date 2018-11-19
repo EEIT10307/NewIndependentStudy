@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+				車牌<input type="text" name="completeLicensePlate" id="completeLicensePlate" value="AAA-01" class="form-control">
+				增加里程數<input type="text" name="increasedMileage" id="increasedMileage" value="50000" class="form-control">
+				<input type="submit" id="submitIncreaseMileage" value="提交" class="form-control btn btn-secondary col-lg-2 offset-lg-5 col-md-4 offset-md-4 my-4">
+				
+				<script>
+		          $("#submitIncreaseMileage").click(function(){
+		              var completeLicensePlate=$("#completeLicensePlate").val();
+		              var increasedMileage=$("#increasedMileage").val();
+		              alert("車牌:"+completeLicensePlate+"\n增加里程數:"+increasedMileage);
+		              $.ajax({
+		              type:"post",
+		              url:"updateBikeMileage",
+		              contentType: "application/json; charset=utf-8",
+		              data:JSON.stringify({"licensePlate":completeLicensePlate,"increasedMileage":increasedMileage}),
+		              success : function(response) {
+		                    alert("增加里程success囉");
+				              $.ajax({
+					              type:"post",
+					              url:"showMessageIfMileageIsOverAfterComplete",
+								  contentType: "application/json; charset=utf-8",
+					              data:JSON.stringify({"licensePlate":completeLicensePlate}),
+					              success : function(response) {
+					            	  var maintenanceMessage=""
+									  var  json3  = JSON.parse(JSON.stringify(response)); 
+					                    if(json3==null){
+					                    	alert("沒爆表");
+					                    }else{
+											for(i in json3){
+												var index = +i + +1;
+												maintenanceMessage+=(index+"."+json3[i].maintenanceItem+"<br>")
+											}
+											maintenanceMessage+="項目爆表了請盡快送保養!!!";
+					                    	alert(maintenanceMessage)
+					                    }
+						 				
+							      }
+					              });
+				      }
+		              });
+		          });
+				</script>
+</body>
+</html>

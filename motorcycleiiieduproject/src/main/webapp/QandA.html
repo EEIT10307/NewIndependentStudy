@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>調度紀錄</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<script src="js/chat.js"></script>
+	<script src="js/effect.js"></script>
+	<script src="js/include.js"></script>
+	
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script><!-- chart -->
+	
+	<link rel="stylesheet" type="text/css" href="css/sb-admin.min.css"/> <!-- sidebar style -->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  </head>
+<body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index.html">後台管理</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <script type="text/javascript">
+      !function(t){"use strict";t("#sidebarToggle").click(
+	  			function(e) {
+	  				e.preventDefault(), t("body").toggleClass("sidebar-toggled"),
+	  						t(".sidebar").toggleClass("toggled")
+	  			}), t("body.fixed-nav .sidebar").on(
+	  			"mousewheel DOMMouseScroll wheel", function(e) {
+	  				if (768 < $window.width()) {
+	  					var o = e.originalEvent, t = o.wheelDelta || -o.detail;
+	  					this.scrollTop += 30 * (t < 0 ? 1 : -1), e.preventDefault()
+	  				}
+	  			}), t(document).scroll(
+	  			function() {
+	  				100 < t(this).scrollTop() ? t(".scroll-to-top").fadeIn() : t(".scroll-to-top").fadeOut()
+	  			}), t(document).on("click", "a.scroll-to-top", function(e) {
+	  				var o = t(this);
+	  				t("html, body").stop().animate({
+	  					scrollTop : t(o.attr("href")).offset().top
+	  				}, 1e3, "easeInOutExpo"),e.preventDefault()})}(jQuery);
+	  	
+	  	
+	  </script>
+      
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="搜尋..." aria-label="搜尋" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link dropdown-toggle" href="#" id="replymsg" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell fa-fw"></i>
+            <span class='badge badge-danger' id='newAlert'>9+</span>
+          </a>
+            <script type="text/javascript">
+            $("#replymsg").on("click",function(){
+    	  		$("#chatbox").removeClass("d-none");
+    	  	});
+            </script>
+        </li>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw fa-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">登出</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav"></ul>
+      <script type="text/javascript">
+      	$('.sidebar').load("sidebarAdmin.html");
+      </script>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid form-group">
+        <!-- QandA Modal-->
+    <div class="modal fade" id="QandAModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">回覆內容</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2"><h2 style='color:brown'>請輸入回覆內容</h2><br/><textarea id='textarea'></textarea></div>
+          <div class="modal-footer">
+            <a class="ok btn btn-outline-secondary" data-dismiss="modal">確認</a>
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">問與答</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>問與答</th>
+                      <th>姓名</th>
+                      <th>內容</th>
+                      <th>回覆日期</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                     <tr>
+                      <th>問與答</th>
+                      <th>姓名</th>
+                      <th>內容</th>
+                      <th>回覆日期</th>
+                    </tr>
+                  </tfoot>
+                  <tbody class='zxcvbnm'>
+                
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <script type="text/javascript">
+          //robin
+
+            $.ajax({
+                   type: "POST",
+                   url: "getAllOrderList",
+           			async: false,
+                   contentType: "application/json; charset=utf-8",
+                   success: function (response) {
+//            				alert(response)
+                   
+                       for (var x = 0; x < response.length; x++) {
+                       	  var motorname = response[x].bikeModel
+                           sessionStorage.setItem(motorname, JSON.stringify(response[x]))
+                          }
+                   },
+                   error:function(responseerror){
+                       alert(responseerror.responseText)
+                   }
+               });
+           //------------------------------------------------------------------------------------
+           	        $.ajax({
+           				type : "post",
+           				url : "selectQAall",
+           				async: false,
+           				success : function(response) {
+//            									alert(response);
+           					var a=0;	
+           					var QA = JSON.parse(response);
+           					//迴圈
+           					for (i in QA) {
+           						if(QA[i].administratorID==null){
+           							  a++;
+           							
+           							
+           							$(".zxcvbnm").append("<tr id='t"+a+"'>"+
+           									  "<td>"+"問"+a+"<input type='hidden' id='qAndASerialNum"+a+"' value='"+QA[i].qAndASerialNum+"'></td>"+
+           									  "<td>"+QA[i].questioner+"</td>"+
+           									  "<td>"+QA[i].questionCotent+"</td>"+
+           									  "<td>"+QA[i].questionDate+"<input type='button' value='回覆' style='float:right;' id='"+a+"' class='ask btn  btn-secondary '></td>"+
+           									  "</tr>")
+           						}
+           						
+           				
+           					}
+           				},
+           		     error:function(responseerror){
+           		         alert(responseerror.responseText)
+           		     }
+           			});
+           	        var dt = new Date();
+           	        var year=dt.getFullYear()
+           	        var month=dt.getMonth()+1
+           	        //alert("月"+month)
+           	        var day=dt.getDate()
+           	        //alert("日"+day)
+           	        var hour=dt.getHours()
+           	        //alert("時間"+hour)
+           	        var min=dt.getMinutes()
+           	        //alert("分鐘"+min)
+           	        var ss=	dt.getSeconds()
+           	        //alert("秒"+ss)
+           	        var z;
+           			$(".zxcvbnm").on("click",".ask",function(response) {
+           				 z=$(this).attr("id")//按鍵ID
+           				$("#QandAModal").modal('show');
+           			})
+           			//mdoel的按鍵
+           			$(".ok").click(function () {
+           				$("#t"+z+"").after("<tr>"+
+           								   "<td>答"+z+"</td>"+
+           								   "<td  style='color:red;'>"+"管理員"+"</td>"+
+           								   "<td>"+$("#textarea").val()+"</td>"+
+           								   "<td>"+year+"/"+month+"/"+day+"&nbsp;"+hour+":"+min+":"+ss+"</td>"+
+           								   "</tr>")
+           				var qAndASerialNum=$("#qAndASerialNum"+z+"").val();//客人的流水號   
+           				var ans="管理員";//取得管理員回應名稱
+           				var textarea=$("#textarea").val()//留言內容 
+           				
+           				var ansupdate={"qAndASerialNum":qAndASerialNum,"ans":ans,"ansquction":textarea}
+           				$.ajax({
+           					type : "post",
+           					url : "updateQA",
+           					data : ansupdate,
+           					success : function(response) {
+           					},
+           			     error:function(responseerror){
+           			         alert(responseerror.responseText)
+           			     }
+           				});				   
+           								   
+           								   
+           								   
+           			})
+            </script>
+
+            <div class="card-footer small text-muted">更新時間  昨天  11:59 PM</div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Motorcycle 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="exampleModalLabel">確定要登出?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body text-center py-2">登出前<br/>請確認儲存了所有修改資料<br/>否則將會發生不可預期的錯誤!!!!</div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">取消</button>
+            <a class="btn btn-outline-secondary" href="index.html">登出</a>
+          </div>
+        </div>
+      </div>
+    </div>
+        <script>
+	    $(document).ready(function() {
+	        $('#dataTable').DataTable( {
+	            "footerCallback": function ( row, data, start, end, display ) {
+	                var api = this.api(), data;
+	     
+	                // Remove the formatting to get integer data for summation
+	                var intVal = function ( i ) {
+	                    return typeof i === 'string' ?
+	                        i.replace(/[\$,]/g, '')*1 :
+	                        typeof i === 'number' ?
+	                            i : 0;
+	                };
+	            }
+	        });
+// ------------------------------------------------------------------------------------
+
+
+	    });
+    </script>
+    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+	<script>includeHTML();</script>
+	
+</body>
+</html>

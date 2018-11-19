@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+<body>
+<div style="list-style: none;">
+	<br />
+	<div class="text-center mb-2">
+		<h3 class="col-xs-6 offset-xs-3 modal-title">去租車</h3>
+	</div>
+	<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12">
+			<h5 class='text-center'>取車 Pick-Up</h5>
+			<div class='form-inline d-flex justify-content-between'>
+				日期:
+				<input type="date" name="pDate" id="pDate" class='form-control col-4'>
+				時間:
+				<select name="Ptime" class="makePoption form-control col-4"></select>
+			</div>
+				<h5 class='text-center mt-3'>取車店 Pickup-Store</h5>
+				<select name="pickupbranchName" class="pickupbranchName form-control"></select>
+		</div>
+	</div>
+	<hr>
+	<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12">
+			<h5 class='text-center'>還車 Drop-Off</h5>
+			<div class='form-inline d-flex justify-content-between'>
+			日期:
+			<input type="date" name="dDate" id="dDate" class='form-control col-4'>
+			時間:
+			<select name="Dtime" class="makeDoption form-control col-4"></select>
+			</div>
+			<h5 class='text-center mt-3'>還車店 Dropoff-Store</h5>
+			<select name="dropoffbranchName" class="dropoffbranchName form-control"></select>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="motorserchdo">查詢</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+	</div>
+		
+  <script src="js/ordertimesearch.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,4 @@
+@charset "UTF-8";
+#mapdetail {width:100%; height: 90%; overflow: scroll; overflow-x: hidden;}
+#mapdetail img{height: 100px; width: 100px; display: block; object-fit: cover;}
+#content{width: 220px; height:50px}

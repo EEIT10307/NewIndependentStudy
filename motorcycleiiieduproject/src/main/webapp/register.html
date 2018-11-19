@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>註冊帳號</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/register.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+	<script src="js/register.js"></script>
+	
+	<link rel="shortcut icon" href="#" />
+</head>
+<body>
+	<video autoplay muted loop id="myVideo"><source src="vedio/motor.mp4" type="video/mp4"></video>
+<div class="container">
+	<form>
+	    <div class="row">
+	    	<div class="col-sm-4 offset-sm-1">
+		      	<h2 style="text-align:center">第三方註冊</h2>
+			    <div class="col-sm-12" id="third">
+			    	<a href="#" class="fb btn" onclick="fbLogin()">Facebook 註冊</a>
+			        <a href="#" class="google btn">Google 註冊</a><br/>
+				</div>
+	    	</div>
+		    <div class="vl">
+		      <span class="vl-innertext">or</span>
+		    </div>
+	    	
+	      <div class="col-sm-4 offset-sm-2 text">
+	        <h2 style="text-align:center">一般註冊</h2><br/>
+			<input type="text" placeholder="請輸入信箱" id="email" name="email"><br/><br/>
+			<input type="text" placeholder="請輸入手機" id="phone" name="phone"><br/><br/>
+	    	<input type="password" placeholder="請輸入密碼" id="pwd" name="password"><br/><br/>
+	    	<span id="idsp"></span>
+				<div class="modal-footer">
+					<button  id = "register" type="button" class="btn btn-secondary">註冊</button>
+					<a href="index.html" class="btn btn-secondary" role="button" aria-disabled="true">返回首頁</a>
+				</div>
+	      </div>
+	    </div>
+    </form>
+</div>
+</body>
+
+
