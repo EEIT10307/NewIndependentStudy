@@ -14,7 +14,7 @@
 	<style type="text/css">
 		td input, td select { margin-bottom: 1%;}
 		.divshadow{
-			box-shadow: 0px 0px 50px #888888;
+			box-shadow: 0px 0px 10px #888888;
 			border-radius: 25px;
 		}		
 	</style>
@@ -113,7 +113,7 @@
       </script>
       <div id="content-wrapper">
       	<div class="container-fluid form-group col-lg-8 offset-lg-2">
-			<div id="func0">	
+			<div id="func0" class='px-5 py-2'>	
 				<h4 class="text-center">新增保養項目</h4>
 				保養項目<input type="text" name="maintenanceItem" id="maintenanceItem" value="" class="form-control">
 				所需到達里程
@@ -126,18 +126,18 @@
 <!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
 				<br/>
 				<div class='d-flex justify-content-around'>
-				<div class='mx-2' id="func1">
-					<h4 class='text-center my-3'>查詢保養中的機車</h4>
+				<div class='mx-2 p-3' id="func1">
+					<h5 class='text-center my-3'>查詢保養中的機車</h5>
 					<div class="from-control col-12 text-center" id="radioset"></div>
 				</div>
 			<!-- //---------------------顯示目前那些車有保養項目超過規定里程--------------------------- -->
-				<div class='mx-2' id="func2">
-					<h4 class='text-center my-3'>顯示超過規定里程數的車</h4>
+				<div class='mx-2 p-3' id="func2">
+					<h5 class='text-center my-3'>顯示超過規定里程數的車</h5>
 					<input type="submit" id="showEveryMileageIsOver" value="點我搜尋" class="form-control btn btn-secondary col-lg-6 offset-lg-3 col-md-12 my-4">
 				</div>
 			<!-- //---------------------各車目前保養里程狀態EveryBikeMileage查詢測試--------------------------- -->
-				<div class='mx-2' id="func3">
-					<h4 class='text-center my-3'>各車保養項目里程數</h4>
+				<div class='mx-2 p-3' id="func3">
+					<h5 class='text-center my-3'>各車保養項目里程數</h5>
 					<div class="from-control col-12 text-center" id="radioset2"></div>
 				</div>
 				</div>
@@ -300,14 +300,22 @@
 			                        $("#maintenance-modal-footer").html("");
 									$("#maintenance-modal").modal('show');
 								    $("#maintenance-modal").on("click","#maintenanceComplete",function(){
-									  alert("保養完畢按鈕點了:"+json4[0].licensePlate)
+// 									  alert("保養完畢按鈕點了:"+json4[0].licensePlate)
+// 											window.location.href("maintenanceDetail.html");
+// 											window.location.reload();
 									  $.ajax({
 										  type:"post",
 										  url:"completeMaintenance",
 										  contentType: "application/json; charset=utf-8",
 										  data:JSON.stringify({"licensePlate":json4[0].licensePlate}),
 										  success : function(response) {
-											  $("#maintenance-modal").modal('hide');
+											  $("#maintenance-modal-title").html("保養訊息");
+											  $("#maintenance-modal-body").html("<div style='text-align:center'>已完成保養</div>");
+											  $("#maintenance-modal-footer").html("<button type='button' id='modalok' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+										      $("#maintenance-modal").modal('show');
+										      $('#maintenance-modal').on('click','#modalok', function() {
+										    	  window.location.reload();
+										    	  });
 										  }//end of success(3)
 									  })//end of ajax(3)
 								  })//end of $("#maintenance-modal").on("click","#maintenanceComplet
@@ -407,9 +415,9 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
  // ---------------------秀保養項目---------------------------
 						$("#resultoffunction").on("click","#platetoshowmaintenance",function(){
 							var plate=$(this).val();
-
 							var c=$(this).attr("class").substring(5,7);
 							$(this).attr("id","platetohidemaintenance")
+							$(this).val("")
 						 	$(this).val("隱藏"+plate)
 							$.ajax({
 								type:"post",
@@ -440,6 +448,18 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 // 		                                	$(this).val(plate)
 		                                	$(this).val($(this).attr("name"))
 		                                })//end of $("#resultofselectedstoretoshow2").on("click","#platetohidemaintenance"
+		            					$('.progress-value > span').each(function(){
+		            						$(this).prop('Counter',0).animate({
+		            							Counter: $(this).text()
+		            							},
+		            							{
+		            								duration: 1500,
+		            								easing: 'swing',
+		            								step: function (now){	
+		            									$(this).text(Math.ceil(now));
+		            								}	
+		            							});
+		            						});
 								}//end of success(2)
 								});//end of ajax(2)
 							});//end of $("#resultofselectedstoretoshow2").on("click","#platetoshowmaintenance"
@@ -468,7 +488,7 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 			    $("#maintenance-modal-title").html("保養訊息");
 			    $("#maintenance-modal-body").html("<div style='text-align:center'>目前沒有機車有保養項目超過規定的里程數</div>");
 			    $("#maintenance-modal-footer").html("<button type='button' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
-				  $("#maintenance-modal").modal('show');
+				$("#maintenance-modal").modal('show');
 				
 			}	
 					
@@ -528,8 +548,13 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 							data:JSON.stringify({"licensePlate":plate}),
 							contentType:"application/JSON; charset = UTF-8" , 
 							success : function(response) {
-								alert("送保養成功囉!!!");
-								window.location.href("maintenanceDetail.html");
+								  $("#maintenance-modal-title").html("保養訊息");
+								  $("#maintenance-modal-body").html("<div style='text-align:center'>已送出保養</div>");
+								  $("#maintenance-modal-footer").html("<button type='button' id='modalok' class='btn btn-secondary' data-dismiss='modal'>OK</button>");
+							      $("#maintenance-modal").modal('show');
+							      $('#maintenance-modal').on('click','#modalok', function() {
+							    	  window.location.reload();
+							    	  });
 							},error:function(responseerror){
 						         alert(responseerror.responseText)
 						     }
@@ -554,7 +579,7 @@ $("#radioset2").on("click","input[name='storetoshow2']",function(){
 			     	 }
 
 				});
-			});
+			});//end of $("#showEveryMileageIsOver").click
 
 
 
