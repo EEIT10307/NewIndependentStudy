@@ -107,6 +107,12 @@ public class MaintenanceService implements MaintenanceIFaceService {
 		return testMaintenanceDAO.maintenanceHistoryforGsonConvert(finalMaintenanceHistory);
 	}
 
+	@Override
+	public boolean selectEveryBikeInfo(String licensePlate) {
+		// TODO Auto-generated method stub
+		return testMaintenanceDAO.selectEveryBikeInfo(licensePlate);
+	}
+
 
 
 

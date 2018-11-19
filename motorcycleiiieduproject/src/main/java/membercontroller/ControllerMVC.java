@@ -5,8 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Blob;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,15 +17,12 @@ import java.util.regex.Pattern;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.type.BlobType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +36,8 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import cleanbean.MemberDetailCleanBean;
+import maintenance.MaintenanceIFaceService;
 import memberservice.MemberService;
-
 import projectbean.MemberDetail;
 
 
@@ -59,6 +54,8 @@ public class ControllerMVC  {
 	Gson gson ; 
 	@Autowired
 	SessionFactory factory;
+	@Autowired
+	MaintenanceIFaceService maintenanceIFaceService;
 
 	
 	@Autowired
@@ -459,7 +456,13 @@ public class ControllerMVC  {
 	return "success";
 	
 	}
+	@RequestMapping(value = "/selectEveryBikeInfo",method = RequestMethod.POST)
+	  public@ResponseBody String selectEveryBikeInfo(String licensePlate) throws IOException {
+	System.out.println("查詢:"+licensePlate);
+	boolean zx = maintenanceIFaceService.selectEveryBikeInfo(licensePlate);
+	return gson.toJson(zx);
 	
+	}
 	
 	
 	

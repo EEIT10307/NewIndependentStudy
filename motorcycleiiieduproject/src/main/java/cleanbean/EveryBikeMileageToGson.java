@@ -3,6 +3,7 @@ package cleanbean;
 
 
 public class EveryBikeMileageToGson {
+	
 	private Integer everyBikeMileageSerialNum;
 	private String licensePlate ; 
 	private String maintenanceItem;
@@ -11,7 +12,9 @@ public class EveryBikeMileageToGson {
 	private String branchName;
 	private Double requiredHourToDo;
 	private Double totalMileage;
-	public EveryBikeMileageToGson(Integer everyBikeMileageSerialNum, String licensePlate, String maintenanceItem,
+	private boolean isReadyMaintenance;
+	
+	public EveryBikeMileageToGson(boolean isReadyMaintenance,Integer everyBikeMileageSerialNum, String licensePlate, String maintenanceItem,
 			Double currentMileage,Double requiredMileage,String branchName,Double requiredHourToDo,Double totalMileage) {
 		super();
 		this.everyBikeMileageSerialNum = everyBikeMileageSerialNum;
@@ -22,6 +25,7 @@ public class EveryBikeMileageToGson {
 		this.branchName=branchName;
 		this.requiredHourToDo=requiredHourToDo;
 		this.totalMileage=totalMileage;
+		this.isReadyMaintenance=isReadyMaintenance;
 	}
 	public Integer getEveryBikeMileageSerialNum() {
 		return everyBikeMileageSerialNum;
@@ -71,6 +75,12 @@ public class EveryBikeMileageToGson {
 	}
 	public void setTotalMileage(Double totalMileage) {
 		this.totalMileage = totalMileage;
+	}
+	public boolean isReadyMaintenance() {
+		return isReadyMaintenance;
+	}
+	public void setReadyMaintenance(boolean isReadyMaintenance) {
+		this.isReadyMaintenance = isReadyMaintenance;
 	}
 	
 
