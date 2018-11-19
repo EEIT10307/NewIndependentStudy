@@ -11,6 +11,7 @@ import cleanbean.OrderListToGson;
 import cleanbean.ShowManagerChangeOrderStatus;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
+import projectbean.BranchDetail;
 import projectbean.Discount;
 import projectbean.OrderList;
 
@@ -59,6 +60,9 @@ public interface OrderIFaceDAO {
 	  void   showManagerFinishedOrder(FinOrderBean finOrderBean)  ; 
 	  
 	  void   showManagerFinishedDiapatcher( ShowManagerChangeOrderStatus showManagerChangeOrderStatus)  ; 
-
+	  
+	  
+	  List<BranchDetail>  showAllBranchDetail() ; 
+  
 
 }

@@ -17,6 +17,7 @@ import cleanbean.ShowManagerChangeOrderStatus;
 import orderdao.OrderIFaceDAO;
 import projectbean.AcceStock;
 import projectbean.BikeDetail;
+import projectbean.BranchDetail;
 import projectbean.Discount;
 import projectbean.OrderList;
 
@@ -157,6 +158,13 @@ public class OrderService implements OrderIFaceService {
 	public void showManagerFinishedDiapatcher(ShowManagerChangeOrderStatus showManagerChangeOrderStatus) {
 		// TODO Auto-generated method stub
 		testOrderDAO.showManagerFinishedDiapatcher(showManagerChangeOrderStatus) ; 
+	}
+
+
+	@Override
+	public List<BranchDetail> showAllBranchDetail() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

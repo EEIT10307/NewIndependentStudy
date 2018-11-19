@@ -102,6 +102,10 @@ public class OrderController {
 			return new String("{\"fail\":fail}");
 		}
 	}
+	
+	
+	
+	
 
 	// 取得折扣資訊
 	@GetMapping(value = "/getDiscount", produces = "application/JSON; charset = UTF-8")

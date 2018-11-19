@@ -119,7 +119,7 @@ if(count == 0 && username != undefined   && username != "不在線上"){
   $(".chatroom").append(
 	  $(`
 	  <div class="mesgs bg-light" id="${username}chatroom" hidden="hidden">
-	  <div class="msg_history">
+	  <div class="msg_history"  id="${username}msg_history">
 					 <div class="incoming_msg">
 					 <div class="incoming_msg_name"></div>
 					 <div class="received_msg">
@@ -159,9 +159,9 @@ if(count == 0 && username != undefined   && username != "不在線上"){
 
   }
 	
+var enteer = $("#"+$(".active_chat").attr("id")+"msg_history");   
+enteer.scrollTop(enteer[0].scrollHeight + 83);
 
-var div3=$(".msg_history");
-div3.scrollTop(div3[0].scrollHeight +83);
 
 	    }
 
@@ -199,6 +199,11 @@ $(document).on("click","#sentoserve" , function () {
 var message = $("#"+$(this).attr("name")+'mymessage').val()
 $("#"+$(this).attr("name")+'mymessage').val("") 
 	send(this , message)
+	
+	alert($(".active_chat").attr("id"))
+ 
+	var enteer = $("#"+$(".active_chat").attr("id")+"msg_history");   
+enteer.scrollTop(enteer[0].scrollHeight + 83);
 
 
 });
@@ -210,11 +215,19 @@ $(document).keypress(function(e) {
 var name = $("#"+$(".active_chat").attr("id")+"mymessage").next()
 
 $("#"+$(".active_chat").attr("id")+"mymessage").val("") ;
-
+	
+	
+	
+	var enteer = $("#"+$(".active_chat").attr("id")+"msg_history");   
+	
     //  alert($(name).attr("name"))
 	// alert($("#"+$(".active_chat").attr("id")+"mymessage").val())
 
 	send(name , message)
+	
+
+	enteer.scrollTop(enteer[0].scrollHeight + 83);
+	
 	}
 
 

@@ -250,17 +250,82 @@
 // 				}
 // 	    	});
 	});
+	 
+
+// $.ajax({
+// 	type: "GET",
+// 	url: "showAllBranchDetail",
+// 	contentType: "application/json; charset=utf-8",
+// 	success: function (response) {
+// 		var locations = []
+		
+// 		for(let k in response){
+// 		var loca = [] ; 
+// 		var num = 1 ; 
+// 			loca.push(response[k].branchName) ; 
+// 			alert(response[k].branchName)
+// 		var geocoder = new google.maps.Geocoder();
+//       geocoder.geocode({ address: response[k].branchAddress },
+//       function (result, status) {
+// 	if (status == google.maps.GeocoderStatus.OK) {
+// 		var location = result[0].geometry.location;
+//         loca.push(location.lat())  //緯度
+//         loca.push(location.lng())  //精度
+//         loca.push(num) 
+//         loca.push(response[k].branchPhone)
+//           loca.push(response[k].branchAddress)
+//             loca.push("一~日 9:00~20:00")
+//             loca.push("https://zh-tw.facebook.com/d9350910/")      
+// 			locations.push(loca)
+// 			alert(locations)
+// 			loca = []
+//             num++   
+// 	} else {
+// 		alert('解析失敗!回傳狀態為：' + status);
+// 	}
+
+// 	setTimeout(3000)
+// });	
+// 	}
+// 	var map = new google.maps.Map(document.getElementById('map'), { zoom: 6.7, center: new google.maps.LatLng(23.75, 121.2), mapTypeId: google.maps.MapTypeId.ROADMAP　});
+// 	for(i = 0; i < locations.length; i++){
+// 		var infowindow = new google.maps.InfoWindow();
+// 		var marker;
+// 		var latLng = new google.maps.LatLng(locations[i][1], locations[i][2]);  
+// 		marker = new google.maps.Marker({           
+// 			position: latLng,
+// 			map: map
+// 		});
+// 		marker.data = locations[i]; // adds object to marker object
+// 		marker.addListener('click', function() {
+// 		// read custom data in this.data   
+// // 		infowindow.setContent("<div id='infowindow'>"+ this.data[0]+"<p>tel</p>"+this.data[4] +"</div>");
+// 			var contentString = '<div id="content">'+
+// 			'<h3 id="firstHeading" class="firstHeading">'+this.data[0]+'</h3><br/>'+
+// 		    '<div id="bodyContent">'+
+// 		    '<p><span>電話</span>'+this.data[4]+'</p>'+
+// 		    '<p><span>地址</span>'+this.data[5]+'</p>'+
+// 		    '<p><span>營業時間</span>'+this.data[6]+'</p>'+
+// 		    '<p><span>網站</span><a href="'+this.data[7]+'">'+this.data[7]+'</a></p>'+
+// 		    '</div>'+
+// 		    '</div>';
+// 			infowindow.setContent(contentString);
+// 			infowindow.open(map, this);
+// 			map.setCenter(this.getPosition());
+// 		});
+// 	}
+// }
+// });
+
+
 	
 	
-	
-	
-	
-	var locations = [
-		[ "全好車業", 25.0517208, 121.5148625, 1, "0926-664-076", "103台北市大同區長安西路145巷12號", "一~日 9:00~20:00", "https://zh-tw.facebook.com/d9350910/"],
-		["好好騎機車出租", 22.9648553, 120.2108129, 2, "06-222-2816", "704台南市北區北門路二段69號", "一~日 8:00~22:00", "https://www.google.com.tw/"] ,
-		[ "逍遙遊台中火車站租機車", 24.1825736, 120.5730652, 3, "04-2223-2119", "400台中市中區建國路103號", "一~日 9:00~21:00", "http://motorbike-travel.com/index.aspx"],
-		[ "淡水趴趴走機車出租", 25.1760562, 121.436585, 4, "0980-425-482", "251新北市淡水區新民街53巷", "一~日 9:00~20:00", "https://zh-tw.facebook.com/vcdpupu/"]
-	];
+ 	var locations = [
+		[ "大安店", 25.0438107, 121.54619809999997, 1, "0926-664-076", "大安路30號", "一~日 9:00~20:00", "https://zh-tw.facebook.com/d9350910/"],
+		["木柵店", 24.9866302, 121.54624080000008, 2, "06-222-2816", "木柵路12號", "一~日 8:00~22:00", "https://www.google.com.tw/"] ,
+		[ "石牌店", 25.1154245, 121.515627, 3, "04-2223-2119", "石牌路12號", "一~日 9:00~21:00", "http://motorbike-travel.com/index.aspx"],
+		
+	]; 
 // 			alert(locations.length);
 	var map = new google.maps.Map(document.getElementById('map'), { zoom: 6.7, center: new google.maps.LatLng(23.75, 121.2), mapTypeId: google.maps.MapTypeId.ROADMAP　});
 	for(i = 0; i < locations.length; i++){
