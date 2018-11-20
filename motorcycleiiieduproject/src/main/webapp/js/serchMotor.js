@@ -375,6 +375,7 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 		var co=$("[name='count']").length;//計算元素有幾個
 
 		var questioner = $("#cus").val();//輸入者姓名
+
 		var questionCoten=$("#questionCoten").val();//問答問題
 
 		if(questioner=="" || questionCoten==""){

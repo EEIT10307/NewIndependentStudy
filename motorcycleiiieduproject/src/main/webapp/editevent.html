@@ -179,7 +179,8 @@
 			<div class="text-center my-5"><button type='submit' class='btn btn-outline-secondary algin-center' id='submit'>確認修改</button></div>
       	</div>
       	
-			<script>
+	<script>
+			
 			var editor1;
 			var editor2;
 			var editor3;
@@ -187,6 +188,29 @@
 			var editor5;
 			var editor6;
 			var editor7;
+
+	      	var num = $('.edit').length;
+	      	$(document).ready(function(){
+		    	$.ajax({
+		            type: "get",
+		            url: "queryAllWebContent",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (response) {
+
+//	 		               alert(response[6].webElements+ +response[6].webContent);
+//	 		               alert(num)
+					   for(i=0; i<num; i++){ 
+						   $('#'+response[i].webElements).empty().append(response[i].webContent);
+					   $('#editor4 h3').addClass("featurette-heading");
+					   $('#editor6 h3').addClass("featurette-heading");
+					   $('#editor4 p:first').addClass("text-right");
+					   $('#editor6 p:first').addClass("text-right");
+					   $('#editor4 p:last').addClass("lead text-justify");
+					   $('#editor6 p:last').addClass("lead text-justify");
+					   }
+					
+			
+			
 
 				
 					InlineEditor
@@ -265,7 +289,12 @@
 						.catch( error => {
 						   console.error( error );
 						});
-			
+		            },
+				     error:function(responseerror){
+//	 			         alert(responseerror.responseText)
+				     }
+		        });	
+			});
 			</script>
 			<script>		   
 // 				for(i=0; i<num; i++){
@@ -306,17 +335,18 @@
 // 					alert(editor[0].webElements + editor[0].webContent);
 					//insertWebContent
 					//updateWebContent
-			    	alert(editor)
+// 			    	alert(editor)
 					$.ajax({ 
 			    		type: "Post",
 			    		url: "updateWebContent",
 			    		data: JSON.stringify(editor),
 			    		contentType: "application/json; charset=utf-8",
 			    		success: function (response) {
-			    			alert(response);
+// 			    			alert(response);
+			    			alert("修改成功!!!");
 			    		},
 			    		error:function(responseerror){
-			    			alert(responseerror.responseText)
+// 			    			alert(responseerror.responseText)
 			    			window.location.assign ("error.html");
 			    		}
 			    	});
@@ -362,8 +392,12 @@
         </div>
       </div>
     </div>
-    
-    <div w3-include-html="chatbox.html" class="d-none" id="chatbox"></div>
+    <div  class="d-none" id="chatbox">
+
+		</div>
+		<script>
+		$("#chatbox").load("chatbox.html");
+		</script>
 	<script>includeHTML();</script>
 		
   </body>

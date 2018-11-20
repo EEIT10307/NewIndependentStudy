@@ -203,6 +203,7 @@ if (resulttime >= 4 & resulttime < 8) {
                     data: jsonob,
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
+                    
                         for (let k in response) {
            
                             t.row.add([
@@ -220,7 +221,7 @@ if (resulttime >= 4 & resulttime < 8) {
                     }
                 });
 
-                t.columns( [0,1] ).visible( false );
+                t.columns( [0,1] ).visible( true );
 
             }
 
@@ -289,7 +290,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
     dispadetail.bikeModel = $(this).parent().prev().prev().text()
     dispadetail.pickupDate = $("#pDate").val() + " " + ((parseInt($(".makePoption").val().split(":")[0])-1)+":"+"00")
     dispadetail.dropoffDate = $("#pDate").val() + " " + $(".makePoption").val()
-    dispadetail.totalDiscount = "0"
+    dispadetail.totalDiscount = 1
     dispadetail.bikePrice = "0";
     dispadetail.accessoriesAmount = ""
     dispadetail.accessoriesTotalPrice = "0"
@@ -375,7 +376,7 @@ $("#outDIV").on("click", "#dispacher" ,  function () {
 		    dispadetailend.bikeModel = thisis.parent().prev().prev().text()
 		    dispadetailend.pickupDate =  $("#dDate").val() + " " + $(".makeDoption").val()
 		    dispadetailend.dropoffDate = $("#dDate").val() + " " + ((parseInt($(".makeDoption").val().split(":")[0])+1)+":"+"00")
-		    dispadetailend.totalDiscount = "0"
+		    dispadetailend.totalDiscount = 1
 		    dispadetailend.bikePrice = "0"
 		    dispadetailend.accessoriesAmount = ""
 		    dispadetailend.accessoriesTotalPrice = "0"

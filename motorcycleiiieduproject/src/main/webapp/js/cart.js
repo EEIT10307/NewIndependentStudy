@@ -140,7 +140,7 @@ $(".addphone").click(function (e) {
 		  
 		}
 	});
-	alert("感謝您的預定 , 系統將會自動發送評價表至您的信箱")
+	alert("感謝您的預定 ")
 
 
 	window.location.assign ("index.html"); 
