@@ -368,31 +368,19 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 		var dt = new Date();
 		var year=dt.getFullYear()
 		var month=dt.getMonth()+1
-//	 	alert("月"+month)
 		var day=dt.getDate()
-//	 	alert("日"+day)
 		var hour=dt.getHours()
-//	 	alert("時間"+hour)
 		var min=dt.getMinutes()
-//	 	alert("分鐘"+min)
 		var ss=	dt.getSeconds()
-//	 	alert("秒"+ss)
-//	 	alert(year+month+day+hour+min+ss)
-//			$(".cc").append(year+"/"+month+"/"+day+"&nbsp;&nbsp;&nbsp;"+hour+":"+min+":"+ss)
 		var co=$("[name='count']").length;//計算元素有幾個
 
 		var questioner = $("#cus").val();//輸入者姓名
-//			alert(questioner)
 		var questionCoten=$("#questionCoten").val();//問答問題
 
-//			alert(questionCoten)
-		$("#appendtext").append("<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"+year+"/"+month+"/"+day+"&nbsp;&nbsp;&nbsp;&nbsp;"+hour+":"+min+":"+ss+"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>")
-		//"<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"++"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>"
 		if(questioner=="" || questionCoten==""){
 			return;
 		}
 		$("#appendtext").append("<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"+year+"/"+month+"/"+day+"&nbsp;&nbsp;&nbsp;&nbsp;"+hour+":"+min+":"+ss+"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>")
-		//"<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"++"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>"
 		$("#cus").val("");
 		$("#questionCoten").html("");
 //			型號and年份  BikeModel   ModelYear
@@ -406,7 +394,6 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 			success : function(response) {
 			},
 		     error:function(responseerror){
-		 //        alert(responseerror.responseText)
 		     }
 		});
 		
