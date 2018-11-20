@@ -284,7 +284,7 @@ public class MaintenanceDAO implements MaintenanceIFaceDAO {
 		 System.out.println("執行新增MaintenanceHistory!!!!!!");
 
 		 Date now=new Date();
-		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd hh:mm");
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		 System.out.println("現在時間:"+sdf.format(now));
 		 for(EveryBikeMileage loop : maintenanceItemList) {
 			 System.out.println("靠杯喔");
