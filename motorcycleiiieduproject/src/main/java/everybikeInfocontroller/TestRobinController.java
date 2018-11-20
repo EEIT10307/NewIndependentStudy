@@ -144,7 +144,7 @@ public class TestRobinController {
 					root1.getModelYear());
 			everyBikeMileageIFaceService.save(root1.getLicensePlate());
 		}
-		return "";
+		return gson.toJson("OK");
 	}
 
 	@RequestMapping(value = "/uploadmutipartf", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE) // 測試上傳照片(多張)

@@ -593,14 +593,18 @@
 						url : "insertBikeDetail",
 						data : jsonarray,
 						success : function(response) {
-
+						
 							var cd = JSON.parse(response)
 
+						if(cd.key!=null){
+								
 							alert(cd.key)
-						if(cd.key==null){
-							
-						window.location.href="uploadmotor.html";
 							}
+							if(cd.key==null){
+						window.location.href="uploadmotor.html";
+								
+								}
+								
 						}
 					});
 			         }else{
