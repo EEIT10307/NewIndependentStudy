@@ -345,14 +345,15 @@ $.ajax({
         var maintenanceMessage=""
         var  json3  = JSON.parse(JSON.stringify(response)); 
           if(json3==null){
-              alert("沒爆表");
+        	  
           }else{
               for(i in json3){
                   var index = +i + +1;
                   maintenanceMessage+=(index+"."+json3[i].maintenanceItem+"<br>")
               }
-              maintenanceMessage+="項目爆表了請盡快送保養!!!";
-              alert(maintenanceMessage)
+              maintenanceMessage+="項目超過保養里程數了請盡快送保養!!!";
+              $("#maintenance-modal-body").html(maintenanceMessage);
+              $("#maintenance-modal").modal('show');
           }
            
     }

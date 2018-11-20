@@ -34,7 +34,29 @@
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
       </button>
-      
+
+<!-- 	//------------------------------------訂單完成保養通知Modal--------------------------------->
+			<!-- Modal -->
+			<div class="modal fade" id="maintenance-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="maintenance-modal-title">保養通知</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="maintenance-modal-body">
+			      </div>
+			      <div class="modal-footer" id="maintenance-modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+<!-- 			        <button type="button" class="btn btn-primary">已知</button> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<!-- //---------------------------------------------------------------------------- -->
+
       <script type="text/javascript">
       !function(t){"use strict";t("#sidebarToggle").click(
 	  			function(e) {
