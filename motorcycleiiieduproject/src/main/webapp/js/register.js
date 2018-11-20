@@ -1,5 +1,12 @@
 $(window).on('load',function () {   
-  
+	
+	$("#memberRegister").click(function (e) {
+		
+	    $("#email").val("shuuuuuuuuuuzo@gmail.com");
+	    $("#phone").val("0912345678");
+	    $("#pwd").val("aa!123");
+	}) 
+	
 $("#register").click(function (e) { 
 
 

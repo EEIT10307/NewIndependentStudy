@@ -384,7 +384,10 @@ $("td.table").addClass("tdborder");//class=table 的元素td 套入CSS
 		var questioner = $("#cus").val();//輸入者姓名
 //			alert(questioner)
 		var questionCoten=$("#questionCoten").val();//問答問題
+
 //			alert(questionCoten)
+		$("#appendtext").append("<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"+year+"/"+month+"/"+day+"&nbsp;&nbsp;&nbsp;&nbsp;"+hour+":"+min+":"+ss+"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>")
+		//"<tr name='count'><td>Q"+co+":</td><td>"+questioner+"</td><td>"++"</td></tr><tr><td>"+questionCoten+"</td><td></td><td></td></tr>"
 		if(questioner=="" || questionCoten==""){
 			return;
 		}
