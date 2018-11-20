@@ -158,6 +158,13 @@ $.ajax({
 	    $("#pwd").val("456456");
 	})
 	
+		$("#memberLogin2").click(function (e) {
+	
+	    $("#email").val("bookwater2@yahoo.com.tw");
+	    $("#pwd").val("456456");
+	})
+	
+	
     $("#checkall").click(function (e) {
         e.preventDefault();
 
