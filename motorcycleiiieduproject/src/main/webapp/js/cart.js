@@ -92,12 +92,12 @@ if(orderdetailstr.phone != ""){
 			data: JSON.stringify(orderdetailstr),
 			contentType: "application/json; charset=utf-8",
 			success: function (response) {
-				
+			
 	
 			},
 			error:function(responseerror){
 		   
-				alert(responseerror.responseText)
+				
 		  
 			  
 			}
@@ -135,14 +135,14 @@ $(".addphone").click(function (e) {
 		},
 		error:function(responseerror){
 	   
-			alert(responseerror.responseText)
+		
 	  
 		  
 		}
 	});
+	
+
 	alert("感謝您的預定 ")
-
-
 	window.location.assign ("index.html"); 
 	}
 });

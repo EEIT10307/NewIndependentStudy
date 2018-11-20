@@ -262,10 +262,12 @@ public class ControllerMVC  {
 		MemberDetail mem = gson.fromJson(reader, MemberDetail.class) ;
 	
 		Date signinDate = new java.util.Date();
+		
 		  
 //		  Blob test = new Blob(url);
 		  mem.setSigninDate(signinDate); 
 		  mem.setLastLoginDate(signinDate);
+		  mem.setBirthday(signinDate);
 //		  mem.setProfilePhoto(test); 暫時將bean的 	@Column(nullable = false) 註解起來
 		  System.out.println("最後登入日:"+mem.getLastLoginDate());
 		  

@@ -117,11 +117,11 @@
 				      <input type="text" class="form-control" id="branchName" name='bName'/>
 				      </div>
 			  </div>
-			  <div id="zipcode" class="form-row justify-content-center">
+			  <div id="zipcode" class="form-row justify-content-end mr-3">
 			    <label for="addr" class="col-sm-2 col-form-label">地址</label>
 				<div class="f3 mx-1 form-group" data-role="county"></div>
 				<div class="f4 mx-1 form-group" data-role="district"></div>
-				<input name="addr" type="text" class="f13 address form-control col-6 mx-1" id="branchAddress" >
+				<input name="addr" type="text" class="f13 address form-control col-7 ml-1" id="branchAddress">
 			  </div>
 			  <div class="form-row form-group justify-content-center">
 			    <label class="col-sm-2 col-form-label">電話</label>
@@ -203,12 +203,12 @@
 				    	data:zx,
 				    	contentType:"application/json;charset=utf-8",
 						success : function(response) {
-							alert("success");
-							alert("response="+response);
+						//	alert("success");
+						//	alert("response="+response);
 				    
-							alert("上傳照片開始");
+						//	alert("上傳照片開始");
 							var formData = new FormData($("#multiform")[0]);
-							alert(formData);
+						//	alert(formData);
 						    $.ajax({
 						    	type : "post",
 						    	url : "uploadBranchImg",
@@ -218,13 +218,13 @@
 								contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
 								dataType : 'text',
 								success : function(data) {
-									alert("上傳照片="+data);
+									alert("上傳成功");
 								},
 								error : function() {
-									alert("上傳照片失敗");
+						//			alert("上傳照片失敗");
 								}
 							});//ajax upload branch image
-						    alert("上傳照片結束");
+						//    alert("上傳照片結束");
 						}//success
 				    });//ajax
 	      		});//click

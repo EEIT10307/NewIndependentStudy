@@ -154,13 +154,13 @@ $.ajax({
 
 	$("#memberLogin").click(function (e) {
 	
-	    $("#email").val("bookwater1@yahoo.com.tw");
+	    $("#email").val("bookwater1@gmail.com");
 	    $("#pwd").val("456456");
 	})
 	
 		$("#memberLogin2").click(function (e) {
 	
-	    $("#email").val("bookwater2@yahoo.com.tw");
+	    $("#email").val("bookwater2@gmail.com");
 	    $("#pwd").val("456456");
 	})
 	
@@ -190,18 +190,18 @@ $.ajax({
         });
         // }
 
-        //清除cookie
+     //清除cookie
         function clearAllCookie() {
             // alert("loginType清除所有Cookies!!!!!!!")
-            var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+            var clearcookies =document.cookie
+            var keys = clearcookies.match(/[^ =;]+(?=\=)/g);
             if (keys) {
                 for (var i = keys.length; i--;)
-                    document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+                clearcookies = keys[i] + '=0;expires=' + new Date(0).toUTCString()
             }
-            // alert('loginType清除cookie內的資料後==>'+document.cookie)
+            document.cookie=clearcookies;
+            alert('loginType清除cookie內的資料後==>'+document.cookie)
             window.location.reload(true);
-
-
 
 
             // function deleteCookies(name) { 
@@ -253,7 +253,7 @@ $.ajax({
             //display user data
             // alert("getLoginStatus CHECK!!!!")
             //判斷是否是會員，如果不是
-            getFbUserData();
+           // getFbUserData();
         }
     });
 };

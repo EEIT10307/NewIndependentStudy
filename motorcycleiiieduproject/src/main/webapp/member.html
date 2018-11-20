@@ -92,9 +92,11 @@
                     <input type="text" class="form-control" id="despassword">
                   </div>
 	              <div class="col-12"><button  id='change'  class="btn btn-secondary mx-auto my-3">更新資料</button></div>
+	            
                 </div>
 								</div>
 				</form> 
+				   <div class="col-12"><button  id='changeonebutton'  class="btn btn-secondary mx-auto my-3">一鍵更新</button></div>
                 <div class="col-4">
 						<form id="myForm" class="col-12">
 				    <!-- <h7>上傳照片<span>預覽</span></h7> -->
@@ -119,7 +121,17 @@
 		</div>
 		
 <!--     	</section> -->
+	<script>
+	  $("#changeonebutton").click(function () { 
+
+	      $("#despassword").val("AABB123!!!!!!");
+	   $("#desname").val("Stephen Curry");
+	   $("#desbirthday").val("2018-08-08");
+	   $("#desphone").val("0988888888");
+	   $("#desaddress").val("台北市大安區大安路大安巷大安街");
+	    });
 	
+	</script>
 	
  	
 	<div w3-include-html="chatboxMember.html"></div>

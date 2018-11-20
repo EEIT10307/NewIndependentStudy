@@ -378,7 +378,7 @@ public class TestRobinController {
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
 						new File("/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
 								BikeModel + "_" + ModelYear + "_00" + i + ".jpg"))); // 上傳檔案位置為D:\
-
+  System.out.println("====================t傳檔案===========================");
 				outputStream.write(file.getBytes());
 				outputStream.flush();
 				outputStream.close();
