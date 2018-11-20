@@ -88,8 +88,10 @@ public class KuanBranchDetailController{
 			System.out.println("進去!!!!!!!");
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
+				///Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
+				//C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image
 				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"C:\\Maven\\repository\\motorcycleiiieduproject\\src\\main\\webapp\\Image","branch_"+bName+i+".jpg"))); // 上傳檔案位置為D:\
+						"/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image","branch_"+bName+i+".jpg"))); // 上傳檔案位置為D:\
 				outputStream.write(file.getBytes());
 				outputStream.flush();
 				outputStream.close();
