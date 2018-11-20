@@ -90,7 +90,7 @@ if(email=="gm@gmail.com" && password=="gm!123"){
     var gmpage = "gmpage.html?name="+email
         	
     //重要！！ 轉傳時要編碼一次編成ＵＲＩ
-	window.location.href="revenue.html";
+	window.location.href="addstore.html";
 return;
 }
 var combie =  {"email":email , "password":password} ; 
@@ -145,7 +145,19 @@ $.ajax({
 
 
     });
+    
+    $("#administratorLogin").click(function (e) {
 
+        $("#email").val("gm@gmail.com");
+        $("#pwd").val("gm!123");
+    })
+
+	$("#memberLogin").click(function (e) {
+	
+	    $("#email").val("bookwater1@yahoo.com.tw");
+	    $("#pwd").val("456456");
+	})
+	
     $("#checkall").click(function (e) {
         e.preventDefault();
 

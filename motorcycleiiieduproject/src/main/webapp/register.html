@@ -15,29 +15,30 @@
 </head>
 <body>
 	<video autoplay muted loop id="myVideo"><source src="vedio/motor.mp4" type="video/mp4"></video>
-<div class="container">
+<div class="container register">
 	<form>
 	    <div class="row">
 	    	<div class="col-sm-4 offset-sm-1">
 		      	<h2 style="text-align:center">第三方註冊</h2>
-			    <div class="col-sm-12" id="third">
+			    <div class="col-sm-12 text-center" id="third">
 			    	<a href="#" class="fb btn" onclick="fbLogin()">Facebook 註冊</a>
-			        <a href="#" class="google btn">Google 註冊</a><br/>
+<!-- 			        <a href="#" class="google btn">Google 註冊</a><br/> -->
 				</div>
 	    	</div>
 		    <div class="vl">
 		      <span class="vl-innertext">or</span>
 		    </div>
 	    	
-	      <div class="col-sm-4 offset-sm-2 text">
+	      <div class="col-sm-4 offset-sm-2 text-center">
 	        <h2 style="text-align:center">一般註冊</h2><br/>
 			<input type="text" placeholder="請輸入信箱" id="email" name="email"><br/><br/>
 			<input type="text" placeholder="請輸入手機" id="phone" name="phone"><br/><br/>
 	    	<input type="password" placeholder="請輸入密碼" id="pwd" name="password"><br/><br/>
 	    	<span id="idsp"></span>
 				<div class="modal-footer">
-					<button  id = "register" type="button" class="btn btn-secondary">註冊</button>
-					<a href="index.html" class="btn btn-secondary" role="button" aria-disabled="true">返回首頁</a>
+					<button  id = "register" type="button" class="btn btn-secondary regbtn">註冊</button>
+					<button id="memberRegister" type="button" class="btn btn-secondary">一鍵註冊</button>
+					<a href="index.html" class="btn btn-secondary regbtn" role="button" aria-disabled="true">返回首頁</a>
 				</div>
 	      </div>
 	    </div>

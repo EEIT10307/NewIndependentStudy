@@ -80,17 +80,18 @@ public class TestRobinController {
 	OrderIFaceService orderIFaceService;
 	@Autowired
 	BackIFaceService backIFaceService;
+
 	@Autowired
 	Gson gson;
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST) // 留言評價版
 	public @ResponseBody String insertbikeReview(String orderSerialNum, int email, Double satisfacation,
-			String bikeModel, String reviewContent) throws IOException, ParseException {
+			String reviewContent) throws IOException, ParseException {
 
 		SimpleDateFormat fro = new SimpleDateFormat("yyyy/MM/dd hh:mm");
 		Date now = new Date();
 
-		bikeReviewIFaceService.save(orderSerialNum, email, reviewContent, satisfacation, now, bikeModel);// 評價留言板新增內容
+		bikeReviewIFaceService.save(orderSerialNum, email, reviewContent, satisfacation, now);// 評價留言板新增內容
 		return "OK";
 	}
 
@@ -137,11 +138,11 @@ public class TestRobinController {
 
 		}
 		bikeDetailIFaceService.save(bikeDetailAndEveryBikeInfo);
-	for (BikeDetailAndEveryBikeInfo root1 : bikeDetailAndEveryBikeInfo) {
+		for (BikeDetailAndEveryBikeInfo root1 : bikeDetailAndEveryBikeInfo) {
 
-
-		everyBikeInfoIFaceService.save(root1.getLicensePlate(), root1.getBranchName(), root1.getBikeModel(), root1.getModelYear());
-		everyBikeMileageIFaceService.save(root1.getLicensePlate());
+			everyBikeInfoIFaceService.save(root1.getLicensePlate(), root1.getBranchName(), root1.getBikeModel(),
+					root1.getModelYear());
+			everyBikeMileageIFaceService.save(root1.getLicensePlate());
 		}
 		return "";
 	}
@@ -153,11 +154,11 @@ public class TestRobinController {
 			MultipartFile file = files[i];
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
-			//=/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
-				//=C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
-				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
-						"R3_1990_00" + i + ".jpg"))); // 上傳檔案位置為D:\
+				// =/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
+				// =C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
+				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
+						new File("/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
+								"R3_1990_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
 				outputStream.flush();
@@ -249,7 +250,8 @@ public class TestRobinController {
 
 	@PostMapping(value = "/selectBikeDetial", produces = "text/html; charset = UTF-8") // 查詢機車詳細
 	public @ResponseBody String selectBikeDetial(String BikeModel, String ModelYear) throws IOException {
-		List<BikeDetailToGson> ta = everyBikeInfoIFaceService.forGsonConvertBikeDetail(everyBikeInfoIFaceService.selectbikeModelmodelYear(BikeModel, ModelYear));
+		List<BikeDetailToGson> ta = everyBikeInfoIFaceService
+				.forGsonConvertBikeDetail(everyBikeInfoIFaceService.selectbikeModelmodelYear(BikeModel, ModelYear));
 		return gson.toJson(ta);
 	}
 
@@ -272,10 +274,6 @@ public class TestRobinController {
 		return "";
 	}
 
-
-
-
-
 	@PostMapping(value = "/insertQA", produces = "text/html; charset = UTF-8") // 商品評價 新增
 	public @ResponseBody String insertQA(@RequestBody QaBean qaBean) throws IOException {
 
@@ -284,67 +282,80 @@ public class TestRobinController {
 	}
 
 	@PostMapping(value = "/selectQA", produces = "text/html; charset = UTF-8") // 商品評價 查詢
-	public @ResponseBody String selectQAA(String bikeModel,String modelYear) throws IOException {
-	
-		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQAwhere(bikeModel,modelYear));
-		 if(QQ.size()==0) {
-			 return "";
-		 }
+	public @ResponseBody String selectQAA(String bikeModel, String modelYear) throws IOException {
+
+		List<QaBeanToJson> QQ = bikeDetailIFaceService
+				.QaBeanToJson(bikeDetailIFaceService.selectQAwhere(bikeModel, modelYear));
+		if (QQ.size() == 0) {
+			return "";
+		}
 		return gson.toJson(QQ);
 	}
+
 	@PostMapping(value = "/selectQAall", produces = "text/html; charset = UTF-8") // 商品評價 查詢
 	public @ResponseBody String selectQAall() throws IOException {
-	
-		 List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA());
-		 if(QQ.size()==0) {
-			 return "";
-		 }
+
+		List<QaBeanToJson> QQ = bikeDetailIFaceService.QaBeanToJson(bikeDetailIFaceService.selectQA());
+		if (QQ.size() == 0) {
+			return "";
+		}
 		return gson.toJson(QQ);
 	}
+
 	@PostMapping(value = "/updateQA", produces = "text/html; charset = UTF-8") // 商品評價 更新
-	public @ResponseBody String updateQA(int qAndASerialNum,String ans,String ansquction) throws IOException {
+	public @ResponseBody String updateQA(int qAndASerialNum, String ans, String ansquction) throws IOException {
 		bikeDetailIFaceService.updateQA(qAndASerialNum, ans, ansquction);
 		return "回覆成功";
 	}
-	@PostMapping(value = "/selecOrderTotal", produces = "text/html; charset = UTF-8") //查詢月營收
+
+	@PostMapping(value = "/selecOrderTotal", produces = "text/html; charset = UTF-8") // 查詢月營收
 	public @ResponseBody String selecOrderTotal(String branchName) throws IOException {
 		List<OrderList> order = orderListIFaceService.selecOrderTotal(branchName);
-		OrderListRobinYear orderjson=orderListIFaceService.OrderListForJson((List<OrderList>) order);
-		 
+		OrderListRobinYear orderjson = orderListIFaceService.OrderListForJson((List<OrderList>) order);
+
 		return gson.toJson(orderjson);
 	}
+
 	@PostMapping(value = "/selecOrderTotalYear", produces = "text/html; charset = UTF-8") // 查詢年營收
 	public @ResponseBody String selecOrderTotalYear(String branchName) throws IOException {
 		List<OrderList> order = orderListIFaceService.selecOrderTotalYear(branchName);
 
-		OrderListRobinYear orderjson=orderListIFaceService.OrderListForJsonYear((List<OrderList>) order);
+		OrderListRobinYear orderjson = orderListIFaceService.OrderListForJsonYear((List<OrderList>) order);
 		return gson.toJson(orderjson);
 
 	}
+
 	@PostMapping(value = "/selectMemberDetailyear", produces = "text/html; charset = UTF-8") // 查詢年營收
 	public @ResponseBody String selectMemberDetailyear() throws IOException {
 		System.out.println("yy");
 		List<MemberDetail> selectMemberyear = orderListIFaceService.selectMemberyear();
-		MemberDetailSelectYearForJson memberDetailSelectYearForJson = orderListIFaceService.MemberDetailSelectYearForJson(selectMemberyear);
+		MemberDetailSelectYearForJson memberDetailSelectYearForJson = orderListIFaceService
+				.MemberDetailSelectYearForJson(selectMemberyear);
 		return gson.toJson(memberDetailSelectYearForJson);
 
 	}
+
 	@PostMapping(value = "/selectMemberDetail", produces = "text/html; charset = UTF-8") // 會員查詢
 	public @ResponseBody String selectMemberDetail() throws IOException {
-			return gson.toJson(memberDetailIFaceService.memberDetailALLForJson(memberDetailIFaceService.selectMemberDetailAll()));
+		return gson.toJson(
+				memberDetailIFaceService.memberDetailALLForJson(memberDetailIFaceService.selectMemberDetailAll()));
 	}
+
 	@PostMapping(value = "/selectOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
 	public @ResponseBody String selectOrderList(String phone) throws IOException {
-			return gson.toJson(memberDetailIFaceService.selectOrderList(phone));
+		return gson.toJson(memberDetailIFaceService.selectOrderList(phone));
 	}
+
 	@PostMapping(value = "/getAllOrderList", produces = "text/html; charset = UTF-8") // 會員查詢
 	public @ResponseBody String getAllOrderList() throws IOException {
-			return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
+		return gson.toJson(orderIFaceService.forGsonConvert(bikeDetailIFaceService.getAllMembers()));
 	}
-	@PostMapping(value = "/back", produces = "text/html; charset = UTF-8") // 會員查詢
-	public @ResponseBody String back() throws IOException {
-			
-			return "";
+
+	@PostMapping(value = "/selectbikerew", produces = "text/html; charset = UTF-8") // 會員查詢
+	public @ResponseBody String selectbikerew(String bikeModel,String modelYear) throws IOException {
+		
+		
+		return gson.toJson(bikeReviewIFaceService.BikeReviewForJson(bikeReviewIFaceService.selectBikeReview(bikeModel, modelYear)));
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------以下為測試
 
@@ -355,18 +366,18 @@ public class TestRobinController {
 		System.out.println(BikeModel);
 		System.out.println("FQ");
 		for (int i = 0; i < files.length; i++) {
-		
+
 //			System.out.println(BikeModel);
 //			System.out.println(ModelYear);
 			MultipartFile file = files[i];
-	
+
 			if (!file.getOriginalFilename().isEmpty()) {
 				i++;
-				//=/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
-				//=C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
-				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
-						BikeModel + "_" + ModelYear + "_00" + i + ".jpg"))); // 上傳檔案位置為D:\
+				// =/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image
+				// =C:\\Maven\\workspace-motro\\motorcycleiiieduproject.zip_expanded\\motorcycleiiieduproject\\src\\main\\webapp\\Image
+				BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
+						new File("/Users/kuochiahao/git/repository/motorcycleiiieduproject/src/main/webapp/Image",
+								BikeModel + "_" + ModelYear + "_00" + i + ".jpg"))); // 上傳檔案位置為D:\
 
 				outputStream.write(file.getBytes());
 				outputStream.flush();

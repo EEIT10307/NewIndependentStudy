@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import cleanbean.BikeReviewForJson;
 import projectbean.BikeReview;
 @Repository
 public interface BikeReviewIFaceDao {
@@ -18,8 +19,8 @@ public interface BikeReviewIFaceDao {
 
 	int updateMember(BikeReview mb);
 
-	int save(String orderSerialNum, Integer member, String reviewContent, Double satisfacation, Date reviewTime,
-			String bikeModel);
-
+	int save(String orderSerialNum, Integer member, String reviewContent, Double satisfacation, Date reviewTime);
+	List<BikeReview> selectBikeReview(String bikeModel, String modelYear);
+	List<BikeReviewForJson> BikeReviewForJson(List<BikeReview> BikeReview);
 
 }

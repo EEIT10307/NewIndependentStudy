@@ -27,6 +27,7 @@ public class BikeReview implements Serializable{
 	private Double satisfacation ;
 	private java.util.Date reviewTime ; 
 	private String bikeModel ; 
+	private String modelYear ; 
 	
 
 	
@@ -34,7 +35,7 @@ public class BikeReview implements Serializable{
 	
 	}
 	public BikeReview(OrderList orderSerialNum, MemberDetail email, String reviewContent,
-			Double satisfacation, Date reviewTime, String bikeModel) {
+			Double satisfacation, Date reviewTime, String bikeModel,String modelYear) {
 		super();
 		
 		this.orderSerialNum = orderSerialNum;
@@ -43,6 +44,7 @@ public class BikeReview implements Serializable{
 		this.satisfacation = satisfacation;
 		this.reviewTime = reviewTime;
 		this.bikeModel = bikeModel;
+		this.modelYear = modelYear;
 	}
 	
 	
@@ -98,6 +100,12 @@ public class BikeReview implements Serializable{
 	}
 	public void setReviewTime(java.util.Date reviewTime) {
 		this.reviewTime = reviewTime;
+	}
+	public String getModelYear() {
+		return modelYear;
+	}
+	public void setModelYear(String modelYear) {
+		this.modelYear = modelYear;
 	} 
 	
 
